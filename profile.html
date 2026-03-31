@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apni Saltanat | Mera Account</title>
+<title>Apni Saltanat | Pakistan's Premier Shahi Marketplace</title>
+<meta name="title" content="Apni Saltanat | Pakistan's Premier Shahi Marketplace">
+<meta name="description" content="Shop at Apni Saltanat, Pakistan's most trusted online Shahi Marketplace. Discover a wide variety of premium products including electronics, fashion, and daily essentials at fair and royal prices. Every deal is a commitment to trust.">
+<meta name="keywords" content="Apni Saltanat, Online Shopping Pakistan, Shahi Bazaar, Marketplace Pakistan, Best Online Store, Electronics Pakistan, Fashion Marketplace, Bablu Architect, Buy Online Pakistan">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00ff88">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+<link rel="icon" type="image/png" href="https://apnisaltanat.com/favicon.png">
+<link rel="shortcut icon" href="https://apnisaltanat.com/favicon.png" type="image/x-icon">
+<link rel="apple-touch-icon" href="https://apnisaltanat.com/favicon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://apnisaltanat.com/">
+<meta property="og:title" content="Apni Saltanat | Pakistan's Premier Shahi Marketplace">
+<meta property="og:description" content="Discover premium quality products at fair prices. Experience the royal way of online shopping in Pakistan.">
+<meta property="og:image" content="https://apnisaltanat.com/favicon.png">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://apnisaltanat.com/">
+<meta property="twitter:title" content="Apni Saltanat | Pakistan's Premier Shahi Marketplace">
+<meta property="twitter:description" content="Shop the best deals in Pakistan at Apni Saltanat. Quality and trust delivered to your doorstep.">
+<meta property="twitter:image" content="https://apnisaltanat.com/favicon.png">
+
+<link rel="canonical" href="https://apnisaltanat.com/"><link rel="canonical" href="https://apnisaltanat.com/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg-body: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-main: #0a0a0c;
+            --text-muted: #707070;
+            --accent-purple: #9c27b0;
+            --accent-blue: #2196f3;
+            --border-radius: 20px;
+            --border-color: #eeeeee;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px rgba(0,0,0,0.08);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg-body); 
+            color: var(--text-main); 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Shahi Header --- */
+        .shahi-header {
+            background: #fff; 
+            padding: 15px 0; 
+            position: sticky; 
+            top: 10px; 
+            z-index: 1000; 
+            margin: 0 20px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color); 
+            box-shadow: var(--shadow-sm);
+        }
+        .header-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+        .site-logo { font-size: 20px; font-weight: 900; text-decoration: none; color: #000; letter-spacing: -1px; }
+        .site-logo span { color: var(--accent-blue); }
+
+        /* --- Profile Container --- */
+        .profile-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 60px 20px;
+        }
+
+        .profile-card {
+            background: #fff;
+            padding: 50px;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 550px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .profile-header { text-align: center; margin-bottom: 45px; }
+        .avatar-box {
+            width: 100px; height: 100px;
+            background: #f9f9f9;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 40px;
+            color: var(--accent-blue);
+            box-shadow: var(--shadow-sm);
+        }
+        .profile-header p { font-size: 11px; font-weight: 800; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 8px; }
+        .profile-header h2 { font-size: 32px; font-weight: 900; color: #1a1a1e; letter-spacing: -1px; }
+
+        /* --- Form --- */
+        .input-group { margin-bottom: 25px; }
+        .input-group label { display: block; font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; font-weight: 800; }
+        .input-wrap { position: relative; }
+        .input-wrap i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #bbb; font-size: 15px; }
+        .shahi-input {
+            width: 100%; padding: 15px 20px 15px 50px; background: #fff; border: 1px solid var(--border-color);
+            border-radius: 15px; color: #000; outline: none; transition: var(--transition); font-size: 15px;
+        }
+        .shahi-input:focus { border-color: var(--accent-blue); box-shadow: 0 0 15px rgba(33, 150, 243, 0.1); }
+        .shahi-input:disabled { background: #fcfcfc; color: #999; }
+
+        .btn-update {
+            width: 100%; padding: 18px; 
+            background: #1a1a1e; 
+            color: #fff;
+            border: none; border-radius: 15px; font-weight: 800; cursor: pointer;
+            transition: var(--transition); text-transform: uppercase; margin-top: 15px;
+            letter-spacing: 1px; font-size: 13px;
+        }
+        .btn-update:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); background: #000; }
+
+        .divider { height: 1px; background: #f0f0f0; margin: 40px 0; position: relative; }
+        .divider span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 0 15px; font-size: 10px; font-weight: 800; color: #bbb; text-transform: uppercase; letter-spacing: 2px; }
+
+        #msg { text-align: center; font-size: 13px; margin-top: 25px; font-weight: 700; min-height: 20px; }
+
+        .back-btn { 
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            margin-top: 30px; color: #aaa; text-decoration: none; font-size: 12px; 
+            text-transform: uppercase; font-weight: 800; letter-spacing: 1px; transition: 0.3s;
+        }
+        .back-btn:hover { color: var(--accent-blue); }
+
+        footer { background: #fff; padding: 80px 40px 40px; border-top: 1px solid var(--border-color); color: var(--text-main); }
+        .footer-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px; }
+
+        @media (max-width: 768px) {
+            .shahi-header { margin: 0 10px; top: 5px; height: 50px; display: flex; align-items: center; border-radius: 30px; }
+            .header-inner { padding: 0 15px; width: 100%; }
+            .site-logo { font-size: 15px; }
+            .profile-wrapper { padding: 30px 15px; }
+            .profile-card { padding: 30px 20px; border-radius: 20px; box-shadow: none; border: 1px solid #f0f0f0; }
+            .avatar-box { width: 70px; height: 70px; font-size: 28px; margin-bottom: 15px; }
+            .profile-header { margin-bottom: 30px; }
+            .profile-header p { font-size: 9px; letter-spacing: 2px; }
+            .profile-header h2 { font-size: 22px; }
+            .input-group { margin-bottom: 20px; }
+            .input-group label { font-size: 10px; }
+            .shahi-input { padding: 12px 15px 12px 45px; font-size: 14px; border-radius: 12px; }
+            .btn-update { padding: 15px; font-size: 12px; border-radius: 12px; }
+            
+            footer { padding: 40px 20px 30px; margin-top: 50px; }
+            .footer-grid { gap: 40px; text-align: center; }
+            footer div:last-child { text-align: center !important; }
+            footer div:last-child div { justify-content: center !important; }
+        }
+         .footer-logo { font-size: 24px; font-weight: 900; color: #000; margin-bottom: 20px; font-family: 'Outfit'; }
+
+    </style>
+</head>
+<body>
+
+<header class="shahi-header">
+    <div class="header-inner">
+        <a href="index.html" class="site-logo">APNI <span>SALTANAT</span></a>
+        <a href="index.html" style="color: var(--accent-blue); text-decoration: none; font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;"><i class="fas fa-chevron-left"></i> Back to Home</a>
+    </div>
+</header>
+
+<div class="profile-wrapper">
+    <div class="profile-card">
+        <div class="profile-header">
+            <p>Citizen Settings</p>
+            <div class="avatar-box"><i class="fas fa-user-shield"></i></div>
+            <h2>MY ACCOUNT</h2>
+        </div>
+
+        <div id="profileForm">
+            <!-- Store Banner Section (Visible for Sellers Only) -->
+            <div id="sellerBannerSection" style="display: none; margin-bottom: 30px; padding: 20px; border: 1px dashed var(--accent-blue); border-radius: 20px; background: #f0f7ff;">
+                <label style="display: block; font-size: 11px; color: var(--accent-blue); text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; font-weight: 800;">
+                    <i class="fas fa-image"></i> Store Banner Sliders (Unlimited)
+                </label>
+                <div id="bannerDropZone" style="border: 2px dashed #ccc; border-radius: 15px; padding: 20px; text-align: center; background: #fff; cursor: pointer;">
+                    <i class="fas fa-cloud-upload-alt" style="font-size: 24px; color: #aaa;"></i>
+                    <p style="font-size: 12px; color: #888; margin-top: 5px;">Click to Add Banner Pics</p>
+                    <input type="file" id="bannerFileInput" accept="image/*" multiple style="display: none;">
+                </div>
+                <div id="bannerPreviewGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 10px; margin-top: 15px;"></div>
+                <p style="font-size: 10px; color: #999; margin-top: 10px; text-align: center;">These pics will appear as a slider on Marketplace & your Store.</p>
+            </div>
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <div class="input-wrap">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="newName" class="shahi-input" placeholder="Enter your full name">
+                </div>
+            </div>
+
+           
+            <div class="input-group">
+                <label>Contact Number (WhatsApp number for customer inquiries)</label>
+                <div class="input-wrap">
+                    <i class="fas fa-phone"></i>
+                    <input type="text" id="newPhone" class="shahi-input" placeholder="">
+                </div>
+            </div>
+
+            <div class="input-group" id="bankField" style="display: none;">
+                <label>Bank Account Number</label>
+                <div class="input-wrap">
+                    <i class="fas fa-university"></i>
+                    <input type="text" id="newBank" class="shahi-input" placeholder="Account Number or IBAN">
+                </div>
+            </div>
+
+            <div class="divider"><span>Security</span></div>
+
+            <div class="input-group">
+                <label>Security Code (New Password)</label>
+                <div class="input-wrap">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="newPass" class="shahi-input" placeholder="••••••••">
+                </div>
+            </div>
+
+            <button class="btn-update" id="updateBtn">UPDATE SETTINGS</button>
+            <p id="msg"></p>
+            
+            <a href="marketplace.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK TO DASHBOARD</a>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="footer-grid">
+        <div style="grid-column: span 1.5;">
+            <div class="footer-logo">APNI <span>SALTANAT</span></div>
+            <p style="color: #555; font-size: 15px; line-height: 1.8; max-width: 400px;">
+               We believe in premium quality products at fair prices. Every deal in the Saltanat is a commitment to trust.
+            </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <h4 style="font-size: 13px; text-transform: uppercase; color: #000; letter-spacing: 1px; margin-bottom: 10px;">Saltanat Links</h4>
+            <a href="index.html" style="text-decoration: none; color: #777; font-size: 14px;">Shahi Bazaar(Marketplace)</a>
+            <a href="instructions.html" style="text-decoration: none; color: #777; font-size: 14px;">Shahi Paigam(message)</a>
+            <a href="faq.html" style="text-decoration: none; color: #777; font-size: 14px;">Help Center</a>
+        </div>
+               <div style="text-align: right;">
+            <h4 style="font-size: 13px; text-transform: uppercase; color: #000; letter-spacing: 1px; margin-bottom: 10px;">Contact Us</h4>
+            <p style="color: #444; font-size: 14px; margin-bottom: 20px;">Taxila, Punjab, Pakistan</p>
+            <div style="display: flex; gap: 20px; justify-content: flex-end; font-size: 24px; color: #333;">
+            <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank" style="color: inherit;">
+        <i class="fab fa-instagram"></i>
+    </a>
+                <a href="https://wa.me/923011786494" target="_blank" style="color: inherit;">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.facebook.com/apnisaltanat.official" target="_blank" style="color: inherit;">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 80px; color: #222; font-size: 12px; letter-spacing: 3px; text-transform: uppercase;">
+        &copy; 2026 APNI SALTANAT | BY BABLU ARCHITECT
+    </div>
+</footer>
+
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, updatePassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getDatabase, ref, get, update as dbUpdate } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc",
+        authDomain: "apnisaltanat.com",
+        databaseURL: "https://apni-saltanat-default-rtdb.firebaseio.com",
+        projectId: "apni-saltanat",
+        storageBucket: "apni-saltanat.firebasestorage.app",
+        messagingSenderId: "691941073239",
+        appId: "1:691941073239:web:9e0b568eccc347a0c0de12"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+    const IMGBB_KEY = "da752463f652bf8cf94fc976f43d93ba"; // Reuse key from upload.html
+
+    let uid = null;
+    let bannerFiles = [];
+    let existingBanners = [];
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            uid = user.uid;
+            document.getElementById('newName').value = ""; // Reset
+            const sSnap = await get(ref(db, `users/sardaars/${user.uid}`));
+            const bSnap = await get(ref(db, `users/buyers/${user.uid}`));
+            const data = sSnap.exists() ? sSnap.val() : (bSnap.exists() ? bSnap.val() : null);
+
+            if (data) {
+                document.getElementById('newName').value = data.name || data.userName || "";
+                document.getElementById('newPhone').value = data.phone || "";
+                if (data.role === 'sardaar') {
+                    document.getElementById('bankField').style.display = 'block';
+                    document.getElementById('sellerBannerSection').style.display = 'block';
+                    document.getElementById('newBank').value = data.bankAccount || "";
+                    existingBanners = data.storeBanners ? data.storeBanners.split('|') : [];
+                    renderBannerPreview();
+                }
+            }
+        } else {
+            window.location.href = 'login.html';
+        }
+    });
+
+    // --- Banner Handling ---
+    const bDrop = document.getElementById('bannerDropZone');
+    const bFile = document.getElementById('bannerFileInput');
+    const bPrev = document.getElementById('bannerPreviewGrid');
+
+    if(bDrop) bDrop.onclick = () => bFile.click();
+    if(bFile) bFile.onchange = () => { 
+        for(let f of bFile.files) bannerFiles.push(f); 
+        renderBannerPreview(); 
+    };
+
+    function renderBannerPreview() {
+        bPrev.innerHTML = '';
+        existingBanners.forEach((u, i) => {
+            const d = document.createElement('div');
+            d.style = "position:relative; width:100%; aspect-ratio:1/1; background:#eee; border-radius:10px; overflow:hidden;";
+            d.innerHTML = `<img src="${u}" style="width:100%; height:100%; object-fit:cover;">
+                           <button onclick="removeExBanner(${i})" style="position:absolute; top:2px; right:2px; background:rgba(0,0,0,0.5); color:#fff; border:none; border-radius:50%; width:20px; height:20px; cursor:pointer;">×</button>`;
+            bPrev.appendChild(d);
+        });
+        bannerFiles.forEach((f, i) => {
+            const d = document.createElement('div');
+            d.style = "position:relative; width:100%; aspect-ratio:1/1; background:#eee; border-radius:10px; overflow:hidden; border:2px solid var(--accent-blue);";
+            d.innerHTML = `<img src="${URL.createObjectURL(f)}" style="width:100%; height:100%; object-fit:cover;">
+                           <button onclick="removeNewBanner(${i})" style="position:absolute; top:2px; right:2px; background:rgba(0,0,0,0.5); color:#fff; border:none; border-radius:50%; width:20px; height:20px; cursor:pointer;">×</button>`;
+            bPrev.appendChild(d);
+        });
+    }
+
+    window.removeExBanner = (i) => { existingBanners.splice(i, 1); renderBannerPreview(); };
+    window.removeNewBanner = (i) => { bannerFiles.splice(i, 1); renderBannerPreview(); };
+
+    document.getElementById('updateBtn').addEventListener('click', async () => {
+        const user = auth.currentUser;
+        const name = document.getElementById('newName').value.trim();
+        const phone = document.getElementById('newPhone').value.trim();
+        const bank = document.getElementById('newBank').value.trim();
+        const pass = document.getElementById('newPass').value;
+        const btn = document.getElementById('updateBtn');
+
+        if (!name || !phone) {
+            showMsg("Naam aur Number lazmi hai Sultan!", "#ff4d4d");
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> UPDATING...';
+
+        try {
+            const sSnap = await get(ref(db, `users/sardaars/${user.uid}`));
+            const isSardaar = sSnap.exists();
+            const folder = isSardaar ? 'sardaars' : 'buyers';
+
+            let bannerUrls = [...existingBanners];
+            if (isSardaar && bannerFiles.length > 0) {
+                showMsg("Banners upload ho rahe hain...", "var(--accent-blue)");
+                for (let f of bannerFiles) {
+                    const fd = new FormData(); fd.append('image', f);
+                    const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, { method:'POST', body:fd });
+                    const d = await res.json();
+                    if(d.success) bannerUrls.push(d.data.url);
+                }
+            }
+
+            let updatePayload = {
+                name: name,
+                userName: name,
+                phone: phone
+            };
+
+            if (isSardaar) {
+                updatePayload.bankAccount = bank;
+                updatePayload.storeBanners = bannerUrls.join('|');
+            }
+
+            await dbUpdate(ref(db, `users/${folder}/${user.uid}`), updatePayload);
+
+            if (pass) {
+                if (pass.length < 6) throw new Error("Password kam az kam 6 characters ka ho!");
+                await updatePassword(user, pass);
+            }
+
+            showMsg("👑 Mubarak! Maloomat tabdeel ho gayi hain.", "var(--accent-blue)");
+            bannerFiles = []; // Clear
+            existingBanners = bannerUrls; // Update
+            renderBannerPreview();
+        } catch (error) {
+            console.error(error);
+            showMsg("Logout aur login kar ke dobara koshish karein: " + error.message, "#ff4d4d");
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = 'UPDATE SETTINGS';
+        }
+    });
+
+    function showMsg(text, color) {
+        const msg = document.getElementById('msg');
+        msg.innerText = text;
+        msg.style.color = color;
+    }
+</script>
+</body>
+</html>

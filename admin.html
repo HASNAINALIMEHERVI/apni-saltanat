@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sardaar Requests | Admin Control</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        :root { --shahi-green: #00ff88; --royal-gold: #ffcc00; --deep-bg: #0a0a0c; --card: #141417; }
+        body { font-family: 'Inter', sans-serif; background: var(--deep-bg); color: white; margin: 0; padding: 20px; }
+        
+        .admin-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 20px; }
+        
+        .notif-badge { background: #ff4444; color: white; padding: 6px 15px; border-radius: 30px; font-size: 14px; font-weight: 800; display: inline-block; box-shadow: 0 0 15px rgba(255, 68, 68, 0.4); }
+
+        .search-box { position: relative; flex: 1; max-width: 400px; }
+        .search-box input { width: 100%; padding: 12px 45px 12px 15px; background: #1a1a1e; border: 1px solid #333; border-radius: 8px; color: white; outline: none; transition: 0.3s; }
+        .search-box input:focus { border-color: var(--shahi-green); }
+        .search-box i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--shahi-green); }
+
+        .btn-download { background: var(--shahi-green); color: black; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; border: none; }
+        
+        table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; margin-top: 10px; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #222; }
+        th { background: #1a1a1e; color: var(--shahi-green); text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
+        
+        .btn-group { display: flex; gap: 8px; }
+        .action-btn { padding: 8px 14px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px; transition: 0.2s; }
+        .btn-active { background: var(--shahi-green); color: #000; }
+        .btn-not-approved { background: #ff4444; color: #fff; }
+        .action-btn:hover { transform: scale(1.05); }
+
+        .doc-link { color: var(--royal-gold); text-decoration: none; font-size: 12px; font-weight: bold; border: 1px dashed #444; padding: 4px 8px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="admin-header">
+    <div>
+        <h2 style="margin:0;"><i class="fas fa-id-badge" style="color: var(--shahi-green);"></i> SARDAAR SUBMISSION</h2>
+        <div id="notifContainer" style="margin-top:10px;"></div>
+        <a href="admin_hub.html" style="color:var(--shahi-green); text-decoration:none; font-size:12px; font-weight:800; text-transform:uppercase;"><i class="fas fa-th"></i> Back to Hub</a>
+    </div>
+
+    <div class="search-box">
+        <input type="text" id="adminSearch" placeholder="Email ya naam search karein...">
+        <i class="fas fa-search"></i>
+    </div>
+
+    <button class="btn-download" onclick="exportToExcel()"><i class="fas fa-file-excel"></i> EXCEL REPORT</button>
+</div>
+
+<table id="requestsTable">
+    <thead>
+        <tr>
+            <th>Email Node</th>
+            <th>Personal Details</th>
+            <th>Store Details</th>
+            <th>Documents</th>
+            <th>Decision</th>
+        </tr>
+    </thead>
+    <tbody id="requestList">
+        <tr><td colspan="5" style="text-align:center; padding:50px; color:#555;">Darbari records check ho rahe hain...</td></tr>
+    </tbody>
+</table>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // 1. Firebase Initialize
+    const firebaseConfig1 = {
+        apiKey: "AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc",
+        authDomain: "apnisaltanat.com",
+        databaseURL: "https://apni-saltanat-default-rtdb.firebaseio.com",
+        projectId: "apni-saltanat",
+    };
+
+    const app1 = initializeApp(firebaseConfig1);
+    const db1 = getDatabase(app1);
+    const auth = getAuth(app1);
+    const SULTAN_UID = "qnWFjg3XNlO7jHDhz84bPJMikP72";
+
+    let pendingSardaars = [];
+
+    // 2. Auth Guard & Data Loading Trigger
+    onAuthStateChanged(auth, (user) => {
+        if (user && user.uid === SULTAN_UID) {
+            console.log("Khush-amdeed Sultan. Data load ho raha hai...");
+            // Jab Sultan confirm ho jaye, tabhi data load karein
+            loadPendingSardaars(); 
+        } else {
+            alert("Maazrat! Sirf Sultan hi is darbaar mein dakhil ho sakte hain.");
+            window.location.href = "login.html";
+        }
+    });
+
+    // 3. Data Loading Function
+    function loadPendingSardaars() {
+        onValue(ref(db1, 'users/sardaars'), (snapshot) => {
+            const notifContainer = document.getElementById('notifContainer');
+            pendingSardaars = [];
+
+            if (snapshot.exists()) {
+                snapshot.forEach((child) => {
+                    const data = child.val();
+                    if (data.status === "pending") {
+                        pendingSardaars.push({ nodeID: child.key, ...data });
+                    }
+                });
+            }
+
+            notifContainer.innerHTML = pendingSardaars.length > 0 
+                ? `<div class="notif-badge">${pendingSardaars.length} New Merchant Requests!</div>`
+                : `<div style="color:#666">All clear, Sultan!</div>`;
+
+            renderTable(pendingSardaars);
+        });
+    }
+
+    // 4. Rendering logic
+    function renderTable(data) {
+        const list = document.getElementById('requestList');
+        if(data.length === 0) {
+            list.innerHTML = "<tr><td colspan='5' style='text-align:center; padding:40px;'>No pending applications.</td></tr>";
+            return;
+        }
+
+        list.innerHTML = data.map(item => `
+            <tr>
+                <td><small style="color:var(--royal-gold)">${item.nodeID}</small></td>
+                <td>
+                    <b>${item.name || item.userName || 'N/A'}</b><br>
+                    <small>${item.email || 'No Email'}</small><br>
+                    <small>${item.phone || 'No Phone'}</small><br>
+                    <small style="color:var(--royal-gold)">Bank: ${item.bankAccount || 'N/A'}</small>
+                </td>
+                <td>
+                    <b style="color:var(--shahi-green)">${item.storeName || 'N/A'}</b><br>
+                    <small>${item.category || 'Imperial Goods'}</small>
+                </td>
+                <td>
+                    <a href="${item.idFrontURL || '#'}" target="_blank" class="doc-link">Front ID</a>
+                    <a href="${item.idBackURL || '#'}" target="_blank" class="doc-link">Back ID</a>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <button class="action-btn btn-active" onclick="handleAction('${item.nodeID}', 'approved')">✓ APPROVE</button>
+                        <button class="action-btn btn-not-approved" onclick="handleAction('${item.nodeID}', 'rejected')">✗ REJECT</button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // Global Search
+    document.getElementById('adminSearch').addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const filtered = pendingSardaars.filter(s => 
+            (s.name || s.userName || "").toLowerCase().includes(term) || 
+            (s.nodeID || "").toLowerCase().includes(term)
+        );
+        renderTable(filtered);
+    });
+
+    // Handle Approval/Rejection
+    window.handleAction = (nodeID, newStatus) => {
+        const confirmMsg = newStatus === 'approved' ? "Approve this merchant for marketplace access?" : "Reject this application?";
+        if(confirm(confirmMsg)) {
+            update(ref(db1, `users/sardaars/${nodeID}`), {
+                status: newStatus === 'approved' ? 'active' : 'rejected'
+            }).then(() => {
+                alert(newStatus === 'approved' ? "✅ Merchant Approved!" : "❌ Application Rejected!");
+            }).catch(err => alert("Update failed: " + err.message));
+        }
+    };
+
+    // Excel Export
+    window.exportToExcel = () => {
+        const table = document.getElementById("requestsTable");
+        const wb = XLSX.utils.table_to_book(table, { sheet: "Pending" });
+        XLSX.writeFile(wb, "Pending_Sardaars.xlsx");
+    };
+</script></body>
+</html>

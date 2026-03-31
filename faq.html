@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sawal o Jawab | FAQ - Mansa-e-Saltanat</title>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00ff88">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --shahi-green: #00ff88;
+            --royal-gold: #ffcc00;
+            --deep-black: #050505;
+            --card-bg: #111111;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            font-family: 'Inter', sans-serif;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .faq-container {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 50px;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-header h1 {
+            color: var(--royal-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 2.2rem;
+        }
+
+        .faq-header p {
+            color: #888;
+        }
+
+        /* --- Accordion Style --- */
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: var(--shahi-green);
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background: #1a1a1a;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #0d0d0d;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .faq-answer-content {
+            padding: 20px;
+            border-top: 1px solid #222;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 3000px; /* Adjust as needed */
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--royal-gold);
+            border-bottom: 1px solid #222;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--shahi-green);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            color: var(--royal-gold);
+        }
+
+        .highlight {
+            color: var(--royal-gold);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="faq-container">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK TO HOME</a>
+
+    <div class="faq-header">
+        <h1>Frequently Asked Questions</h1>
+        <p>Everything you need to know about the Saltanat ecosystem for buyers and sellers.</p>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Can I become a Seller without a fee?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                No, a monthly maintenance fee is mandatory to sustain the Saltanat infrastructure: 
+                <span class="highlight">1000 PKR</span> for Pakistanis and 
+                <span class="highlight">$5 USD</span> for international sellers. 
+                This must be cleared by the 5th of every month.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Do I need to create an account to buy products?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                No, we offer maximum flexibility for our customers. You can browse and **purchase any product as a guest** without creating an account. Only Sellers (Sardaars) are required to register to manage their shops.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>How can I access the Seller Dashboard?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                <p style="margin-bottom: 20px;">
+                    To manage your shop, please follow these two steps:
+                    <br><strong>Step 1:</strong> Open the side menu on the homepage.
+                    <br><strong>Step 2:</strong> Click on <span class="highlight">Seller Login</span> at the bottom.
+                </p>
+                
+                <div style="display: flex; flex-direction: column; gap: 25px; align-items: center; width: 100%;">
+                    
+                    <div style="width: 100%; max-width: 600px; border: 2px solid #222; border-radius: 15px; overflow: hidden; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <p style="font-size: 11px; color: #aaa; padding: 8px 15px; background: #111; border-bottom: 1px solid #222; text-transform: uppercase; letter-spacing: 1px;">
+                            <i class="fas fa-bars"></i> Menu Navigation
+                        </p>
+                        <img src="image.png" alt="Menu Navigation" style="width: 100%; height: auto; display: block;">
+                    </div>
+
+                    <div style="width: 100%; max-width: 600px; border: 2px solid #222; border-radius: 15px; overflow: hidden; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <p style="font-size: 11px; color: #aaa; padding: 8px 15px; background: #111; border-bottom: 1px solid #222; text-transform: uppercase; letter-spacing: 1px;">
+                            <i class="fas fa-user-shield"></i> Seller Interface
+                        </p>
+                        <img src="image2.png" alt="Seller Interface" style="width: 100%; height: auto; display: block;">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>What if the product is damaged during delivery?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                Ensuring safe delivery is the sole responsibility of the <span class="highlight">Sardaar (Seller)</span>. If an item is damaged during transit, the Seller must compensate the buyer for the loss.
+            </div>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Which payment methods are accepted for the monthly fee?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                To provide maximum flexibility, we accept payments through multiple local and international channels. You can send the fee using:
+                <br><br>
+                <ul style="padding-left: 20px; color: #ccc; line-height: 1.8;">
+                    <li><span class="highlight">International:</span> Payoneer (Recommended for Foreigners)</li>
+                    <li><span class="highlight">Bank Transfer:</span> HBL (Habib Bank Limited)</li>
+                    <li><span class="highlight">Bank Transfer:</span> MBL (Meezan Bank Limited)</li>
+                    <li><span class="highlight">Mobile Wallets:</span> JazzCash or EasyPaisa</li>
+                </ul>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Can a blocked account be reopened?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                Accounts involved in fraud, scams, or illegal goods are <span class="highlight">Permanently Blocked</span>. In such cases, the Sultan's decision is final.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Am I allowed to sell multiple products?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                Yes! Once verified, you can list and sell unlimited <span class="highlight">Halal / Legal Products</span> under your active subscription.
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                
+                // Close other items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem) {
+                        item.classList.remove('active');
+                    }
+                });
+
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

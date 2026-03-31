@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>All Collections | Apni Saltanat</title>
+    <title>Apni Saltanat | Pakistan's Premier Shahi Marketplace</title>
+<meta name="title" content="Apni Saltanat | Pakistan's Premier Shahi Marketplace">
+<meta name="description" content="Shop at Apni Saltanat, Pakistan's most trusted online Shahi Marketplace. Discover a wide variety of premium products including electronics, fashion, and daily essentials at fair and royal prices. Every deal is a commitment to trust.">
+<meta name="keywords" content="Apni Saltanat, Online Shopping Pakistan, Shahi Bazaar, Marketplace Pakistan, Best Online Store, Electronics Pakistan, Fashion Marketplace, Bablu Architect, Buy Online Pakistan">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00ff88">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+<link rel="icon" type="image/png" href="https://apnisaltanat.com/favicon.png">
+<link rel="shortcut icon" href="https://apnisaltanat.com/favicon.png" type="image/x-icon">
+<link rel="apple-touch-icon" href="https://apnisaltanat.com/favicon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://apnisaltanat.com/">
+<meta property="og:title" content="Apni Saltanat | Pakistan's Premier Shahi Marketplace">
+<meta property="og:description" content="Discover premium quality products at fair prices. Experience the royal way of online shopping in Pakistan.">
+<meta property="og:image" content="https://apnisaltanat.com/favicon.png">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://apnisaltanat.com/">
+<meta property="twitter:title" content="Apni Saltanat | Pakistan's Premier Shahi Marketplace">
+<meta property="twitter:description" content="Shop the best deals in Pakistan at Apni Saltanat. Quality and trust delivered to your doorstep.">
+<meta property="twitter:image" content="https://apnisaltanat.com/favicon.png">
+
+<link rel="canonical" href="https://apnisaltanat.com/">
+<link rel="canonical" href="https://apnisaltanat.com/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg-body: #fbfbfd;
+            --bg-card: #ffffff;
+            --text-main: #0a0a0c;
+            --text-muted: #707070;
+            --accent-purple: #9c27b0;
+            --accent-blue: #2196f3;
+            --accent-orange: #f85606; 
+            --border-radius: 20px;
+            --border-color: #eeeeee;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+            --transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --container-width: 1200px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-body); color: var(--text-main); }
+
+        .shahi-header {
+            background: #fff; padding: 15px 0; position: sticky; top: 10px; z-index: 1000; 
+            margin: 0 20px; border-radius: 50px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);
+        }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; gap: 20px; }
+        .site-logo { font-size: 18px; font-weight: 900; text-decoration: none; color: #000; font-family: 'Outfit', sans-serif; flex-shrink: 0; }
+        .site-logo span { color: var(--accent-blue); }
+
+        .search-wrap { flex: 1; max-width: 450px; position: relative; }
+        .search-wrap i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #aaa; }
+        .search-input { width: 100%; padding: 10px 15px 10px 45px; background: #f1f3f6; border: 1px solid transparent; border-radius: 50px; font-size: 14px; outline: none; transition: 0.3s; }
+        .search-input:focus { background: #fff; border-color: var(--accent-blue); }
+
+        .container { max-width: var(--container-width); margin: 50px auto; padding: 0 20px; }
+        
+        /* Black Hero Section with Centered Dual-Color Text */
+        .hero { height: 250px; background: #000; border-radius: 30px; margin-bottom: 50px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
+        .hero-content { position: relative; z-index: 2; width: 100%; }
+        .hero-content h1 { font-size: 64px; font-weight: 900; font-family: 'Outfit'; color: #fff; text-transform: uppercase; }
+        .hero-content h1 span { color: var(--accent-blue); }
+
+        .cat-section { margin-bottom: 60px; }
+        .cat-name { font-size: 18px; font-weight: 800; color: var(--accent-purple); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+        .cat-name::after { content: ''; flex: 1; height: 1px; background: #eee; }
+
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+
+        .shahi-card { background: #ffffff; border-radius: 24px; padding: 12px; transition: var(--transition); border: 1px solid #f2f2f2; display: flex; flex-direction: column; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.02); text-align: left; position: relative; overflow: hidden; }
+        .shahi-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); border-color: #e0e0e0; }
+        
+        .img-container { height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; background: #fdfdfd; border-radius: 18px; overflow: hidden; border: 1px solid #f9f9f9; }
+        .img-container img { max-width: 90%; max-height: 90%; object-fit: contain; transition: 0.4s; }
+        .shahi-card:hover .img-container img { transform: scale(1.08); }
+
+        .p-name { font-size: 15px; font-weight: 700; color: #1a1a1e; margin-bottom: 4px; line-height: 1.4; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        
+        .card-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 10px; border-top: 1px solid #f9f9f9; }
+        .price-now { font-size: 18px; font-weight: 900; color: #000; font-family: 'Outfit'; }
+        .btn-view { background: var(--accent-blue); color: white; width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: 0.3s; }
+
+        footer { background: #fff; padding: 60px 40px 40px; border-top: 1px solid #eee; margin-top: 100px; }
+        .footer-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; }
+        .footer-logo { font-size: 24px; font-weight: 900; color: #000; margin-bottom: 20px; font-family: 'Outfit'; }
+
+        @media (max-width: 768px) {
+            .shahi-header { top: 5px; margin: 0 10px; border-radius: 30px; height: 50px; display: flex; align-items: center; }
+            .header-inner { padding: 0 15px; width: 100%; }
+            .search-wrap { display: none; }
+            
+            /* Mobile Search Row */
+            .mobile-search-row { display: block !important; margin: 15px 5px 10px; }
+
+            .hero { height: 180px; padding: 20px; }
+            .hero-content h1 { font-size: 32px; }
+            .products-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .shahi-card { padding: 10px; border-radius: 20px; }
+            .img-container { height: 160px; border-radius: 15px; }
+            
+            footer { padding: 40px 20px 30px; margin-top: 50px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            footer div:last-child { text-align: center !important; }
+            footer div:last-child div { justify-content: center !important; }
+        }
+
+        .mobile-search-row { display: none; position: relative; }
+        .mobile-search-row i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #aaa; z-index: 10; }
+        .mobile-search-row input { width: 100%; padding: 12px 15px 12px 45px; background: #fff; border: 1px solid var(--border-color); border-radius: 50px; font-size: 14px; outline: none; box-shadow: var(--shadow-sm); }
+    </style>
+</head>
+<body>
+
+<header class="shahi-header">
+    <div class="header-inner">
+        <a href="index.html" class="site-logo">APNI <span>SALTANAT</span></a>
+        
+        <div class="search-wrap">
+            <i class="fas fa-search"></i>
+            <input type="text" id="headerSearch" class="search-input" placeholder="Search products......" oninput="searchInCategories(this.value)">
+        </div>
+
+        <a href="index.html" style="text-decoration:none; color:var(--accent-blue); font-size:12px; font-weight:700;"><i class="fas fa-arrow-left"></i> BACK TO HOME</a>
+    </div>
+</header>
+
+<div class="shahi-container">
+    <div class="mobile-search-row">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search products......" oninput="searchInCategories(this.value)">
+    </div>
+</div>
+
+<main class="container">
+    <div class="hero">
+        <div class="hero-content">
+            <h1>ALL <span>CATEGORIES</span></h1>
+        </div>
+    </div>
+    
+    <div id="categories-root">
+        <div style="text-align: center; padding: 100px 0;">
+            <i class="fas fa-circle-notch fa-spin" style="font-size: 40px; color: var(--accent-blue);"></i>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="footer-grid">
+        <div style="grid-column: span 1.5;">
+            <div class="footer-logo">APNI <span>SALTANAT</span></div>
+            <p style="color: #555; font-size: 15px; line-height: 1.8; max-width: 400px;">
+               We believe in premium quality products at fair prices. Every deal in the Saltanat is a commitment to trust.
+            </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <h4 style="font-size: 13px; text-transform: uppercase; color: #000; letter-spacing: 1px; margin-bottom: 10px;">Saltanat Links</h4>
+            <a href="index.html" style="text-decoration: none; color: #777; font-size: 14px;">Shahi Bazaar(Marketplace)</a>
+            <a href="instructions.html" style="text-decoration: none; color: #777; font-size: 14px;">Shahi Paigam(message)</a>
+            <a href="faq.html" style="text-decoration: none; color: #777; font-size: 14px;">Help Center</a>
+        </div>
+        <div style="text-align: right;">
+            <h4 style="font-size: 13px; text-transform: uppercase; color: #000; letter-spacing: 1px; margin-bottom: 10px;">Contact Us</h4>
+            <p style="color: #444; font-size: 14px; margin-bottom: 20px;">Taxila, Punjab, Pakistan</p>
+            <div style="display: flex; gap: 20px; justify-content: flex-end; font-size: 24px; color: #333;">
+            <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank" style="color: inherit;">
+        <i class="fab fa-instagram"></i>
+    </a>
+                <a href="https://wa.me/923011786494" target="_blank" style="color: inherit;">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.facebook.com/apnisaltanat.official" target="_blank" style="color: inherit;">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 80px; color: #222; font-size: 12px; letter-spacing: 3px; text-transform: uppercase;">
+        &copy; 2026 APNI SALTANAT | BY BABLU ARCHITECT
+    </div>
+</footer>
+
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc",
+        authDomain: "apnisaltanat.com",
+        databaseURL: "https://apni-saltanat-default-rtdb.firebaseio.com",
+        projectId: "apni-saltanat",
+        storageBucket: "apni-saltanat.firebasestorage.app",
+        messagingSenderId: "691941073239",
+        appId: "1:691941073239:web:9e0b568eccc347a0c0de12"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    async function loadCategories() {
+        const root = document.getElementById('categories-root');
+        try {
+            const [pSnap, sardaarsSnap] = await Promise.all([
+                get(ref(db, 'products')),
+                get(ref(db, 'users/sardaars'))
+            ]);
+
+            if(!pSnap.exists()) {
+                root.innerHTML = "<p>No products found.</p>";
+                return;
+            }
+
+            const data = pSnap.val();
+            const sardaarsData = sardaarsSnap.exists() ? sardaarsSnap.val() : {};
+            const allProducts = [];
+
+            for(let seller in data) {
+                // Skip products if sardaar is blocked
+                if (sardaarsData[seller] && sardaarsData[seller].status === 'blocked') continue;
+
+                for(let pid in data[seller]) {
+                    const p = data[seller][pid];
+                    allProducts.push({ id: pid, seller: seller, ...p });
+                }
+            }
+
+            window.renderStructure = (productList) => {
+                const structure = {};
+                productList.forEach(p => {
+                    const cat = p.category || 'Other';
+                    if(!structure[cat]) structure[cat] = [];
+                    structure[cat].push(p);
+                });
+
+                let html = '';
+                for(let cat in structure) {
+                    html += `<div class="cat-section"><h2 class="cat-name">${cat}</h2><div class="products-grid">`;
+                    structure[cat].forEach(p => {
+                        html += `
+                            <div class="shahi-card" onclick="location.href='product.html?id=${p.id}&seller=${p.seller}'">
+                                <div class="img-container"><img src="${p.img}"></div>
+                                <div class="p-name">${p.name}</div>
+                                <div class="card-bottom">
+                                    <span class="price-now">Rs. ${p.price}</span>
+                                    <div class="btn-view"><i class="fas fa-arrow-right"></i></div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += `</div></div>`;
+                }
+                root.innerHTML = html || "<p>No items match your search.</p>";
+            };
+
+            window.searchInCategories = (query) => {
+                const q = (typeof query === 'string' ? query : document.getElementById('headerSearch').value).toLowerCase().trim();
+                if(!q) { renderStructure(allProducts); return; }
+                const filtered = allProducts.filter(p => 
+                    p.name.toLowerCase().includes(q) || 
+                    (p.category && p.category.toLowerCase().includes(q))
+                );
+                renderStructure(filtered);
+            };
+
+            renderStructure(allProducts);
+        } catch(e) {
+            console.error(e);
+            root.innerHTML = "<p>Error loading categories.</p>";
+        }
+    }
+
+    loadCategories();
+</script>
+</body>
+</html>

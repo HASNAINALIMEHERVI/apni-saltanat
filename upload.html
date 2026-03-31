@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sardaar Panel | Apni Saltanat</title>
+  <title>Apni Saltanat | Pakistan's Premier Shahi Marketplace</title>
+<meta name="title" content="Apni Saltanat | Pakistan's Premier Shahi Marketplace">
+<meta name="description" content="Shop at Apni Saltanat, Pakistan's most trusted online Shahi Marketplace. Discover a wide variety of premium products including electronics, fashion, and daily essentials at fair and royal prices. Every deal is a commitment to trust.">
+<meta name="keywords" content="Apni Saltanat, Online Shopping Pakistan, Shahi Bazaar, Marketplace Pakistan, Best Online Store, Electronics Pakistan, Fashion Marketplace, Bablu Architect, Buy Online Pakistan">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00ff88">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+<link rel="icon" type="image/png" href="https://apnisaltanat.com/favicon.png">
+<link rel="shortcut icon" href="https://apnisaltanat.com/favicon.png" type="image/x-icon">
+<link rel="apple-touch-icon" href="https://apnisaltanat.com/favicon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://apnisaltanat.com/">
+<meta property="og:title" content="Apni Saltanat | Pakistan's Premier Shahi Marketplace">
+<meta property="og:description" content="Discover premium quality products at fair prices. Experience the royal way of online shopping in Pakistan.">
+<meta property="og:image" content="https://apnisaltanat.com/favicon.png">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://apnisaltanat.com/">
+<meta property="twitter:title" content="Apni Saltanat | Pakistan's Premier Shahi Marketplace">
+<meta property="twitter:description" content="Shop the best deals in Pakistan at Apni Saltanat. Quality and trust delivered to your doorstep.">
+<meta property="twitter:image" content="https://apnisaltanat.com/favicon.png">
+
+<link rel="canonical" href="https://apnisaltanat.com/">
+<link rel="canonical" href="https://apnisaltanat.com/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg-body: #fbfbfd;
+            --bg-card: #ffffff;
+            --text-main: #1a1a1e;
+            --text-muted: #707070;
+            --accent-purple: #9c27b0;
+            --accent-blue: #2196f3;
+            --border-color: #eeeeee;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        
+        html, body { 
+            width: 100%;
+            overflow-x: hidden;
+            background: var(--bg-body); 
+            font-family: 'Inter', sans-serif; 
+            color: var(--text-main); 
+            line-height: 1.6;
+        }
+
+        .shahi-header {
+            background: rgba(255,255,255,0.95); 
+            backdrop-filter: blur(10px);
+            padding: 12px 0; 
+            position: sticky; 
+            top: 10px; 
+            z-index: 1000; 
+            max-width: 95%;
+            margin: 0 auto;
+            border-radius: 50px;
+            border: 1px solid var(--border-color); 
+            box-shadow: var(--shadow-sm);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .site-logo { font-size: 18px; font-weight: 900; text-decoration: none; color: #000; font-family: 'Outfit', sans-serif; }
+        .site-logo span { color: var(--accent-blue); }
+
+        .container { 
+            width: 100%;
+            max-width: 900px; 
+            margin: 30px auto 100px; 
+            padding: 0 15px;
+        }
+        
+        .section-box { 
+            margin-top: 25px; 
+            padding: 25px 20px; 
+            background: #fff; 
+            border-radius: 24px; 
+            border: 1px solid var(--border-color); 
+            box-shadow: var(--shadow-sm);
+            width: 100%;
+            overflow: hidden;
+        }
+        .shahi-label { 
+            font-size: 16px; 
+            font-weight: 900; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            text-transform: uppercase; 
+            font-family: 'Outfit';
+        }
+
+        .form-row { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
+            margin-bottom: 15px; 
+        }
+        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+        .form-group { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+        label { font-size: 10px; color: #aaa; font-weight: 800; text-transform: uppercase; }
+        
+        input, select, textarea { 
+            width: 100%;
+            padding: 14px; 
+            background: #f9f9fb; 
+            border: 1px solid #eee; 
+            border-radius: 12px; 
+            outline: none; 
+            font-size: 14px;
+            font-family: inherit;
+        }
+        textarea { resize: vertical; min-height: 80px; }
+
+        .point-input-row { 
+            display: flex; 
+            gap: 8px; 
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .point-input-row input { flex: 1; min-width: 0; }
+
+        .btn-shahi { 
+            background: linear-gradient(180deg, #00aeef 0%, #0072bc 100%); 
+            color: #fff; border: none; padding: 16px; width: 100%; 
+            font-weight: 800; cursor: pointer; border-radius: 14px; 
+            margin-top: 10px; text-transform: uppercase; transition: 0.2s;
+        }
+        .btn-gold { background: linear-gradient(180deg, #ffcc00 0%, #ff9900 100%); color: #000; }
+
+        .drop-zone {
+            border: 2px dashed #eee; border-radius: 18px; padding: 25px;
+            text-align: center; background: #fcfcfd; cursor: pointer;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+        }
+        .preview-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); 
+            gap: 10px; 
+            margin-top: 15px; 
+        }
+        .preview-box { 
+            aspect-ratio: 1/1; background: #fff; border-radius: 10px; border: 1px solid #eee; 
+            position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; 
+        }
+        .preview-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .remove-btn { position: absolute; top: 2px; right: 2px; background: #ff4d4d; color: #fff; width: 20px; height: 20px; border-radius: 50%; border: none; font-size: 12px; }
+
+        .table-wrap { width: 100%; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        thead { background: #fcfcfc; }
+        th { padding: 12px 15px; text-align: left; font-size: 10px; text-transform: uppercase; color: #bbb; border-bottom: 1px solid #eee; }
+        td { padding: 12px 15px; border-bottom: 1px solid #f9f9f9; font-size: 13px; }
+
+        /* Receipt Modal Styles */
+        #receiptModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 5000; display: none; align-items: center; justify-content: center; padding: 15px; }
+        .receipt-card { background: #fff; width: 100%; max-width: 400px; padding: 25px; border-radius: 24px; position: relative; box-shadow: var(--shadow-sm); overflow-y: auto; max-height: 90vh; }
+        .receipt-card input { padding: 10px 15px; font-size: 13px; margin-bottom: 5px; }
+        .receipt-card .form-group { margin-bottom: 12px !important; }
+        #settlementPreview { width: 100%; height: 120px; object-fit: contain; background: #f9f9f9; border-radius: 12px; margin-top: 5px; border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        #settlementPreview img { max-width: 100%; max-height: 100%; }
+
+        footer { background: #fff; padding: 80px 40px 40px; margin-top: 100px; border-top: 1px solid var(--border-color); color: var(--text-main); }
+        .footer-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px; }
+
+        @media (max-width: 768px) {
+            .shahi-header { margin: 0 10px; top: 5px; height: 50px; display: flex; align-items: center; border-radius: 30px; }
+            .header-inner { padding: 0 15px; width: 100%; }
+            .site-logo { font-size: 15px; }
+
+            .container { margin-top: 15px; padding: 0 10px; }
+            .section-box { padding: 20px 15px; border-radius: 20px; }
+            .shahi-label { font-size: 14px; margin-bottom: 15px; }
+            
+            input, select, textarea { padding: 12px; font-size: 13px; border-radius: 10px; }
+            .btn-shahi { padding: 14px; font-size: 12px; border-radius: 12px; }
+            
+            thead { display: none; }
+            tr { display: flex; flex-direction: column; padding: 12px; border: 1px solid #f0f0f0; border-radius: 12px; margin-bottom: 12px; background: #fafafa; }
+            td { display: flex; flex-direction: column; gap: 4px; padding: 6px 0; border-bottom: 1px solid #eee; text-align: left; }
+            td:last-child { border-bottom: none; }
+            td::before { content: attr(data-label); font-weight: 800; color: #ccc; font-size: 8px; text-transform: uppercase; text-align: left; }
+
+            footer { padding: 40px 20px 30px; margin-top: 50px; }
+            .footer-grid { gap: 30px; text-align: center; grid-template-columns: 1fr; }
+            footer div:last-child { text-align: center !important; }
+            footer div:last-child div { justify-content: center !important; }
+        }
+         .footer-logo { font-size: 24px; font-weight: 900; color: #000; margin-bottom: 20px; font-family: 'Outfit'; }
+
+    </style>
+</head>
+<body>
+
+<header class="shahi-header">
+    <div class="header-inner">
+        <a href="marketplace.html" class="site-logo">SARDAAR <span>PANEL</span></a>
+        <a href="marketplace.html" style="text-decoration:none; color:var(--accent-blue); font-size:12px; font-weight:700;"><i class="fas fa-arrow-left"></i>BACK TO DASHBOARD</a>
+    </div>
+</header>
+
+<div class="container">
+    <!-- Trigger Button for Fee Receipt -->
+    <button class="btn-shahi btn-gold" style="margin-bottom: 25px;" onclick="openReceiptModal()"><i class="fas fa-money-bill-wave"></i> PAYMENT PROOF (Rs. 1000)</button>
+    <div class="section-box">
+        <span class="shahi-label" id="formTitle"><i class="fas fa-plus-circle"></i> Update Inventory</span>
+        <input type="hidden" id="editId">
+        
+        <div class="form-row">
+            <div class="form-group"><label>Product Name</label><input type="text" id="pName" placeholder="Name"></div>
+            <div class="form-group"><label>Category</label><input type="text" id="pCat" placeholder="Category (Main)"></div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group"><label>Sub Category</label><input type="text" id="pSubCat" placeholder="Sub Category"></div>
+            <div class="form-group"><label>Sale Price</label><input type="number" id="pNewPrice" placeholder="Rs. 0"></div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group"><label>Old Price</label><input type="number" id="pOldPrice" placeholder="Rs. 0"></div>
+            <div class="form-group" style="visibility: hidden;"><label>Hidden</label><input type="text"></div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label>Description (Details)</label>
+            <textarea id="longDesc" placeholder="Enter product details..."></textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label>Characteristics (Specific points)</label>
+            <div id="pointsContainer">
+                <div class="point-input-row">
+                    <input type="text" class="p-key" placeholder="Key (e.g. Color)">
+                    <input type="text" class="p-val" placeholder="Value (e.g. Red)">
+                </div>
+            </div>
+            <button id="addNewPointBtn" style="background:none; border:1px dashed #ccc; padding:8px; border-radius:10px; cursor:pointer; font-size:11px; color:var(--accent-blue); font-weight:700;">+ Add Character</button>
+        </div>
+        
+        <div class="form-group">
+            <label>Images</label>
+            <div id="dropZone" class="drop-zone">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Click to Upload</p>
+                <input type="file" id="fileInput" accept="image/*" multiple style="display: none;">
+            </div>
+            <div id="previewGrid" class="preview-grid"></div>
+        </div>
+        
+        <button id="uploadBtn" class="btn-shahi">Save Changes</button>
+        <p id="status" style="display:none; text-align:center; color:var(--accent-blue); margin-top:10px; font-weight:800; font-size:12px;">Processing...</p>
+    </div>
+
+    <div class="section-box">
+        <span class="shahi-label"><i class="fas fa-shopping-cart"></i> Recent Orders</span>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Customer</th><th>Product</th><th>Contact</th><th>Action</th></tr></thead>
+                <tbody id="ordersBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="section-box">
+        <span class="shahi-label"><i class="fas fa-box-open"></i> My Inventory</span>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Image</th><th>Name</th><th>Price</th><th>Action</th></tr></thead>
+                <tbody id="inventoryBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Receipt Submission Modal -->
+<div id="receiptModal">
+    <div class="receipt-card">
+        <i class="fas fa-times" style="position:absolute; top:20px; right:20px; cursor:pointer; color: #888;" onclick="closeReceiptModal()"></i>
+        <h2 style="font-size:22px; font-weight:800; margin-bottom:25px; text-align:center; font-family: 'Outfit';">Fee Submission.</h2>
+        
+        <div class="form-group" style="margin-bottom:15px;"><label>Sardaar Name</label><input type="text" id="setSellerName" placeholder="Apna Naam"></div>
+        <div class="form-group" style="margin-bottom:15px;"><label>Store Name</label><input type="text" id="setStoreName" placeholder="Store ka Naam"></div>
+        <div class="form-group" style="margin-bottom:15px;"><label>Address</label><input type="text" id="setAddress" placeholder="Mukammal Pata"></div>
+        
+        <div class="form-group">
+            <label>Payment Receipt (Screenshot)</label>
+            <input type="file" id="receiptInput" accept="image/*" onchange="previewReceipt(this)">
+            <div id="settlementPreview"><p style="color:#aaa; font-size:12px;">No image selected</p></div>
+        </div>
+
+        <button class="btn-shahi btn-gold" id="submitPaymentBtn">Submit to Shahi Khizana 👑</button>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getDatabase, ref, onValue, push, update, remove, get, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    // Project 1 Config
+    const firebaseConfig1 = {
+        apiKey: "AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc",
+        authDomain: "apnisaltanat.com",
+        databaseURL: "https://apni-saltanat-default-rtdb.firebaseio.com",
+        projectId: "apni-saltanat",
+    };
+
+    const app = initializeApp(firebaseConfig1);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+    
+    const IMGBB_KEY = "da752463f652bf8cf94fc976f43d93ba";
+
+    let uid = null;
+    let products = {};
+    let files = [];
+    let existingUrls = [];
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) { 
+            uid = user.uid; 
+            loadInventory(user.uid); 
+            loadOrders(user.uid);
+            get(ref(db, `users/sardaars/${user.uid}`)).then(s => {
+                if(s.exists()){
+                    const d = s.val();
+                    document.getElementById('setSellerName').value = d.userName || d.name || '';
+                    document.getElementById('setStoreName').value = d.storeName || '';
+                    document.getElementById('setAddress').value = d.address || '';
+                }
+            });
+        }
+        else { location.href = "login.html"; }
+    });
+
+    window.openReceiptModal = () => document.getElementById('receiptModal').style.display = 'flex';
+    window.closeReceiptModal = () => document.getElementById('receiptModal').style.display = 'none';
+
+    window.previewReceipt = (input) => {
+        const preview = document.getElementById('settlementPreview');
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (e) => preview.innerHTML = `<img src="${e.target.result}">`;
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    document.getElementById('submitPaymentBtn').onclick = async () => {
+        const name = document.getElementById('setSellerName').value.trim();
+        const store = document.getElementById('setStoreName').value.trim();
+        const addr = document.getElementById('setAddress').value.trim();
+        const file = document.getElementById('receiptInput').files[0];
+
+        if(!name || !store || !addr || !file) return alert("Sultan, fill all details and upload receipt!");
+
+        const btn = document.getElementById('submitPaymentBtn');
+        btn.disabled = true; btn.innerText = "Submitting...";
+
+        try {
+            const fd = new FormData(); fd.append('image', file);
+            const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, { method:'POST', body:fd });
+            const d = await res.json();
+
+            if(d.success) {
+                const payData = {
+                    sellerName: name,
+                    storeName: store,
+                    address: addr,
+                    receiptUrl: d.data.url,
+                    sellerId: uid,
+                    timestamp: Date.now()
+                };
+
+                await set(push(ref(db, 'settlements')), payData);
+                alert("Receipt submitted successfully Sultan!");
+                closeReceiptModal();
+            } else {
+                alert("Upload failed: " + d.error.message);
+            }
+        } catch(e) { alert("Error: " + e.message); }
+        btn.disabled = false; btn.innerText = "Submit to Shahi Khizana 👑";
+    };
+
+    const dropZone = document.getElementById('dropZone');
+    const fileIn = document.getElementById('fileInput');
+    const preview = document.getElementById('previewGrid');
+
+    if(dropZone) dropZone.onclick = () => fileIn.click();
+    if(fileIn) fileIn.onchange = () => { for(let f of fileIn.files) files.push(f); renderPreview(); };
+   // Updated function to render image previews with Sultan's confirmation
+window.renderPreview = () => {
+    preview.innerHTML = '';
+    
+    // 1. Existing URLs (Jo pehle se database mein hain)
+    existingUrls.forEach((u, i) => {
+        preview.innerHTML += `
+            <div class="preview-box">
+                <img src="${u}">
+                <button class="remove-btn" onclick="confirmRemoveExisting(${i})">×</button>
+            </div>`;
+    });
+    
+    // 2. New files (Jo abhi upload honi hain)
+    files.forEach((f, i) => {
+        preview.innerHTML += `
+            <div class="preview-box">
+                <img src="${URL.createObjectURL(f)}">
+                <button class="remove-btn" onclick="confirmRemoveNewFile(${i})">×</button>
+            </div>`;
+    });
+}
+
+// Helper function: Purani tasveer hatane ke liye pochna
+window.confirmRemoveExisting = (index) => {
+    if (confirm("Sultan, kya aap waqayi is purani tasveer ko hatana chahte hain?")) {
+        existingUrls.splice(index, 1);
+        renderPreview();
+    }
+}
+
+// Helper function: Nayi (abhi select ki hui) tasveer hatane ke liye pochna
+window.confirmRemoveNewFile = (index) => {
+    if (confirm("Sultan, kya ye nayi tasveer nikaal dein?")) {
+        files.splice(index, 1);
+        renderPreview();
+    }
+}
+    document.getElementById('addNewPointBtn').onclick = () => {
+        const d = document.createElement('div');
+        d.className = 'point-input-row';
+        d.innerHTML = `<input type="text" class="p-key" placeholder="Key"><input type="text" class="p-val" placeholder="Value"><button onclick="this.parentElement.remove()" style="border:none;background:none;color:red;padding:0 5px;">×</button>`;
+        document.getElementById('pointsContainer').appendChild(d);
+    };
+
+    function loadInventory(id) {
+        onValue(ref(db, `products/${id}`), (snap) => {
+            let h = ''; products = {};
+            if(snap.exists()){
+                snap.forEach(c => {
+                    const p = c.val(); p.key = c.key; products[c.key] = p;
+                    h += `<tr><td data-label="Image"><img src="${p.img}" style="width:40px;height:40px;object-fit:contain;border-radius:5px;"></td><td data-label="Name">${p.name}</td><td data-label="Price">Rs. ${p.price}</td><td data-label="Action"><i class="fas fa-edit" onclick="editProd('${c.key}')" style="margin-right:10px;cursor:pointer;"></i><i class="fas fa-trash" onclick="deleteProd('${c.key}')" style="color:red;cursor:pointer;"></i></td></tr>`;
+                });
+            }
+            document.getElementById('inventoryBody').innerHTML = h || '<tr><td colspan="4" style="text-align:center">Inventory is empty.</td></tr>';
+        });
+    }
+
+    function loadOrders(id) {
+        onValue(ref(db, `orders/${id}`), (snap) => {
+            let h = '';
+            if(snap.exists()){
+                snap.forEach(c => {
+                    const o = c.val();
+                    h += `<tr>
+                        <td data-label="Customer">${o.customerName}<br><small style="color:#999">${o.customerAddress}</small></td>
+                        <td data-label="Product">${o.productName}<br><small>Rs. ${o.productPrice}</small></td>
+                        <td data-label="Contact">${o.customerPhone}<br><small style="color:#999">Postal: ${o.customerPostal || 'N/A'}</small></td>
+                        <td data-label="Action">
+                            <i class="fas fa-trash" onclick="deleteOrder('${c.key}')" style="color:red;cursor:pointer;"></i>
+                        </td>
+                    </tr>`;
+                });
+            }
+            document.getElementById('ordersBody').innerHTML = h || '<tr><td colspan="4" style="text-align:center">No pending orders.</td></tr>';
+        });
+    }
+
+    window.deleteOrder = (id) => {
+        if(confirm("Sultan, order delete kr dein?")) {
+            remove(ref(db, `orders/${uid}/${id}`));
+        }
+    };
+
+    document.getElementById('uploadBtn').onclick = async () => {
+        const name = document.getElementById('pName').value.trim();
+        const price = document.getElementById('pNewPrice').value.trim();
+        if(!name || !price) return alert("Name & Price required!");
+        
+        const status = document.getElementById('status');
+        status.style.display = 'block';
+        status.innerText = "Umer-e-Rafta (Uploading images)...";
+
+        try {
+            let urls = [...existingUrls];
+            // Process images sequentially to avoid browser limits
+            for(let i=0; i < files.length; i++) {
+                status.innerText = `wait ${i+1}/${files.length} (Uploading image)...`;
+                const fd = new FormData(); 
+                fd.append('image', files[i]);
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, { method:'POST', body:fd });
+                const d = await res.json();
+                if(d.success) urls.push(d.data.url);
+            }
+            
+            let charArr = [];
+            document.querySelectorAll('.point-input-row').forEach(r => {
+                const k = r.querySelector('.p-key').value.trim(), v = r.querySelector('.p-val').value.trim();
+                if(k && v) charArr.push(`${k}:${v}`); else if(v) charArr.push(v);
+            });
+
+            const data = {
+                name, price, 
+                category: document.getElementById('pCat').value,
+                subcategory: document.getElementById('pSubCat').value || '',
+                oldPrice: document.getElementById('pOldPrice').value,
+                description: document.getElementById('longDesc').value.trim(), 
+                characteristics: charArr.join('|'), 
+                img: urls[0] || '', // Thumb
+                allImgs: urls.join('|'), // Full collection
+                sellerId: uid, timestamp: Date.now()
+            };
+
+            const editId = document.getElementById('editId').value;
+            if(editId) {
+                await update(ref(db, `products/${uid}/${editId}`), data);
+            } else {
+                const newKey = push(ref(db, `products/${uid}`)).key;
+                await set(ref(db, `products/${uid}/${newKey}`), data);
+            }
+
+            alert("👑 Product uploaded successfully!"); location.reload();
+        } catch(e) { alert("Error: " + e.message); status.style.display = 'none'; }
+    };
+
+    window.editProd = (id) => {
+        const p = products[id];
+        document.getElementById('pName').value = p.name;
+        document.getElementById('pCat').value = p.category || '';
+        document.getElementById('pSubCat').value = p.subcategory || '';
+        document.getElementById('pNewPrice').value = p.price;
+        document.getElementById('pOldPrice').value = p.oldPrice || '';
+        document.getElementById('longDesc').value = p.description || '';
+        document.getElementById('editId').value = id;
+        
+        const pointsCon = document.getElementById('pointsContainer');
+        pointsCon.innerHTML = '';
+        if (p.characteristics) {
+            p.characteristics.split('|').forEach(pt => {
+                const d = document.createElement('div'); d.className = 'point-input-row';
+                if(pt.includes(':')){ const parts = pt.split(':'); d.innerHTML = `<input type="text" class="p-key" value="${parts[0]}"><input type="text" class="p-val" value="${parts[1]}"><button onclick="this.parentElement.remove()" style="border:none;background:none;color:red;padding:0 5px;">×</button>`; }
+                else { d.innerHTML = `<input type="text" class="p-key" value=""><input type="text" class="p-val" value="${pt}"><button onclick="this.parentElement.remove()" style="border:none;background:none;color:red;padding:0 5px;">×</button>`; }
+                pointsCon.appendChild(d);
+            });
+        }
+        existingUrls = p.allImgs ? p.allImgs.split('|') : [p.img];
+        files = []; renderPreview();
+        document.getElementById('formTitle').innerText = "Edit Product";
+        window.scrollTo({top:0, behavior:'smooth'});
+    };
+
+    window.deleteProd = (id) => { 
+        if(confirm("Remove product?")) {
+            remove(ref(db, `products/${uid}/${id}`));
+        }
+    };
+</script>
+<footer>
+    <div class="footer-grid">
+        <div style="grid-column: span 1.5;">
+            <div class="footer-logo">APNI <span>SALTANAT</span></div>
+            <p style="color: #555; font-size: 15px; line-height: 1.8; max-width: 400px;">
+               We believe in premium quality products at fair prices. Every deal in the Saltanat is a commitment to trust.
+            </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <h4 style="font-size: 13px; text-transform: uppercase; color: #000; letter-spacing: 1px; margin-bottom: 10px;">Saltanat Links</h4>
+            <a href="index.html" style="text-decoration: none; color: #777; font-size: 14px;">Shahi Bazaar(Marketplace)</a>
+            <a href="instructions.html" style="text-decoration: none; color: #777; font-size: 14px;">Shahi Paigam(message)</a>
+            <a href="faq.html" style="text-decoration: none; color: #777; font-size: 14px;">Help Center</a>
+        </div>
+               <div style="text-align: right;">
+            <h4 style="font-size: 13px; text-transform: uppercase; color: #000; letter-spacing: 1px; margin-bottom: 10px;">Contact Us</h4>
+            <p style="color: #444; font-size: 14px; margin-bottom: 20px;">Taxila, Punjab, Pakistan</p>
+            <div style="display: flex; gap: 20px; justify-content: flex-end; font-size: 24px; color: #333;">
+            <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank" style="color: inherit;">
+        <i class="fab fa-instagram"></i>
+    </a>
+                <a href="https://wa.me/923011786494" target="_blank" style="color: inherit;">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.facebook.com/apnisaltanat.official" target="_blank" style="color: inherit;">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 80px; color: #222; font-size: 12px; letter-spacing: 3px; text-transform: uppercase;">
+        &copy; 2026 APNI SALTANAT | BY BABLU ARCHITECT
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darbari Payments | Sultan Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --shahi-green: #00ff88;
+            --royal-gold: #ffcc00;
+            --deep-bg: #0a0a0c;
+            --card-bg: #141417;
+            --accent-blue: #2196f3;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--deep-bg); color: white; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; border-bottom: 2px solid var(--shahi-green); padding-bottom: 20px; margin-bottom: 40px; }
+        
+        .payment-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; }
+        .payment-card { background: var(--card-bg); border-radius: 20px; padding: 25px; border: 1px solid #333; transition: 0.3s; position: relative; }
+        .payment-card:hover { border-color: var(--shahi-green); transform: translateY(-5px); }
+        
+        .shahi-label { color: var(--royal-gold); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .shahi-val { font-size: 16px; font-weight: 700; margin-bottom: 15px; display: block; }
+        
+        .reciept-img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin: 15px 0; border: 1px solid #222; cursor: pointer; }
+        
+        .btn-confirm { 
+            width: 100%; padding: 15px; 
+            background: var(--shahi-green); color: black; 
+            border: none; border-radius: 10px; font-weight: 800; 
+            cursor: pointer; text-transform: uppercase; 
+            transition: 0.3s; margin-top: 10px;
+        }
+        .btn-confirm:hover { background: #00cc6e; box-shadow: 0 0 20px rgba(0,255,136,0.3); }
+
+        .status-tag { position: absolute; top: 20px; right: 20px; padding: 4px 10px; border-radius: 5px; font-size: 10px; font-weight: 900; }
+        .status-pending { background: rgba(255, 204, 0, 0.1); color: var(--royal-gold); border: 1px solid var(--royal-gold); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1 style="color: var(--royal-gold); letter-spacing: 5px;">KHIZANA-E-SALTANAT</h1>
+        <p style="color: #888;">Seller Commission & Rent Verifications</p>
+    </div>
+
+    <div class="payment-grid" id="paymentList">
+        <p style="text-align:center; width:100%; color:#555;">Darbari Ledger Khul Raha Hai...</p>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // 1. Firebase Initialize
+    const firebaseConfig1 = {
+        apiKey: "AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc",
+        authDomain: "apnisaltanat.com",
+        databaseURL: "https://apni-saltanat-default-rtdb.firebaseio.com",
+        projectId: "apni-saltanat",
+        storageBucket: "apni-saltanat.firebasestorage.app",
+        messagingSenderId: "691941073239",
+        appId: "1:691941073239:web:9e0b568eccc347a0c0de12"
+    };
+
+    const app1 = initializeApp(firebaseConfig1);
+    const db1 = getDatabase(app1);
+    const auth1 = getAuth(app1);
+    const SULTAN_UID = "qnWFjg3XNlO7jHDhz84bPJMikP72";
+
+    // 2. Auth Guard: Sultan Identity Verification
+    onAuthStateChanged(auth1, (user) => {
+        if (user && user.uid === SULTAN_UID) {
+            console.log("Sultan Authenticated: Opening Treasury Vault...");
+            loadAllSettlements(); // Tasdeeq ke baad data load karein
+        } else {
+            alert("Access Denied! Only the Sultan can verify imperial payments.");
+            window.location.href = "login.html";
+        }
+    });
+
+    // 3. Load Payments Data
+    function loadAllSettlements() {
+        onValue(ref(db1, 'settlements'), (snap) => {
+            const list = document.getElementById('paymentList');
+            if(!snap.exists()) {
+                list.innerHTML = "<h2 style='grid-column:1/-1; text-align:center; color:#444;'>No pending payment verifications.</h2>";
+                return;
+            }
+            renderData(snap.val());
+        }, (error) => {
+            console.error("Firebase Read Error:", error);
+            document.getElementById('paymentList').innerHTML = `<p style='color:red;'>Access Error: ${error.message}</p>`;
+        });
+    }
+
+    // 4. Render Data (English UI)
+    function renderData(data) {
+        const list = document.getElementById('paymentList');
+        let h = '';
+        Object.entries(data).sort((a,b) => (b[1].timestamp || 0) - (a[1].timestamp || 0)).forEach(([id, p]) => {
+            h += `
+                <div class="payment-card">
+                    <span class="status-tag status-pending">UNVERIFIED</span>
+                    <span class="shahi-label">Merchant Name</span>
+                    <span class="shahi-val">${p.sellerName || 'N/A'}</span>
+                    
+                    <span class="shahi-label">Store Identity</span>
+                    <span class="shahi-val">${p.storeName || 'N/A'}</span>
+                    
+                    <span class="shahi-label">Business Address</span>
+                    <span class="shahi-val">${p.address || 'N/A'}</span>
+
+                    <span class="shahi-label">Payment Receipt Screenshot</span>
+                    <img src="${p.receiptUrl}" class="reciept-img" onclick="window.open('${p.receiptUrl}')" title="Click to enlarge">
+                    
+                    <button class="btn-confirm" onclick="confirmPayment('${id}')">APPROVE PAYMENT 👑</button>
+                </div>
+            `;
+        });
+        list.innerHTML = h;
+    }
+
+    // 5. Confirmation Action
+    async function confirmPayment(id) {
+        if(!confirm("Sultan, do you confirm that this payment has been received in the Shahi Khizana?")) return;
+
+        try {
+            // Receipt ko settlements se delete kar dein (process complete)
+            await remove(ref(db1, `settlements/${id}`));
+            alert("Payment Confirmed! The record has been moved to the archives.");
+        } catch (e) {
+            console.error('Confirm error:', e);
+            alert("Confirmation failed: " + e.message);
+        }
+    }
+
+    // Global exposure for button clicks
+    window.confirmPayment = confirmPayment;
+
+</script>
+</body>
+</html>
