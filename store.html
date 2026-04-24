@@ -1,234 +1,381 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9236482420910781" crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Seller Store | Apni Saltanat</title>
-    <meta name="description" content="Browse products from this verified Apni Saltanat seller. Premium quality products with reliable delivery across Pakistan.">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
-    <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }</script>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="royal.css">
-    <style>
-        /* Cart icon */
-        .cart-icon-wrap { position:relative; display:flex; align-items:center; justify-content:center; width:40px; height:40px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:50%; text-decoration:none; color:var(--text-muted); transition:var(--transition); }
-        .cart-icon-wrap:hover { border-color:var(--border-gold); color:var(--royal-gold); }
-        .cart-count { position:absolute; top:-6px; right:-6px; background:var(--royal-gold); color:#131313; font-size:9px; font-weight:900; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid var(--bg-dark); }
+    <meta name="description" content="Browse products from this verified Apni Saltanat seller." />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9236482420910781" crossorigin="anonymous"></script>
+    
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#020617" />
 
-        /* Banner Slider */
-        .store-banner { width:100%; border-radius:var(--radius-lg); overflow:hidden; position:relative; background:var(--bg-surface); border:1px solid var(--border); margin:24px 0 0; height:320px; }
-        .banner-slider { display:flex; height:100%; transition:transform 0.5s ease; }
-        .banner-slide { min-width:100%; height:100%; }
-        .banner-slide img { width:100%; height:100%; object-fit:cover; }
-        .banner-slide-default { min-width:100%; height:100%; background:linear-gradient(135deg, #0a0800 0%, #1a1200 100%); display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; }
-        .banner-slide-default::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, rgba(255,204,0,0.1) 0%, transparent 65%); }
-        .banner-default-text { font-family:'Epilogue',sans-serif; font-size:clamp(22px,4vw,48px); font-weight:900; color:var(--text-light); text-transform:uppercase; position:relative; z-index:2; }
-        .banner-default-text span { color:var(--royal-gold); }
-        .slider-dots { position:absolute; bottom:14px; width:100%; display:flex; justify-content:center; gap:8px; z-index:10; }
-        .dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.4); transition:0.3s; cursor:pointer; }
-        .dot.active { background:var(--royal-gold); width:24px; border-radius:4px; }
-
-        /* Store Info Card */
-        .store-info-card { background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:28px 36px; display:flex; align-items:center; gap:28px; margin:20px 0 30px; transition:var(--transition); }
-        .store-info-card:hover { border-color:var(--border-gold); }
-        .store-avatar { width:80px; height:80px; background:rgba(255,204,0,0.1); border:2px solid rgba(255,204,0,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:32px; color:var(--royal-gold); flex-shrink:0; }
-        .store-detail h1 { font-family:'Epilogue',sans-serif; font-size:24px; font-weight:900; color:var(--text-light); margin-bottom:4px; }
-        .store-badge { display:inline-flex; align-items:center; gap:6px; font-size:11px; color:var(--royal-gold); font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
-        .store-meta { font-size:13px; color:var(--text-muted); font-weight:700; }
-        .wa-btn { display:inline-flex; align-items:center; gap:8px; background:#25d366; color:#fff; padding:10px 20px; border-radius:50px; text-decoration:none; font-weight:800; font-size:13px; margin-top:12px; transition:var(--transition); }
-        .wa-btn:hover { background:#128c7e; transform:translateY(-2px); }
-
-        /* Professional Header Enhancement */
-        .store-logo-img { width:100px; height:100px; border-radius:50%; border:3px solid var(--border-gold); background:var(--bg-deep); object-fit:cover; box-shadow:0 10px 30px rgba(0,0,0,0.5); margin-top:-50px; position:relative; z-index:5; }
-        .store-avatar.has-logo { display:none; }
-        .store-detail { flex:1; }
-        
-        .mid-store-banner { width:100%; border-radius:var(--radius-lg); overflow:hidden; margin:40px 0; border:1px solid var(--border); height:160px; position:relative; cursor:pointer; }
-        .mid-store-banner img { width:100%; height:100%; object-fit:cover; transition:0.5s; }
-        .mid-store-banner:hover img { transform:scale(1.03); }
-
-        /* Animation class */
-        .shahi-card { opacity:0; transform:translateY(30px); }
-        .shahi-card.active { opacity:1; transform:translateY(0); transition:0.8s cubic-bezier(0.165,0.84,0.44,1); }
-
-        /* Product Grid */
-        #products-list { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:16px; margin-bottom:80px; }
-        .shahi-card { background:var(--bg-surface); border-radius:var(--radius-lg); padding:12px; transition:var(--transition); border:1px solid var(--border); display:flex; flex-direction:column; cursor:pointer; position:relative; overflow:hidden; }
-        .shahi-card:hover { transform:translateY(-10px) scale(1.02); box-shadow:0 30px 60px rgba(255,204,0,0.15); border-color:var(--royal-gold); }
-        .img-container { height:180px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; background:var(--bg-deep); border-radius:var(--radius-md); overflow:hidden; position:relative; }
-        .img-container img { max-width:88%; max-height:88%; object-fit:contain; transition:0.6s cubic-bezier(0.165,0.84,0.44,1); }
-        .shahi-card:hover .img-container img { transform:scale(1.1) rotate(2deg); }
-        .p-name { font-size:14px; font-weight:700; color:var(--text-light); margin-bottom:4px; line-height:1.4; height:40px; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; }
-        .card-bottom { display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:10px; border-top:1px solid var(--border); }
-        .price-now { font-size:18px; font-weight:900; color:var(--royal-gold); font-family:'Epilogue',sans-serif; }
-        .btn-view { background:var(--royal-gold); color:#131313; width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:12px; }
-
-        @media(max-width:768px) {
-            .store-info-card { flex-direction:column; text-align:center; padding:24px 20px; }
-            .store-banner { height:200px; margin:16px 0 0; }
-            #products-list { grid-template-columns:1fr 1fr; gap:10px; }
-            .shahi-card { padding:8px; }
-            .img-container { height:140px; }
-            .p-name { font-size:12px; height:34px; }
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: {
+                            50: '#fffdf0',
+                            100: '#fff9db',
+                            200: '#fff2b8',
+                            300: '#ffe88a',
+                            400: '#ffdb52',
+                            500: '#ffcc00', // royal-gold
+                            600: '#e6b800',
+                            700: '#b38f00',
+                            800: '#806600',
+                            900: '#4d3d00',
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 30px rgba(255, 204, 0, 0.4)',
+                    }
+                }
+            }
         }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- FontAwesome for specific icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020617; color: #fff; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; border-left: 1px solid rgba(255,255,255,0.05); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #ffdb52, #b38f00); border-radius: 999px; }
+
+        .mesh-bg {
+            background-color: #020617;
+            background-image: 
+                radial-gradient(ellipse at 10% 20%, rgba(255, 204, 0, 0.1) 0%, transparent 60%),
+                radial-gradient(ellipse at 90% 10%, rgba(200, 150, 0, 0.1) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 90%, rgba(255, 220, 50, 0.05) 0%, transparent 60%);
+        }
+
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .glass-pill {
+            background: rgba(2, 6, 23, 0.6);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, #ffdb52, #b38f00);
+            color: #111;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s;
+        }
+        .btn-premium::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #ffcc00, #997a00);
+            z-index: -1; opacity: 0; transition: opacity 0.3s;
+        }
+        .btn-premium:hover { transform: scale(1.05); box-shadow: var(--tw-shadow-glow); }
+        .btn-premium:hover::before { opacity: 1; }
+
+        .text-gradient {
+            background: linear-gradient(to right, #ffdb52, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes spark-float {
+            0%   { transform: translate(0, 0) scale(1); opacity: 0; }
+            20%  { opacity: 0.8; }
+            80%  { opacity: 0.4; transform: translate(var(--drift), -80vh) scale(1.2); }
+            100% { transform: translate(calc(var(--drift) * 1.5), -120vh) scale(0.5); opacity: 0; }
+        }
+        .spark {
+            position: fixed; bottom: -50px;
+            background: #ffcc00;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ffcc00, 0 0 30px #ffdb52;
+            pointer-events: none; z-index: 0;
+            animation: spark-float linear infinite;
+        }
+
+        .hero-slider { position: relative; width: 100%; max-width: 500px; height: 500px; border-radius: 2rem; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        @media (max-width: 1024px) { .hero-slider { max-width: 420px; height: 420px; } }
+        @media (max-width: 640px) { .hero-slider { max-width: 100%; height: 250px; } }
+        
+        .hero-slide { position: absolute; inset: 0; opacity: 0; transform: scale(1.08); transition: opacity 1s ease, transform 1s ease; }
+        .hero-slide.active { opacity: 1; transform: scale(1); z-index: 2; }
+        .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+        .wa-float {
+            position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px;
+            background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 30px rgba(37,211,102,0.4); z-index: 999; transition: all 0.3s;
+        }
+        @media (min-width: 640px) { .wa-float { bottom: 30px; right: 30px; width: 64px; height: 64px; } }
+        .wa-float::after {
+            content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #25D366;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; z-index: -1;
+        }
+        @keyframes ping { 75%, 100% { transform: scale(1.6); opacity: 0; } }
+        .wa-float:hover { transform: scale(1.1) rotate(5deg); box-shadow: 0 15px 40px rgba(37,211,102,0.6); }
+
+        #loader {
+            position: fixed; inset: 0; background: #020617; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 0.8s, visibility 0.8s;
+        }
+        .loader-bar { width: 200px; height: 2px; background: rgba(255,255,255,0.1); margin-top: 40px; border-radius: 99px; overflow: hidden; position: relative; }
+        .loader-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: linear-gradient(to right, #ffdb52, #ffcc00); }
+        
+        /* Grid card image constraint */
+        .product-img-wrap { width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); border-radius: 1rem; margin-bottom: 1rem; overflow: hidden; position: relative; }
+        .product-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; transition: 0.5s; }
+        .hover-card:hover .product-img-wrap img { transform: scale(1.1) rotate(2deg); }
+
+        .mid-store-banner { width:100%; border-radius:2rem; overflow:hidden; margin:40px 0; border:1px solid rgba(255,255,255,0.1); position:relative; cursor:pointer; }
+        .mid-store-banner img { width:100%; height:100%; object-fit:cover; transition:0.5s; }
+        .mid-store-banner:hover img { transform:scale(1.02); }
     </style>
 </head>
-<body>
+<body class="mesh-bg relative">
 
-<!-- NAV -->
-<nav class="royal-nav">
-    <div class="nav-container">
-        <div style="display:flex; align-items:center; gap:16px;">
-            <a href="index.html" class="nav-logo">👑 APNI SALTANAT</a>
-            <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--text-muted); font-size:12px; font-weight:700; background:rgba(255,255,255,0.05); border:1px solid var(--border); padding:6px 14px; border-radius:var(--radius-sm); transition:var(--transition);" onmouseover="this.style.borderColor='var(--border-gold)'; this.style.color='var(--royal-gold)';" onmouseout="this.style.borderColor=''; this.style.color='';">
-                <i class="fas fa-arrow-left"></i> <span class="mobile-hide">Back to Bazaar</span>
-            </a>
-        </div>
-        <div style="display:flex; gap:10px; align-items:center;">
-            <a href="cart.html" class="cart-icon-wrap"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a>
-            <a href="profile.html" class="cart-icon-wrap" id="profileTrigger" style="display:none;"><i class="fas fa-user"></i></a>
-            <div onclick="toggleMenu()" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; cursor:pointer; color:var(--text-muted); font-size:18px; transition:var(--transition); margin-left:4px;" onmouseover="this.style.borderColor='var(--border-gold)';" onmouseout="this.style.borderColor='';">
-                <i class="fas fa-ellipsis-v"></i>
+<div id="loader">
+    <i class="fas fa-crown text-gold-500 text-6xl animate-pulse"></i>
+    <div class="loader-bar"><div class="loader-progress" id="loader-progress"></div></div>
+    <span class="mt-4 text-gold-400 text-xs font-bold uppercase tracking-[0.3em] animate-pulse">Loading Store...</span>
+</div>
+
+<div id="spark-container"></div>
+
+<!-- NAVBAR -->
+<div class="fixed top-4 left-0 w-full z-50 px-4 flex justify-center">
+    <nav class="glass-pill w-full max-w-6xl px-3 py-2 rounded-full flex items-center justify-between" id="navbar">
+        <a href="index.html" class="flex items-center gap-3 pl-2 group">
+            <div class="w-11 h-11 rounded-full bg-[#111] border-2 border-gold-500 shadow-glow flex items-center justify-center relative overflow-hidden p-1 transition-all">
+                <img id="navLogo" src="favicon.png" alt="Logo" class="h-full w-full object-contain relative z-10 transition-transform group-hover:scale-110 rounded-full" />
             </div>
+            <span class="text-2xl font-heading font-black tracking-tight text-white hidden sm:block" id="navStoreName">Apni<span class="text-gold-500">Saltanat</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-1 bg-white/5 rounded-full px-2 py-1 border border-white/5">
+            <a href="index.html" class="text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all">Back to Bazaar</a>
+            <a href="#products" class="text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all">Products</a>
+            <a href="cart.html" class="text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all">My Cart <span id="cartCount" class="bg-gold-500 text-black px-1.5 py-0.5 rounded-full text-xs ml-1">0</span></a>
         </div>
-    </div>
-</nav>
+        <div class="flex items-center gap-3 pr-1">
+            <a href="#contact" class="hidden sm:inline-flex btn-premium text-sm font-heading font-bold px-6 py-2.5 rounded-full shadow-glow">Contact Seller</a>
+            <!-- Mobile Menu Toggle -->
+            <button id="mobileMenuBtn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </nav>
 
-<div class="container">
-
-<div style="max-width:1300px; margin:0 auto; padding:0 20px;">
-    <!-- BANNER SLIDER -->
-    <div class="store-banner" id="bannerSliderContainer">
-        <canvas id="stardust-canvas"></canvas>
-        <div class="banner-slider" id="bannerSlider">
-            <div class="banner-slide-default">
-                <h1 class="banner-default-text" id="headerStoreName">LOADING <span>STORE</span></h1>
-            </div>
-        </div>
-        <div class="slider-dots" id="sliderDots"></div>
-    </div>
-
-    <!-- STORE INFO -->
-    <div class="store-info-card fade-up">
-        <div id="logoWrapper" style="display:flex; flex-direction:column; align-items:center;">
-             <div class="store-avatar" id="avatarIcon"><i class="fas fa-store"></i></div>
-             <img id="storeLogoImg" class="store-logo-img" style="display:none;">
-        </div>
-        <div class="store-detail">
-            <div class="store-badge"><i class="fas fa-crown"></i> <span id="storeTag">Verified Seller</span></div>
-            <h1 id="storeName">Loading...</h1>
-            <div class="store-meta"><span id="totalItems">0</span> Products Listed</div>
-            <a href="#" id="whatsappBtn" class="wa-btn" style="display:none;"><i class="fab fa-whatsapp"></i> Contact Seller</a>
-        </div>
-    </div>
-
-    <!-- Imperial Trust Section -->
-    <div id="trustSection" class="fade-up" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin:0 auto 30px; max-width:1300px; padding:0 20px;">
-        <div class="status-banner info live-pulse" style="margin-bottom:0; justify-content:center; text-align:center; padding:12px;">
-            <i class="fas fa-shield-alt"></i>
-            <div class="sb-text" style="flex:none;"><span class="sb-title" style="margin-bottom:0;">Imperial Security</span></div>
-        </div>
-        <div class="status-banner warning live-pulse" style="margin-bottom:0; justify-content:center; text-align:center; padding:12px; border-color:var(--royal-gold); animation-delay:0.5s;">
-            <i class="fas fa-bolt"></i>
-            <div class="sb-text" style="flex:none;"><span class="sb-title" style="margin-bottom:0;">Shahi Delivery</span></div>
-        </div>
-        <div class="status-banner info live-pulse" style="margin-bottom:0; justify-content:center; text-align:center; padding:12px; animation-delay:1s;">
-            <i class="fas fa-headset"></i>
-            <div class="sb-text" style="flex:none;"><span class="sb-title" style="margin-bottom:0;">Royal Support</span></div>
-        </div>
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="absolute top-[80px] left-4 right-4 glass-dark rounded-3xl p-6 flex flex-col gap-4 border border-gold-400/20 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 translate-y-[-20px] md:hidden">
+        <a href="index.html" class="mobile-link text-lg font-medium text-white hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-white/5">
+            <i data-lucide="home" class="w-5 h-5 text-gold-500"></i> Back to Bazaar
+        </a>
+        <a href="#products" class="mobile-link text-lg font-medium text-white hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-white/5">
+            <i data-lucide="package" class="w-5 h-5 text-gold-500"></i> Products
+        </a>
+        <a href="cart.html" class="mobile-link text-lg font-medium text-white hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-white/5">
+            <i data-lucide="shopping-cart" class="w-5 h-5 text-gold-500"></i> My Cart <span id="mobileCartCount" class="bg-gold-500 text-black px-2 py-0.5 rounded-full text-xs ml-auto font-bold">0</span>
+        </a>
+        <a href="#contact" class="mobile-link btn-premium text-center font-heading font-bold py-3 rounded-full mt-2">
+            Contact Seller
+        </a>
     </div>
 </div>
 
-    <!-- PRODUCTS -->
-    <div id="products-list">
-        <div style="grid-column:1/-1; text-align:center; padding:80px 0;">
-            <div class="royal-spinner" style="width:36px; height:36px; border-width:3px;"></div>
-            <p style="color:var(--text-muted); margin-top:16px;">Loading store...</p>
-        </div>
-    </div>
-</div>
-</div>
-
-<div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
-    <div class="menu-inner" onclick="event.stopPropagation()">
-        <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
-        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Shahi Bazaar</a>
-        <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
-        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Sardaar Dashboard</a>
-        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Sardaar</a>
-        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Shahi Categories</a>
-
-        <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
-        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Shahi Paigam</a>
-        <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
-        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Saltanat Blog</a>
-        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
-
-        <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
-            <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
-        </div>
-        <div style="padding-top:10px;">
-            <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
-            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Sardaar</a>
-        </div>
-    </div>
-</div>
-
-<!-- FOOTER -->
-<footer class="royal-footer">
-    <div class="footer-container">
-        <div class="footer-grid">
-            <div>
-                <div class="footer-brand">👑 APNI SALTANAT</div>
-                <p class="footer-desc">Pakistan's Royal Marketplace. High-quality products and trusted sellers. Har Soda Aik Ahad.</p>
-                <div class="social-row" style="margin-top:20px;">
-                    <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/923011786494" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<!-- HERO -->
+<section id="hero" class="relative min-h-[100dvh] flex items-center pt-28 pb-20 justify-center overflow-hidden">
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center">
+        
+        <div id="hero-text" class="space-y-8 text-center lg:text-left">
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold-400/30 bg-gold-500/10 backdrop-blur-md">
+                    <i data-lucide="crown" class="w-4 h-4 text-gold-400"></i>
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-gold-300">Verified Seller</span>
+                </div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#25D366]/30 bg-[#25D366]/10 backdrop-blur-md">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-[#25D366]"></i>
+                    <span class="text-xs font-bold uppercase tracking-[0.1em] text-white">Trust & Quality</span>
                 </div>
             </div>
+            
+            <h1 class="text-5xl sm:text-6xl lg:text-8xl font-heading font-black leading-[1.05] tracking-tight text-white drop-shadow-2xl">
+                Welcome to <br class="hidden md:block"/>
+                <span class="text-gradient" id="heroStoreName">The Store</span>
+            </h1>
+            
+            <p class="text-white/70 text-lg sm:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed font-body">
+                Premium quality products, trusted service, and direct delivery across Pakistan. Explore our exclusive collection below.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 pt-4">
+                <a href="#products" class="btn-premium px-8 py-4 rounded-full font-heading font-bold text-base w-full sm:w-auto text-center inline-flex items-center justify-center gap-2 group">
+                    <span>Shop Now</span>
+                    <i data-lucide="shopping-bag" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                </a>
+                <a id="heroContactBtn" href="#contact" class="px-8 py-4 rounded-full font-heading font-bold text-base text-white border border-white/20 hover:bg-white/10 transition-all w-full sm:w-auto text-center">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+
+        <div id="hero-bottle" class="flex justify-center lg:justify-end relative">
+            <div class="absolute inset-0 bg-gradient-to-tr from-gold-500/20 to-transparent blur-3xl -z-10 rounded-full scale-150"></div>
+            <div class="hero-slider border border-white/10" id="heroSlider">
+                <!-- Banners will be injected here -->
+                <div class="hero-slide active">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-10 opacity-60"></div>
+                    <div class="w-full h-full bg-[#111] flex items-center justify-center text-gold-500">
+                        <i class="fas fa-store text-6xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCTS GRID -->
+<section id="products" class="relative py-28 bg-[#01040d] text-white border-t border-white/5 overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-gold-500/5 to-transparent pointer-events-none"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 section-title">
+            <span class="px-4 py-1.5 rounded-full bg-gold-500/10 text-gold-400 text-xs font-bold uppercase tracking-widest border border-gold-400/20">Exclusive Collection</span>
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-black leading-[1.1] text-white">
+                Our Premium <br/><span class="text-gradient">Products</span>
+            </h2>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="max-w-2xl mx-auto mb-12 relative z-20">
+            <div class="absolute inset-y-0 left-5 flex items-center pointer-events-none">
+                <i data-lucide="search" class="w-5 h-5 text-white/50"></i>
+            </div>
+            <input type="text" id="searchInput" placeholder="Search products by name..." class="w-full bg-[#111]/80 backdrop-blur-md border border-white/10 rounded-full py-4 pl-14 pr-6 text-white placeholder-white/40 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-all shadow-glow text-lg font-medium">
+        </div>
+
+        <!-- Mid Banner top (optional) -->
+        <div id="midBannerContainer" class="hidden"></div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6" id="products-list">
+            <!-- Products injected here -->
+            <div style="grid-column:1/-1; text-align:center; padding:80px 0;">
+                <i class="fas fa-circle-notch fa-spin text-gold-500 text-4xl"></i>
+                <p class="text-white/50 mt-4">Loading inventory...</p>
+            </div>
+        </div>
+        
+        <!-- Footer Banner bottom (optional) -->
+        <div id="footerBannerContainer" class="hidden mt-12"></div>
+
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="relative py-20 bg-[#020617]">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="rounded-[2.5rem] p-6 sm:p-12 md:p-20 text-center shadow-2xl relative overflow-hidden bg-[#04091a] border border-white/10 isolate">
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-[#ffdb52] to-[#ffcc00] rounded-full blur-3xl opacity-10 transform translate-x-1/3 -translate-y-1/3"></div>
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] z-0"></div>
+
+            <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
+                <div class="w-24 h-24 bg-white/5 border border-white/10 rounded-[2rem] flex items-center justify-center shadow-2xl mb-8 rotate-3 transform hover:rotate-6 transition-transform">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-[#25D366]"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-heading font-black text-white leading-[1.1] mb-6 drop-shadow-lg">
+                    Have questions? Chat on <br/> <span class="text-[#25D366]">WhatsApp</span>
+                </h2>
+                <p class="text-white/80 font-medium text-lg mb-10 max-w-lg">
+                    Tap the button to chat with the seller directly. Get quick answers and support for your orders.
+                </p>
+                <a id="mainWhatsAppBtn" href="#" target="_blank" class="bg-[#25D366] text-white px-10 py-5 rounded-full font-heading font-bold text-xl inline-flex items-center gap-3 shadow-[0_20px_40px_rgba(37,211,102,0.4)] hover:scale-105 transition-all">
+                    <i class="fab fa-whatsapp text-2xl"></i> Connect Now
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative pt-24 pb-12 overflow-hidden bg-[#0a0f1e] text-white">
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-white/10 pb-16">
+            <div class="lg:col-span-2 space-y-6">
+                <a href="index.html" class="flex items-center gap-4">
+                    <span class="text-3xl font-heading font-black tracking-tight">Apni<span class="text-gold-500">Saltanat</span></span>
+                </a>
+                <p class="text-white/50 leading-relaxed font-medium max-w-sm">
+                    Pakistan's Royal Marketplace. High-quality products and trusted sellers. Har Soda Aik Ahad.
+                </p>
+            </div>
             <div>
-                <div class="footer-col-title">Marketplace</div>
-                <ul class="footer-links">
-                    <li><a href="index.html">Shahi Bazaar</a></li>
-                    <li><a href="categories.html">Categories</a></li>
-                    <li><a href="seller-dashboard.html">Sardaar Dashboard</a></li>
-                    <li><a href="signup.html">Become a Sardaar</a></li>
+                <h4 class="font-heading font-bold text-lg mb-6 text-white">Marketplace</h4>
+                <ul class="space-y-4 text-white/50 font-medium">
+                    <li><a href="index.html" class="hover:text-gold-400">Shahi Bazaar</a></li>
+                    <li><a href="categories.html" class="hover:text-gold-400">Categories</a></li>
+                    <li><a href="signup.html" class="hover:text-gold-400">Become a Sardaar</a></li>
                 </ul>
             </div>
             <div>
-                <div class="footer-col-title">Imperial Hub</div>
-                <ul class="footer-links">
-                    <li><a href="about.html">Our Story</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="blog.html">Saltanat Blog</a></li>
-                    <li><a href="instructions.html">Shahi Paigam</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-col-title">Legal</div>
-                <ul class="footer-links">
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="disclaimer.html">Shahi Disclaimer</a></li>
-                    <li><a href="terms.html">Terms & Conditions</a></li>
-                    <li><a href="refund-policy.html">Refund Policy</a></li>
+                <h4 class="font-heading font-bold text-lg mb-6 text-white">Legal</h4>
+                <ul class="space-y-4 text-white/50 font-medium">
+                    <li><a href="privacy-policy.html" class="hover:text-gold-400">Privacy Policy</a></li>
+                    <li><a href="terms.html" class="hover:text-gold-400">Terms & Conditions</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-copy">
-            <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
-            <span>Har Soda Aik Ahad 👑</span>
+        <div class="pt-8 text-center text-white/30 text-sm font-medium">
+            <p>&copy; 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</p>
         </div>
     </div>
 </footer>
 
+<a id="floatingWhatsApp" href="#" target="_blank" class="wa-float" style="display:none;" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp text-3xl text-white"></i>
+</a>
+
+<!-- FIREBASE & LOGIC -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, onValue, get, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
     const app = initializeApp(firebaseConfig);
@@ -238,224 +385,255 @@
     const sID = params.get('seller');
     if(!sID) location.href = "index.html";
 
-    // Track Store Visit
-    if (sID) {
-        const visitRef = ref(db, `users/sardaars/${sID}/visits`);
-        runTransaction(visitRef, (currentValue) => {
-            return (currentValue || 0) + 1;
-        });
+    // Track Visit
+    const visitRef = ref(db, `users/sardaars/${sID}/visits`);
+    runTransaction(visitRef, (currentValue) => (currentValue || 0) + 1);
+
+    function updateCartCount() { 
+        const cart = JSON.parse(localStorage.getItem('saltanatCart')) || [];
+        const count = cart.length;
+        const mainCount = document.getElementById('cartCount');
+        if(mainCount) mainCount.innerText = count; 
+        const mobCount = document.getElementById('mobileCartCount');
+        if(mobCount) mobCount.innerText = count;
     }
-
-    window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
-
-    onAuthStateChanged(auth, u => {
-        const loginLink = document.getElementById('menuLogin');
-        const authWrapper = document.getElementById('authWrapper');
-        if(u) {
-            if(document.getElementById('profileTrigger')) document.getElementById('profileTrigger').style.display='flex';
-            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Sardaar Profile`;
-            loginLink.href = 'seller-dashboard.html';
-            
-            if (!document.getElementById('logoutLink')) {
-                const logout = document.createElement('a');
-                logout.id = 'logoutLink';
-                logout.href = '#';
-                logout.className = 'menu-item';
-                logout.style.color = '#ff4d4d';
-                logout.style.marginTop = '12px';
-                logout.innerHTML = `<i class="fas fa-sign-out-alt"></i> Exit Saltanat`;
-                logout.onclick = (e) => { 
-                    e.preventDefault(); 
-                    if (confirm("Are you sure you want to Exit Saltanat? (Sadaq-e-Sultan)")) {
-                        signOut(auth).then(() => { 
-                           localStorage.clear(); 
-                           window.location.reload(); 
-                        });
-                    }
-                };
-                authWrapper.appendChild(logout);
-            }
-        } else {
-            loginLink.innerHTML = `<i class="fas fa-sign-in-alt"></i> Join/Login`;
-            loginLink.href = 'login.html';
-            if (document.getElementById('logoutLink')) document.getElementById('logoutLink').remove();
-        }
-    });
-
-    function updateCartCount() { document.getElementById('cartCount').innerText = (JSON.parse(localStorage.getItem('saltanatCart')) || []).length; }
     updateCartCount();
 
-    onAuthStateChanged(auth, (user) => {
-        if(user) {
-            get(ref(db, `users/sardaars/${user.uid}`)).then(s => {
-                if(s.exists()) { const p = document.getElementById('profileTrigger'); p.href = `seller-dashboard.html?seller=${user.uid}`; p.style.display = 'flex'; }
-            });
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+
+    mobileMenuBtn.addEventListener('click', () => {
+        menuOpen = !menuOpen;
+        if (menuOpen) {
+            mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+            mobileMenu.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-5 h-5"></i>';
+        } else {
+            mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+            mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-5 h-5"></i>';
         }
+        if (window.lucide) lucide.createIcons();
     });
 
-    if(!sID) location.href = "index.html";
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            menuOpen = false;
+            mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+            mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-5 h-5"></i>';
+            if (window.lucide) lucide.createIcons();
+        });
+    });
 
-    function loadStore() {
-        get(ref(db, `users/sardaars/${sID}`)).then(async (s) => {
-            if(s.exists()) {
-                const d = s.val();
-                if (d.status === 'blocked' || d.status === 'unpaid') {
-                    document.getElementById('products-list').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:#f44336;"><i class="fas fa-ban" style="font-size:48px; margin-bottom:16px; display:block;"></i><h3 style="font-family:'Epilogue'; font-size:20px;">This store is currently unavailable.</h3></div>`;
-                    document.getElementById('storeName').innerText = "STORE UNAVAILABLE";
-                    window.storeUnavailableFlag = true; return;
-                }
-                const name = (d.userName || d.name || 'Sardaar').toUpperCase();
-                document.getElementById('storeName').innerText = name;
-                document.getElementById('storeTag').innerText = `Verified ${d.role || 'Seller'}`;
+    // GSAP
+    gsap.registerPlugin(ScrollTrigger);
 
-                // Banner Slider
-                const bannerSlider = document.getElementById('bannerSlider');
-                const sliderDots = document.getElementById('sliderDots');
-                let slideCount = 0;
-                if (d.storeBanners) {
-                    const banners = d.storeBanners.split('|').filter(b => b.trim() !== '');
-                    bannerSlider.innerHTML = banners.map(url => `<div class="banner-slide"><img src="${url}"></div>`).join('');
-                    sliderDots.innerHTML = banners.map((_, i) => `<div class="dot${i===0?' active':''}"></div>`).join('');
-                    slideCount = banners.length;
-                } else {
-                    bannerSlider.innerHTML = `<div class="banner-slide-default"><h1 class="banner-default-text">${name} <span>'S STORE</span></h1></div>`;
-                    sliderDots.innerHTML = `<div class="dot active"></div>`;
-                    slideCount = 1;
-                }
-                if (window.storeSliderInterval) clearInterval(window.storeSliderInterval);
-                if (slideCount > 1) {
-                    let cs = 0;
-                    window.storeSliderInterval = setInterval(() => {
-                        cs = (cs + 1) % slideCount;
-                        bannerSlider.style.transform = `translateX(-${cs * 100}%)`;
-                        Array.from(sliderDots.children).forEach((d, i) => d.classList.toggle('active', i === cs));
-                    }, 4000);
-                }
-                if (d.phone) { const wb = document.getElementById('whatsappBtn'); wb.href = `https://wa.me/${d.phone.replace(/[^0-9]/g,'')}`; wb.style.display = 'inline-flex'; }
-                
-                // Professional Logo
-                if (d.storeLogo) {
-                    const logoImg = document.getElementById('storeLogoImg');
-                    logoImg.src = d.storeLogo;
-                    logoImg.style.display = 'block';
-                    logoImg.classList.add('float-live');
-                    document.getElementById('avatarIcon').style.display = 'none';
-                }
-
-                // Now load products with seller data already in hand (d)
-                onValue(ref(db, `products/${sID}`), async (snap) => {
-                    if (window.storeUnavailableFlag) return;
-                    if(snap.exists()) {
-                        const reviewsSnap = await get(ref(db, 'reviews'));
-                        const allReviews = reviewsSnap.exists() ? reviewsSnap.val() : {};
-                        const data = snap.val();
-                        let arr = [];
-                        for(let id in data) {
-                            let pRating=0, pReviewCount=0;
-                            if (allReviews[id]) { const reviews=Object.values(allReviews[id]); pReviewCount=reviews.length; pRating=(reviews.reduce((a,r)=>a+parseInt(r.rating),0)/pReviewCount).toFixed(1); }
-                            arr.push({ id, pRating, pReviewCount, ...data[id] });
-                        }
-                        arr.sort((a,b) => (b.timestamp||0)-(a.timestamp||0));
-                        document.getElementById('totalItems').innerText = arr.length;
-                        
-                        let html = "";
-                        let midBannerShown = false;
-                        arr.forEach((p, index) => {
-                            const stars = p.pRating > 0 ? `<i class="fas fa-star" style="color:var(--royal-gold); font-size:10px;"></i> ${p.pRating} <span style="font-size:10px; color:var(--text-muted);">(${p.pReviewCount})</span>` : `<i class="far fa-star" style="color:var(--text-dim); font-size:10px;"></i> <span style="font-size:10px; color:var(--text-dim);">No reviews</span>`;
-                            html += `<div class="shahi-card reveal" onclick="location.href='product.html?id=${p.id}&seller=${sID}'"><div class="img-container"><img src="${p.img}" loading="lazy"></div><div class="p-name">${p.name}</div><div style="display:flex; align-items:center; gap:4px; margin-bottom:8px; font-size:11px; font-weight:800;">${stars}</div><div class="card-bottom"><span class="price-now">Rs. ${p.price}</span><div class="btn-view"><i class="fas fa-arrow-right"></i></div></div></div>`;
-                            
-                            // Mid Banner - show after 4th item (index 3) or 8th if preferred, but 4 is safer for small stores
-                            if (index === 3 && d.midBanner) {
-                                html += `<div class="mid-store-banner reveal" style="grid-column:1/-1;"><img src="${d.midBanner}" onerror="this.parentElement.style.display='none'"></div>`;
-                                midBannerShown = true;
-                            }
-                        });
-
-                        // If Mid Banner exists but wasn't shown (fewer than 4 products), show it before footer
-                        if (!midBannerShown && d.midBanner) {
-                            html += `<div class="mid-store-banner reveal" style="grid-column:1/-1;"><img src="${d.midBanner}" onerror="this.parentElement.style.display='none'"></div>`;
-                        }
-
-                        // Footer Banner
-                        if (d.footerBanner) {
-                            html += `<div class="mid-store-banner reveal" style="grid-column:1/-1; margin-top:20px;"><img src="${d.footerBanner}" onerror="this.parentElement.style.display='none'"></div>`;
-                        }
-
-                        document.getElementById('products-list').innerHTML = html;
-                        initScrollReveal();
-                    } else { 
-                        // If no products, still show banners!
-                        let html = "";
-                        if (d.midBanner) html += `<div class="mid-store-banner reveal" style="grid-column:1/-1;"><img src="${d.midBanner}"></div>`;
-                        if (d.footerBanner) html += `<div class="mid-store-banner reveal" style="grid-column:1/-1; margin-top:20px;"><img src="${d.footerBanner}"></div>`;
-                        html += `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:var(--text-muted);">No products in this store yet.</div>`;
-                        document.getElementById('products-list').innerHTML = html;
-                        initScrollReveal();
-                    }
-                });
-            }
+    function triggerGSAP() {
+        gsap.utils.toArray('.section-title').forEach(title => {
+            gsap.from(title, { scrollTrigger: { trigger: title, start: 'top 85%' }, y: 50, opacity: 0, duration: 1, ease: 'power3.out' });
+        });
+        gsap.utils.toArray('.hover-card').forEach((card, i) => {
+            gsap.from(card, { scrollTrigger: { trigger: card, start: 'top 90%' }, y: 60, opacity: 0, duration: 0.8, ease: 'back.out(1.5)' });
         });
     }
 
-    function initScrollReveal() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+    // Load Store Data
+    get(ref(db, `users/sardaars/${sID}`)).then(async (s) => {
+        if(s.exists()) {
+            const d = s.val();
+            
+            if (d.status === 'blocked' || d.status === 'unpaid') {
+                document.getElementById('products-list').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:#f44336;"><i class="fas fa-ban text-6xl mb-4"></i><h3 class="text-2xl font-heading">This store is currently unavailable.</h3></div>`;
+                return;
+            }
+
+            const name = (d.userName || d.name || 'Sardaar').toUpperCase();
+            document.getElementById('navStoreName').innerHTML = `${name}`;
+            document.getElementById('heroStoreName').innerText = `${name}'S STORE`;
+
+            if (d.storeLogo) document.getElementById('navLogo').src = d.storeLogo;
+            
+            if (d.phone) {
+                const waLink = `https://wa.me/${d.phone.replace(/[^0-9]/g,'')}`;
+                document.getElementById('heroContactBtn').href = waLink;
+                document.getElementById('mainWhatsAppBtn').href = waLink;
+                document.getElementById('floatingWhatsApp').href = waLink;
+                document.getElementById('floatingWhatsApp').style.display = 'flex';
+            }
+
+            // Banners Slider Setup
+            const heroSlider = document.getElementById('heroSlider');
+            let slideCount = 0;
+            if (d.storeBanners) {
+                const banners = d.storeBanners.split('|').filter(b => b.trim() !== '');
+                if (banners.length > 0) {
+                    heroSlider.innerHTML = banners.map((url, i) => `
+                        <div class="hero-slide ${i===0?'active':''}">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-10 opacity-60"></div>
+                            <img src="${url}">
+                        </div>`).join('');
+                    slideCount = banners.length;
+                }
+            }
+            if (slideCount > 1) {
+                const slides = heroSlider.querySelectorAll('.hero-slide');
+                let cur = 0;
+                setInterval(() => {
+                    slides[cur].classList.remove('active');
+                    cur = (cur + 1) % slides.length;
+                    slides[cur].classList.add('active');
+                }, 4000);
+            }
+
+            // Mid & Footer Banners
+            if (d.midBanner) {
+                const mc = document.getElementById('midBannerContainer');
+                mc.innerHTML = `
+                <div class="glass-dark rounded-[2.5rem] p-8 sm:p-12 border border-gold-400/20 grid lg:grid-cols-2 gap-12 items-center relative overflow-hidden mb-16">
+                    <div class="absolute -right-20 -top-20 w-96 h-96 bg-gold-600/20 blur-[100px] rounded-full pointer-events-none"></div>
+                    <div class="space-y-6 relative z-10 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold-400/30 bg-gold-500/10">
+                            <i data-lucide="star" class="w-4 h-4 text-gold-400"></i>
+                            <span class="text-xs font-bold uppercase tracking-[0.2em] text-gold-300">Featured</span>
+                        </div>
+                        <h2 class="text-4xl sm:text-5xl font-heading font-black text-white leading-tight">Exclusive <br/><span class="text-gradient">Collection</span></h2>
+                        <p class="text-white/60 text-lg leading-relaxed font-medium">Discover our premium range of products, specially curated to bring you the best quality and value. Elevate your lifestyle with our exclusive offerings.</p>
+                    </div>
+                    <div class="relative z-10 w-full h-[300px] sm:h-[400px] rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(255,204,0,0.15)] border border-white/10 group">
+                        <img src="${d.midBanner}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>`;
+                mc.classList.remove('hidden');
+            }
+            if (d.footerBanner) {
+                const fc = document.getElementById('footerBannerContainer');
+                fc.innerHTML = `
+                <div class="glass-dark rounded-[2.5rem] p-8 sm:p-12 border border-gold-400/20 grid lg:grid-cols-2 gap-12 items-center relative overflow-hidden mt-16">
+                    <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-gold-600/20 blur-[100px] rounded-full pointer-events-none"></div>
+                    <div class="relative z-10 w-full h-[300px] sm:h-[400px] rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(255,204,0,0.15)] border border-white/10 order-2 lg:order-1 group">
+                        <img src="${d.footerBanner}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="space-y-6 relative z-10 text-center lg:text-left order-1 lg:order-2">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold-400/30 bg-gold-500/10">
+                            <i data-lucide="award" class="w-4 h-4 text-gold-400"></i>
+                            <span class="text-xs font-bold uppercase tracking-[0.2em] text-gold-300">Premium Quality</span>
+                        </div>
+                        <h2 class="text-4xl sm:text-5xl font-heading font-black text-white leading-tight">Unmatched <br/><span class="text-gradient">Excellence</span></h2>
+                        <p class="text-white/60 text-lg leading-relaxed font-medium">We take pride in delivering top-tier products. Our commitment to excellence ensures that every item meets the highest standards of quality.</p>
+                    </div>
+                </div>`;
+                fc.classList.remove('hidden');
+            }
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+            // Load Products
+            let allProducts = [];
+            
+            function renderProducts(arr) {
+                let html = "";
+                arr.forEach((p) => {
+                    const stars = p.pRating > 0 ? `<i class="fas fa-star text-gold-500 text-[10px] sm:text-base"></i> ${p.pRating} <span class="text-white/50 text-[10px] sm:text-xs">(${p.pReviewCount})</span>` : `<span class="text-white/40 text-[10px] sm:text-xs">No reviews</span>`;
+                    html += `
+                    <div class="glass-dark border border-white/10 rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 text-center flex flex-col items-center hover-card bg-[#0a0f1e]/60 relative hover:border-gold-500/30 transition-all cursor-pointer" onclick="location.href='product.html?id=${p.id}&seller=${sID}'">
+                        <div class="product-img-wrap border border-white/5 h-[120px] sm:h-[200px] mb-3 sm:mb-4">
+                            <img src="${p.img}" loading="lazy" />
+                        </div>
+                        <h3 class="text-sm sm:text-xl font-heading font-bold text-white mb-1 sm:mb-2 line-clamp-2 min-h-[40px] sm:min-h-[56px]">${p.name}</h3>
+                        <div class="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2 text-xs sm:text-sm">${stars}</div>
+                        <div class="flex items-baseline justify-center gap-1 sm:gap-2 mb-3 sm:mb-6 mt-1 sm:mt-2">
+                            <span class="text-base sm:text-2xl font-heading font-bold text-gold-400">Rs. ${p.price}</span>
+                        </div>
+                        <a href="product.html?id=${p.id}&seller=${sID}" class="w-full py-2 sm:py-3.5 rounded-full font-heading font-bold text-xs sm:text-base text-white bg-white/5 hover:bg-gold-500 hover:text-black border border-white/10 transition-colors mt-auto flex justify-center items-center gap-1 sm:gap-2">View details</a>
+                    </div>`;
+                });
+                
+                if (arr.length === 0) {
+                     html = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:rgba(255,255,255,0.5);">No products found matching your search.</div>`;
+                }
+                
+                document.getElementById('products-list').innerHTML = html;
+            }
+
+            onValue(ref(db, `products/${sID}`), async (snap) => {
+                if(snap.exists()) {
+                    const reviewsSnap = await get(ref(db, 'reviews'));
+                    const allReviews = reviewsSnap.exists() ? reviewsSnap.val() : {};
+                    const data = snap.val();
+                    allProducts = [];
+                    for(let id in data) {
+                        let pRating=0, pReviewCount=0;
+                        if (allReviews[id]) { 
+                            const reviews=Object.values(allReviews[id]); 
+                            pReviewCount=reviews.length; 
+                            pRating=(reviews.reduce((a,r)=>a+parseInt(r.rating),0)/pReviewCount).toFixed(1); 
+                        }
+                        allProducts.push({ id, pRating, pReviewCount, ...data[id] });
+                    }
+                    allProducts.sort((a,b) => (b.timestamp||0)-(a.timestamp||0));
+                    
+                    renderProducts(allProducts);
+                    triggerGSAP();
+                } else {
+                    document.getElementById('products-list').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:rgba(255,255,255,0.5);">No products in this store yet.</div>`;
                 }
             });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal, .fade-up, .fade-left, .fade-right, .scale-in').forEach(el => observer.observe(el));
-    }
-    loadStore();
 
-    // --- GOLD DUST PARTICLE SYSTEM ---
-    const canvas = document.getElementById('stardust-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    const particleCount = 60;
+            // Search Filter Listener
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const q = e.target.value.toLowerCase();
+                    const filtered = allProducts.filter(p => (p.name || '').toLowerCase().includes(q) || (p.description || '').toLowerCase().includes(q) || (p.category || '').toLowerCase().includes(q));
+                    renderProducts(filtered);
+                });
+            }
 
-    function resizeCanvas() {
-        const rect = canvas.parentElement.getBoundingClientRect();
-        canvas.width = rect.width;
-        canvas.height = rect.height;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    class Particle {
-        constructor() {
-            this.reset();
+        } else {
+            document.getElementById('products-list').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:rgba(255,255,255,0.5);">Store not found.</div>`;
         }
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 0.5;
-            this.speedX = Math.random() * 1 - 0.5;
-            this.speedY = Math.random() * 1 - 0.5;
-            this.opacity = Math.random() * 0.5 + 0.2;
-        }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
-        }
-        draw() {
-            ctx.fillStyle = `rgba(255, 204, 0, ${this.opacity})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
+    });
 
-    for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+    // Loader & Bubbles
+    window.addEventListener('load', () => {
+        if (window.lucide) lucide.createIcons();
+        let prog = 0;
+        const interval = setInterval(() => {
+            prog += Math.random() * 30;
+            if (prog >= 100) {
+                prog = 100;
+                clearInterval(interval);
+                setTimeout(() => {
+                    document.getElementById('loader').style.opacity = '0';
+                    document.getElementById('loader').style.visibility = 'hidden';
+                    const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 }});
+                    tl.from('#navbar', { y: -100, opacity: 0, duration: 1 })
+                      .from('#hero-text > *', { y: 40, opacity: 0, stagger: 0.1 }, "-=0.6")
+                      .from('#hero-bottle', { opacity: 0, duration: 1.5, ease: 'expo.out' }, "-=1");
+                }, 500);
+            }
+            document.getElementById('loader-progress').style.width = prog + '%';
+        }, 100);
 
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
+        const bc = document.getElementById('spark-container');
+        for (let i = 0; i < 25; i++) {
+            const s = document.createElement('div');
+            s.className = 'spark';
+            const size = Math.random() * 4 + 2; 
+            s.style.width = size + 'px';
+            s.style.height = size + 'px';
+            s.style.left = (Math.random() * 100) + 'vw';
+            s.style.animationDelay = (Math.random() * 10) + 's';
+            s.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            s.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
+            bc.appendChild(s);
+        }
+    });
 </script>
+
 </body>
 </html>

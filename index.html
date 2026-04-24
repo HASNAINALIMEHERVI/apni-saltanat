@@ -31,9 +31,12 @@
         /* ===== MEGA MENU ===== */
         .cat-trigger { position:relative; display:flex; align-items:center; gap:8px; cursor:pointer; padding:8px 16px; border-radius:var(--radius-sm); border:1px solid var(--border); color:var(--text-muted); font-size:13px; font-weight:700; transition:var(--transition); }
         .cat-trigger:hover { border-color:var(--border-gold); color:var(--royal-gold); background:rgba(255,204,0,0.05); }
-        .shahi-mega-menu { position:absolute; top:calc(100% + 12px); left:0; background:var(--bg-surface); display:none; grid-template-columns:200px 200px 240px; border:1px solid var(--border); border-radius:var(--radius-md); box-shadow:var(--shadow-dark); z-index:3000; overflow:hidden; min-height:300px; }
-        .cat-trigger:hover .shahi-mega-menu { display:grid; }
-        .mega-col { height:100%; overflow-y:auto; padding:8px 0; background:var(--bg-surface); border-right:1px solid var(--border); }
+        .shahi-mega-menu { position:absolute; top:calc(100% + 12px); left:0; background:var(--bg-surface); visibility:hidden; opacity:0; transition: visibility 0s 0.6s, opacity 0.6s ease; display:grid; grid-template-columns:200px 200px 240px; border:1px solid var(--border); border-radius:var(--radius-md); box-shadow:var(--shadow-dark); z-index:3000; overflow:hidden; min-height:300px; max-height:60vh; }
+        .cat-trigger:hover .shahi-mega-menu { visibility:visible; opacity:1; transition: visibility 0s 0s, opacity 0.3s ease; }
+        .mega-col { max-height:60vh; overflow-y:scroll; padding:8px 0; background:var(--bg-surface); border-right:1px solid var(--border); }
+        .mega-col::-webkit-scrollbar { width: 5px; }
+        .mega-col::-webkit-scrollbar-track { background: transparent; }
+        .mega-col::-webkit-scrollbar-thumb { background: var(--royal-gold); border-radius: 10px; }
         .mega-col:last-child { border-right:none; }
         .mega-col-title { font-size:10px; font-weight:800; color:var(--text-muted); text-transform:uppercase; padding:10px 16px; letter-spacing:1.5px; }
         .mega-item { padding:10px 16px; font-size:13px; font-weight:600; color:var(--text-muted); display:flex; justify-content:space-between; align-items:center; cursor:pointer; transition:0.2s; }
@@ -253,7 +256,6 @@
                 <div class="footer-col-title">Marketplace</div>
                 <ul class="footer-links">
                     <li><a href="index.html">Shahi Bazaar</a></li>
-                    <li><a href="categories.html">Categories</a></li>
                     <li><a href="seller-dashboard.html">Sardaar Dashboard</a></li>
                     <li><a href="signup.html">Become a Sardaar</a></li>
                 </ul>
@@ -292,13 +294,14 @@
         <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Sardaar Dashboard</a>
         <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Sardaar</a>
 
-        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Categories</a>
+
 
         <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
         <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Shahi Paigam</a>
         <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
         <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Saltanat Blog</a>
         <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
+        <a href="partners.html" class="menu-item"><i class="fas fa-handshake"></i> Our Partners</a>
 
         <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
             <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aquamarine — Ultra Pure Premium Drinking Water</title>
+    <meta name="description" content="Aquamarine — 100% RO purified premium drinking water. Germ-free, crystal clear, and delivered to your doorstep in Multan. Experience the purest hydration for your family and business." />
+    <meta name="keywords" content="Aquamarine water, premium drinking water, RO purified water Multan, safe drinking water, custom labeled water bottles, bulk water delivery Pakistan,aquamarine,aquamarinebottles,aquamarine water bottles,water bottles,filter water,aquamarine" />
+    <link rel="canonical" href="https://aquamarine.com.pk/" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9236482420910781"
+     crossorigin="anonymous"></script>
+
+
+    <!-- Favicon & Brand Icons -->
+    <link rel="icon" type="image/png" href="bottle.png" />
+    <link rel="apple-touch-icon" href="bottle.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#020617" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aquamarine.com.pk/" />
+    <meta property="og:title" content="Aquamarine — Ultra Pure Premium Drinking Water" />
+    <meta property="og:description" content="Get 100% RO purified, crystal clear water delivered to your doorstep. Safe, germ-free, and refreshing." />
+    <meta property="og:image" content="bottle.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://aquamarine.com.pk/" />
+    <meta property="twitter:title" content="Aquamarine — Ultra Pure Premium Drinking Water" />
+    <meta property="twitter:description" content="Get 100% RO purified, crystal clear water delivered to your doorstep." />
+    <meta property="twitter:image" content="bottle.png" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Aquamarine Beverages",
+      "image": "https://aquamarine.com.pk/bottle.png",
+      "@id": "https://aquamarine.com.pk/",
+      "url": "https://aquamarine.com.pk/",
+      "telephone": "+923230275594",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Main Road",
+        "addressLocality": "Multan",
+        "postalCode": "60000",
+        "addressCountry": "PK"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 30.1575,
+        "longitude": 71.5249
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "sameAs": [
+        "https://www.facebook.com/aquamarine.official",
+        "https://www.instagram.com/aquamarine.official"
+      ]
+    }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        aqua: {
+                            50: '#f0fbff',
+                            100: '#e0f6ff',
+                            200: '#bbedff',
+                            300: '#7cdfff',
+                            400: '#33cdff',
+                            500: '#00b5f5',
+                            600: '#0090ce',
+                            700: '#0072ff',
+                            800: '#004999',
+                            900: '#003366',
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(0, 114, 255, 0.1)',
+                        'glass-strong': '0 15px 40px 0 rgba(0, 114, 255, 0.2)',
+                        'glow': '0 0 30px rgba(0, 200, 255, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020617; color: #fff; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+
+        /* ——— Custom Scrollbar ——— */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; border-left: 1px solid rgba(255,255,255,0.05); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #33cdff, #0072ff); border-radius: 999px; }
+
+        /* ——— Mesh Gradients & Hero Dark BG ——— */
+        .mesh-bg {
+            background-color: #020617;
+            background-image: 
+                radial-gradient(ellipse at 10% 20%, rgba(51, 205, 255, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 90% 10%, rgba(0, 114, 255, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 90%, rgba(0, 200, 255, 0.1) 0%, transparent 60%);
+        }
+
+        /* ——— Glassmorphism (Dark & Light) ——— */
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        .glass-pill {
+            background: rgba(2, 6, 23, 0.6);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .glass-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 15px 35px rgba(0, 114, 255, 0.04);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s;
+        }
+        .glass-light:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 114, 255, 0.08);
+            border-color: rgba(51, 205, 255, 0.5);
+        }
+
+        /* ——— Animated Glow Button ——— */
+        .btn-premium {
+            background: linear-gradient(135deg, #33cdff, #0072ff);
+            color: white;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s;
+        }
+        .btn-premium::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #00b5f5, #004999);
+            z-index: -1; opacity: 0; transition: opacity 0.3s;
+        }
+        .btn-premium:hover {
+            transform: scale(1.05); box-shadow: var(--box-shadow-glow);
+        }
+        .btn-premium:hover::before { opacity: 1; }
+
+        /* ——— Text Gradient ——— */
+        .text-gradient {
+            background: linear-gradient(to right, #7cdfff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-dark {
+            background: linear-gradient(to right, #0072ff, #00b5f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ——— Water Drops / Bubbles ——— */
+        @keyframes liquid-float {
+            0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 0; }
+            20%  { opacity: 0.6; }
+            80%  { opacity: 0.3; }
+            100% { transform: translateY(-120vh) scale(1.5) rotate(45deg); opacity: 0; }
+        }
+        .bubble {
+            position: fixed;
+            bottom: -50px;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.8), rgba(51,205,255,0.1));
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            pointer-events: none;
+            z-index: 0;
+            animation: liquid-float linear infinite;
+        }
+
+        /* ——— Image Slider Enhance ——— */
+        .hero-slider { position: relative; width: 100%; max-width: 500px; height: 500px; border-radius: 2rem; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        @media (max-width: 1024px) { .hero-slider { max-width: 420px; height: 420px; } }
+        @media (max-width: 640px) { .hero-slider { max-width: 100%; height: 250px; } }
+        .hero-slide { position: absolute; inset: 0; opacity: 0; transform: scale(1.08); transition: opacity 1s ease, transform 1s ease; }
+        .hero-slide.active { opacity: 1; transform: scale(1); z-index: 2; }
+        .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ——— WhatsApp Button Wave ——— */
+        .wa-float {
+            position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px;
+            background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 30px rgba(37,211,102,0.4); z-index: 999;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        @media (min-width: 640px) {
+            .wa-float { bottom: 30px; right: 30px; width: 64px; height: 64px; }
+        }
+        .wa-float::after {
+            content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #25D366;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; z-index: -1;
+        }
+        @keyframes ping {
+            75%, 100% { transform: scale(1.6); opacity: 0; }
+        }
+        .wa-float:hover { transform: scale(1.1) rotate(5deg); box-shadow: 0 15px 40px rgba(37,211,102,0.6); }
+
+        /* ——— Bento Grid Specifics ——— */
+        .bento-icon { background: linear-gradient(135deg, #e0f6ff, #f0fbff); color: #0072ff; }
+        .hover-card:hover .bento-icon { background: linear-gradient(135deg, #bbedff, #e0f6ff); transform: scale(1.1) rotate(5deg); transition: 0.3s; }
+
+        /* ——— Premium Loader ——— */
+        #loader {
+            position: fixed; inset: 0; background: #020617; z-index: 9999;
+            display: flex; flex-direction: column; items: center; justify-content: center;
+            transition: opacity 0.8s cubic-bezier(0.7, 0, 0.3, 1), visibility 0.8s;
+        }
+        .loader-bottle {
+            width: 80px; height: auto; filter: drop-shadow(0 0 20px rgba(51, 205, 255, 0.5));
+            animation: pulse-glow 2s infinite ease-in-out;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 40px rgba(51, 205, 255, 0.8)); }
+        }
+        .loader-bar {
+            width: 200px; height: 2px; background: rgba(255,255,255,0.1);
+            margin-top: 40px; border-radius: 99px; overflow: hidden; position: relative;
+        }
+        .loader-progress {
+            position: absolute; top: 0; left: 0; height: 100%; width: 0%;
+            background: linear-gradient(to right, #33cdff, #0072ff);
+        }
+    </style>
+</head>
+<body class="mesh-bg relative">
+
+<!-- Premium Page Loader -->
+<div id="loader">
+    <img src="bottle.png" alt="Aquamarine" class="loader-bottle" />
+    <div class="loader-bar">
+        <div class="loader-progress" id="loader-progress"></div>
+    </div>
+    <span class="mt-4 text-aqua-400 text-xs font-bold uppercase tracking-[0.3em] animate-pulse">Purity Loading...</span>
+</div>
+
+<!-- Floating Liquid Bubbles (Generated by JS) -->
+<div id="bubble-container"></div>
+
+<!-- ╔════════════════════════════════════════════════════════╗ -->
+<!-- ║  FLOATING NAVBAR                                      ║ -->
+<!-- ╚════════════════════════════════════════════════════════╝ -->
+<div class="fixed top-4 left-0 w-full z-50 px-4 flex justify-center">
+    <nav class="glass-pill w-full max-w-5xl px-3 py-2 rounded-full flex items-center justify-between" id="navbar">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 pl-2 group">
+            <div class="w-11 h-11 rounded-full bg-white border-2 border-aqua-400 shadow-[0_0_20px_rgba(0,114,255,0.3)] flex items-center justify-center relative overflow-hidden p-1.5 transition-all group-hover:border-white group-hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]">
+                <img src="bottle.png" alt="Logo" class="h-full w-full object-contain relative z-10 transition-transform group-hover:scale-110" />
+                <div class="absolute inset-0 bg-aqua-400 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+            </div>
+            <span class="text-2xl font-heading font-black tracking-tight text-white hidden sm:block">Aqua<span class="text-aqua-400">marine</span></span>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-1 bg-white/5 rounded-full px-2 py-1 border border-white/5">
+            <a href="#source" class="text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all">Purity</a>
+            <a href="#benefits" class="text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all">Benefits</a>
+            <a href="#branding" class="text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all">Custom Branding</a>
+            <a href="#buy" class="text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all">Our Bottles</a>
+        </div>
+
+        <!-- Buy Button & Mobile Burger -->
+        <div class="flex items-center gap-3 pr-1">
+            <a href="#buy" class="hidden sm:inline-flex btn-premium text-sm font-heading font-bold px-4 md:px-6 py-2 md:py-2.5 rounded-full shadow-glow">Order Now</a>
+            <button id="burger" class="md:hidden w-10 h-10 rounded-full bg-white/10 flex flex-col items-center justify-center gap-1.5" aria-label="Menu">
+                <span class="w-5 h-[2px] bg-white rounded-full transition-all" id="b1"></span>
+                <span class="w-5 h-[2px] bg-white rounded-full transition-all" id="b2"></span>
+            </button>
+        </div>
+    </nav>
+</div>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="fixed inset-0 bg-[#020617]/95 backdrop-blur-3xl z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-400">
+    <a href="#source" class="text-3xl font-heading font-bold text-white/70 hover:text-white transition-colors mob-link">Purity</a>
+    <a href="#benefits" class="text-3xl font-heading font-bold text-white/70 hover:text-white transition-colors mob-link">Benefits</a>
+    <a href="#branding" class="text-3xl font-heading font-bold text-white/70 hover:text-white transition-colors mob-link">Custom Branding</a>
+    <a href="#buy" class="text-3xl font-heading font-bold text-white/70 hover:text-white transition-colors mob-link">Our Bottles</a>
+    <a href="#buy" class="mt-4 btn-premium text-2xl font-heading font-bold px-8 py-3 rounded-full shadow-glow mob-link text-white text-center">Order Now</a>
+</div>
+
+
+<!-- ╔════════════════════════════════════════════════════════╗ -->
+<!-- ║  HERO SECTION (DARK MESH)                             ║ -->
+<!-- ╚════════════════════════════════════════════════════════╝ -->
+<section id="hero" class="relative min-h-[100dvh] flex items-center pt-28 pb-20 justify-center overflow-hidden">
+    <!-- Decorative Glowing Orb -->
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-aqua-500/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Text -->
+        <div id="hero-text" class="space-y-8 text-center lg:text-left">
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-aqua-400/30 bg-aqua-500/10 backdrop-blur-md">
+                    <span class="w-2 h-2 rounded-full bg-aqua-400 animate-pulse"></span>
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-aqua-300">100% RO Purified</span>
+                </div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#25D366]/30 bg-[#25D366]/10 backdrop-blur-md shadow-[0_0_15px_rgba(37,211,102,0.15)]">
+                    <i data-lucide="badge-check" class="w-4 h-4 text-[#25D366]"></i>
+                    <span class="text-xs font-bold uppercase tracking-[0.1em] text-white">Verified in Pakistan</span>
+                </div>
+            </div>
+            <h1 class="text-5xl sm:text-6xl lg:text-8xl font-heading font-black leading-[1.05] tracking-tight text-white drop-shadow-2xl">
+                Taste The <br class="hidden md:block"/>
+                <span class="text-gradient">Purest Water.</span>
+            </h1>
+            
+            <p class="text-white/70 text-lg sm:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed font-body">
+                Premium quality, germ-free drinking water delivered to your doorstep. Refresh your body and elevate your health with every drop.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 pt-4">
+                <a href="#contact" class="btn-premium px-6 py-3 rounded-full font-heading font-bold text-sm sm:text-base w-full sm:w-auto text-center inline-flex items-center justify-center gap-2 group">
+                    <span>Order via WhatsApp</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#source" class="px-8 py-4 rounded-full font-heading font-bold text-base text-white border border-white/20 hover:bg-white/10 hover:border-white/40 transition-all w-full sm:w-auto text-center flex items-center justify-center gap-2">
+                    <i data-lucide="play-circle" class="w-5 h-5 opacity-70"></i> Our Process
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex items-center justify-center lg:justify-start gap-8 pt-6 border-t border-white/10 mt-6 !pb-0">
+                <div>
+                    <p class="text-3xl font-heading font-bold text-aqua-300">100%</p>
+                    <p class="text-xs text-white/50 uppercase tracking-widest mt-1 font-semibold">RO Pure</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-heading font-bold text-aqua-300">0%</p>
+                    <p class="text-xs text-white/50 uppercase tracking-widest mt-1 font-semibold">Chemicals</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-heading font-bold text-aqua-300">24/7</p>
+                    <p class="text-xs text-white/50 uppercase tracking-widest mt-1 font-semibold">Delivery</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider -->
+        <div id="hero-bottle" class="flex justify-center lg:justify-end relative">
+            <div class="absolute inset-0 bg-gradient-to-tr from-aqua-500/20 to-transparent blur-3xl -z-10 rounded-full scale-150"></div>
+            <div class="hero-slider border border-white/10" id="heroSlider">
+                <div class="hero-slide active">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-10 opacity-60"></div>
+                    <img src="bottle.png" alt="Aquamarine RO Water" />
+                </div>
+                <div class="hero-slide">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-10 opacity-60"></div>
+                    <img src="custom_marriage.png" alt="Custom Branding - Marriage Halls" />
+                </div>
+                <div class="hero-slide">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-10 opacity-60"></div>
+                    <img src="custom_hotel.png" alt="Custom Branding - Hotels" />
+                </div>
+                <div class="hero-slide">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-10 opacity-60"></div>
+                    <img src="bottle1.png" alt="Custom Branding - Hotels" />
+                </div>
+                <div class="hero-slide">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-10 opacity-60"></div>
+                    <img src="bottle2.png" alt="Custom Branding - Hotels" />
+                </div>
+                <div class="hero-slide">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-10 opacity-60"></div>
+                    <img src="slide2.png" alt="Pure Drops" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ╔════════════════════════════════════════════════════════╗ -->
+<!-- ║  PURITY (DARK COMPONENT)                              ║ -->
+<!-- ╚════════════════════════════════════════════════════════╝ -->
+<section id="source" class="relative py-24 border-t border-white/5 bg-[#01040d]">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="glass-dark rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 md:p-16 border border-aqua-400/20 grid lg:grid-cols-5 gap-8 sm:gap-12 items-center relative overflow-hidden">
+            <!-- decorative slash -->
+            <div class="absolute -right-20 -top-20 w-96 h-96 bg-aqua-600/20 blur-[100px] rounded-full"></div>
+            
+            <div class="lg:col-span-2 space-y-8 relative z-10 text-center lg:text-left">
+                <h2 class="text-5xl sm:text-6xl font-heading font-black text-white leading-none">Zero Compromise<br>On <span class="text-aqua-400">Purity.</span></h2>
+                <p class="text-white/60 text-xl leading-relaxed font-medium">Our advanced Reverse Osmosis (RO) filtration system strips away 99.9% of all impurities, leaving you with water that tastes exceptionally crisp and clean.</p>
+                <div class="inline-block mt-4">
+                    <img src="slide3.png" alt="Splash" class="w-full h-40 object-cover rounded-2xl border border-white/10 opacity-80" />
+                </div>
+            </div>
+
+            <div class="lg:col-span-3 grid sm:grid-cols-2 gap-6 relative z-10">
+                <!-- Data Card -->
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition-colors">
+                    <div class="w-12 h-12 bg-aqua-500/20 rounded-xl flex items-center justify-center mb-4 text-aqua-400"><i data-lucide="shield-alert"></i></div>
+                    <h4 class="text-xl font-heading font-bold mb-2">Bacteria & Virus</h4>
+                    <p class="text-white/50 text-sm">Ultra-filtration membrane blocks micro-organisms to ensure 100% safety.</p>
+                    <div class="mt-4 flex items-end justify-between"><span class="text-3xl font-heading font-bold text-aqua-400">99.9%</span><span class="text-xs text-white/40 uppercase mb-1">Removed</span></div>
+                </div>
+                <!-- Data Card -->
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition-colors">
+                    <div class="w-12 h-12 bg-aqua-500/20 rounded-xl flex items-center justify-center mb-4 text-aqua-400"><i data-lucide="flask-conical"></i></div>
+                    <h4 class="text-xl font-heading font-bold mb-2">Heavy Metals</h4>
+                    <p class="text-white/50 text-sm">Lead, arsenic, and harsh chemicals are separated out completely.</p>
+                    <div class="mt-4 flex items-end justify-between"><span class="text-3xl font-heading font-bold text-aqua-400">99.0%</span><span class="text-xs text-white/40 uppercase mb-1">Removed</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ╔════════════════════════════════════════════════════════╗ -->
+<!-- ║  BENEFITS (COMBO - LIGHT BENTO MESH)                  ║ -->
+<!-- ╚════════════════════════════════════════════════════════╝ -->
+<section id="benefits" class="relative py-28 lg:py-36 bg-[#020617] text-white border-t border-white/5 overflow-hidden">
+    <!-- Soft light blobs -->
+    <div class="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-aqua-500/5 to-transparent pointer-events-none"></div>
+    <div class="absolute -left-40 top-40 w-96 h-96 bg-aqua-500/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -right-40 bottom-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+        
+        <!-- Heading -->
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <span class="px-4 py-1.5 rounded-full bg-aqua-500/10 text-aqua-400 text-xs font-bold uppercase tracking-widest border border-aqua-400/20">Why Aquamarine</span>
+            <h2 class="text-3xl sm:text-5xl lg:text-6xl font-heading font-black leading-[1.1] text-white section-title">
+                Designed for your <br/><span class="text-gradient">Health & Home</span>
+            </h2>
+        </div>
+
+        <!-- Bento Grid -->
+        <div class="grid md:grid-cols-3 md:grid-rows-2 gap-4 sm:gap-6 min-h-[300px]">
+            
+            <!-- Large Focus Card -->
+            <div class="md:col-span-2 md:row-span-1 glass-dark rounded-[2rem] p-6 sm:p-10 flex flex-col md:flex-row gap-6 sm:gap-8 items-center justify-between hover-card relative overflow-hidden group bg-[#0a0f1e]/80 border-white/10 hover:border-aqua-500/40">
+                <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-aqua-500/10 rounded-full blur-3xl transition-opacity group-hover:bg-aqua-400/20"></div>
+                <div class="w-full sm:w-1/2 space-y-4 relative z-10">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all"><i data-lucide="shield-check" class="w-7 h-7 text-aqua-400"></i></div>
+                    <h3 class="text-2xl font-heading font-bold text-white">Safe for the Whole Family</h3>
+                    <p class="text-white/70 font-medium leading-relaxed">From infants to elders, our multi-stage RO purification ensures that every drop is gentle, safe, and completely free of toxic compounds.</p>
+                </div>
+                <div class="w-full sm:w-1/2 h-full rounded-2xl overflow-hidden shadow-inner border border-white/10 relative z-10">
+                    <img src="slide2.png" alt="Family Safe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80" />
+                </div>
+            </div>
+
+            <!-- Tall Vertical Card -->
+            <div class="md:col-span-1 md:row-span-2 glass-dark rounded-[2.5rem] p-8 sm:p-10 flex flex-col items-center text-center justify-center hover-card relative overflow-hidden group bg-gradient-to-b from-[#0a0f1e] to-[#040816] border-white/10 hover:border-aqua-500/40">
+                <div class="w-20 h-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 shadow-xl shadow-aqua-500/20"><i data-lucide="sparkles" class="w-10 h-10 text-aqua-400"></i></div>
+                <h3 class="text-3xl font-heading font-bold text-white mb-4">Glowing Skin</h3>
+                <p class="text-white/70 font-medium leading-relaxed">Hydration is the secret to youth. Drinking our absolutely pure water daily flushes out toxins, helping your skin remain soft, clear, and radiantly fresh.</p>
+            </div>
+
+            <!-- Small Card 1 -->
+            <div class="md:col-span-1 md:row-span-1 glass-dark rounded-[2.5rem] p-8 flex flex-col justify-center hover-card group bg-[#0a0f1e]/80 border-white/10 hover:border-aqua-500/40">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center"><i data-lucide="brain" class="w-6 h-6 text-aqua-400"></i></div>
+                    <h3 class="text-xl font-heading font-bold text-white">Better Digestion</h3>
+                </div>
+                <p class="text-white/70 font-medium">Clean water balances your stomach acidity and drastically improves the breakdown of your daily meals.</p>
+            </div>
+
+            <!-- Small Card 2 -->
+            <div class="md:col-span-1 md:row-span-1 glass-dark rounded-[2.5rem] p-8 flex flex-col justify-center hover-card group bg-[#0a0f1e]/80 border-white/10 hover:border-aqua-500/40">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center"><svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-[#25D366]"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+                    <h3 class="text-xl font-heading font-bold text-white">Fast Delivery</h3>
+                </div>
+                <p class="text-white/70 font-medium">Order instantly on WhatsApp and we dispatch our delivery vehicles directly to your doorstep.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ╔════════════════════════════════════════════════════════╗ -->
+<!-- ║  CUSTOM BRANDING (NEW SECTION - LUXURY DARK)          ║ -->
+<!-- ╚════════════════════════════════════════════════════════╝ -->
+<section id="branding" class="relative py-28 bg-[#01040d] border-t border-white/5 overflow-hidden">
+    <!-- Animated Light Patterns -->
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-aqua-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            
+            <!-- Branding Text Content -->
+            <div class="space-y-8 branding-content">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-aqua-400/30 bg-aqua-500/10 backdrop-blur-md">
+                    <i data-lucide="tag" class="w-4 h-4 text-aqua-400"></i>
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-aqua-300">Premium Partnership</span>
+                </div>
+                
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-black leading-tight text-white section-title">
+                    Your Brand,<br/>
+                    <span class="text-gradient">Your Identity.</span>
+                </h2>
+                
+                <p class="text-white/70 text-lg sm:text-xl leading-relaxed font-body">
+                    We specialize in premium customized branding. Elevate your **Marriage Hall**, **Restaurant**, or **Hotel** business with high-quality bottled water featuring your unique brand logo and design.
+                </p>
+
+                <div class="glass-dark p-6 rounded-3xl border border-white/10 space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-aqua-500/20 flex items-center justify-center text-aqua-400"><i data-lucide="check-circle"></i></div>
+                        <p class="text-white font-medium">Customized Label Design</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-aqua-500/20 flex items-center justify-center text-aqua-400"><i data-lucide="check-circle"></i></div>
+                        <p class="text-white font-medium">Marriage Halls & Event Branding</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-aqua-500/20 flex items-center justify-center text-aqua-400"><i data-lucide="check-circle"></i></div>
+                        <p class="text-white font-medium">Hotel & Restaurant Bulk Orders</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-5 pt-4">
+                    <a href="https://wa.me/923230275594?text=Hi!%20I%20want%20to%20order%20customized%20labeled%20water%20bottles%20for%20my%20business/event." target="_blank" class="btn-premium px-8 py-4 rounded-full font-heading font-bold text-base w-full sm:w-auto text-center flex items-center justify-center gap-3 shadow-glow group">
+                        <span>Get Bulk Quote</span>
+                        <i data-lucide="message-circle" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Branding Visuals -->
+            <div class="relative branding-visuals">
+                <!-- Floating Card -->
+                <div class="absolute -top-10 -right-10 glass-pill p-6 rounded-3xl border border-aqua-400/30 z-20 hidden md:block animate-bounce shadow-2xl" style="animation-duration: 4s;">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-aqua-400 rounded-full flex items-center justify-center text-white"><i data-lucide="users"></i></div>
+                        <div class="text-left">
+                            <p class="text-xs text-white/50 uppercase font-bold tracking-tighter">Trusted By</p>
+                            <p class="text-lg text-white font-bold">50+ Partners</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-slider border border-white/20 shadow-2xl" id="brandingSlider">
+                    <div class="branding-slide active">
+                        <img src="custom_marriage.png" alt="Custom Label for Marriage Halls" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="branding-slide">
+                        <img src="custom_hotel.png" alt="Custom Label for Hotels" class="w-full h-full object-cover" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    .branding-slide { position: absolute; inset: 0; opacity: 0; transform: scale(1.05); transition: opacity 1s ease, transform 1s ease; }
+    .branding-slide.active { opacity: 1; transform: scale(1); z-index: 2; }
+    .branding-slide img { width: 100%; height: 100%; object-fit: cover; }
+</style>
+
+
+<!-- ╔════════════════════════════════════════════════════════╗ -->
+<!-- ║  PRICING (CLEAN MINIMAL LIGHT)                        ║ -->
+<!-- ╚════════════════════════════════════════════════════════╝ -->
+<section id="buy" class="relative py-24 bg-[#01040d] text-white border-t border-white/5">
+    <!-- Subtle grid background -->
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wMykiLz48L3N2Zz4=')] opacity-50 z-0"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+        
+        <div class="text-center mb-14">
+            <h2 class="text-4xl sm:text-5xl font-heading font-black text-white mb-4 section-title">Premium PET Bottles.</h2>
+            <p class="text-white/60 font-medium text-lg">We provide high-quality PET bottles. Pricing will be decided on WhatsApp.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            
+            <!-- Standard -->
+            <div class="glass-dark border-[rgba(255,255,255,0.1)] rounded-[2.5rem] p-10 text-center flex flex-col items-center hover-card bg-[#0a0f1e]/60 z-10 hover:border-aqua-500/30 relative">
+                <div class="absolute -top-4 bg-gradient-to-r from-aqua-400 to-blue-500 text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg shadow-aqua-500/30">Best Seller</div>
+                <p class="text-sm font-bold uppercase tracking-widest text-white/40 mb-2 mt-2">Essential</p>
+                <div class="w-20 h-20 mb-4 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"><i data-lucide="droplet" class="w-8 h-8 text-aqua-400"></i></div>
+                <h3 class="text-2xl font-heading font-bold text-white mb-2">500ml PET Bottle</h3>
+                <div class="flex items-baseline justify-center gap-2 mb-6 mt-4">
+                    <span class="text-2xl font-heading font-bold text-aqua-300">Price on WhatsApp</span>
+                </div>
+                <ul class="space-y-3 text-white/60 font-medium mb-8 text-sm w-full text-left pl-4">
+                    <li class="flex gap-3 items-center"><i data-lucide="check" class="w-4 h-4 text-aqua-400"></i> Perfect for travel</li>
+                    <li class="flex gap-3 items-center"><i data-lucide="check" class="w-4 h-4 text-aqua-400"></i> Easy to carry</li>
+                    <li class="flex gap-3 items-center"><i data-lucide="check" class="w-4 h-4 text-aqua-400"></i> High-quality PET</li>
+                </ul>
+                <a href="https://wa.me/923230275594?text=Hi%20I%20want%20to%20discuss%20pricing%20for%20Aquamarine%20500ml%20PET%20bottles" target="_blank" class="w-full py-4 rounded-full font-heading font-bold text-white bg-white/10 hover:bg-white/20 border border-white/10 transition-colors mt-auto flex justify-center items-center gap-2">Discuss on WhatsApp</a>
+            </div>
+
+            <!-- Popular -->
+            <div class="glass-dark border border-aqua-500/30 rounded-[2.5rem] p-10 text-center flex flex-col items-center hover-card bg-gradient-to-b from-[#0a0f1e] to-aqua-900/20 relative z-20 shadow-[0_0_40px_rgba(0,198,255,0.15)] transform md:-translate-y-4">
+                <div class="absolute -top-4 bg-gradient-to-r from-aqua-400 to-blue-500 text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg shadow-aqua-500/30">Best Value Family Pack</div>
+                
+                <p class="text-sm font-bold uppercase tracking-widest text-aqua-400 mb-2 mt-2">Premium</p>
+                <div class="w-20 h-20 mb-4 rounded-full bg-aqua-500/10 border border-aqua-500/20 flex items-center justify-center"><i data-lucide="droplets" class="w-8 h-8 text-aqua-400"></i></div>
+                <h3 class="text-2xl font-heading font-bold text-white mb-2">1.5L PET Bottle</h3>
+                <div class="flex items-baseline justify-center gap-2 mb-6 mt-4">
+                    <span class="text-2xl font-heading font-bold text-aqua-300">Price on WhatsApp</span>
+                </div>
+                <ul class="space-y-3 text-white/60 font-medium mb-8 text-sm w-full text-left pl-4">
+                    <li class="flex gap-3 items-center"><i data-lucide="check" class="w-4 h-4 text-aqua-400"></i> Family size hydration</li>
+                    <li class="flex gap-3 items-center"><i data-lucide="check" class="w-4 h-4 text-aqua-400"></i> High-quality PET</li>
+                    <li class="flex gap-3 items-center"><i data-lucide="check" class="w-4 h-4 text-aqua-400"></i> Fridge optimized shape</li>
+                </ul>
+                <a href="https://wa.me/923230275594?text=Hi%20I%20want%20to%20discuss%20pricing%20for%20Aquamarine%201.5L%20PET%20bottles" target="_blank" class="btn-premium w-full py-4 rounded-full font-heading font-bold text-white shadow-glow mt-auto flex justify-center items-center gap-2">Discuss on WhatsApp</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ╔════════════════════════════════════════════════════════╗ -->
+<!-- ║  CONTACT (MASSIVE WHATSAPP CTA - VIBRANT DYNAMIC)     ║ -->
+<!-- ╚════════════════════════════════════════════════════════╝ -->
+<section id="contact" class="relative py-20 bg-[#020617]">
+    <div class="max-w-6xl mx-auto px-6">
+        
+        <div class="rounded-[2.5rem] p-6 sm:p-12 md:p-20 text-center shadow-2xl relative overflow-hidden bg-[#04091a] border border-white/10 isolate">
+            <!-- Fluid background shapes -->
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-[#33cdff] to-[#00b5f5] rounded-full blur-3xl opacity-20 transform translate-x-1/3 -translate-y-1/3"></div>
+            <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-[#00c6ff] to-[#0072ff] rounded-full blur-3xl opacity-20 transform -translate-x-1/4 translate-y-1/4"></div>
+            <!-- Grid pattern overlay -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] z-0"></div>
+
+            <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
+                <div class="w-24 h-24 bg-white/5 border border-white/10 rounded-[2rem] flex items-center justify-center shadow-2xl mb-8 rotate-3 transform hover:rotate-6 transition-transform">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-[#25D366]"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </div>
+                
+                <h2 class="text-3xl sm:text-5xl md:text-6xl font-heading font-black text-white leading-[1.1] mb-6 drop-shadow-lg section-title">
+                    Order instantly via <br/> <span class="text-[#25D366]">WhatsApp</span>
+                </h2>
+                
+                <p class="text-white/80 font-medium text-lg sm:text-xl leading-relaxed mb-10 max-w-lg">
+                    Tap the button to chat with our team directly. We take your order and dispatch it instantly to your location. Fast, simple, secure.
+                </p>
+                
+                <a href="https://wa.me/923230275594?text=Hi%20Aquamarine!%20I%20want%20to%20place%20an%20order." target="_blank" class="bg-[#25D366] text-white px-10 py-5 rounded-full font-heading font-bold text-xl inline-flex items-center gap-3 shadow-[0_20px_40px_rgba(37,211,102,0.4)] hover:scale-105 hover:-translate-y-1 transition-all duration-300">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Order on WhatsApp
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ╔════════════════════════════════════════════════════════╗ -->
+<!-- ║  FOOTER (SLEEK DARK)                                  ║ -->
+<!-- ╚════════════════════════════════════════════════════════╝ -->
+<footer class="relative pt-24 pb-12 overflow-hidden bg-[#0a0f1e] text-white">
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-white/10 pb-16">
+            
+            <!-- Brand -->
+            <div class="lg:col-span-2 space-y-6 pr-0 lg:pr-16">
+                <a href="#" class="flex items-center gap-4 group">
+                    <div class="w-12 h-12 rounded-full bg-white border-2 border-aqua-400 flex items-center justify-center p-1.5 shadow-glow">
+                        <img src="bottle.png" alt="Logo" class="h-full w-full object-contain" />
+                    </div>
+                    <span class="text-3xl font-heading font-black tracking-tight">Aqua<span class="text-aqua-400">marine</span></span>
+                </a>
+                <p class="text-white/50 leading-relaxed font-medium max-w-sm">
+                    100% RO purified drinking water designed to elevate your lifestyle. Clean, safe, and delivered directly to your door.
+                </p>
+                <div class="flex items-center gap-3 pt-4">
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:bg-aqua-500 hover:text-white hover:border-transparent transition-all duration-300"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:bg-aqua-500 hover:text-white hover:border-transparent transition-all duration-300"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div>
+                <h4 class="font-heading font-bold text-lg mb-6 text-white">Explore</h4>
+                <ul class="space-y-4 text-white/50 font-medium">
+                    <li><a href="#hero" class="hover:text-aqua-400 transition-colors">Home</a></li>
+                    <li><a href="#source" class="hover:text-aqua-400 transition-colors">Filtration Process</a></li>
+                    <li><a href="#benefits" class="hover:text-aqua-400 transition-colors">Health Benefits</a></li>
+                    <li><a href="#buy" class="hover:text-aqua-400 transition-colors">Our Bottles</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4 class="font-heading font-bold text-lg mb-6 text-white">Reach Us</h4>
+                <ul class="space-y-4 text-white/50 font-medium">
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-aqua-400 shrink-0 mt-0.5"></i>
+                        <span>Multan, Pakistan</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i data-lucide="mail" class="w-5 h-5 text-aqua-400 shrink-0"></i>
+                        <span>aquamarinedo9@gmail.com</span>
+                    </li>
+                    <li class="flex items-center gap-3 mt-6">
+                        <a href="https://wa.me/923230275594?text=Hi" target="_blank" class="w-full text-center bg-white/5 hover:bg-white/10 border border-white/10 py-3 rounded-lg text-white font-heading font-bold transition-colors">
+                            WhatsApp Support
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between pt-8 text-white/30 text-sm font-medium">
+            <p>&copy; 2026 Aquamarine Beverages. All rights reserved.</p>
+            <div class="flex gap-6 mt-4 sm:mt-0">
+                <a href="about.html" class="hover:text-white transition-colors">About Us</a>
+                <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+                <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+                <a href="disclaimer.html" class="hover:text-white transition-colors">Disclaimer</a>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/923230275594?text=Hi%20I%20want%20to%20order%20Aquamarine%20RO%20water" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+
+<!-- ╔════════════════════════════════════════════════════════╗ -->
+<!-- ║  JAVASCRIPT - ANIMATION ENGINE                        ║ -->
+<!-- ╚════════════════════════════════════════════════════════╝ -->
+<script>
+    // Init Icons
+    lucide.createIcons();
+
+    // Mobile Menu
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const b1 = document.getElementById('b1');
+    const b2 = document.getElementById('b2');
+    let menuOpen = false;
+
+    function toggleMenu() {
+        menuOpen = !menuOpen;
+        if (menuOpen) {
+            mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+            b1.style.transform = 'translateY(4px) rotate(45deg)';
+            b2.style.transform = 'translateY(-4px) rotate(-45deg)';
+            document.body.style.overflow = 'hidden';
+        } else {
+            mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+            b1.style.transform = 'none';
+            b2.style.transform = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+    burger.addEventListener('click', toggleMenu);
+    document.querySelectorAll('.mob-link').forEach(link => link.addEventListener('click', toggleMenu));
+
+    // GSAP Scroll Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initial load animations with Loader
+    window.addEventListener('load', () => {
+        const lp = document.getElementById('loader-progress');
+        const loader = document.getElementById('loader');
+        
+        // Fast progress simulation
+        let prog = 0;
+        const interval = setInterval(() => {
+            prog += Math.random() * 30;
+            if (prog >= 100) {
+                prog = 100;
+                clearInterval(interval);
+                
+                // Hide loader
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    loader.style.visibility = 'hidden';
+                    
+                    // Trigger hero animations
+                    const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 }});
+                    tl.from('#navbar', { y: -100, opacity: 0, duration: 1 })
+                      .from('#hero-text > *', { y: 40, opacity: 0, stagger: 0.1 }, "-=0.6")
+                      .from('#hero-bottle', { opacity: 0, duration: 1.5, ease: 'expo.out' }, "-=1");
+                }, 500);
+            }
+            lp.style.width = prog + '%';
+        }, 100);
+    });
+
+    // Removed parallax from bottle to keep it still
+
+    // Title reveals
+    gsap.utils.toArray('.section-title').forEach(title => {
+        gsap.from(title, {
+            scrollTrigger: { trigger: title, start: 'top 85%' },
+            y: 50, opacity: 0, duration: 1, ease: 'power3.out'
+        });
+    });
+
+    // Cards hover stagger
+    gsap.utils.toArray('.hover-card').forEach((card, i) => {
+        gsap.from(card, {
+            scrollTrigger: { trigger: card, start: 'top 90%' },
+            y: 60, opacity: 0, duration: 0.8, ease: 'back.out(1.5)'
+        });
+    });
+
+    // Generate Floating Bubbles
+    const bubbleContainer = document.getElementById('bubble-container');
+    for (let i = 0; i < 20; i++) {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        
+        // Randomize
+        const size = Math.random() * 20 + 5; // 5px to 25px
+        const left = Math.random() * 100; // 0% to 100%
+        const delay = Math.random() * 10; // 0s to 10s
+        const duration = Math.random() * 8 + 8; // 8s to 16s
+
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${left}vw`;
+        bubble.style.animationDelay = `${delay}s`;
+        bubble.style.animationDuration = `${duration}s`;
+
+        bubbleContainer.appendChild(bubble);
+    }
+
+    // Hero Image Slider
+    (function initSlider() {
+        const slides = document.querySelectorAll('.hero-slide');
+        let current = 0;
+        setInterval(() => {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, 4000); // 4 seconds per slide
+    })();
+
+    // Branding Slider
+    (function initBrandingSlider() {
+        const slides = document.querySelectorAll('.branding-slide');
+        if (slides.length === 0) return;
+        let current = 0;
+        setInterval(() => {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, 5000); // 5 seconds per slide
+    })();
+
+    // Branding Section GSAP
+    gsap.from('.branding-content > *', {
+        scrollTrigger: { trigger: '#branding', start: 'top 70%' },
+        x: -50, opacity: 0, stagger: 0.1, duration: 1, ease: 'power3.out'
+    });
+    gsap.from('.branding-visuals', {
+        scrollTrigger: { trigger: '#branding', start: 'top 70%' },
+        scale: 0.9, opacity: 0, duration: 1.2, ease: 'power2.out'
+    });
+
+</script>
+
+</body>
+</html>

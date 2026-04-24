@@ -7,8 +7,8 @@
     <meta name="description" content="Manage your royal empire on Apni Saltanat — Pakistan's Premium Marketplace.">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="royal.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --sidebar-width: 280px;
@@ -69,6 +69,9 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
         }
 
         .nav-link {
@@ -151,9 +154,11 @@
         /* ===== MAIN CONTENT ===== */
         .shahi-main {
             flex: 1;
+            min-width: 0; /* Fixes flexbox overflow bug */
+            max-width: 1400px;
+            overflow-x: hidden;
             margin-left: var(--sidebar-width);
             padding: 40px;
-            max-width: 1400px;
             transition: var(--transition);
         }
 
@@ -258,12 +263,17 @@
             display: block;
         }
 
-        /* ===== TABLES (Orders & Inventory) ===== */
         .shahi-table-card {
             background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             overflow: hidden;
+        }
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .table-header {
@@ -344,54 +354,103 @@
             margin-bottom: 24px;
         }
 
-        /* ===== MOBILE RESPONSIVE ===== */
+        /* ===== MOBILE RESPONSIVE & BOTTOM NAV ===== */
+        .mobile-bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(10, 8, 0, 0.85);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 204, 0, 0.2);
+            z-index: 5000;
+            padding: 10px 20px 25px; /* padding for safe area */
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-muted);
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-item i {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        .mobile-nav-item.active {
+            color: var(--royal-gold);
+            transform: translateY(-4px);
+        }
+
+        .mobile-nav-fab {
+            position: relative;
+            top: -20px;
+            background: linear-gradient(135deg, #FFEDC3, #FFCC00);
+            color: #131313;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.4);
+            border: 4px solid var(--bg-dark);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .mobile-nav-fab:active { transform: scale(0.95); }
+        .mobile-nav-fab i { font-size: 22px; margin: 0; }
+
         .mobile-toggle {
             display: none;
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--royal-gold);
-            color: #131313;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,204,0,0.1);
+            color: var(--royal-gold);
+            border: 1px solid var(--border-gold);
             border-radius: 12px;
             z-index: 2000;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            box-shadow: var(--shadow-gold);
+            font-size: 18px;
+            backdrop-filter: blur(10px);
             cursor: pointer;
         }
 
         @media (max-width: 1024px) {
-            .shahi-sidebar {
-                transform: translateX(-100%);
-            }
-            .shahi-sidebar.active {
-                transform: translateX(0);
-            }
-            .shahi-main {
-                margin-left: 0;
-                padding: 80px 20px 40px;
-            }
-            .mobile-toggle {
-                display: flex;
-            }
-            .shahi-stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .upload-grid {
-                grid-template-columns: 1fr;
-            }
+            .shahi-sidebar { transform: translateX(-100%); z-index: 6000; box-shadow: var(--shadow-dark); }
+            .shahi-sidebar.active { transform: translateX(0); }
+            .shahi-main { margin-left: 0; padding: 80px 20px 40px; }
+            .mobile-toggle { display: flex; }
+            .shahi-stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .upload-grid { grid-template-columns: 1fr; }
         }
 
-        @media (max-width: 600px) {
-            .shahi-stats-grid {
-                grid-template-columns: 1fr;
-            }
-            .input-row {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 768px) {
+            .mobile-bottom-nav { display: flex; }
+            .mobile-toggle { display: none; } /* Hide hamburger since we have 'Menu' in bottom nav */
+            .shahi-main { padding: 30px 15px 100px; }
+            .dashboard-header { flex-direction: column; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
+            .dashboard-header button { width: 100%; }
+            .shahi-stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .shahi-stat-card { padding: 16px; }
+            .stat-icon-wrap { width: 36px; height: 36px; font-size: 16px; margin-bottom: 12px; border-radius: 10px; }
+            .stat-value { font-size: 18px; }
+            .stat-label { font-size: 9px; letter-spacing: 1px; }
+            .table-header { flex-direction: column; gap: 10px; align-items: flex-start; padding: 16px; }
         }
 
         /* ===== CUSTOM SCROLLBAR FOR SIDEBAR ===== */
@@ -423,6 +482,7 @@
         .stat-revenue .stat-icon-wrap { background: rgba(0, 255, 100, 0.1); color: #0f6; border-color: rgba(0, 255, 100, 0.2); }
         .stat-orders .stat-icon-wrap { background: rgba(33, 150, 243, 0.1); color: #2196f3; border-color: rgba(33, 150, 243, 0.2); }
         .stat-products .stat-icon-wrap { background: rgba(255, 204, 0, 0.1); color: var(--royal-gold); border-color: rgba(255, 204, 0, 0.2); }
+        .shahi-stat-card.stat-products { border-color: rgba(255, 204, 0, 0.2); background: rgba(255, 204, 0, 0.05); }
         .stat-pending .stat-icon-wrap { background: rgba(255, 77, 77, 0.1); color: #ff4d4d; border-color: rgba(255, 77, 77, 0.2); }
 
         /* SHAHI MODAL */
@@ -456,11 +516,11 @@
 
 <!-- ROYAL NOTIFICATION OVERLAY -->
 <div id="notifOverlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:10000; display:none; align-items:center; justify-content:center; backdrop-filter:blur(20px);">
-    <div style="text-align:center; max-width:420px; padding:50px; background:var(--bg-surface); border:2px solid var(--royal-gold); border-radius:30px; box-shadow:0 0 100px rgba(197,160,89,0.3);">
+    <div style="text-align:center; max-width:420px; padding:50px; background:var(--bg-surface); border:2px solid var(--royal-gold); border-radius:30px; box-shadow:0 0 100px rgba(197,160,89,0.3); animation: modalIn 0.5s ease-out;">
         <div style="font-size:70px; margin-bottom:25px;">👑</div>
         <h2 style="font-family:'Epilogue',sans-serif; color:var(--royal-gold); margin-bottom:15px; font-size:24px; font-weight:900;">SALAM SARDAAR!</h2>
-        <p style="color:var(--text-light); line-height:1.8; margin-bottom:35px; font-size:16px;">Plzz click <b>OK</b> to move further and activate your Royal Order Alerts. Ye dashboard use karne ke liye zaroori hai.</p>
-        <button onclick="acceptNotifs()" class="btn-gold" style="width:100%; height:60px; font-weight:900; font-size:18px; letter-spacing:1px; box-shadow:var(--shadow-gold);">OK, CHALO SHURU KAREIN 👑</button>
+        <p style="color:var(--text-light); line-height:1.8; margin-bottom:35px; font-size:16px;">Please click <b>OK</b> to activate your dashboard. Must click allow for order notifications.</p>
+        <button onclick="acceptNotifs()" class="btn-gold" style="width:100%; height:60px; font-weight:900; font-size:18px; letter-spacing:1px; box-shadow:var(--shadow-gold);">OK, LET'S BEGIN 👑</button>
     </div>
 </div>
 
@@ -484,8 +544,11 @@
         <div onclick="switchTab('dashboard')" class="nav-link active" id="tab-dashboard-link">
             <i class="fas fa-chart-line"></i> <span>Dashboard</span>
         </div>
+        <div onclick="switchTab('inventory')" class="nav-link" id="tab-inventory-link">
+            <i class="fas fa-boxes-stacked"></i> <span>My Inventory</span>
+        </div>
         <div onclick="switchTab('products')" class="nav-link" id="tab-products-link">
-            <i class="fas fa-box"></i> <span>Manage Products</span>
+            <i class="fas fa-plus-circle"></i> <span>Add New Product</span>
         </div>
         <div onclick="switchTab('orders')" class="nav-link" id="tab-orders-link">
             <i class="fas fa-shopping-cart"></i> <span>View Orders</span>
@@ -528,18 +591,25 @@
         <div class="shahi-stats-grid">
             <div class="shahi-stat-card stat-revenue">
                 <div class="stat-icon-wrap"><i class="fas fa-wallet"></i></div>
-                <div class="stat-label">Total Revenue</div>
+                <div class="stat-label">Potential Revenue</div>
                 <div class="stat-value" id="statRevenue">Rs. 0</div>
             </div>
             <div class="shahi-stat-card stat-sales" style="border-color: rgba(0, 200, 83, 0.2); background: rgba(0, 200, 83, 0.05);">
                 <div class="stat-icon-wrap" style="background: rgba(0, 200, 83, 0.1); color: #00c853; border-color: rgba(0, 200, 83, 0.2);"><i class="fas fa-hand-holding-usd"></i></div>
-                <div class="stat-label">Total Sales</div>
+                <div class="stat-label">Confirmed Sales</div>
                 <div class="stat-value" id="statSales">Rs. 0</div>
             </div>
             <div class="shahi-stat-card stat-orders">
                 <div class="stat-icon-wrap"><i class="fas fa-shopping-bag"></i></div>
                 <div class="stat-label">Total Orders</div>
                 <div class="stat-value" id="statOrders">0</div>
+                <button class="btn-outline" onclick="switchTab('orders')" style="margin-top:10px; width:100%; font-size:10px; padding:5px;">VIEW ORDERS</button>
+            </div>
+            <div class="shahi-stat-card stat-products">
+                <div class="stat-icon-wrap"><i class="fas fa-boxes"></i></div>
+                <div class="stat-label">Your Products</div>
+                <div class="stat-value" id="statProducts">0</div>
+                <button class="btn-outline" onclick="switchTab('inventory')" style="margin-top:10px; width:100%; font-size:10px; padding:5px;">MANAGE INVENTORY</button>
             </div>
             <div class="shahi-stat-card stat-visits" style="border-color: rgba(156, 39, 176, 0.2); background: rgba(156, 39, 176, 0.05);">
                 <div class="stat-icon-wrap" style="background: rgba(156, 39, 176, 0.1); color: #e040fb; border-color: rgba(156, 39, 176, 0.2);"><i class="fas fa-eye"></i></div>
@@ -550,16 +620,6 @@
                 <div class="stat-icon-wrap"><i class="fas fa-clock"></i></div>
                 <div class="stat-label">Pending Orders</div>
                 <div class="stat-value" id="statPending">0</div>
-            </div>
-        </div>
-
-        <div class="shahi-table-card" style="margin-bottom: 40px; padding: 24px;">
-            <div class="table-header" style="padding: 0 0 20px 0; border-bottom: none;">
-                <h2>Sales Analytics</h2>
-                <div style="font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Revenue Trend (7 Days)</div>
-            </div>
-            <div style="height: 300px; position: relative;">
-                <canvas id="revenueChart"></canvas>
             </div>
         </div>
 
@@ -591,15 +651,15 @@
     <section id="tab-products" class="tab-content">
         <div class="dashboard-header">
             <div class="welcome-msg">
-                <h1>My Inventory</h1>
-                <p>Upload new items and manage your stock.</p>
+                <h1>Add New Product</h1>
+                <p>Upload new items to your royal store.</p>
             </div>
-            <button class="btn-gold" id="btnShowUpload"><i class="fas fa-plus"></i> New Product</button>
+            <button class="btn-gold" onclick="switchTab('inventory')"><i class="fas fa-boxes-stacked"></i> Back to Inventory</button>
         </div>
 
-        <div class="upload-grid">
-            <!-- LEFT: FORM (Hidden by default, shown on 'Add New') -->
-            <div class="form-section" id="productFormBox">
+        <div class="upload-grid" style="grid-template-columns: 1fr;">
+            <!-- LEFT: FORM -->
+            <div class="form-section" id="productFormBox" style="max-width: 800px; margin: 0 auto;">
                 <div class="section-head" style="margin-bottom: 24px; display: flex; align-items: center; gap: 15px;">
                     <div class="sidebar-logo" style="width: 32px; height: 32px; font-size: 14px;"><i class="fas fa-pencil-alt"></i></div>
                     <h2 id="formTitle" style="font-family:'Epilogue'; font-size:16px; font-weight:900; color:var(--royal-gold);">Add Product</h2>
@@ -625,6 +685,13 @@
                     <div class="royal-field">
                         <label>Sale Price (Rs.) *</label>
                         <input type="number" id="pNewPrice" class="royal-input" placeholder="1500">
+                    </div>
+                </div>
+
+                <div class="input-row" style="grid-template-columns: 1fr;">
+                    <div class="royal-field">
+                        <label>Old Price (Rs.)</label>
+                        <input type="number" id="pOldPrice" class="royal-input" placeholder="2000 (Optional)">
                     </div>
                 </div>
 
@@ -656,28 +723,39 @@
                     <i class="fas fa-sync-alt fa-spin"></i> Processing...
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- RIGHT: INVENTORY TABLE -->
-            <div class="shahi-table-card">
-                <div class="table-header">
-                    <h2>Inventory List</h2>
-                    <span class="badge-gold" id="inventoryCount">0 items</span>
-                </div>
-                <div class="table-wrap">
-                    <table class="shahi-table">
-                        <thead>
-                            <tr>
-                                <th>Img</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="inventoryBody">
-                            <tr><td colspan="4" style="text-align:center; padding:40px;">No products found.</td></tr>
-                        </tbody>
-                    </table>
-                </div>
+    <!-- INVENTORY VIEW -->
+    <section id="tab-inventory" class="tab-content">
+        <div class="dashboard-header">
+            <div class="welcome-msg">
+                <h1>My Inventory</h1>
+                <p>Manage and edit your royal stock.</p>
+            </div>
+            <button class="btn-gold" onclick="switchTab('products')"><i class="fas fa-plus"></i> Add New Product</button>
+        </div>
+
+        <div class="shahi-table-card">
+            <div class="table-header">
+                <h2>Inventory List</h2>
+                <span class="badge-gold" id="inventoryCount">0 items</span>
+            </div>
+            <div class="table-wrap" style="overflow-x: auto;">
+                <table class="shahi-table">
+                    <thead>
+                        <tr>
+                            <th>Img</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryBody">
+                        <tr><td colspan="5" style="text-align:center; padding:40px;">No products found.</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -714,6 +792,25 @@
 
 </main>
 
+<!-- BOTTOM NAV FOR MOBILE -->
+<div class="mobile-bottom-nav">
+    <div class="mobile-nav-item active" onclick="switchTab('dashboard')" id="mob-tab-dashboard">
+        <i class="fas fa-chart-line"></i><span>Dash</span>
+    </div>
+    <div class="mobile-nav-item" onclick="switchTab('inventory')" id="mob-tab-inventory">
+        <i class="fas fa-boxes-stacked"></i><span>Stock</span>
+    </div>
+    <div class="mobile-nav-fab" onclick="switchTab('products')" id="mob-tab-products">
+        <i class="fas fa-plus"></i>
+    </div>
+    <div class="mobile-nav-item" onclick="switchTab('orders')" id="mob-tab-orders">
+        <i class="fas fa-shopping-cart"></i><span>Orders</span>
+    </div>
+    <div class="mobile-nav-item" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i><span>Menu</span>
+    </div>
+</div>
+
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -729,7 +826,7 @@
 
     const IMGBB_KEY = '86566089ecf91f3b063625bccc076b1f';
     let uid, products = {}, files = [], existingUrls = [];
-    let revenueChart = null;
+
 
     // ===== UI HELPERS =====
     window.toggleSidebar = () => document.getElementById('sidebar').classList.toggle('active');
@@ -737,12 +834,16 @@
     window.switchTab = (tabId) => {
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
         document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+        document.querySelectorAll('.mobile-nav-item').forEach(item => item.classList.remove('active'));
         
         document.getElementById(`tab-${tabId}`).classList.add('active');
         const link = document.getElementById(`tab-${tabId}-link`);
         if(link) link.classList.add('active');
 
-        if(window.innerWidth <= 1024) toggleSidebar();
+        const mobLink = document.getElementById(`mob-tab-${tabId}`);
+        if(mobLink) mobLink.classList.add('active');
+
+        if(window.innerWidth <= 1024) document.getElementById('sidebar').classList.remove('active');
         window.scrollTo(0, 0);
     };
 
@@ -797,6 +898,7 @@
                             <td><img src="${p.img}" style="width:40px; height:40px; border-radius:8px; object-fit:cover;"></td>
                             <td style="font-weight:700;">${p.name}</td>
                             <td style="color:var(--royal-gold); font-weight:800;">Rs.${p.price}</td>
+                            <td style="font-size:12px; color:var(--text-muted);">${p.category || 'N/A'}</td>
                             <td>
                                 <button class="btn-outline" onclick="editProd('${p.key}')" style="padding:6px 12px; margin-right:5px;"><i class="fas fa-edit"></i></button>
                                 <button class="btn-outline" onclick="deleteProd('${p.key}')" style="padding:6px 12px; border-color:rgba(244,67,54,0.2); color:#f44336;"><i class="fas fa-trash"></i></button>
@@ -807,7 +909,7 @@
             }
             document.getElementById('statProducts').innerText = count;
             document.getElementById('inventoryCount').innerText = `${count} items`;
-            document.getElementById('inventoryBody').innerHTML = html || '<tr><td colspan="4" style="text-align:center; padding:40px;">No products found.</td></tr>';
+            document.getElementById('inventoryBody').innerHTML = html || '<tr><td colspan="5" style="text-align:center; padding:40px;">No products found.</td></tr>';
         });
 
         // Load Orders
@@ -837,9 +939,14 @@
 
                     orders.push(o);
                     totalOrders++;
-                    totalRevenue += parseInt(o.productPrice || 0);
+                    
+                    // Robust price parsing for stats
+                    const rawPrice = o.productPrice ? o.productPrice.toString().replace(/[^0-9.]/g, '') : "0";
+                    const priceNum = parseFloat(rawPrice || 0);
+                    
+                    totalRevenue += priceNum;
                     if(o.status === 'completed') {
-                        totalSales += parseInt(o.productPrice || 0);
+                        totalSales += priceNum;
                     }
                     if(o.status === 'new' || !o.status) pendingCount++;
                 });
@@ -895,12 +1002,9 @@
             document.getElementById('ordersCountBadge').innerText = `${pendingCount} Pending`;
             document.getElementById('recentOrdersBody').innerHTML = recentHtml || '<tr><td colspan="5" style="text-align:center; padding:40px; color:var(--text-dim);">No recent orders.</td></tr>';
             document.getElementById('fullOrdersBody').innerHTML = fullHtml || '<tr><td colspan="5" style="text-align:center; padding:40px;">Waiting for orders...</td></tr>';
-            
-            // Update Analytics Chart
-            updateChart(orders);
         });
 
-        // SIMPLE ORDER NOTIFICATION LISTENER (Zero Limits, No Keys Needed)
+        // SIMPLE ORDER NOTIFICATION LISTENER
         let isInitialLoad = true;
         const ordersRef = ref(db, `orders/${user.uid}`);
         onChildAdded(ordersRef, (snapshot) => {
@@ -909,15 +1013,11 @@
                 notifySardaar(order);
             }
         });
-        // Set initialLoad to false after first read
         get(ordersRef).then(() => { isInitialLoad = false; });
     }
 
     function notifySardaar(order) {
-        // 1. Play Sound
         audioOrder.play().catch(e => console.log("Audio play blocked until interaction"));
-
-        // 2. Browser Notification
         if (Notification.permission === "granted") {
             new Notification("👑 Naya Order Aa Gaya!", {
                 body: `Sultan! Aapko ${order.customerName} se Rs.${order.productPrice} ka order mila hai.`,
@@ -925,7 +1025,6 @@
             });
         }
         
-        // 3. UI Alert
         const alertBox = document.createElement('div');
         alertBox.style = "position:fixed; bottom:20px; right:20px; background:var(--bg-surface); border:1px solid var(--royal-gold); padding:20px; border-radius:12px; z-index:10001; box-shadow:var(--shadow-gold); animation: slideIn 0.5s ease-out;";
         alertBox.innerHTML = `<div style="display:flex; align-items:center; gap:12px;">
@@ -938,100 +1037,6 @@
         </div>`;
         document.body.appendChild(alertBox);
         setTimeout(() => alertBox.remove(), 10000);
-    }
-
-    // ===== ANALYTICS LOGIC =====
-    function updateChart(orders) {
-        const ctx = document.getElementById('revenueChart');
-        if (!ctx) return;
-
-        const last7Days = [];
-        const revenueData = [];
-        const daysToProcess = 7;
-
-        for (let i = daysToProcess - 1; i >= 0; i--) {
-            const d = new Date();
-            d.setHours(0,0,0,0);
-            d.setDate(d.getDate() - i);
-            const dateTimestamp = d.getTime();
-            const label = d.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric' });
-            
-            last7Days.push(label);
-            
-            let dayTotal = 0;
-            orders.forEach(o => {
-                if (o.timestamp) {
-                    const oDate = new Date(o.timestamp);
-                    oDate.setHours(0,0,0,0);
-                    if (oDate.getTime() === dateTimestamp) {
-                        // Clean price string if needed (remove Rs. and commas)
-                        const rawPrice = o.productPrice ? o.productPrice.toString().replace(/[^0-9.]/g, '') : "0";
-                        dayTotal += parseFloat(rawPrice || 0);
-                    }
-                }
-            });
-            revenueData.push(dayTotal);
-        }
-
-        if (revenueChart) revenueChart.destroy();
-        
-        // Ensure Chart is available
-        const ChartLib = window.Chart;
-        if(!ChartLib) {
-            console.error("Chart.js not loaded yet!");
-            return;
-        }
-
-        revenueChart = new ChartLib(ctx.getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: last7Days,
-                datasets: [{
-                    label: 'Revenue',
-                    data: revenueData,
-                    borderColor: '#c5a059',
-                    backgroundColor: 'rgba(197, 160, 89, 0.1)',
-                    borderWidth: 3,
-                    tension: 0.4,
-                    fill: true,
-                    pointBackgroundColor: '#c5a059',
-                    pointBorderColor: '#1a1a1a',
-                    pointBorderWidth: 2,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        backgroundColor: '#2a2a2a',
-                        titleColor: '#c5a059',
-                        bodyColor: '#fff',
-                        borderColor: '#c5a059',
-                        borderWidth: 1,
-                        padding: 12,
-                        displayColors: false,
-                        callbacks: {
-                            label: (context) => `Rs. ${context.raw.toLocaleString()}`
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(255, 255, 255, 0.05)', drawBorder: false },
-                        ticks: { color: '#888', font: { size: 10 }, callback: (v) => 'Rs.' + v }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: { color: '#888', font: { size: 10 } }
-                    }
-                }
-            }
-        });
     }
 
     // ===== ORDER ACTIONS =====
@@ -1120,7 +1125,7 @@
                     await navigator.serviceWorker.register('sw-master.js');
                 }
             } else {
-                shahiAlert("Sultan, notifications block hain. Browser settings se allow karein.", "⚠️");
+                shahiAlert("Sultan, notifications are blocked. Must click allow for order notifications in your browser settings.", "⚠️");
             }
         } catch (err) {
             console.error("Notif Error:", err);
@@ -1157,6 +1162,7 @@
         document.getElementById('pCat').value = p.category || '';
         document.getElementById('pSubCat').value = p.subcategory || '';
         document.getElementById('pNewPrice').value = p.price;
+        document.getElementById('pOldPrice').value = p.oldPrice || '';
         document.getElementById('longDesc').value = p.description || '';
         document.getElementById('editId').value = id;
         
@@ -1175,7 +1181,8 @@
         files = [];
         renderPreview();
         document.getElementById('formTitle').innerText = "Edit Royal Product";
-        window.scrollTo({ top: document.getElementById('productFormBox').offsetTop - 100, behavior: 'smooth' });
+        switchTab('products');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     window.deleteProd = (id) => { 
@@ -1245,6 +1252,7 @@
 
             const data = {
                 name, price,
+                oldPrice: document.getElementById('pOldPrice').value.trim() || '',
                 category: document.getElementById('pCat').value,
                 subcategory: document.getElementById('pSubCat').value,
                 description: document.getElementById('longDesc').value.trim(),

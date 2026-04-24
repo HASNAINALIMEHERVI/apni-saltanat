@@ -337,11 +337,26 @@
                 for (const item of cart) {
                     const sID = item.sellerId || item.seller;
                     if (!sID) { console.warn("Missing seller ID:", item); continue; }
-                    const orderData = { productName:item.name, productPrice:item.price, productId:item.id, customerName:name, customerAddress:address, customerPhone:phone, customerPostal:postal, customerEmail:email, sellerId:sID, timestamp:Date.now(), status:'new' };
+                    const orderData = { 
+                        productName:item.name, 
+                        productPrice:item.price, 
+                        productId:item.id, 
+                        customerName:name, 
+                        customerAddress:address, 
+                        customerPhone:phone, 
+                        customerPostal:postal, 
+                        customerEmail:email, 
+                        sellerId:sID, 
+                        timestamp:Date.now(), 
+                        status:'new' 
+                    };
                     await set(push(ref(db, `orders/${sID}`)), orderData);
+                    
+                    // Notify Seller via Email
+                    notifySellerEmail(sID, orderData);
                 }
                 
-                shahiAlert("Mubarak Ho Sultan! Aapka order receive ho gaya hai. Seller ki confirmation ke baad aapko email mil jayegi.", "✅");
+                shahiAlert("You will receive the email after order confirmation from seller today. Sultan! Aapka order receive ho gaya hai.", "✅");
                 
                 localStorage.removeItem('saltanatCart');
                 cart = [];
@@ -354,6 +369,31 @@
             }
         });
     };
+
+    async function notifySellerEmail(sellerId, order) {
+        try {
+            // Use get(ref(db, ...)) to fetch seller data
+            const { get, ref } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
+            const snap = await get(ref(db, `users/sardaars/${sellerId}`));
+            if (snap.exists()) {
+                const sData = snap.val();
+                if (sData.email) {
+                    const scriptUrl = "https://script.google.com/macros/s/AKfycbwo6smhEV8TWPrWdBJ3SCFFj96AL6ucGHR4dRMAfCX5EpFSJuQnIwgMHmoWbzLaawzb/exec";
+                    const payload = {
+                        targetEmail: sData.email,
+                        subject: "Naya Order! - Apni Saltanat",
+                        message: `Salam Sardaar! Aapko ek naya order mila hai.\n\nCustomer: ${order.customerName}\nProduct: ${order.productName}\nPrice: Rs. ${order.productPrice}\n\nDashboard check karein: https://apnisaltanat.com/seller-dashboard.html`,
+                        productName: order.productName,
+                        customerName: order.customerName,
+                        status: "New Order"
+                    };
+                    fetch(scriptUrl, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+                }
+            }
+        } catch (e) {
+            console.error("Seller Email Error:", e);
+        }
+    }
 
     // ===== SHAHI MODAL SYSTEM =====
     window.shahiAlert = (text, type = 'info') => {
