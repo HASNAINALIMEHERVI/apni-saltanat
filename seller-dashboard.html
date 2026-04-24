@@ -424,9 +424,35 @@
         .stat-orders .stat-icon-wrap { background: rgba(33, 150, 243, 0.1); color: #2196f3; border-color: rgba(33, 150, 243, 0.2); }
         .stat-products .stat-icon-wrap { background: rgba(255, 204, 0, 0.1); color: var(--royal-gold); border-color: rgba(255, 204, 0, 0.2); }
         .stat-pending .stat-icon-wrap { background: rgba(255, 77, 77, 0.1); color: #ff4d4d; border-color: rgba(255, 77, 77, 0.2); }
+
+        /* SHAHI MODAL */
+        #shahiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        .modal-card { background: var(--bg-surface); border: 2px solid var(--royal-gold); border-radius: 24px; padding: 40px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 50px rgba(197,160,89,0.2); animation: modalIn 0.3s ease-out; }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .modal-icon { font-size: 50px; margin-bottom: 20px; }
+        .modal-title { font-family: 'Epilogue', sans-serif; font-weight: 900; color: var(--royal-gold); margin-bottom: 10px; font-size: 20px; text-transform: uppercase; }
+        .modal-text { color: var(--text-light); margin-bottom: 30px; line-height: 1.6; }
+        .modal-btns { display: flex; gap: 12px; }
+        .modal-btn { flex: 1; padding: 15px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; transition: 0.3s; }
+        .btn-confirm { background: var(--royal-gold); color: #1a1a1a; }
+        .btn-cancel { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border); }
+        .btn-confirm:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold); }
     </style>
 </head>
 <body>
+
+<!-- SHAHI MODAL CONTAINER -->
+<div id="shahiModal">
+    <div class="modal-card">
+        <div class="modal-icon" id="modalIcon">👑</div>
+        <div class="modal-title" id="modalTitle">SALAM SARDAAR</div>
+        <div class="modal-text" id="modalText">Message here...</div>
+        <div class="modal-btns" id="modalBtns">
+            <button class="modal-btn btn-confirm" id="modalConfirmBtn">OK</button>
+            <button class="modal-btn btn-cancel" id="modalCancelBtn">CANCEL</button>
+        </div>
+    </div>
+</div>
 
 <!-- ROYAL NOTIFICATION OVERLAY -->
 <div id="notifOverlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:10000; display:none; align-items:center; justify-content:center; backdrop-filter:blur(20px);">
@@ -463,10 +489,6 @@
         </div>
         <div onclick="switchTab('orders')" class="nav-link" id="tab-orders-link">
             <i class="fas fa-shopping-cart"></i> <span>View Orders</span>
-        </div>
-        <div onclick="requestNotificationPermission()" class="nav-link" id="notif-btn">
-            <i class="fas fa-bell"></i> <span>Royal Notifications</span>
-            <span id="notif-status" style="margin-left: auto; font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.05); color: var(--text-muted);">CHECKING</span>
         </div>
         <a href="#" id="viewStoreLink" target="_blank" class="nav-link">
             <i class="fas fa-external-link-alt"></i> <span>My Store View</span>
@@ -732,12 +754,12 @@
     });
 
     window.handleLogout = () => {
-        if (confirm("Are you sure you want to Logout from Saltanat?")) {
+        shahiConfirm("Are you sure you want to Logout from Saltanat?", () => {
             signOut(auth).then(() => {
                 localStorage.clear();
                 window.location.href = 'login.html';
             });
-        }
+        });
     };
 
     // ===== DATA LOADING =====
@@ -987,6 +1009,33 @@
         });
     }
 
+    // ===== SHAHI MODAL LOGIC =====
+    function shahiAlert(msg, icon = '👑') {
+        document.getElementById('modalIcon').innerText = icon;
+        document.getElementById('modalTitle').innerText = "SARDAAR ALERT";
+        document.getElementById('modalText').innerText = msg;
+        document.getElementById('modalCancelBtn').style.display = 'none';
+        document.getElementById('modalConfirmBtn').onclick = () => {
+            document.getElementById('shahiModal').style.display = 'none';
+        };
+        document.getElementById('shahiModal').style.display = 'flex';
+    }
+
+    function shahiConfirm(msg, onConfirm, icon = '❓') {
+        document.getElementById('modalIcon').innerText = icon;
+        document.getElementById('modalTitle').innerText = "PLEASE CONFIRM";
+        document.getElementById('modalText').innerText = msg;
+        document.getElementById('modalCancelBtn').style.display = 'block';
+        document.getElementById('modalConfirmBtn').onclick = () => {
+            document.getElementById('shahiModal').style.display = 'none';
+            if(onConfirm) onConfirm();
+        };
+        document.getElementById('modalCancelBtn').onclick = () => {
+            document.getElementById('shahiModal').style.display = 'none';
+        };
+        document.getElementById('shahiModal').style.display = 'flex';
+    }
+
     // ===== NOTIFICATION LOGIC =====
     window.acceptNotifs = async () => {
         document.getElementById('notifOverlay').style.display = 'none';
@@ -994,25 +1043,17 @@
     };
 
     window.requestNotificationPermission = async () => {
-        const btn = document.getElementById('notif-status');
-        btn.innerText = "WAIT...";
-
         try {
             const permission = await Notification.requestPermission();
             if (permission === 'granted') {
-                // Register Service Worker if not registered
                 if ('serviceWorker' in navigator) {
-                    const registration = await navigator.serviceWorker.register('sw-master.js');
-                    // FCM is now optional for background, simple listener handles foreground
-                    updateNotifUI('ON');
+                    await navigator.serviceWorker.register('sw-master.js');
                 }
             } else {
-                alert("Sultan, notifications block hain. Browser settings se allow karein.");
-                updateNotifUI('OFF');
+                shahiAlert("Sultan, notifications block hain. Browser settings se allow karein.", "⚠️");
             }
         } catch (err) {
             console.error("Notif Error:", err);
-            updateNotifUI('OFF');
         }
     };
 
@@ -1067,8 +1108,16 @@
         window.scrollTo({ top: document.getElementById('productFormBox').offsetTop - 100, behavior: 'smooth' });
     };
 
-    window.deleteProd = (id) => { if (confirm("Is product ko Saltanat se nikaal dein?")) remove(ref(db, `products/${uid}/${id}`)); };
-    window.deleteOrder = (id) => { if (confirm("Is order ko delete karein?")) remove(ref(db, `orders/${uid}/${id}`)); };
+    window.deleteProd = (id) => { 
+        shahiConfirm("Is product ko Saltanat se nikaal dein?", () => {
+            remove(ref(db, `products/${uid}/${id}`)); 
+        });
+    };
+    window.deleteOrder = (id) => { 
+        shahiConfirm("Is order ko delete karein?", () => {
+            remove(ref(db, `orders/${uid}/${id}`)); 
+        });
+    };
 
     // ===== UPLOAD LOGIC =====
     const fileIn = document.getElementById('fileInput');
@@ -1099,8 +1148,8 @@
     document.getElementById('uploadBtn').onclick = async () => {
         const name = document.getElementById('pName').value.trim();
         const price = document.getElementById('pNewPrice').value.trim();
-        if (!name || !price) return alert("Sultan, Name aur Price zaroori hain!");
-        if (files.length === 0 && existingUrls.length === 0) return alert("Product ki tasveer upload karein!");
+        if (!name || !price) return shahiAlert("Sultan, Name aur Price zaroori hain!", "⚠️");
+        if (files.length === 0 && existingUrls.length === 0) return shahiAlert("Product ki tasveer upload karein!", "🖼️");
 
         const btn = document.getElementById('uploadBtn');
         const status = document.getElementById('status');
@@ -1139,14 +1188,14 @@
             const editId = document.getElementById('editId').value;
             if (editId) {
                 await update(ref(db, `products/${uid}/${editId}`), data);
-                alert("👑 Product Updated!");
+                shahiAlert("👑 Product Updated!");
             } else {
                 await push(ref(db, `products/${uid}`), data);
-                alert("👑 Product Published!");
+                shahiAlert("👑 Product Published!");
             }
-            location.reload();
+            setTimeout(() => location.reload(), 1500);
         } catch(e) {
-            alert("Error: " + e.message);
+            shahiAlert("Error: " + e.message, "❌");
             btn.disabled = false;
             status.style.display = 'none';
         }
