@@ -698,6 +698,7 @@
     const auth = getAuth(app);
     const db = getDatabase(app);
     const messaging = getMessaging(app);
+    const audioOrder = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); // Shahi Chime
 
     const IMGBB_KEY = '86566089ecf91f3b063625bccc076b1f';
     let uid, products = {}, files = [], existingUrls = [];
@@ -851,6 +852,45 @@
             // Update Analytics Chart
             updateChart(orders);
         });
+
+        // SIMPLE ORDER NOTIFICATION LISTENER (Zero Limits, No Keys Needed)
+        let isInitialLoad = true;
+        const ordersRef = ref(db, `orders/${user.uid}`);
+        onChildAdded(ordersRef, (snapshot) => {
+            if (!isInitialLoad) {
+                const order = snapshot.val();
+                notifySardaar(order);
+            }
+        });
+        // Set initialLoad to false after first read
+        get(ordersRef).then(() => { isInitialLoad = false; });
+    }
+
+    function notifySardaar(order) {
+        // 1. Play Sound
+        audioOrder.play().catch(e => console.log("Audio play blocked until interaction"));
+
+        // 2. Browser Notification
+        if (Notification.permission === "granted") {
+            new Notification("👑 Naya Order Aa Gaya!", {
+                body: `Sultan! Aapko ${order.customerName} se Rs.${order.productPrice} ka order mila hai.`,
+                icon: 'favicon.png'
+            });
+        }
+        
+        // 3. UI Alert
+        const alertBox = document.createElement('div');
+        alertBox.style = "position:fixed; bottom:20px; right:20px; background:var(--bg-surface); border:1px solid var(--royal-gold); padding:20px; border-radius:12px; z-index:10001; box-shadow:var(--shadow-gold); animation: slideIn 0.5s ease-out;";
+        alertBox.innerHTML = `<div style="display:flex; align-items:center; gap:12px;">
+            <div style="font-size:24px;">👑</div>
+            <div>
+                <div style="font-weight:900; color:var(--royal-gold);">NAYA ORDER!</div>
+                <div style="font-size:12px; color:var(--text-light);">${order.productName} - Rs.${order.productPrice}</div>
+            </div>
+            <button onclick="this.parentElement.parentElement.remove()" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:20px;">×</button>
+        </div>`;
+        document.body.appendChild(alertBox);
+        setTimeout(() => alertBox.remove(), 10000);
     }
 
     // ===== ANALYTICS LOGIC =====
@@ -963,20 +1003,7 @@
                 // Register Service Worker if not registered
                 if ('serviceWorker' in navigator) {
                     const registration = await navigator.serviceWorker.register('sw-master.js');
-                    const token = await getToken(messaging, { 
-                        serviceWorkerRegistration: registration,
-                        vapidKey: 'BM-YOUR-VAPID-KEY-HERE' // USER: Please replace with your actual VAPID key from Firebase Console
-                    }).catch(e => {
-                        console.warn("Token fetch failed (VAPID might be missing):", e);
-                        return null;
-                    });
-
-                    if (token) {
-                        await update(ref(db, `users/sardaars/${uid}`), { fcmToken: token });
-                        alert("👑 Shahi Notifications Activated! You will receive alerts for new orders.");
-                    } else {
-                        alert("Permission granted! (VAPID key required for full activation in production).");
-                    }
+                    // FCM is now optional for background, simple listener handles foreground
                     updateNotifUI('ON');
                 }
             } else {
