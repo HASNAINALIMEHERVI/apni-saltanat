@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahi Ledger | Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --shahi-blue: #2196f3; --shahi-gold: #ffcc00; --danger: #ff4444; --success: #00ff88; --card-bg: #1a1a1e; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0c; color: white; margin: 0; padding: 20px; }
+        .ledger-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #222; padding-bottom: 20px; margin-bottom: 30px; }
+        .controls { display: flex; gap: 15px; align-items: center; }
+        
+        /* Search & Bulk Styling */
+        .search-container { display: flex; gap: 15px; margin-bottom: 25px; align-items: center; }
+        #searchInput { flex: 1; background: var(--card-bg); border: 1px solid #333; padding: 12px 20px; border-radius: 12px; color: white; outline: none; font-size: 14px; transition: 0.3s; }
+        #searchInput:focus { border-color: var(--shahi-blue); box-shadow: 0 0 10px rgba(33, 150, 243, 0.2); }
+        
+        .month-select { background: var(--card-bg); color: white; border: 1px solid #333; padding: 10px 15px; border-radius: 10px; outline: none; font-weight: 700; cursor: pointer; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: var(--card-bg); padding: 25px; border-radius: 20px; border: 1px solid #333; }
+        .stat-val { font-size: 32px; font-weight: 900; color: var(--success); font-family: 'Outfit'; }
+        .stat-label { font-size: 11px; color: #888; text-transform: uppercase; margin-top: 5px; }
+        .stat-gold { color: var(--shahi-gold); }
+
+        .ledger-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 20px; overflow: hidden; margin-bottom: 50px; }
+        th { text-align: left; padding: 20px; color: #555; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #333; }
+        td { padding: 20px; border-bottom: 1px solid #222; font-size: 14px; }
+        
+        .btn { border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 11px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-paid { background: rgba(0,255,136,0.1); color: var(--success); border: 1px solid var(--success); }
+        .btn-unpaid { background: rgba(255,68,68,0.1); color: var(--danger); border: 1px solid var(--danger); }
+        .btn-freeze { background: var(--shahi-gold); color: #000; padding: 12px 25px; font-size: 13px; }
+        .btn-bulk { background: var(--shahi-blue); color: white; display: none; }
+        .btn-frozen { background: #333; color: #888; cursor: not-allowed; }
+
+        tr.frozen { opacity: 0.6; }
+        .lock-icon { color: var(--shahi-gold); margin-right: 5px; }
+        .check-box { width: 18px; height: 18px; cursor: pointer; accent-color: var(--shahi-blue); }
+    </style>
+</head>
+<body>
+
+<div class="ledger-header">
+    <h2 style="font-family:'Outfit';">SHAHI LEDGER 👑</h2>
+    <div class="controls">
+        <select id="monthYear" class="month-select"></select>
+        <button id="freezeBtn" class="btn btn-freeze"><i class="fas fa-lock"></i> FREEZE RECORD</button>
+    </div>
+</div>
+
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Sardaar ka naam ya email search karein...">
+    <button id="bulkMarkBtn" class="btn btn-bulk"><i class="fas fa-check-double"></i> MARK SELECTED PAID</button>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card"><div class="stat-val" id="totalIncome">Rs. 0</div><div class="stat-label">Monthly Income</div></div>
+    <div class="stat-card"><div class="stat-val" id="paidCount">0</div><div class="stat-label">Paid Sardaars</div></div>
+    <div class="stat-card"><div class="stat-val stat-gold" id="totalSellers">0</div><div class="stat-label">Total Sardaars</div></div>
+</div>
+
+<table class="ledger-table">
+    <thead>
+        <tr>
+            <th width="40"><input type="checkbox" id="selectAll" class="check-box"></th>
+            <th>Sardaar Info</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th>Monthly Fee (Rs. 1000)</th>
+        </tr>
+    </thead>
+    <tbody id="sellerList">
+        <tr><td colspan="5" style="text-align:center">Record load ho raha hai...</td></tr>
+    </tbody>
+</table>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, onValue, set, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // 1. Firebase Initialize
+    const firebaseConfig = {
+        apiKey: "AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc",
+        authDomain: "apnisaltanat.com",
+        databaseURL: "https://apni-saltanat-default-rtdb.firebaseio.com",
+        projectId: "apni-saltanat",
+        storageBucket: "apni-saltanat.firebasestorage.app",
+        messagingSenderId: "691941073239",
+        appId: "1:691941073239:web:9e0b568eccc347a0c0de12"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
+    const SULTAN_UID = "qnWFjg3XNlO7jHDhz84bPJMikP72";
+
+    const monthSelect = document.getElementById('monthYear');
+    const freezeBtn = document.getElementById('freezeBtn');
+    const sellerList = document.getElementById('sellerList');
+    const searchInput = document.getElementById('searchInput');
+    const bulkMarkBtn = document.getElementById('bulkMarkBtn');
+    const selectAllCb = document.getElementById('selectAll');
+
+    let isFrozen = false;
+    let sellersData = {};
+    let paymentsData = {};
+
+    // 2. Auth Guard & Initialization
+    onAuthStateChanged(auth, (user) => {
+        if (user && user.uid === SULTAN_UID) {
+            console.log("Sultan verified. Opening the Treasury Ledger...");
+            setupMonthSelector();
+            loadData(); // Sultan verify hone ke baad data load karein
+        } else {
+            alert("Access Denied! You do not have permission to view the Treasury.");
+            window.location.href = "login.html";
+        }
+    });
+
+    function setupMonthSelector() {
+        const now = new Date();
+        for(let i=0; i<24; i++) {
+            const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+            const val = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2, '0')}`;
+            const label = d.toLocaleString('default', { month: 'long', year: 'numeric' });
+            monthSelect.innerHTML += `<option value="${val}">${label}</option>`;
+        }
+        monthSelect.onchange = loadData;
+        searchInput.oninput = () => renderTable();
+    }
+
+    function loadData() {
+        const period = monthSelect.value;
+        if(!period) return;
+
+        // Ledger Status Listener
+        onValue(ref(db, `shahi_ledger/${period}/status`), (snap) => {
+            isFrozen = snap.val() === 'frozen';
+            freezeBtn.innerHTML = isFrozen ? '<i class="fas fa-snowflake"></i> RECORD FROZEN' : '<i class="fas fa-lock"></i> FREEZE RECORD';
+            freezeBtn.className = isFrozen ? 'btn btn-frozen' : 'btn btn-freeze';
+            freezeBtn.disabled = isFrozen;
+            renderTable();
+        });
+
+        // Payments Listener
+        onValue(ref(db, `shahi_ledger/${period}/payments`), (snap) => {
+            paymentsData = snap.val() || {};
+            renderTable();
+        });
+
+        // Merchants Listener
+        onValue(ref(db, 'users/sardaars'), (snap) => {
+            sellersData = snap.val() || {};
+            renderTable();
+        });
+    }
+
+    function renderTable() {
+        const query = searchInput.value.toLowerCase();
+        let html = '';
+        let income = 0;
+        let paid = 0;
+        const sellersArr = Object.entries(sellersData);
+
+        sellersArr.forEach(([uid, s]) => {
+            const name = (s.userName || s.name || '').toLowerCase();
+            const email = (s.email || '').toLowerCase();
+            
+            if (!name.includes(query) && !email.includes(query)) return;
+
+            const hasPaid = paymentsData[uid] === true;
+            if(hasPaid) { income += 1000; paid++; }
+
+            html += `<tr class="${isFrozen?'frozen':''}">
+                <td>
+                    <input type="checkbox" class="row-check check-box" data-uid="${uid}" 
+                           ${hasPaid || isFrozen ? 'disabled' : ''} onchange="window.updateBulkBtn()">
+                </td>
+                <td>
+                    <b>${s.userName || s.name || 'Merchant'}</b>
+                    ${isFrozen ? '<i class="fas fa-lock lock-icon"></i>' : ''}
+                    <br><small style="color:#666">${s.email || 'No Email'}</small>
+                </td>
+                <td>${s.phone || 'N/A'}</td>
+                <td>${s.address || 'N/A'}</td>
+                <td>
+                    <button class="btn ${hasPaid?'btn-paid':'btn-unpaid'}" 
+                            onclick="window.markPaid('${uid}', ${hasPaid})" 
+                            ${isFrozen?'disabled':''}>
+                        <i class="fas ${hasPaid?'fa-check-circle':'fa-circle'}"></i>
+                        ${hasPaid ? 'PAID' : 'MARK PAID'}
+                    </button>
+                </td>
+            </tr>`;
+        });
+
+        sellerList.innerHTML = html || '<tr><td colspan="5" style="text-align:center">No merchants found in the registry.</td></tr>';
+        document.getElementById('totalIncome').innerText = `PKR ${income}`;
+        document.getElementById('paidCount').innerText = paid;
+        document.getElementById('totalSellers').innerText = sellersArr.length;
+        window.updateBulkBtn();
+    }
+
+    // Global Action Functions
+    window.markPaid = async (uid, currentStatus) => {
+        if(isFrozen) return;
+        const period = monthSelect.value;
+        const action = !currentStatus ? "Mark this merchant as PAID?" : "Revert this merchant to UNPAID?";
+        if(confirm(action)) {
+            await set(ref(db, `shahi_ledger/${period}/payments/${uid}`), !currentStatus);
+        }
+    };
+
+    window.updateBulkBtn = () => {
+        const selected = document.querySelectorAll('.row-check:checked').length;
+        bulkMarkBtn.style.display = selected > 0 ? 'flex' : 'none';
+        bulkMarkBtn.innerHTML = `<i class="fas fa-check-double"></i> MARK ${selected} AS PAID`;
+    };
+
+    selectAllCb.onclick = () => {
+        const checks = document.querySelectorAll('.row-check:not([disabled])');
+        checks.forEach(c => c.checked = selectAllCb.checked);
+        window.updateBulkBtn();
+    };
+
+    bulkMarkBtn.onclick = async () => {
+        const period = monthSelect.value;
+        const selected = document.querySelectorAll('.row-check:checked');
+        if(confirm(`Sultan, mark all ${selected.length} selected merchants as PAID?`)) {
+            const updates = {};
+            selected.forEach(cb => {
+                updates[`shahi_ledger/${period}/payments/${cb.dataset.uid}`] = true;
+            });
+            await update(ref(db), updates);
+            selectAllCb.checked = false;
+            alert("Treasury records updated!");
+        }
+    };
+
+    freezeBtn.onclick = async () => {
+        const period = monthSelect.value;
+        if(confirm("Sultan, are you sure you want to FREEZE this month's records? This action cannot be undone from the UI.")) {
+            await update(ref(db, `shahi_ledger/${period}`), { status: 'frozen' });
+        }
+    };
+
+</script>
+</body>
+</html>

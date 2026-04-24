@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Apni Saltanat — Online Shopping Tips & Guides for Pakistan</title>
+    <meta name="description" content="Read expert tips, guides, and articles about online shopping in Pakistan, how to start selling online, e-commerce trends, and more from Apni Saltanat's official blog.">
+    <meta name="keywords" content="online shopping tips Pakistan, how to sell online Pakistan, ecommerce Pakistan, Apni Saltanat blog">
+    <link rel="canonical" href="https://apnisaltanat.com/blog.html">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }</script>
+    <meta property="og:title" content="Apni Saltanat Blog — Online Shopping Tips & Guides">
+    <meta property="og:description" content="Expert guides on online shopping, selling, and e-commerce in Pakistan.">
+    <meta property="og:url" content="https://apnisaltanat.com/blog.html">
+    <meta property="og:type" content="website">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9236482420910781" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="royal.css">
+    <style>
+        /* Blog specific */
+        .blog-wrap { max-width:1200px; margin:0 auto; padding:0 20px 80px; display:grid; grid-template-columns:1fr 300px; gap:40px; margin-top:40px; }
+
+        /* Featured */
+        .featured-post { background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; cursor:pointer; transition:var(--transition); text-decoration:none; display:block; margin-bottom:24px; }
+        .featured-post:hover { border-color:var(--border-gold); transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+        .featured-img { height:260px; background:linear-gradient(135deg, #0a0800 0%, #1a1400 100%); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+        .featured-img::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 40% 60%, rgba(255,204,0,0.1) 0%, transparent 55%); }
+        .featured-img .big-icon { font-size:80px; color:rgba(255,204,0,0.12); z-index:2; position:relative; }
+        .featured-badge { position:absolute; top:20px; left:20px; background:var(--royal-gold); color:#131313; font-size:11px; font-weight:900; text-transform:uppercase; padding:6px 14px; border-radius:50px; letter-spacing:1px; z-index:3; display:flex; align-items:center; gap:6px; font-family:'Epilogue',sans-serif; }
+        .featured-body { padding:32px; }
+        .post-meta { display:flex; align-items:center; gap:14px; margin-bottom:14px; flex-wrap:wrap; }
+        .post-cat { background:rgba(255,204,0,0.1); color:var(--royal-gold); font-size:11px; font-weight:800; padding:4px 12px; border-radius:50px; text-transform:uppercase; border:1px solid rgba(255,204,0,0.25); }
+        .post-date { font-size:12px; color:var(--text-muted); display:flex; align-items:center; gap:5px; }
+        .post-read { font-size:12px; color:var(--text-muted); display:flex; align-items:center; gap:5px; }
+        .featured-body h2 { font-family:'Epilogue',sans-serif; font-size:24px; font-weight:900; color:var(--text-light); margin-bottom:10px; line-height:1.3; }
+        .featured-body p { font-size:14px; color:var(--text-muted); line-height:1.8; margin-bottom:18px; }
+        .read-more { color:var(--royal-gold); font-weight:700; font-size:13px; display:flex; align-items:center; gap:6px; }
+
+        /* Article Cards */
+        .articles-title { font-family:'Epilogue',sans-serif; font-size:18px; font-weight:900; color:var(--text-light); margin-bottom:18px; display:flex; align-items:center; gap:10px; }
+        .article-card { background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden; display:flex; margin-bottom:16px; cursor:pointer; transition:var(--transition); text-decoration:none; }
+        .article-card:hover { border-color:var(--border-gold); transform:translateY(-3px); box-shadow:0 12px 35px rgba(0,0,0,0.35); }
+        .article-img { width:130px; min-height:120px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:32px; }
+        .article-img.green { background:linear-gradient(135deg, #0d3b16, #2d8f3a); }
+        .article-img.purple { background:linear-gradient(135deg, #1e0d3b, #7b3ab3); }
+        .article-img.orange { background:linear-gradient(135deg, #3b1208, #c0420f); }
+        .article-img.teal { background:linear-gradient(135deg, #053b32, #1a8f7a); }
+        .article-body { padding:20px; flex:1; min-width:0; }
+        .article-body h4 { font-family:'Epilogue',sans-serif; font-size:15px; font-weight:800; color:var(--text-light); margin-bottom:6px; line-height:1.3; }
+        .article-body p { font-size:13px; color:var(--text-muted); line-height:1.6; margin-bottom:10px; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+        .article-footer { display:flex; justify-content:space-between; align-items:center; }
+        .article-footer span { font-size:11px; color:var(--text-dim); }
+        .article-footer .read-btn { background:rgba(255,204,0,0.1); color:var(--royal-gold); font-size:12px; font-weight:700; padding:5px 14px; border-radius:50px; border:1px solid rgba(255,204,0,0.2); }
+
+        /* Sidebar */
+        .sidebar { position:sticky; top:90px; height:fit-content; }
+        .sidebar-box { background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:24px; margin-bottom:20px; transition:var(--transition); }
+        .sidebar-box:hover { border-color:var(--border-gold); }
+        .sidebar-box h4 { font-family:'Epilogue',sans-serif; font-size:15px; font-weight:900; color:var(--text-light); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+        .popular-item { display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none; transition:0.2s; }
+        .popular-item:last-child { border:none; }
+        .popular-item:hover h5 { color:var(--royal-gold); }
+        .popular-num { font-family:'Epilogue',sans-serif; font-size:22px; font-weight:900; color:var(--bg-deep); min-width:30px; }
+        .popular-item h5 { font-size:13px; font-weight:700; color:var(--text-light); margin-bottom:4px; line-height:1.4; }
+        .popular-item span { font-size:12px; color:var(--text-muted); }
+        .tag-cloud { display:flex; flex-wrap:wrap; gap:8px; }
+        .tag { background:var(--bg-deep); color:var(--text-muted); font-size:12px; font-weight:600; padding:6px 14px; border-radius:50px; border:1px solid var(--border); cursor:pointer; transition:0.2s; text-decoration:none; }
+        .tag:hover { background:rgba(255,204,0,0.1); color:var(--royal-gold); border-color:var(--border-gold); }
+        .cta-sidebar { background:linear-gradient(135deg,#0a0800,#1a1200); border:1px solid var(--border-gold); border-radius:var(--radius-md); padding:28px; text-align:center; }
+        .cta-sidebar h4 { color:var(--royal-gold); font-family:'Epilogue',sans-serif; font-size:18px; margin-bottom:8px; }
+        .cta-sidebar p { color:var(--text-muted); font-size:13px; margin-bottom:18px; line-height:1.6; }
+
+        /* Cat filter bar */
+        .cat-bar { background:var(--bg-surface); border-bottom:1px solid var(--border); padding:14px 20px; overflow-x:auto; scrollbar-width:none; }
+        .cat-bar::-webkit-scrollbar { display:none; }
+        .cat-inner { max-width:1200px; margin:0 auto; display:flex; gap:10px; white-space:nowrap; }
+        .cat-chip { padding:8px 18px; border-radius:50px; font-size:12px; font-weight:700; cursor:pointer; transition:0.2s; border:1px solid var(--border); background:var(--bg-deep); color:var(--text-muted); text-decoration:none; display:inline-block; }
+        .cat-chip:hover,.cat-chip.active { background:rgba(255,204,0,0.1); color:var(--royal-gold); border-color:var(--border-gold); }
+
+        @media(max-width:900px) { .blog-wrap { grid-template-columns:1fr; } .sidebar { position:static; } }
+        @media(max-width:600px) { .article-card { flex-direction:column; } .article-img { width:100%; min-height:90px; } .featured-img { height:180px; } }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="royal-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">👑 APNI SALTANAT</a>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <a href="signup.html" class="btn-outline mobile-hide" style="padding:9px 20px; font-size:12px;">Sell Now</a>
+            <div onclick="toggleMenu()" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; cursor:pointer; color:var(--text-muted); font-size:18px; transition:var(--transition); margin-left:4px;" onmouseover="this.style.borderColor='var(--border-gold)';" onmouseout="this.style.borderColor='';">
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div style="background:linear-gradient(135deg,#0a0800 0%,#1a1200 100%); padding:80px var(--p-desktop) 60px; text-align:center; position:relative; overflow:hidden; border-bottom:1px solid var(--border-gold);">
+    <div style="position:absolute; inset:0; background:radial-gradient(ellipse at 30% 60%, rgba(255,204,0,0.08) 0%, transparent 55%), radial-gradient(ellipse at 70% 40%, rgba(255,204,0,0.05) 0%, transparent 45%); pointer-events:none;"></div>
+    <div style="position:relative; z-index:2; max-width:700px; margin:0 auto;">
+        <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,204,0,0.1); border:1px solid rgba(255,204,0,0.3); color:var(--royal-gold); padding:7px 18px; border-radius:50px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:20px;"><i class="fas fa-pen-nib"></i> Saltanat Blog</div>
+        <h1 style="font-family:'Epilogue',sans-serif; font-size:clamp(32px,6vw,58px); font-weight:900; color:var(--text-light); margin-bottom:16px; line-height:1.15;">Tips, Guides &<br><span style="color:var(--royal-gold);">Insights</span> for Pakistan</h1>
+        <p style="font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:28px;">Expert articles on online shopping, selling strategies, e-commerce trends — all for Pakistani buyers & sellers.</p>
+    </div>
+</div>
+
+<!-- CAT BAR -->
+<div class="cat-bar">
+    <div class="cat-inner" style="max-width:1300px; margin:0 auto; padding:0 var(--p-desktop);">
+        <a href="#" class="cat-chip active">All Articles</a>
+        <a href="#" class="cat-chip">Online Shopping</a>
+        <a href="#" class="cat-chip">Selling Tips</a>
+        <a href="#" class="cat-chip">E-Commerce Pakistan</a>
+        <a href="#" class="cat-chip">Buyer's Guide</a>
+        <a href="#" class="cat-chip">Marketplace Tips</a>
+    </div>
+</div>
+
+<!-- BLOG CONTENT -->
+<div class="blog-wrap" style="max-width:1300px; margin:40px auto 80px; padding:0 var(--p-desktop);">
+    <div class="blog-grid" style="display:grid; grid-template-columns:1fr 320px; gap:40px;">
+        <div class="main-content">
+            <!-- Featured -->
+            <a href="blog-online-shopping-tips.html" class="featured-post">
+                <div class="featured-img">
+                    <i class="fas fa-shopping-bag big-icon"></i>
+                    <span class="featured-badge"><i class="fas fa-fire"></i> Featured</span>
+                </div>
+                <div class="featured-body">
+                    <div class="post-meta">
+                        <span class="post-cat">Online Shopping</span>
+                        <span class="post-date"><i class="fas fa-calendar"></i> April 5, 2026</span>
+                        <span class="post-read"><i class="fas fa-clock"></i> 8 min read</span>
+                    </div>
+                    <h2>10 Smart Tips for Safe Online Shopping in Pakistan (2026 Guide)</h2>
+                    <p>Online shopping in Pakistan is growing rapidly, but many buyers still fall victim to scams and fake products. Here are 10 proven tips to help you shop safely, save money, and get exactly what you ordered — every time.</p>
+                    <span class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Latest Articles -->
+            <div class="articles-title"><i class="fas fa-newspaper" style="color:var(--royal-gold);"></i> Latest Articles</div>
+
+            <a href="blog-how-to-sell-online-pakistan.html" class="article-card">
+                <div class="article-img green">🛒</div>
+                <div class="article-body">
+                    <span class="post-cat" style="display:inline-block; margin-bottom:8px; background:rgba(45,143,58,0.15); color:#4caf50; border-color:rgba(45,143,58,0.3);">Selling Tips</span>
+                    <h4>How to Start Selling Online in Pakistan — Complete Beginner's Guide</h4>
+                    <p>Want to start your own online business? Here's everything you need to know — from product selection to reaching your first customer.</p>
+                    <div class="article-footer"><span><i class="fas fa-calendar"></i> April 4, 2026 · <i class="fas fa-clock"></i> 10 min</span><span class="read-btn">Read →</span></div>
+                </div>
+            </a>
+
+            <a href="blog-ecommerce-growth-pakistan.html" class="article-card">
+                <div class="article-img purple">📈</div>
+                <div class="article-body">
+                    <span class="post-cat" style="display:inline-block; margin-bottom:8px; background:rgba(123,58,179,0.15); color:#9c27b0; border-color:rgba(123,58,179,0.3);">E-Commerce Pakistan</span>
+                    <h4>Pakistan's E-Commerce Boom: Why 2026 Is the Best Time to Shop & Sell Online</h4>
+                    <p>Pakistan's digital marketplace is growing at record speed. We break down the numbers, the opportunities, and what it means for you.</p>
+                    <div class="article-footer"><span><i class="fas fa-calendar"></i> April 3, 2026 · <i class="fas fa-clock"></i> 7 min</span><span class="read-btn">Read →</span></div>
+                </div>
+            </a>
+
+            <a href="blog-how-to-spot-fake-products.html" class="article-card">
+                <div class="article-img orange">🔍</div>
+                <div class="article-body">
+                    <span class="post-cat" style="display:inline-block; margin-bottom:8px; background:rgba(192,66,15,0.15); color:#ff7043; border-color:rgba(192,66,15,0.3);">Buyer's Guide</span>
+                    <h4>How to Spot Fake & Counterfeit Products When Shopping Online in Pakistan</h4>
+                    <p>Counterfeit products cost Pakistani consumers billions every year. Learn the warning signs and protect yourself before clicking "Buy."</p>
+                    <div class="article-footer"><span><i class="fas fa-calendar"></i> April 2, 2026 · <i class="fas fa-clock"></i> 6 min</span><span class="read-btn">Read →</span></div>
+                </div>
+            </a>
+
+            <a href="blog-best-products-sell-online-pakistan.html" class="article-card">
+                <div class="article-img teal">💡</div>
+                <div class="article-body">
+                    <span class="post-cat" style="display:inline-block; margin-bottom:8px; background:rgba(26,143,122,0.15); color:#26a69a; border-color:rgba(26,143,122,0.3);">Marketplace Tips</span>
+                    <h4>Top 15 Best-Selling Product Categories for Online Sellers in Pakistan (2026)</h4>
+                    <p>We analyzed real marketplace data to bring you the 15 hottest product categories with the highest demand and profit margins.</p>
+                    <div class="article-footer"><span><i class="fas fa-calendar"></i> April 1, 2026 · <i class="fas fa-clock"></i> 9 min</span><span class="read-btn">Read →</span></div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h4><i class="fas fa-fire" style="color:var(--royal-gold);"></i> Popular Posts</h4>
+                <a href="blog-online-shopping-tips.html" class="popular-item"><span class="popular-num">01</span><div><h5>10 Smart Tips for Safe Online Shopping in Pakistan</h5><span><i class="fas fa-clock"></i> 8 min read</span></div></a>
+                <a href="blog-how-to-sell-online-pakistan.html" class="popular-item"><span class="popular-num">02</span><div><h5>How to Start Selling Online in Pakistan</h5><span><i class="fas fa-clock"></i> 10 min read</span></div></a>
+                <a href="blog-ecommerce-growth-pakistan.html" class="popular-item"><span class="popular-num">03</span><div><h5>Pakistan's E-Commerce Boom 2026</h5><span><i class="fas fa-clock"></i> 7 min read</span></div></a>
+            </div>
+            <div class="sidebar-box">
+                <h4><i class="fas fa-tags" style="color:var(--royal-gold);"></i> Topics</h4>
+                <div class="tag-cloud">
+                    <a href="#" class="tag">Online Shopping</a><a href="#" class="tag">Pakistan</a><a href="#" class="tag">Selling Tips</a><a href="#" class="tag">E-Commerce</a><a href="#" class="tag">Buyer Guide</a><a href="#" class="tag">Marketplace</a><a href="#" class="tag">JazzCash</a><a href="#" class="tag">EasyPaisa</a><a href="#" class="tag">Safe Shopping</a><a href="#" class="tag">Digital Pakistan</a>
+                </div>
+            </div>
+            <div class="cta-sidebar">
+                <h4>👑 Become a Sardaar</h4>
+                <p>Start selling your products to thousands of buyers across Pakistan today!</p>
+                <a href="signup.html" class="btn-gold" style="display:block; text-align:center; padding:12px; text-decoration:none; border-radius:12px; font-weight:900; background:var(--royal-gold); color:#131313;"><i class="fas fa-crown"></i> Join Apni Saltanat</a>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<footer class="royal-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">👑 APNI SALTANAT</div>
+                <p class="footer-desc">Pakistan's Royal Marketplace. High-quality products and trusted sellers. Har Soda Aik Ahad.</p>
+                <div class="social-row" style="margin-top:20px;">
+                    <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/923011786494" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Marketplace</div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Shahi Bazaar</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="seller-dashboard.html">Sardaar Dashboard</a></li>
+                    <li><a href="signup.html">Become a Sardaar</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Imperial Hub</div>
+                <ul class="footer-links">
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="blog.html">Saltanat Blog</a></li>
+                    <li><a href="instructions.html">Shahi Paigam</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Legal</div>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="disclaimer.html">Shahi Disclaimer</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="refund-policy.html">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+            <span>Har Soda Aik Ahad 👑</span>
+        </div>
+    </div>
+</footer>
+
+<style>
+    @media(max-width:900px) {
+        .blog-grid { grid-template-columns:1fr !important; }
+        .sidebar { margin-top:40px; }
+    }
+    @media(max-width:768px) {
+        .blog-wrap, .cat-inner { padding:0 var(--p-mobile) !important; }
+        .hero-title { font-size: 32px !important; }
+        footer .footer-grid { grid-template-columns: 1fr !important; gap: 40px; text-align: center; }
+        footer .social-row { justify-content: center; }
+        footer .footer-copy { flex-direction: column; gap: 10px; text-align: center; }
+    }
+</style>
+
+<div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
+    <div class="menu-inner" onclick="event.stopPropagation()">
+        <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Shahi Bazaar</a>
+        <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Sardaar Dashboard</a>
+        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Sardaar</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Shahi Categories</a>
+
+        <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
+        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Shahi Paigam</a>
+        <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
+        <a href="blog.html" class="menu-item active"><i class="fas fa-feather-alt"></i> Saltanat Blog</a>
+        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
+
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
+            <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
+        </div>
+        <div style="padding-top:10px;">
+            <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
+            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Sardaar</a>
+        </div>
+    </div>
+</div>
+
+<div id="cookie-consent" style="position:fixed; bottom:24px; left:24px; background:var(--bg-surface); border:1px solid var(--border-gold); padding:24px; border-radius:var(--radius-lg); box-shadow:0 30px 60px rgba(0,0,0,0.8); z-index:10000; width:min(380px, calc(100vw - 48px)); display:none; border-left:4px solid var(--royal-gold);">
+    <div style="font-family:'Epilogue',sans-serif; font-size:15px; font-weight:900; color:var(--royal-gold); margin-bottom:10px; display:flex; align-items:center; gap:10px;"><i class="fas fa-shield-halved"></i> Shahi Privacy Notice</div>
+    <p style="font-size:12px; color:var(--text-muted); line-height:1.7; margin-bottom:18px;">Apni Saltanat uses cookies to deliver a premium experience and to show relevant ads through Google AdSense. By continuing, you agree to our royal manifesto.</p>
+    <div style="display:flex; gap:12px;">
+        <button onclick="acceptCookies()" class="btn-gold" style="flex:1; height:44px; font-size:12px; font-weight:900; cursor:pointer;">I ACCEPT</button>
+        <a href="privacy-policy.html" class="btn-outline" style="flex:1; height:44px; font-size:11px; text-decoration:none; display:flex; align-items:center; justify-content:center; text-align:center;">READ POLICY</a>
+    </div>
+</div>
+
+<script>
+    function acceptCookies() { localStorage.setItem('saltanat_cookies', 'true'); document.getElementById('cookie-consent').style.display='none'; }
+    window.addEventListener('load', () => { setTimeout(() => { if(!localStorage.getItem('saltanat_cookies')) document.getElementById('cookie-consent').style.display='block'; }, 2000); });
+    window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
+</script>
+
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, u => {
+        const loginLink = document.getElementById('menuLogin');
+        const authWrapper = document.getElementById('authWrapper');
+        if(u) {
+            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Sardaar Profile`;
+            loginLink.href = 'seller-dashboard.html';
+            if (!document.getElementById('logoutLink')) {
+                const logout = document.createElement('a');
+                logout.id = 'logoutLink';
+                logout.href = '#';
+                logout.className = 'menu-item';
+                logout.style.color = '#ff4d4d';
+                logout.style.marginTop = '12px';
+                logout.innerHTML = `<i class="fas fa-sign-out-alt"></i> Exit Saltanat`;
+                logout.onclick = (e) => { 
+                    e.preventDefault(); 
+                    if (confirm("Are you sure you want to Exit Saltanat? (Sadaq-e-Sultan)")) {
+                        signOut(auth).then(() => { localStorage.clear(); window.location.reload(); });
+                    }
+                };
+                authWrapper.appendChild(logout);
+            }
+        } else {
+            loginLink.innerHTML = `<i class="fas fa-sign-in-alt"></i> Join/Login`;
+            loginLink.href = 'login.html';
+            if (document.getElementById('logoutLink')) document.getElementById('logoutLink').remove();
+        }
+    });
+</script>
+</body>
+</html>

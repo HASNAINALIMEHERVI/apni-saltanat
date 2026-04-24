@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sardaar Directory | Apni Saltanat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --deep-matte: #0a0a0c;
+            --shahi-green: #00ff88;
+            --royal-gold: #ffcc00;
+            --card-bg: #141417;
+            --text-silver: #e0e0e0;
+        }
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--deep-matte); color: var(--text-silver); margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 40px; border-bottom: 2px solid var(--shahi-green); padding-bottom: 10px; }
+        
+        /* Search Box Styling */
+        .search-box-container { max-width: 600px; margin: 0 auto 40px; position: relative; }
+        .shahi-search {
+            width: 100%; padding: 15px 25px 15px 55px; border-radius: 30px;
+            border: 2px solid rgba(0, 255, 136, 0.2); background: #1a1a1e;
+            color: white; font-size: 16px; outline: none; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .shahi-search:focus { border-color: var(--shahi-green); box-shadow: 0 0 20px rgba(0, 255, 136, 0.2); }
+        .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--shahi-green); font-size: 20px; }
+
+        /* Grid & Cards */
+        #sardaars-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
+        .sardaar-card {
+            background: var(--card-bg); border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 15px; padding: 25px; position: relative; transition: 0.3s; overflow: hidden;
+        }
+        .sardaar-card:hover { transform: translateY(-5px); border-color: var(--royal-gold); }
+        .sardaar-card::before {
+            content: "\f521"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+            position: absolute; right: -10px; top: -10px; font-size: 80px; color: rgba(255, 204, 0, 0.05);
+        }
+
+        .shahi-label { color: var(--royal-gold); font-size: 11px; text-transform: uppercase; font-weight: 800; }
+        .shahi-value { color: white; font-size: 16px; margin-bottom: 15px; font-family: 'Inter', sans-serif; word-break: break-all; }
+        .detail-row { margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 10px; background: var(--shahi-green); color: black; font-weight: bold; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1 style="color: var(--royal-gold); letter-spacing: 5px; margin-bottom: 5px;">SALTANAT KE SARDAAR</h1>
+        <p style="color: var(--shahi-green); margin: 0;">Talaash karein Naam, Role ya ID se</p>
+    </div>
+
+    <div class="search-box-container">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="searchInput" class="shahi-search" placeholder="Sardaar ka koi b record talaash karein..." oninput="searchSardaars()">
+    </div>
+
+    <div id="sardaars-grid">
+        <h2 style="grid-column: 1/-1; text-align: center; color: #333; padding: 50px;">Darbari Records Load Ho Rahe Hain...</h2>
+    </div>
+</div>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // 1. Firebase Initialize
+    const firebaseConfig1 = {
+        apiKey: "AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc",
+        authDomain: "apnisaltanat.com",
+        databaseURL: "https://apni-saltanat-default-rtdb.firebaseio.com",
+        projectId: "apni-saltanat",
+        storageBucket: "apni-saltanat.firebasestorage.app",
+        messagingSenderId: "691941073239",
+        appId: "1:691941073239:web:9e0b568eccc347a0c0de12"
+    };
+
+    const app1 = initializeApp(firebaseConfig1);
+    const db1 = getDatabase(app1);
+    const auth = getAuth(app1);
+    const SULTAN_UID = "qnWFjg3XNlO7jHDhz84bPJMikP72";
+
+    let allSardaars = [];
+    let productCounts = {};
+
+    // 2. Auth Guard & sultan Verification
+    onAuthStateChanged(auth, (user) => {
+        const grid = document.getElementById('sardaars-grid');
+        if (user && user.uid === SULTAN_UID) {
+            console.log("Sultan Verified: Accessing Merchant Registry...");
+            loadSardaars(); // Verification ke baad data mangwaein
+        } else {
+            alert("Access Denied! Only the Sultan may view the Merchant Directory.");
+            window.location.href = "login.html";
+        }
+    });
+
+    // 3. Load Data Function
+    function loadSardaars() {
+        onValue(ref(db1, 'users/sardaars'), (snapshot) => {
+            allSardaars = [];
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                Object.keys(data).forEach(id => { 
+                    allSardaars.push({ id, ...data[id], source: 'Imperial Database' }); 
+                });
+            }
+            renderSardaars(allSardaars);
+        }, (err) => {
+            console.error('Read error:', err);
+            document.getElementById('sardaars-grid').innerHTML = 
+                "<h2 style='grid-column:1/-1; text-align:center; color:#ff4444;'>Failed to sync registry. Please check permissions.</h2>";
+        });
+
+        onValue(ref(db1, 'products'), (s) => {
+            const counts = {};
+            if(s.exists()){
+                s.forEach(child => { counts[child.key] = child.numChildren(); });
+            }
+            productCounts = counts;
+            renderSardaars(allSardaars);
+        });
+    }
+
+    // 4. Render Function (English UI)
+    window.renderSardaars = (list) => {
+        const grid = document.getElementById('sardaars-grid');
+        if (list.length === 0) {
+            grid.innerHTML = "<h2 style='grid-column:1/-1; text-align:center; color:#555;'>No merchant records found.</h2>";
+            return;
+        }
+
+        grid.innerHTML = list.map(sardaar => {
+            let detailsHtml = "";
+            const fieldLabels = {
+                name: 'Full Name',
+                userName: 'Username',
+                email: 'Email Address',
+                phone: 'Contact Number',
+                bankAccount: 'Bank Details',
+                storeName: 'Official Store',
+                category: 'Trade Category',
+                address: 'Physical Address',
+                cnic: 'Identity Number'
+            };
+
+            Object.keys(fieldLabels).forEach(key => {
+                if (sardaar[key]) {
+                    detailsHtml += `
+                        <div class="detail-row">
+                            <div class="shahi-label">${fieldLabels[key]}</div>
+                            <div class="shahi-value">${sardaar[key]}</div>
+                        </div>`;
+                }
+            });
+
+            const pCount = productCounts[sardaar.id] || 0;
+            const currentStatus = sardaar.status || 'active';
+            let statusColor = '#00ff88';
+            if (currentStatus === 'blocked') statusColor = '#ff4444';
+            if (currentStatus === 'unpaid') statusColor = '#ffcc00';
+
+            return `
+                <div class="sardaar-card">
+                    <span class="status-badge" style="background:${statusColor}">SARDAAR</span>
+                    <span class="status-badge" style="background:#555; color:white; margin-left:5px;">${pCount} ITEMS</span>
+                    <small style="color:var(--shahi-green); float:right; font-size:10px;">Registry: ${sardaar.source}</small>
+                    
+                    <div style="margin: 15px 0;">
+                        <select onchange="window.toggleStatus('${sardaar.id}', this.value)" style="width:100%; padding: 12px; border-radius: 8px; font-weight: 800; background: #1a1a1e; border: 1px solid ${statusColor}; color: ${statusColor}; outline: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size:12px;">
+                            <option value="active" ${currentStatus === 'active' ? 'selected' : ''}>✅ PAID / ACTIVE</option>
+                            <option value="blocked" ${currentStatus === 'blocked' ? 'selected' : ''}>🛑 BLOCKED</option>
+                            <option value="unpaid" ${currentStatus === 'unpaid' ? 'selected' : ''}>⚠️ UNPAID</option>
+                        </select>
+                    </div>
+
+                    ${detailsHtml}
+                    <div class="shahi-label" style="font-size: 9px; opacity: 0.3; margin-top:10px;">System ID: ${sardaar.id}</div>
+                </div>`;
+        }).join('');
+    };
+
+    window.toggleStatus = async (uid, newStatus) => {
+        if(confirm(`Update Sardaar status to ${newStatus.toUpperCase()}?`)) {
+            await update(ref(db1, `users/sardaars/${uid}`), { status: newStatus });
+            alert("Record Updated!");
+        }
+    };
+
+    // 5. Search Logic
+    window.searchSardaars = () => {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allSardaars.filter(s => 
+            Object.values(s).some(val => String(val).toLowerCase().includes(query))
+        );
+        renderSardaars(filtered);
+    };
+</script>
+</body>
+</html>

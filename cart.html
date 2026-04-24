@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart | Apni Saltanat</title>
+    <meta name="description" content="Review your cart items and place your order from Apni Saltanat marketplace.">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }</script>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="royal.css">
+    <style>
+        .cart-nav { display:flex; align-items:center; justify-content:space-between; padding:18px 40px; border-bottom:1px solid var(--border); }
+        .cart-nav .nav-logo { font-family:'Epilogue',sans-serif; font-size:20px; font-weight:900; color:var(--royal-gold); text-decoration:none; letter-spacing:2px; }
+
+        .cart-wrap { max-width:800px; margin:40px auto; padding:0 20px 80px; }
+        .cart-page-title { font-family:'Epilogue',sans-serif; font-size:32px; font-weight:900; color:var(--text-light); margin-bottom:8px; }
+        .cart-sub { font-size:13px; color:var(--text-muted); margin-bottom:30px; }
+
+        /* Cart Item */
+        .cart-list { display:flex; flex-direction:column; gap:12px; }
+        .cart-item { background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px 20px; display:flex; align-items:center; gap:16px; transition:var(--transition); }
+        .cart-item:hover { border-color:var(--border-gold); }
+        .cart-item img { width:72px; height:72px; object-fit:contain; border-radius:var(--radius-sm); background:var(--bg-deep); border:1px solid var(--border); flex-shrink:0; }
+        .item-info { flex:1; }
+        .item-info h3 { font-size:15px; font-weight:800; color:var(--text-light); margin-bottom:4px; }
+        .item-info p { font-size:15px; font-weight:900; color:var(--royal-gold); font-family:'Epilogue',sans-serif; }
+        .remove-btn { color:#f44336; cursor:pointer; font-size:18px; padding:8px; transition:var(--transition); opacity:0.7; }
+        .remove-btn:hover { opacity:1; transform:scale(1.2); }
+
+        /* Empty State */
+        .cart-empty { text-align:center; padding:80px 0; }
+        .cart-empty i { font-size:60px; color:var(--text-dim); margin-bottom:20px; display:block; }
+        .cart-empty h3 { font-family:'Epilogue',sans-serif; font-size:22px; font-weight:900; color:var(--text-light); margin-bottom:8px; }
+        .cart-empty p { color:var(--text-muted); margin-bottom:24px; }
+
+        /* Summary */
+        .cart-summary { background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:28px; margin-top:24px; }
+        .summary-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:14px; font-weight:700; color:var(--text-muted); }
+        .total-row { font-family:'Epilogue',sans-serif; font-size:22px; font-weight:900; color:var(--royal-gold); border-top:1px solid var(--border); padding-top:16px; margin-top:8px; margin-bottom:0; }
+
+        /* Checkout Form */
+        .checkout-form { background:var(--bg-deep); border:1px solid var(--border); border-radius:var(--radius-md); padding:24px; margin-top:20px; display:none; flex-direction:column; gap:12px; }
+        .checkout-form h3 { font-family:'Epilogue',sans-serif; font-size:18px; font-weight:900; color:var(--royal-gold); margin-bottom:4px; }
+        .checkout-form p { font-size:12px; color:var(--text-muted); margin-bottom:4px; }
+        .c-input { padding:13px 18px; background:#111; border:1.5px solid var(--border); border-radius:var(--radius-md); color:var(--text-light); outline:none; font-family:'Manrope',sans-serif; font-size:14px; transition:var(--transition); }
+        .c-input:focus { border-color:var(--royal-gold); }
+        .c-input::placeholder { color:var(--text-dim); }
+
+        .checkout-cta { margin-top:8px; }
+
+        @media(max-width:600px) {
+            .cart-nav { padding:16px 20px; }
+            .cart-wrap { padding:0 16px 60px; }
+            .cart-item { flex-direction:row; }
+            .cart-item img { width:60px; height:60px; }
+            .cart-page-title { font-size:24px; }
+        }
+    </style>
+    <style>
+        /* Auth Loader */
+        #shahi-auth-loader { position:fixed; inset:0; background:#080808; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:0.5s; }
+        .loader-content { text-align:center; animation:pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.7; transform:scale(0.95); } }
+    </style>
+</head>
+<body style="overflow: hidden;">
+
+<!-- SHAHI AUTH LOADER -->
+<div id="shahi-auth-loader">
+    <div class="loader-content">
+        <div style="font-size:50px; margin-bottom:20px; filter:drop-shadow(0 0 15px var(--royal-gold));">👑</div>
+        <div class="royal-spinner" style="width:40px; height:40px; border-width:3px; margin:0 auto;"></div>
+        <p style="color:var(--royal-gold); margin-top:24px; font-family:'Epilogue',sans-serif; font-weight:900; letter-spacing:4px; font-size:11px; text-transform:uppercase;">Apni Saltanat</p>
+    </div>
+</div>
+
+<nav class="royal-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">👑 APNI SALTANAT</a>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <a href="index.html" class="btn-outline" style="padding:9px 20px; font-size:12px; text-decoration:none; display:flex; align-items:center; gap:8px;"><i class="fas fa-arrow-left"></i> <span class="mobile-hide">Keep Shopping</span></a>
+            <div onclick="toggleMenu()" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; cursor:pointer; color:var(--text-muted); font-size:18px; transition:var(--transition);" onmouseover="this.style.borderColor='var(--border-gold)';" onmouseout="this.style.borderColor='';">
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+<div class="cart-wrap">
+    <h1 class="cart-page-title">🛒 My Cart</h1>
+    <p class="cart-sub">Review your items and proceed to checkout</p>
+
+    <div id="cartList" class="cart-list"></div>
+
+    <div id="cartEmpty" class="cart-empty" style="display:none;">
+        <i class="fas fa-shopping-basket"></i>
+        <h3>Your cart is empty</h3>
+        <p>Browse the Shahi Bazaar and add items you love</p>
+        <a href="index.html" class="btn-gold"><i class="fas fa-store"></i> Explore Bazaar</a>
+    </div>
+
+    <div id="cartSummary" class="cart-summary" style="display:none;">
+        <div class="summary-row"><span>Subtotal</span><span id="subtotal">Rs. 0</span></div>
+        <div class="summary-row"><span>Shipping</span><span style="color:var(--text-light);">Calculated at Checkout</span></div>
+        <div class="summary-row total-row"><span>Total</span><span id="total">Rs. 0</span></div>
+
+        <div id="checkoutForm" class="checkout-form">
+            <h3>📋 Delivery Details</h3>
+            <p>Apna delivery address fill karein</p>
+            <input type="text" id="custName" class="c-input" placeholder="Full Name *" required>
+            <input type="text" id="custAddress" class="c-input" placeholder="Complete Delivery Address *" required>
+            <input type="tel" id="custPhone" class="c-input" placeholder="Contact Number *" required>
+            <input type="text" id="custPostal" class="c-input" placeholder="Postal Code (optional)">
+            <input type="email" id="custEmail" class="c-input" placeholder="Email Address (optional)">
+        </div>
+
+        <div class="checkout-cta" style="margin-top:20px;">
+            <button id="checkoutBtn" class="btn-gold" style="width:100%; height:52px; font-size:14px; font-weight:900;"><i class="fas fa-crown"></i> Order Now</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
+    <div class="menu-inner" onclick="event.stopPropagation()">
+        <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Shahi Bazaar</a>
+        <a href="cart.html" class="menu-item" style="color:var(--royal-gold); background:rgba(255,204,0,0.05); border-radius:12px; padding:12px 16px; margin:0 -8px;"><i class="fas fa-shopping-basket"></i> View My Cart</a>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Sardaar Dashboard</a>
+        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Sardaar</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Shahi Categories</a>
+
+        <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
+        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Shahi Paigam</a>
+        <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
+        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Saltanat Blog</a>
+        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
+
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
+            <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
+        </div>
+        <div style="padding-top:10px;">
+            <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
+            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Sardaar</a>
+        </div>
+    </div>
+</div>
+
+<footer class="royal-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">👑 APNI SALTANAT</div>
+                <p class="footer-desc">Pakistan's Royal Marketplace. High-quality products and trusted sellers. Har Soda Aik Ahad.</p>
+                <div class="social-row" style="margin-top:20px;">
+                    <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/923011786494" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Marketplace</div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Shahi Bazaar</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="seller-dashboard.html">Sardaar Dashboard</a></li>
+                    <li><a href="signup.html">Become a Sardaar</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Imperial Hub</div>
+                <ul class="footer-links">
+                    <li><a href="faq.html">Help Center</a></li>
+                    <li><a href="instructions.html">Shahi Paigam</a></li>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="blog.html">Saltanat Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Legal</div>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="refund-policy.html">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+            <span>Har Soda Aik Ahad 👑</span>
+        </div>
+    </div>
+</footer>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
+
+    let cart = JSON.parse(localStorage.getItem('saltanatCart')) || [];
+    let currentUser = null;
+    let isFormVisible = false;
+
+    onAuthStateChanged(auth, u => {
+        const loginLink = document.getElementById('menuLogin');
+        const authWrapper = document.getElementById('authWrapper');
+        const loader = document.getElementById('shahi-auth-loader');
+
+        if(u) {
+            currentUser = u;
+            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Sardaar Profile`;
+            loginLink.href = 'seller-dashboard.html';
+            
+            if (!document.getElementById('logoutLink')) {
+                const logout = document.createElement('a');
+                logout.id = 'logoutLink';
+                logout.href = '#';
+                logout.className = 'menu-item';
+                logout.style.color = '#ff4d4d';
+                logout.style.marginTop = '12px';
+                logout.innerHTML = `<i class="fas fa-sign-out-alt"></i> Exit Saltanat`;
+                logout.onclick = (e) => { 
+                    e.preventDefault(); 
+                    if (confirm("Are you sure you want to Exit Saltanat? (Sadaq-e-Sultan)")) {
+                        signOut(auth).then(() => { 
+                           localStorage.clear(); 
+                           window.location.reload(); 
+                        });
+                    }
+                };
+                authWrapper.appendChild(logout);
+            }
+
+            // Remove loader
+            if(loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => { 
+                    loader.style.display = 'none'; 
+                    document.body.style.overflow = 'auto';
+                }, 500);
+            }
+        } else {
+            // Redirect to login if not authenticated
+            window.location.href = 'login.html';
+        }
+    });
+
+    window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
+
+    window.renderCart = function() {
+        const list = document.getElementById('cartList');
+        const summary = document.getElementById('cartSummary');
+        const empty = document.getElementById('cartEmpty');
+        if (cart.length === 0) { list.innerHTML = ''; summary.style.display = 'none'; empty.style.display = 'block'; return; }
+        empty.style.display = 'none'; summary.style.display = 'block';
+        let total = 0;
+        list.innerHTML = cart.map((item, index) => {
+            total += parseInt(item.price);
+            return `
+                <div class="cart-item">
+                    <img src="${item.img}" alt="${item.name}">
+                    <div class="item-info"><h3>${item.name}</h3><p>Rs. ${item.price}</p></div>
+                    <i class="fas fa-trash-alt remove-btn" onclick="removeItem(${index})" title="Remove"></i>
+                </div>
+            `;
+        }).join('');
+        document.getElementById('subtotal').innerText = `Rs. ${total}`;
+        document.getElementById('total').innerText = `Rs. ${total}`;
+    };
+
+    window.removeItem = (index) => { cart.splice(index, 1); localStorage.setItem('saltanatCart', JSON.stringify(cart)); window.renderCart(); };
+
+    document.getElementById('checkoutBtn').onclick = async () => {
+        if (!currentUser) { alert("Please login first to place orders."); window.location.href = "login.html"; return; }
+        const btn = document.getElementById('checkoutBtn');
+        if (!isFormVisible) {
+            document.getElementById('checkoutForm').style.display = 'flex';
+            btn.innerHTML = '<i class="fas fa-crown"></i> Place All Orders Now';
+            isFormVisible = true; return;
+        }
+        const name = document.getElementById('custName').value.trim();
+        const address = document.getElementById('custAddress').value.trim();
+        const phone = document.getElementById('custPhone').value.trim();
+        const postal = document.getElementById('custPostal').value.trim() || "N/A";
+        const email = document.getElementById('custEmail').value.trim() || "N/A";
+        if (!name || !address || !phone) { alert("Please fill all required delivery details!"); return; }
+        btn.disabled = true; btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Placing Orders...';
+        try {
+            for (const item of cart) {
+                const sID = item.sellerId || item.seller;
+                if (!sID) { console.warn("Missing seller ID:", item); continue; }
+                const orderData = { productName:item.name, productPrice:item.price, productId:item.id, customerName:name, customerAddress:address, customerPhone:phone, customerPostal:postal, customerEmail:email, sellerId:sID, timestamp:Date.now(), status:'new' };
+                await set(push(ref(db, `orders/${sID}`)), orderData);
+            }
+            alert("👑 Mubarak ho Sultan! Aapke sare orders place ho gaye. 3-5 working days mein delivery mil jaye gi.");
+            localStorage.removeItem('saltanatCart');
+            cart = [];
+            window.location.href = "index.html";
+        } catch (error) { console.error(error); alert("Order failed: " + error.message); btn.disabled = false; btn.innerHTML = '<i class="fas fa-crown"></i> Place All Orders Now'; }
+    };
+
+    window.renderCart();
+</script>
+</body>
+</html>

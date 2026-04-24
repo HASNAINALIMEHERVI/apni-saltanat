@@ -1,0 +1,44 @@
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+exports.sendOrderNotification = functions.database.ref('/orders/{sellerId}/{orderId}')
+    .onCreate(async (snapshot, context) => {
+        const orderData = snapshot.val();
+        const sellerId = context.params.sellerId;
+
+        // Get seller's FCM token
+        const sellerSnapshot = await admin.database().ref(`/users/sardaars/${sellerId}`).get();
+        if (!sellerSnapshot.exists()) return null;
+        
+        const sellerData = sellerSnapshot.val();
+        const token = sellerData.fcmToken;
+
+        if (!token) {
+            console.log('No FCM token for seller:', sellerId);
+            return null;
+        }
+
+        const payload = {
+            notification: {
+                title: '👑 Naya Order Aa Gaya Hai!',
+                body: `Sultan! Aapko ${orderData.customerName} se Rs. ${orderData.productPrice} ka order mila hai. Chalen Jaldi se dashboard check karein!`,
+                icon: 'https://apnisaltanat.com/favicon.png',
+                image: 'https://apnisaltanat.com/royal_order_banner.png',
+                badge: 'https://apnisaltanat.com/favicon.png'
+            },
+            data: {
+                click_action: 'https://apnisaltanat.com/seller-dashboard.html',
+                orderId: context.params.orderId,
+                type: 'NEW_ORDER',
+                image: 'https://apnisaltanat.com/royal_order_banner.png'
+            }
+        };
+
+        try {
+            await admin.messaging().sendToDevice(token, payload);
+            console.log('Successfully sent message to:', sellerId);
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
+    });

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apni Saltanat | Partners Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Inherit or redefine variables for clarity */
+            --primary: #4f46e5;
+            --text-white: #f8fafc;
+            --text-dim: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: #0a0b10;
+            color: var(--text-white);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .dashboard-wrapper {
+            max-width: 1300px;
+            width: 95%;
+            margin: 4rem auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            min-width: 900px; /* Force minimum width to prevent overlap */
+            border-collapse: collapse;
+        }
+        
+        th {
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 1.5rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        tr {
+            transition: background 0.2s ease;
+        }
+        
+        tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        td {
+            padding: 1.5rem 1rem;
+            color: var(--text-white);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            vertical-align: top;
+        }
+        
+        .remove-btn {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444 !important; /* Force color */
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+        
+        .remove-btn:hover {
+            background: #ef4444;
+            color: white !important;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--text-white);
+            transform: translateX(-4px);
+        }
+
+        .identity-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .bank-cell {
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Aurora Background -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="dashboard-wrapper">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="partners.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Registration Portal
+            </a>
+            <div id="entryCount" style="color: var(--text-dim); font-size: 0.9rem; font-weight: 500;">
+                Initializing...
+            </div>
+        </div>
+
+        <div class="header" style="margin-bottom: 2rem;">
+            <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -1px;">Partner Directory</h1>
+            <p style="color: var(--text-dim); font-size: 1.1rem;">Manage registrations and verify business credentials.</p>
+        </div>
+        
+        <div class="table-container">
+            <table id="partnersTable">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Partner Identity</th>
+                        <th style="width: 20%;">CNIC Number</th>
+                        <th style="width: 15%;">Region</th>
+                        <th style="width: 25%;">Operational Address</th>
+                        <th style="width: 15%; text-align: right;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data injection point -->
+                </tbody>
+            </table>
+            
+            <div id="emptyState" class="empty-state" style="display: none; text-align: center; padding: 4rem 2rem; color: var(--text-dim);">
+                <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">🗃️</div>
+                <p style="font-size: 1.1rem;">No partner applications found.</p>
+                <a href="partners.html" style="color: var(--primary); text-decoration: none; margin-top: 1rem; display: inline-block;">Start a new registration →</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadData() {
+            const partners = JSON.parse(localStorage.getItem('partnersData')) || [];
+            const tbody = document.getElementById('tableBody');
+            const emptyState = document.getElementById('emptyState');
+            const table = document.getElementById('partnersTable');
+            const countDisplay = document.getElementById('entryCount');
+
+            countDisplay.innerText = `${partners.length} applications total`;
+
+            if (partners.length === 0) {
+                emptyState.style.display = 'block';
+                table.style.display = 'none';
+            } else {
+                emptyState.style.display = 'none';
+                table.style.display = 'table';
+                
+                tbody.innerHTML = '';
+                partners.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>
+                            <div class="identity-cell">
+                                <span style="font-weight: 600; font-size: 1.1rem; color: var(--text-white);">${p.name}</span>
+                                <span style="font-size: 0.85rem; color: var(--primary); font-weight: 500;">${p.email}</span>
+                                <span style="font-size: 0.8rem; color: var(--text-dim);">${p.contact}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <code style="background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 6px; font-size: 0.9rem; color: var(--text-dim);">${p.cnic}</code>
+                        </td>
+                        <td>
+                            <span style="font-size: 0.95rem;">${p.district}</span>
+                        </td>
+                        <td>
+                            <div style="font-size: 0.9rem; line-height: 1.5; color: var(--text-dim); max-width: 280px;">${p.address}</div>
+                        </td>
+                        <td style="text-align: right;">
+                            <button class="remove-btn" onclick="deletePartner(${p.id})">
+                                Remove
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+        }
+
+        function deletePartner(id) {
+            if (confirm("Permanently deactivate this partner application? \nThis action cannot be undone.")) {
+                let partners = JSON.parse(localStorage.getItem('partnersData')) || [];
+                partners = partners.filter(p => p.id !== id);
+                localStorage.setItem('partnersData', JSON.stringify(partners));
+                loadData();
+            }
+        }
+
+        window.onload = loadData;
+    </script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Apni Saltanat</title>
+    <meta name="description" content="Manage your Apni Saltanat seller profile, update contact details, change password, and manage store banners.">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }</script>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="royal.css">
+    <style>
+        .profile-page { min-height: 100vh; display: flex; flex-direction: column; }
+        .hero-banner { background: linear-gradient(135deg, #0a0800 0%, #1a1200 100%); padding: 60px var(--p-desktop) 40px; text-align: center; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-gold); }
+        .hero-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(255,204,0,0.1) 0%, transparent 65%); }
+        .hero-content { position: relative; z-index: 2; }
+        .hero-eyebrow { font-size: 10px; font-weight: 800; color: var(--royal-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 8px; }
+        .hero-title { font-family: 'Epilogue', sans-serif; font-size: clamp(24px, 5vw, 36px); font-weight: 900; color: var(--text-light); }
+
+        .profile-container { max-width: 800px; margin: -40px auto 60px; padding: 0 var(--p-desktop); position: relative; z-index: 5; width: 100%; }
+        .profile-card { background: var(--bg-surface); padding: 40px; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+        
+        .avatar-section { text-align: center; margin-bottom: 40px; }
+        .avatar-circle { width: 80px; height: 80px; background: var(--bg-deep); border: 2px solid var(--border-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 32px; color: var(--royal-gold); }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .field-group { margin-bottom: 20px; }
+        .field-group.full { grid-column: 1 / -1; }
+        .field-group label { display: block; font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; font-weight: 700; }
+        .field-wrap { position: relative; }
+        .field-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 14px; pointer-events: none; }
+        .r-input { width: 100%; padding: 12px 16px 12px 44px; background: var(--bg-deep); border: 1.5px solid var(--border); border-radius: var(--radius-md); color: var(--text-light); outline: none; transition: var(--transition); font-family: 'Manrope', sans-serif; font-size: 14px; }
+        .r-input:focus { border-color: var(--royal-gold); box-shadow: 0 0 0 3px rgba(255,204,0,0.08); }
+        .r-input:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .section-divider { display: flex; align-items: center; gap: 15px; margin: 30px 0 20px; }
+        .section-divider span { font-size: 10px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; white-space: nowrap; }
+        .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        #bannerPreview { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+        .banner-item { position: relative; width: 100px; height: 60px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+        .banner-item img { width: 100%; height: 100%; object-fit: cover; }
+        .banner-remove { position: absolute; top: 4px; right: 4px; background: #f44336; color: white; border: none; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 10px; cursor: pointer; }
+
+        .action-row { margin-top: 30px; display: flex; flex-direction: column; gap: 15px; }
+        .update-btn { width: 100%; padding: 16px; background: var(--royal-gold); color: #131313; border: none; border-radius: var(--radius-md); font-family: 'Epilogue', sans-serif; font-weight: 900; cursor: pointer; transition: var(--transition); text-transform: uppercase; letter-spacing: 2px; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .update-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255,204,0,0.3); }
+        .update-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .back-link { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 11px; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: var(--royal-gold); }
+
+        #msg { text-align: center; font-size: 13px; font-weight: 700; min-height: 20px; margin-top: 10px; }
+
+        @media (max-width: 768px) {
+            .hero-banner { padding: 50px var(--p-mobile) 60px; }
+            .profile-container { margin-top: -30px; padding: 0 var(--p-mobile); }
+            .profile-card { padding: 30px 20px; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="profile-page">
+
+<nav class="royal-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">👑 APNI SALTANAT</a>
+        <div class="nav-actions">
+            <a href="seller-dashboard.html" class="btn-outline" style="padding:8px 18px; font-size:12px;"><i class="fas fa-th-large"></i> Dashboard</a>
+            <div onclick="toggleMenu()" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; cursor:pointer; color:var(--text-muted); font-size:18px; transition:var(--transition); margin-left:4px;" onmouseover="this.style.borderColor='var(--border-gold)';" onmouseout="this.style.borderColor='';">
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="hero-banner">
+    <div class="hero-content">
+        <div class="hero-eyebrow">Personal Chamber</div>
+        <h1 class="hero-title">Account Settings</h1>
+    </div>
+</div>
+
+<div class="profile-container">
+    <div class="profile-card">
+        <div class="avatar-section">
+            <div class="avatar-circle"><i class="fas fa-user-shield"></i></div>
+            <div id="displayEmailLabel" style="font-size:12px; color:var(--text-muted); font-weight:600;">loading email...</div>
+        </div>
+
+        <div class="form-grid">
+            <div class="field-group">
+                <label>Full Name</label>
+                <div class="field-wrap">
+                    <i class="fas fa-user field-icon"></i>
+                    <input type="text" id="newName" class="r-input" placeholder="Your full name">
+                </div>
+            </div>
+            <div class="field-group">
+                <label>WhatsApp Number</label>
+                <div class="field-wrap">
+                    <i class="fas fa-phone field-icon"></i>
+                    <input type="text" id="newPhone" class="r-input" placeholder="+92 3XX XXXXXXX">
+                </div>
+            </div>
+            
+            <div class="field-group full" id="emailGroup">
+                <label>Email Address (read-only)</label>
+                <div class="field-wrap">
+                    <i class="fas fa-envelope field-icon"></i>
+                    <input type="email" id="displayEmail" class="r-input" disabled>
+                </div>
+            </div>
+
+            <div class="field-group full" id="bankField" style="display:none;">
+                <label>Bank Account / EasyPaisa / JazzCash</label>
+                <div class="field-wrap">
+                    <i class="fas fa-university field-icon"></i>
+                    <input type="text" id="newBank" class="r-input" placeholder="Account Number or IBAN">
+                </div>
+            </div>
+
+            <div class="field-group full" id="logoField" style="display:none;">
+                <label>Store Logo (Professional Brand)</label>
+                <div class="field-wrap">
+                    <i class="fas fa-id-badge field-icon"></i>
+                    <input type="file" id="storeLogo" class="r-input" accept="image/*" style="padding-top:10px;">
+                </div>
+                <div id="logoPreview" style="margin-top:10px;"></div>
+            </div>
+
+            <div class="field-group full" id="bannerField" style="display:none;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <label style="margin-bottom:0;">Main Top Banners (Slider)</label>
+                    <button type="button" id="clearBannersBtn" style="font-size:9px; padding:3px 8px; background:rgba(244,67,54,0.1); color:#f44336; border:1px solid rgba(244,67,54,0.2); border-radius:4px; cursor:pointer; font-weight:800;">CLEAR ALL</button>
+                </div>
+                <div class="field-wrap">
+                    <i class="fas fa-images field-icon"></i>
+                    <input type="file" id="storeBanners" class="r-input" accept="image/*" multiple style="padding-top:10px;">
+                </div>
+                <div id="bannerPreview"></div>
+            </div>
+
+            <div class="field-group" id="midBannerField" style="display:none;">
+                <label>Middle Section Banner</label>
+                <div class="field-wrap">
+                    <i class="fas fa-image field-icon"></i>
+                    <input type="file" id="midBanner" class="r-input" accept="image/*" style="padding-top:10px;">
+                </div>
+                <div id="midBannerPreview" class="banner-preview-box" style="margin-top:10px;"></div>
+            </div>
+
+            <div class="field-group" id="footerBannerField" style="display:none;">
+                <label>Footer Section Banner</label>
+                <div class="field-wrap">
+                    <i class="fas fa-image field-icon"></i>
+                    <input type="file" id="footerBanner" class="r-input" accept="image/*" style="padding-top:10px;">
+                </div>
+                <div id="footerBannerPreview" class="banner-preview-box" style="margin-top:10px;"></div>
+            </div>
+
+            <div class="field-group full">
+                <div class="section-divider"><span>Security</span></div>
+                <label>New Password (leave blank to keep current)</label>
+                <div class="field-wrap">
+                    <i class="fas fa-lock field-icon"></i>
+                    <input type="password" id="newPass" class="r-input" placeholder="Minimum 6 characters">
+                </div>
+            </div>
+        </div>
+
+        <div class="action-row">
+            <button class="update-btn" id="updateBtn"><i class="fas fa-save"></i> Update Settings</button>
+            <p id="msg"></p>
+            <a href="seller-dashboard.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+
+<footer class="royal-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">👑 APNI SALTANAT</div>
+                <p class="footer-desc">Pakistan's Royal Online Marketplace. Har Soda Aik Ahad.</p>
+            </div>
+            <div>
+                <div class="footer-col-title">Links</div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Marketplace</a></li>
+                    <li><a href="faq.html">Help Center</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Legal</div>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <span>© 2026 Apni Saltanat | By Bablu Architect</span>
+            <span>Har Soda Aik Ahad 👑</span>
+        </div>
+    </div>
+</footer>
+
+<div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
+    <div class="menu-inner" onclick="event.stopPropagation()">
+        <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Shahi Bazaar</a>
+        <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Sardaar Dashboard</a>
+        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Sardaar</a>
+
+        <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
+        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Shahi Paigam</a>
+        <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
+        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Saltanat Blog</a>
+        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
+
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);">
+            <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
+            <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
+            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Sardaar</a>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, updatePassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getDatabase, ref, get, update as dbUpdate } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+    const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+    const storage = getStorage(app);
+    let currentBanners = [];
+
+    window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
+
+    function renderSinglePreview(containerId, url, field) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = `<div class="banner-item" style="width:100%; height:auto; max-height:120px;"><img src="${url}" style="width:100%; height:100%; object-fit:contain;"><button class="banner-remove" style="top:8px; right:8px;"><i class="fas fa-times"></i></button></div>`;
+        container.querySelector('.banner-remove').onclick = async () => {
+            if(!confirm("Erase this image?")) return;
+            showMsg('Removing...', 'var(--royal-gold)');
+            await dbUpdate(ref(db, `users/sardaars/${auth.currentUser.uid}`), { [field]: "" });
+            container.innerHTML = '';
+            showMsg('Removed!', 'var(--royal-gold)');
+        };
+    }
+
+    function renderBannerPreview() {
+        const previewContainer = document.getElementById('bannerPreview');
+        previewContainer.innerHTML = '';
+        currentBanners.forEach((url, index) => {
+            const item = document.createElement('div');
+            item.className = 'banner-item';
+            item.innerHTML = `<img src="${url}"><button class="banner-remove" data-index="${index}"><i class="fas fa-times"></i></button>`;
+            item.querySelector('.banner-remove').onclick = async () => {
+                currentBanners.splice(index, 1);
+                renderBannerPreview();
+                showMsg('Removing banner...', 'var(--royal-gold)');
+                await dbUpdate(ref(db, `users/sardaars/${auth.currentUser.uid}`), { storeBanners: currentBanners.join('|') });
+                showMsg('Banner removed!', 'var(--royal-gold)');
+            };
+            previewContainer.appendChild(item);
+        });
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            document.getElementById('displayEmail').value = user.email;
+            document.getElementById('displayEmailLabel').innerText = user.email;
+            document.getElementById('menuLogin').innerHTML = `<i class="fas fa-user"></i> My Profile`;
+            document.getElementById('menuLogin').href = 'seller-dashboard.html';
+
+            const sSnap = await get(ref(db, `users/sardaars/${user.uid}`));
+            const bSnap = await get(ref(db, `users/buyers/${user.uid}`));
+            
+            if (sSnap.exists()) {
+                const sData = sSnap.val();
+                if (sData.status === 'unpaid' || sData.status === 'blocked') { window.location.href = "seller-dashboard.html"; return; }
+            }
+            
+            const data = sSnap.exists() ? sSnap.val() : (bSnap.exists() ? bSnap.val() : null);
+            if (data) {
+                document.getElementById('newName').value = data.name || data.userName || "";
+                document.getElementById('newPhone').value = data.phone || "";
+                if (data.role === 'sardaar') {
+                    document.getElementById('bankField').style.display = 'block';
+                    document.getElementById('newBank').value = data.bankAccount || "";
+                    document.getElementById('logoField').style.display = 'block';
+                    document.getElementById('bannerField').style.display = 'block';
+                    document.getElementById('midBannerField').style.display = 'block';
+                    document.getElementById('footerBannerField').style.display = 'block';
+
+                    if (data.storeLogo) renderSinglePreview('logoPreview', data.storeLogo, 'storeLogo');
+                    if (data.midBanner) renderSinglePreview('midBannerPreview', data.midBanner, 'midBanner');
+                    if (data.footerBanner) renderSinglePreview('footerBannerPreview', data.footerBanner, 'footerBanner');
+                    
+                    if (data.storeBanners) { currentBanners = data.storeBanners.split('|').filter(b => b.trim() !== ''); renderBannerPreview(); }
+                }
+            }
+        } else { window.location.href = 'login.html'; }
+    });
+
+    document.getElementById('clearBannersBtn').addEventListener('click', async () => {
+        if(!confirm("Erase all banners immediately?")) return;
+        currentBanners = []; renderBannerPreview(); showMsg("Clearing banners...", "var(--royal-gold)");
+        await dbUpdate(ref(db, `users/sardaars/${auth.currentUser.uid}`), { storeBanners: "" });
+        showMsg("All banners cleared!", "var(--royal-gold)");
+    });
+
+    document.getElementById('storeBanners').addEventListener('change', async (event) => {
+        const files = event.target.files;
+        if(files.length === 0) return;
+        const user = auth.currentUser;
+        showMsg("Uploading Banners...", "var(--royal-gold)");
+        document.getElementById('storeBanners').disabled = true;
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const storageRef = sRef(storage, `store_banners/${user.uid}/${Date.now()}_${Math.random().toString(36).substr(2,9)}_${file.name}`);
+            await uploadBytes(storageRef, file);
+            currentBanners.push(await getDownloadURL(storageRef));
+        }
+        await dbUpdate(ref(db, `users/sardaars/${user.uid}`), { storeBanners: currentBanners.join('|') });
+        renderBannerPreview();
+        document.getElementById('storeBanners').value = "";
+        document.getElementById('storeBanners').disabled = false;
+        showMsg("Banners uploaded & live synced!", "var(--royal-gold)");
+    });
+
+    ['storeLogo', 'midBanner', 'footerBanner'].forEach(field => {
+        const input = document.getElementById(field);
+        if(input) {
+            input.addEventListener('change', async (event) => {
+                const file = event.target.files[0];
+                if(!file) return;
+                const user = auth.currentUser;
+                showMsg(`Uploading ${field}...`, "var(--royal-gold)");
+                input.disabled = true;
+                const storageRef = sRef(storage, `${field}/${user.uid}/${Date.now()}_${file.name}`);
+                await uploadBytes(storageRef, file);
+                const url = await getDownloadURL(storageRef);
+                await dbUpdate(ref(db, `users/sardaars/${user.uid}`), { [field]: url });
+                renderSinglePreview(`${field}Preview`, url, field);
+                input.value = "";
+                input.disabled = false;
+                showMsg("Uploaded & live synced!", "var(--royal-gold)");
+            });
+        }
+    });
+
+    document.getElementById('updateBtn').addEventListener('click', async () => {
+        const user = auth.currentUser;
+        const name = document.getElementById('newName').value.trim();
+        const phone = document.getElementById('newPhone').value.trim();
+        const bank = document.getElementById('newBank').value.trim();
+        const pass = document.getElementById('newPass').value;
+        const btn = document.getElementById('updateBtn');
+        if (!name || !phone) { showMsg("Naam aur Number lazmi hai!", "#f44336"); return; }
+        btn.disabled = true; btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Updating...';
+        try {
+            const sSnap = await get(ref(db, `users/sardaars/${user.uid}`));
+            const folder = sSnap.exists() ? 'sardaars' : 'buyers';
+            let updatePayload = { name, userName: name, phone };
+            if (folder === 'sardaars') updatePayload.bankAccount = bank;
+            await dbUpdate(ref(db, `users/${folder}/${user.uid}`), updatePayload);
+            if (pass) { if (pass.length < 6) throw new Error("Password minimum 6 characters!"); await updatePassword(user, pass); }
+            showMsg("👑 Mubarak! Settings update ho gayi.", "var(--royal-gold)");
+        } catch (error) { console.error(error); showMsg("Error: " + error.message, "#f44336"); }
+        finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Update Settings'; }
+    });
+
+    function showMsg(text, color) { const m = document.getElementById('msg'); m.innerText = text; m.style.color = color; }
+</script>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — Sawal o Jawab | Apni Saltanat</title>
+    <meta name="description" content="Apni Saltanat ke frequently asked questions — buyers aur sellers ke liye sawal aur jawab. Hamare baare mein aur marketplace ke baare mein sab kuch jaanein.">
+    <link rel="canonical" href="https://apnisaltanat.com/faq.html">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="royal.css">
+    <style>
+        .faq-hero {
+            padding: 80px 40px 60px;
+            text-align: center;
+            position: relative;
+        }
+        .faq-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(255,204,0,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .faq-hero h1 {
+            font-family: 'Epilogue', sans-serif;
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 900;
+            color: var(--royal-gold);
+            margin-bottom: 14px;
+        }
+        .faq-hero p {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Tab row */
+        .faq-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 0 40px 40px;
+        }
+        .faq-tab {
+            padding: 9px 22px;
+            background: transparent;
+            border: 1.5px solid var(--border);
+            border-radius: 50px;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            font-family: 'Manrope', sans-serif;
+        }
+        .faq-tab.active, .faq-tab:hover {
+            border-color: var(--royal-gold);
+            color: var(--royal-gold);
+            background: rgba(255,204,0,0.06);
+        }
+
+        /* FAQ Container */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px 80px;
+        }
+
+        .faq-section-title {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--royal-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 40px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .faq-section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .faq-item {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .faq-item:hover { border-color: var(--border-gold); }
+        .faq-item.open { border-color: rgba(255,204,0,0.4); }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-family: 'Manrope', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: left;
+            gap: 16px;
+        }
+        .faq-question .faq-icon {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: rgba(255,204,0,0.08);
+            border: 1px solid var(--border-gold);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--royal-gold);
+            font-size: 12px;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        .faq-item.open .faq-question .faq-icon { background: var(--royal-gold); color: #131313; transform: rotate(45deg); }
+
+        .faq-answer {
+            display: none;
+            padding: 0 24px 22px;
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            border-top: 1px solid var(--border);
+            padding-top: 18px;
+        }
+        .faq-item.open .faq-answer { display: block; }
+
+        /* CTA Banner */
+        .faq-cta {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .faq-cta h2 {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 28px; font-weight: 900;
+            color: var(--text-light); margin-bottom: 12px;
+        }
+        .faq-cta p { color: var(--text-muted); font-size: 15px; margin-bottom: 28px; }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="royal-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">👑 APNI SALTANAT</a>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <a href="signup.html" class="btn-outline mobile-hide" style="padding:9px 20px; font-size:12px;">Sell Now</a>
+            <div onclick="toggleMenu()" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; cursor:pointer; color:var(--text-muted); font-size:18px; transition:var(--transition); margin-left:4px;" onmouseover="this.style.borderColor='var(--border-gold)';" onmouseout="this.style.borderColor='';">
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="faq-hero">
+    <div class="hero-tag" style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,204,0,0.1); border:1px solid rgba(255,204,0,0.3); color:var(--royal-gold); padding:8px 20px; border-radius:50px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:24px;">
+        <i class="fas fa-question-circle"></i> Help Center
+    </div>
+    <h1>Sawal o Jawab 👑</h1>
+    <p>Hamare baare mein sawal hai? Yahan sabke jawab milengen!</p>
+</section>
+
+<!-- FAQ TABS -->
+<div class="faq-tabs">
+    <button class="faq-tab active" onclick="filterFaq('all', this)">Sab FAQ</button>
+    <button class="faq-tab" onclick="filterFaq('buyers', this)">Buyers</button>
+    <button class="faq-tab" onclick="filterFaq('sellers', this)">Sellers</button>
+    <button class="faq-tab" onclick="filterFaq('account', this)">Account</button>
+    <button class="faq-tab" onclick="filterFaq('payment', this)">Payment</button>
+</div>
+
+<!-- FAQ ITEMS -->
+<div class="faq-container">
+
+    <div class="faq-section-title"><i class="fas fa-shopping-bag"></i> Buyers ke Liye</div>
+
+    <div class="faq-item" data-category="buyers">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Kya Apni Saltanat pe shopping safe hai?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Haan! Apni Saltanat pe hum sirf verified sellers ko list hone dete hain. Har seller ka CNIC aur documents verify hote hain. Agar koi masla ho to hum aapki madad karne ke liye available hain via WhatsApp ya email.
+        </div>
+    </div>
+
+    <div class="faq-item" data-category="buyers">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Kya product ki delivery hoti hai?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Delivery directly seller se hoti hai. Product page pe seller ki contact details hoti hain. WhatsApp pe contact karein — seller aapko delivery/COD ke arrangements bata dega. Hum trusted sellers ko hi platform pe rakhte hain.
+        </div>
+    </div>
+
+    <div class="faq-item" data-category="buyers">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Product milne ke baad koi masla ho to kya karein?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Pehle seller se directly baat karein. Agar seller cooperate na kare to hamare WhatsApp +92-301-1786494 pe report karein. Hum seller ka account suspend kar sakte hain agar policy violation ho. Hamari Refund Policy zaroor parhen.
+        </div>
+    </div>
+
+    <div class="faq-item" data-category="buyers">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Kya account banana zaroori hai shopping ke liye?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Nahi! Buyers bina account ke bhi browse aur shop kar sakte hain. Seller se contact ke liye unka WhatsApp number product page pe hota hai. Account sirf sellers ke liye zaroori hai.
+        </div>
+    </div>
+
+    <div class="faq-section-title" style="margin-top:50px;"><i class="fas fa-store"></i> Sellers ke Liye</div>
+
+    <div class="faq-item" data-category="sellers">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Seller account kaise banayein?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Signup page pe jaayein, apna email, phone, address, password, CNIC number aur CNIC ki front/back photos upload karein. Hum 3-5 working days mein review karke approve karenge. Approval ke baad aap products upload kar sakte ho!
+        </div>
+    </div>
+
+    <div class="faq-item" data-category="sellers">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Products upload karne ki koi limit hai?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Abhi ke liye hum manually manage karte hain. Jitne bhi products chahein list kar sakte hain. Platform grow karne ke saath hum aur features add karte rahenge. Hamare instructions.html pe saari details hain.
+        </div>
+    </div>
+
+    <div class="faq-item" data-category="sellers">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Kya mujhe koi commission deni hogi?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Abhi Apni Saltanat pe koi commission ya per-sale fee nahi hai. Aap seedha buyer se payment lete hain. Hum sirf platform provide karte hain. Future mein subscription model aa sakta hai, jo pehle announce hoga.
+        </div>
+    </div>
+
+    <div class="faq-item" data-category="sellers">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Kaun se products list kar sakte hain?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Koi bhi legal, halal product list kar sakte hain — electronics, clothing, handicrafts, food items, accessories, etc. Strictly prohibited: haram/illegal items, adult content, fake branded goods. Violation pe account permanent ban hoga.
+        </div>
+    </div>
+
+    <div class="faq-section-title" style="margin-top:50px;"><i class="fas fa-user"></i> Account ke Baare Mein</div>
+
+    <div class="faq-item" data-category="account">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Password bhool gaya — kya karein?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Login page pe "Forgot Password?" link hai. Apna email daalein — aapko password reset link email pe aayega. Check karein spam folder bhi. Phir bhi masla ho to WhatsApp pe humse contact karein.
+        </div>
+    </div>
+
+    <div class="faq-item" data-category="account">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Mera account pending mein hai — kya karna chahiye?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Signup ke baad account review mein 3-5 working days lagte hain. WhatsApp: +92-301-1786494 pe contact karein agar zyada time ho gaya ho. Documents sahi hone chahiye — blurry ya incomplete documents se delay hота hai.
+        </div>
+    </div>
+
+    <div class="faq-item" data-category="account">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Store profile update kaise karein?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Login karein → Profile page pe jaayein. Wahan store name, WhatsApp number, city, description aur store banner update kar sakte hain. Save karne ke baad changes live ho jaate hain.
+        </div>
+    </div>
+
+    <div class="faq-section-title" style="margin-top:50px;"><i class="fas fa-money-bill"></i> Payment ke Baare Mein</div>
+
+    <div class="faq-item" data-category="payment">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Payment kaise hoti hai?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            Payment directly buyer aur seller ke beech hoti hai. Common methods: Easypaisa, JazzCash, bank transfer, ya COD (Cash on Delivery). Seller apni preferred payment method product listing ya WhatsApp pe batate hain. Apni Saltanat payment process mein directly involved nahi hai.
+        </div>
+    </div>
+
+    <div class="faq-item" data-category="payment">
+        <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Scam se kaise bachain?</span>
+            <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-answer">
+            1) Sirf verified sellers se khareedein. 2) Advance payment karne se pehle seller ki ratings aur profile check karein. 3) Agar koi bahut zyada discount de ya deal suspicious lage to hamen report karein. 4) Photos aur product details carefully dekhen. COD (cash on delivery) sabse safe hai.
+        </div>
+    </div>
+
+</div>
+
+<!-- CTA -->
+<section class="faq-cta">
+    <h2>Aur Sawaal Hain? 🤝</h2>
+    <p>Humse directly WhatsApp pe contact karein — hum poori madad karenge!</p>
+    <a href="https://wa.me/923011786494" target="_blank" class="btn-gold">
+        <i class="fab fa-whatsapp"></i> WhatsApp Karen
+    </a>
+</section>
+
+<!-- FOOTER -->
+<footer class="royal-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">👑 APNI SALTANAT</div>
+                <p class="footer-desc">Pakistan's Royal Marketplace. High-quality products and trusted sellers. Har Soda Aik Ahad.</p>
+                <div class="social-row" style="margin-top:20px;">
+                    <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/923011786494" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Marketplace</div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Shahi Bazaar</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="seller-dashboard.html">Sardaar Dashboard</a></li>
+                    <li><a href="signup.html">Become a Sardaar</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Imperial Hub</div>
+                <ul class="footer-links">
+                    <li><a href="faq.html">Help Center</a></li>
+                    <li><a href="instructions.html">Shahi Paigam</a></li>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="blog.html">Saltanat Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Legal</div>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="refund-policy.html">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+            <span>Har Soda Aik Ahad 👑</span>
+        </div>
+    </div>
+</footer>
+
+<div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
+    <div class="menu-inner" onclick="event.stopPropagation()">
+        <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Shahi Bazaar</a>
+        <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Sardaar Dashboard</a>
+        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Sardaar</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Shahi Categories</a>
+
+        <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
+        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Shahi Paigam</a>
+        <a href="faq.html" class="menu-item active"><i class="fas fa-question-circle"></i> Help Center</a>
+        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Saltanat Blog</a>
+        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
+
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
+            <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
+        </div>
+        <div style="padding-top:10px;">
+            <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
+            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Sardaar</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
+
+    window.toggleFaq = (btn) => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+    };
+
+    window.filterFaq = (cat, btn) => {
+        document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.faq-item').forEach(item => {
+            if (cat === 'all' || item.getAttribute('data-category') === cat) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    };
+</script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, u => {
+        const loginLink = document.getElementById('menuLogin');
+        const authWrapper = document.getElementById('authWrapper');
+        if(u) {
+            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Sardaar Profile`;
+            loginLink.href = 'seller-dashboard.html';
+            if (!document.getElementById('logoutLink')) {
+                const logout = document.createElement('a');
+                logout.id = 'logoutLink';
+                logout.href = '#';
+                logout.className = 'menu-item';
+                logout.style.color = '#ff4d4d';
+                logout.style.marginTop = '12px';
+                logout.innerHTML = `<i class="fas fa-sign-out-alt"></i> Exit Saltanat`;
+                logout.onclick = (e) => { 
+                    e.preventDefault(); 
+                    if (confirm("Are you sure you want to Exit Saltanat? (Sadaq-e-Sultan)")) {
+                        signOut(auth).then(() => { localStorage.clear(); window.location.reload(); });
+                    }
+                };
+                authWrapper.appendChild(logout);
+            }
+        } else {
+            loginLink.innerHTML = `<i class="fas fa-sign-in-alt"></i> Join/Login`;
+            loginLink.href = 'login.html';
+            if (document.getElementById('logoutLink')) document.getElementById('logoutLink').remove();
+        }
+    });
+</script>
+</body>
+</html>

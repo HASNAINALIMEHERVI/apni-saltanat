@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9236482420910781" crossorigin="anonymous"></script>
+    <title>Apni Saltanat | Pakistan's Royal Marketplace — Shahi Bazaar</title>
+    <meta name="title" content="Apni Saltanat | Pakistan's Royal Marketplace">
+    <meta name="description" content="Shop at Apni Saltanat, Pakistan's most trusted royal marketplace. Discover premium products including electronics, fashion, and daily essentials at fair prices. Every deal is a commitment to trust.">
+    <meta name="keywords" content="Apni Saltanat, Online Shopping Pakistan, Shahi Bazaar, Marketplace Pakistan, Best Online Store, Electronics Pakistan, Fashion Marketplace, Bablu Architect, Buy Online Pakistan">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }</script>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apnisaltanat.com/">
+    <meta property="og:title" content="Apni Saltanat | Pakistan's Royal Marketplace">
+    <meta property="og:description" content="Discover premium quality products at fair prices. Experience the royal way of online shopping in Pakistan.">
+    <meta property="og:image" content="https://apnisaltanat.com/favicon.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://apnisaltanat.com/">
+    <meta property="twitter:title" content="Apni Saltanat | Pakistan's Royal Marketplace">
+    <meta property="twitter:description" content="Shop the best deals in Pakistan at Apni Saltanat. Quality and trust delivered to your doorstep.">
+    <meta property="twitter:image" content="https://apnisaltanat.com/favicon.png">
+    <link rel="canonical" href="https://apnisaltanat.com/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="royal.css">
+    <style>
+        /* ===== MEGA MENU ===== */
+        .cat-trigger { position:relative; display:flex; align-items:center; gap:8px; cursor:pointer; padding:8px 16px; border-radius:var(--radius-sm); border:1px solid var(--border); color:var(--text-muted); font-size:13px; font-weight:700; transition:var(--transition); }
+        .cat-trigger:hover { border-color:var(--border-gold); color:var(--royal-gold); background:rgba(255,204,0,0.05); }
+        .shahi-mega-menu { position:absolute; top:calc(100% + 12px); left:0; background:var(--bg-surface); display:none; grid-template-columns:200px 200px 240px; border:1px solid var(--border); border-radius:var(--radius-md); box-shadow:var(--shadow-dark); z-index:3000; overflow:hidden; min-height:300px; }
+        .cat-trigger:hover .shahi-mega-menu { display:grid; }
+        .mega-col { height:100%; overflow-y:auto; padding:8px 0; background:var(--bg-surface); border-right:1px solid var(--border); }
+        .mega-col:last-child { border-right:none; }
+        .mega-col-title { font-size:10px; font-weight:800; color:var(--text-muted); text-transform:uppercase; padding:10px 16px; letter-spacing:1.5px; }
+        .mega-item { padding:10px 16px; font-size:13px; font-weight:600; color:var(--text-muted); display:flex; justify-content:space-between; align-items:center; cursor:pointer; transition:0.2s; }
+        .mega-item:hover,.mega-item.active { background:rgba(255,204,0,0.06); color:var(--royal-gold); }
+        .mega-link { display:block; padding:8px 16px; color:var(--text-muted); text-decoration:none; font-size:13px; transition:0.2s; cursor:pointer; }
+        .mega-link:hover { color:var(--royal-gold); background:rgba(255,204,0,0.04); }
+
+        /* ===== SEARCH ===== */
+        .search-wrap { flex:1; max-width:420px; position:relative; }
+        .search-input { width:100%; padding:11px 16px 11px 44px; background:#111; border:1.5px solid var(--border); border-radius:var(--radius-pill); font-size:13px; color:var(--text-light); outline:none; transition:var(--transition); font-family:'Manrope',sans-serif; }
+        .search-input:focus { border-color:var(--border-gold); box-shadow:0 0 0 3px rgba(255,204,0,0.08); }
+        .search-input::placeholder { color:var(--text-dim); }
+        .search-wrap i { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:13px; }
+
+        /* ===== MOBILE SEARCH ===== */
+        .mobile-search-row { display:none; position:relative; margin:12px 20px; }
+        .mobile-search-row i { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); z-index:2; }
+        .mobile-search-row input { width:100%; padding:12px 16px 12px 44px; background:#111; border:1.5px solid var(--border); border-radius:var(--radius-pill); font-size:13px; color:var(--text-light); outline:none; font-family:'Manrope',sans-serif; }
+
+        /* ===== CART ICON ===== */
+        .cart-icon-wrap { position:relative; cursor:pointer; display:flex; align-items:center; justify-content:center; width:40px; height:40px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:50%; transition:var(--transition); text-decoration:none; color:var(--text-muted); }
+        .cart-icon-wrap:hover { border-color:var(--border-gold); color:var(--royal-gold); }
+        .cart-count { position:absolute; top:-6px; right:-6px; background:var(--royal-gold); color:#131313; font-size:9px; font-weight:900; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid var(--bg-dark); }
+
+        /* ===== HERO ===== */
+        .royal-hero-home {
+            position:relative; overflow:hidden;
+            border-radius:var(--radius-lg);
+            margin:24px 0; padding:70px 60px;
+            background: linear-gradient(135deg, #0a0800 0%, #1a1200 50%, #0a0800 100%);
+            border:1px solid var(--border-gold);
+            text-align:center;
+        }
+        .royal-hero-home::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, rgba(255,204,0,0.12) 0%, transparent 65%); pointer-events:none; }
+        .royal-hero-home::after { content:'👑'; position:absolute; top:-30px; left:50%; transform:translateX(-50%); font-size:200px; opacity:0.03; pointer-events:none; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:8px; background:rgba(255,204,0,0.1); border:1px solid rgba(255,204,0,0.3); color:var(--royal-gold); padding:7px 18px; border-radius:50px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:20px; }
+        .hero-title { font-family:'Epilogue',sans-serif; font-size:clamp(36px,7vw,80px); font-weight:900; color:var(--text-light); line-height:1.05; margin-bottom:16px; }
+        .hero-title span { color:var(--royal-gold); }
+        .hero-sub { font-size:16px; color:var(--text-muted); max-width:500px; margin:0 auto 32px; line-height:1.7; }
+        .hero-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+        .hero-stats { display:flex; gap:40px; justify-content:center; margin-top:40px; flex-wrap:wrap; }
+        .hero-stat { text-align:center; }
+        .hero-stat-val { font-family:'Epilogue',sans-serif; font-size:28px; font-weight:900; color:var(--royal-gold); display:block; line-height:1; }
+        .hero-stat-lbl { font-size:11px; color:var(--text-muted); margin-top:4px; text-transform:uppercase; letter-spacing:1px; font-weight:700; }
+
+        /* ===== SLIDER ===== */
+        .slider-section { margin:0 0 40px; overflow:hidden; position:relative; display:none; }
+        .slider-label { font-size:11px; font-weight:700; color:var(--royal-gold); text-transform:uppercase; letter-spacing:3px; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+        .slider-track { display:flex; gap:14px; width:max-content; animation:scroll 25s linear infinite; }
+        .slider-track:hover { animation-play-state:paused; }
+        @keyframes scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+        .slide-card { width:170px; background:var(--bg-surface); border-radius:var(--radius-md); padding:10px; border:1px solid var(--border); display:flex; flex-direction:column; cursor:pointer; flex-shrink:0; transition:var(--transition); }
+        .slide-card:hover { border-color:var(--border-gold); transform:translateY(-3px); }
+        .slide-img { height:110px; background:var(--bg-deep); border-radius:var(--radius-sm); margin-bottom:8px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+        .slide-img img { max-width:88%; max-height:88%; object-fit:contain; }
+        .slide-title { font-size:11px; font-weight:700; color:var(--text-light); margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .slide-price { font-size:13px; font-weight:900; color:var(--royal-gold); font-family:'Epilogue',sans-serif; }
+
+        /* ===== PRODUCT CARDS ===== */
+        #products-list { display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:18px; margin-top:30px; margin-bottom:60px; }
+        .shahi-card { background:var(--bg-surface); border-radius:var(--radius-lg); padding:12px; transition:var(--transition); border:1px solid var(--border); display:flex; flex-direction:column; cursor:pointer; position:relative; overflow:hidden; }
+        .shahi-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.4); border-color:var(--border-gold); }
+        .img-container { height:190px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; background:var(--bg-deep); border-radius:var(--radius-md); overflow:hidden; }
+        .img-container img { max-width:88%; max-height:88%; object-fit:contain; transition:0.4s; }
+        .shahi-card:hover .img-container img { transform:scale(1.07); }
+        .p-name { font-size:13px; font-weight:700; color:var(--text-light); margin-bottom:4px; line-height:1.4; height:38px; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; }
+        .card-bottom { display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:10px; border-top:1px solid var(--border); }
+        .price-now { font-size:18px; font-weight:900; color:var(--royal-gold); font-family:'Epilogue',sans-serif; }
+        .btn-view { background:var(--royal-gold); color:#131313; width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:12px; transition:var(--transition); }
+        .cat-tag { position:absolute; top:14px; left:14px; background:rgba(19,19,19,0.85); backdrop-filter:blur(8px); padding:4px 10px; border-radius:8px; font-size:9px; font-weight:800; text-transform:uppercase; color:var(--royal-gold); z-index:5; border:1px solid var(--border-gold); }
+        .ameer-badge { position:absolute; top:14px; right:14px; background:linear-gradient(135deg,#FFEDC3,#FFCC00); color:#131313; padding:4px 10px; border-radius:8px; font-size:10px; font-weight:900; text-transform:uppercase; z-index:5; display:flex; align-items:center; gap:4px; font-family:'Epilogue',sans-serif; }
+
+        /* ===== FLOATING BUTTONS ===== */
+        .whatsapp-float { position:fixed; width:56px; height:56px; bottom:36px; right:36px; background:#25d366; color:#fff; border-radius:50%; text-align:center; font-size:26px; box-shadow:0 8px 25px rgba(37,211,102,0.35); z-index:5000; display:flex; align-items:center; justify-content:center; text-decoration:none; transition:var(--transition); }
+        .whatsapp-float:hover { transform:scale(1.1); background:#128c7e; }
+        .btn-become-seller { position:fixed; bottom:36px; left:36px; background:linear-gradient(135deg,#FFEDC3,#FFCC00); color:#131313; padding:14px 22px; border-radius:var(--radius-pill); text-decoration:none; font-size:13px; font-weight:900; text-transform:uppercase; display:flex; align-items:center; gap:10px; box-shadow:0 10px 30px rgba(255,204,0,0.35); z-index:4000; transition:var(--transition); border:2px solid rgba(255,255,255,0.3); font-family:'Epilogue',sans-serif; letter-spacing:1px; }
+        .btn-become-seller:hover { transform:scale(1.05) translateY(-4px); box-shadow:0 16px 40px rgba(255,204,0,0.5); }
+        #shahi-install-btn { display:none; position:fixed; bottom:110px; left:20px; background:var(--royal-gold); color:#131313; padding:11px 18px; border-radius:var(--radius-pill); border:none; font-weight:900; font-size:12px; z-index:4500; box-shadow:0 8px 20px rgba(0,0,0,0.3); cursor:pointer; font-family:'Epilogue',sans-serif; }
+        #shahi-wazeer-btn { position:fixed; bottom:36px; right:110px; display:flex; align-items:center; gap:10px; background:rgba(19,19,19,0.95); color:#fff; padding:12px 20px; border-radius:var(--radius-pill); text-decoration:none; z-index:4500; box-shadow:0 8px 25px rgba(0,0,0,0.4); font-family:'Epilogue',sans-serif; font-weight:800; border:1.5px solid var(--border-gold); transition:var(--transition); }
+        #shahi-wazeer-btn:hover { transform:translateY(-3px); border-color:var(--royal-gold); }
+
+        /* ===== MOBILE ===== */
+        @media(max-width:768px) {
+            .search-wrap { display:none; }
+            .mobile-search-row { display:block; }
+            .cat-trigger { flex-direction: column; gap: 2px; padding: 6px 10px; border-radius: 12px; background: rgba(255,204,0,0.06); border-color: var(--border-gold); }
+            .cat-trigger span { display: block; font-size: 8px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; color: var(--royal-gold); }
+            .cat-trigger i:first-child { font-size: 14px; color: var(--royal-gold); }
+            .cat-trigger i:last-child { display: none; }
+            .hero-title { font-size:36px; }
+            .royal-hero-home { padding:50px 20px; margin:16px 0; }
+            .hero-actions { flex-direction:column; align-items:center; }
+            #products-list { grid-template-columns:1fr 1fr; gap:10px; margin-top:16px; }
+            .shahi-card { border-radius:var(--radius-md); padding:8px; }
+            .img-container { height:140px; }
+            .p-name { font-size:12px; height:34px; }
+            .price-now { font-size:15px; }
+            .btn-view { width:26px; height:26px; border-radius:6px; font-size:10px; }
+            .cat-tag { font-size:7px; padding:2px 6px; }
+            .btn-become-seller { bottom:20px; left:20px; padding:11px 16px; font-size:11px; }
+            .whatsapp-float { bottom:20px; right:20px; width:48px; height:48px; font-size:22px; }
+            #shahi-wazeer-btn { display:none; }
+            .hero-stats { gap:24px; }
+            .shahi-mega-menu { position:fixed; top:72px; left:12px; right:12px; width:auto; border-radius:var(--radius-md); grid-template-columns:1fr; grid-template-rows:auto auto auto; height:auto; max-height:calc(100vh - 100px); overflow-y:auto; }
+            .mega-col { border-right:none; border-bottom:1px solid var(--border); height:auto; max-height:220px; }
+        }
+    </style>
+    <style>
+        /* Auth Loader */
+        #shahi-auth-loader { position:fixed; inset:0; background:#080808; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:0.5s; }
+        .loader-content { text-align:center; animation:pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.7; transform:scale(0.95); } }
+    </style>
+</head>
+<body style="overflow: hidden;">
+
+<!-- SHAHI AUTH LOADER -->
+<div id="shahi-auth-loader">
+    <div class="loader-content">
+        <div style="font-size:50px; margin-bottom:20px; filter:drop-shadow(0 0 15px var(--royal-gold));">👑</div>
+        <div class="royal-spinner" style="width:40px; height:40px; border-width:3px; margin:0 auto;"></div>
+        <p style="color:var(--royal-gold); margin-top:24px; font-family:'Epilogue',sans-serif; font-weight:900; letter-spacing:4px; font-size:11px; text-transform:uppercase;">Apni Saltanat</p>
+    </div>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/923230275594" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<div class="container">
+    <!-- NAVBAR -->
+    <nav class="royal-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">👑 APNI SALTANAT</a>
+            <div class="cat-trigger" style="position:relative;">
+                <i class="fas fa-th-large"></i>
+                <span>Categories</span>
+                <i class="fas fa-chevron-down" style="font-size:9px;"></i>
+                <div class="shahi-mega-menu">
+                    <div class="mega-col" id="mega-l1"><div class="mega-col-title">Main Category</div></div>
+                    <div class="mega-col" id="mega-l2"><div class="mega-col-title">Sub Category</div></div>
+                    <div class="mega-col" id="mega-l3"><div class="mega-col-title">Items</div></div>
+                </div>
+            </div>
+            <div class="search-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" id="headerSearch" class="search-input" placeholder="Search products..." oninput="intelligentSearch(this.value)">
+            </div>
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-icon-wrap" id="cartTrigger"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a>
+                <a href="seller-dashboard.html" class="cart-icon-wrap" id="profileTrigger" style="display:none;"><i class="fas fa-user"></i></a>
+                <div onclick="toggleMenu()" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; cursor:pointer; color:var(--text-muted); font-size:18px; transition:var(--transition); margin-left:4px;" onmouseover="this.style.borderColor='var(--border-gold)';" onmouseout="this.style.borderColor='';">
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE SEARCH -->
+    <div class="mobile-search-row">
+        <i class="fas fa-search"></i>
+        <input type="text" id="mobileSearch" placeholder="Search products..." oninput="intelligentSearch(this.value)">
+    </div>
+
+    <!-- HERO -->
+    <section class="royal-hero-home">
+        <div style="position:relative; z-index:2;">
+            <div class="hero-eyebrow"><i class="fas fa-crown"></i> Pakistan's Royal Marketplace</div>
+            <h1 class="hero-title">SHAHI <span>BAZAAR</span></h1>
+            <p class="hero-sub">Har Soda Aik Ahad — Every deal in the Saltanat is a commitment to trust and quality.</p>
+            <div class="hero-actions">
+                <a href="signup.html" class="btn-royal" style="padding:14px 28px; background:var(--royal-gold); color:#000; border-radius:30px; font-weight:800; text-decoration:none;"><i class="fas fa-store"></i> Become a Sardaar</a>
+                <a href="about.html" class="btn-outline" style="padding:14px 28px; border:1px solid var(--border-gold); color:var(--royal-gold); border-radius:30px; font-weight:800; text-decoration:none;"><i class="fas fa-info-circle"></i> Our Story</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat"><span class="hero-stat-val">300+</span><div class="hero-stat-lbl">Sardaars</div></div>
+                <div class="hero-stat"><span class="hero-stat-val">1000+</span><div class="hero-stat-lbl">Products</div></div>
+                <div class="hero-stat mobile-hide"><span class="hero-stat-val">PKR 0</span><div class="hero-stat-lbl">Setup Cost</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTO SLIDER -->
+    <div class="slider-section" id="sliderSection">
+        <div class="slider-label"><i class="fas fa-bolt"></i> Latest Arrivals</div>
+        <div class="slider-track" id="auto-slider"></div>
+    </div>
+
+    <!-- PRODUCTS GRID -->
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:4px;">
+        <div>
+            <div style="font-size:11px; font-weight:700; color:var(--royal-gold); text-transform:uppercase; letter-spacing:2px; margin-bottom:4px;"><i class="fas fa-store"></i> All Products</div>
+            <h2 style="font-family:'Epilogue',sans-serif; font-size:24px; font-weight:900; color:var(--text-light);">Shahi Bazaar</h2>
+        </div>
+        <a href="blog.html" class="btn-outline" style="padding:9px 20px; font-size:12px;"><i class="fas fa-newspaper"></i> Blog</a>
+    </div>
+    <div id="products-list">
+        <div style="grid-column:1/-1; text-align:center; padding:80px 0;">
+            <div class="royal-spinner" style="width:36px; height:36px; border-width:3px;"></div>
+            <p style="color:var(--text-muted); margin-top:16px; font-size:14px;">Loading products...</p>
+        </div>
+    </div>
+</div>
+
+<footer class="royal-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">👑 APNI SALTANAT</div>
+                <p class="footer-desc">Pakistan's Royal Marketplace. High-quality products and trusted sellers. Har Soda Aik Ahad.</p>
+                <div class="social-row" style="margin-top:20px;">
+                    <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/923011786494" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Marketplace</div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Shahi Bazaar</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="seller-dashboard.html">Sardaar Dashboard</a></li>
+                    <li><a href="signup.html">Become a Sardaar</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Imperial Hub</div>
+                <ul class="footer-links">
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="blog.html">Saltanat Blog</a></li>
+                    <li><a href="instructions.html">Shahi Paigam</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Legal</div>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="disclaimer.html">Shahi Disclaimer</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="refund-policy.html">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+            <span>Har Soda Aik Ahad 👑</span>
+        </div>
+    </div>
+</footer>
+
+<div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
+    <div class="menu-inner" onclick="event.stopPropagation()">
+        <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Shahi Bazaar</a>
+        <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Sardaar Dashboard</a>
+        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Sardaar</a>
+
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Categories</a>
+
+        <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
+        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Shahi Paigam</a>
+        <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
+        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Saltanat Blog</a>
+        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
+
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
+            <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
+            <a href="#" class="menu-item" id="logoutLink" style="display:none; color:#ff4d4d;"><i class="fas fa-sign-out-alt"></i> Exit Saltanat</a>
+        </div>
+        <div style="padding-top:10px;">
+            <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
+            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Sardaar</a>
+        </div>
+    </div>
+</div>
+
+<div id="cookie-consent" style="position:fixed; bottom:24px; left:24px; background:var(--bg-surface); border:1px solid var(--border-gold); padding:24px; border-radius:var(--radius-lg); box-shadow:0 30px 60px rgba(0,0,0,0.8); z-index:10000; width:min(380px, calc(100vw - 48px)); display:none; border-left:4px solid var(--royal-gold);">
+    <div style="font-family:'Epilogue',sans-serif; font-size:15px; font-weight:900; color:var(--royal-gold); margin-bottom:10px; display:flex; align-items:center; gap:10px;"><i class="fas fa-shield-halved"></i> Shahi Privacy Notice</div>
+    <p style="font-size:12px; color:var(--text-muted); line-height:1.7; margin-bottom:18px;">Apni Saltanat uses cookies to deliver a premium experience and to show relevant ads through Google AdSense. By continuing, you agree to our royal manifesto.</p>
+    <div style="display:flex; gap:12px;">
+        <button onclick="acceptCookies()" class="btn-gold" style="flex:1; height:44px; font-size:12px; font-weight:900; cursor:pointer;">I ACCEPT</button>
+        <a href="privacy-policy.html" class="btn-outline" style="flex:1; height:44px; font-size:11px; text-decoration:none; display:flex; align-items:center; justify-content:center; text-align:center;">READ POLICY</a>
+    </div>
+</div>
+
+<script>
+    function acceptCookies() { localStorage.setItem('saltanat_cookies', 'true'); document.getElementById('cookie-consent').style.display='none'; }
+    window.addEventListener('load', () => { setTimeout(() => { if(!localStorage.getItem('saltanat_cookies')) document.getElementById('cookie-consent').style.display='block'; }, 2000); });
+</script>
+
+
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
+
+    window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
+
+    let allProducts = [], ameerSardaars = [], allReviews = {};
+    const cartCount = document.getElementById('cartCount');
+    const updateCartCount = () => { const cart = JSON.parse(localStorage.getItem('saltanat_cart') || '[]'); cartCount.innerText = cart.length; };
+    updateCartCount();
+
+    onAuthStateChanged(auth, u => {
+        const loginLink = document.getElementById('menuLogin');
+        const logoutLink = document.getElementById('logoutLink');
+        const loader = document.getElementById('shahi-auth-loader');
+
+        if(u) {
+            if(document.getElementById('profileTrigger')) document.getElementById('profileTrigger').style.display='flex';
+            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Sardaar Profile`;
+            loginLink.href = 'seller-dashboard.html';
+            
+            if (logoutLink) {
+                logoutLink.style.display = 'block';
+                logoutLink.onclick = (e) => { 
+                    e.preventDefault(); 
+                    if (confirm("Are you sure you want to Exit Saltanat? (Sadaq-e-Sultan)")) {
+                        signOut(auth).then(() => { 
+                           localStorage.clear(); 
+                           window.location.reload(); 
+                        });
+                    }
+                };
+            }
+        } else {
+            // Guest mode: Allow products to load, but keep login link visible
+            loginLink.innerHTML = `<i class="fas fa-sign-in-alt"></i> Join/Login`;
+            loginLink.href = 'login.html';
+        }
+
+        // Always remove loader for all users (guests and logged in)
+        if(loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => { 
+                loader.style.display = 'none'; 
+                document.body.style.overflow = 'auto';
+            }, 500);
+        }
+    });
+
+    onValue(ref(db, 'products'), async (s) => {
+        if(!s.exists()) { document.getElementById('products-list').innerHTML = `<p style="color:var(--text-muted); text-align:center; padding:60px 0;">Marketplace is empty.</p>`; return; }
+        
+        const [sSnap, rSnap] = await Promise.all([get(ref(db, 'users/sardaars')), get(ref(db, 'reviews'))]);
+        const sData = sSnap.exists() ? sSnap.val() : {};
+        allReviews = rSnap.exists() ? rSnap.val() : {};
+        const pData = s.val();
+        allProducts = [];
+
+        ameerSardaars = Object.keys(sData).filter(uid => sData[uid].isAmeer);
+
+        for(let sid in pData) {
+            if (sData[sid] && (sData[sid].status === 'blocked' || sData[sid].status === 'unpaid')) continue;
+            for(let pid in pData[sid]) {
+                const p = pData[sid][pid];
+                let pRating = 0, pReviewCount = 0;
+                if (allReviews[pid]) {
+                    const reviews = Object.values(allReviews[pid]);
+                    pReviewCount = reviews.length;
+                    pRating = (reviews.reduce((acc, r) => acc + parseInt(r.rating), 0) / pReviewCount).toFixed(1);
+                }
+                allProducts.push({ id: pid, seller: sid, pRating, pReviewCount, ...p });
+            }
+        }
+
+        allProducts.sort((a,b) => (b.timestamp || 0) - (a.timestamp || 0));
+        renderSlider(allProducts.slice(0, 8));
+        render(allProducts);
+        setupMegaMenu(allProducts);
+    });
+
+
+    function renderSlider(items) {
+        const slider = document.getElementById('auto-slider');
+        const section = document.getElementById('sliderSection');
+        if(items.length === 0) { section.style.display = 'none'; return; }
+        section.style.display = 'block';
+        const html = items.map(p => `
+            <div class="slide-card" onclick="window.location.href='product.html?id=${p.id}&seller=${p.seller}'">
+                <div class="slide-img"><img src="${p.img}"></div>
+                <div class="slide-title">${p.name}</div>
+                <div class="slide-price">Rs. ${p.price}</div>
+            </div>
+        `).join('');
+        slider.innerHTML = html + html;
+    }
+
+    function setupMegaMenu(products) {
+        const l1 = document.getElementById('mega-l1'), l2 = document.getElementById('mega-l2'), l3 = document.getElementById('mega-l3');
+        const mainCats = [...new Set(products.map(p => p.category).filter(c => c))].sort();
+        l1.innerHTML = '<div class="mega-col-title">Main Category</div>';
+        mainCats.forEach(cat => {
+            const d = document.createElement('div');
+            d.className = 'mega-item';
+            d.innerHTML = `${cat} <i class="fas fa-chevron-right" style="font-size:10px;"></i>`;
+            d.onmouseenter = () => {
+                document.querySelectorAll('#mega-l1 .mega-item').forEach(i => i.classList.remove('active'));
+                d.classList.add('active'); showL2(cat);
+            };
+            l1.appendChild(d);
+        });
+
+        function showL2(mainCat) {
+            l2.innerHTML = `<div class="mega-col-title">Browse ${mainCat}</div>`;
+            const subs = [...new Set(products.filter(p => p.category === mainCat).map(p => p.subcategory).filter(s => s))].sort();
+            subs.forEach(s => {
+                const a = document.createElement('div'); a.className = 'mega-item'; a.innerHTML = `${s} <i class="fas fa-chevron-right" style="font-size:10px;"></i>`;
+                a.onmouseenter = () => {
+                    document.querySelectorAll('#mega-l2 .mega-item').forEach(i => i.classList.remove('active'));
+                    a.classList.add('active'); showL3(mainCat, s);
+                };
+                l2.appendChild(a);
+            });
+        }
+        function showL3(mainCat, subCat) {
+            l3.innerHTML = `<div class="mega-col-title">In ${subCat}</div>`;
+            allProducts.filter(p => p.category === mainCat && p.subcategory === subCat).forEach(p => {
+                const a = document.createElement('a'); a.className = 'mega-link'; a.innerText = p.name;
+                a.onclick = () => render([p]); l3.appendChild(a);
+            });
+        }
+    }
+
+    function render(items) {
+        const list = document.getElementById('products-list');
+        if(items.length === 0) { list.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:var(--text-muted);">No products found.</div>`; return; }
+        list.innerHTML = items.map(p => {
+            const isAmeer = ameerSardaars.includes(p.sellerId || p.seller);
+            const ameerTag = isAmeer ? `<div class="ameer-badge"><i class="fas fa-crown"></i> Ameer</div>` : '';
+            const stars = p.pRating > 0 ? `<i class="fas fa-star" style="color:#FFCC00; font-size:10px;"></i> ${p.pRating} <span style="font-size:10px; color:var(--text-muted);">(${p.pReviewCount})</span>` : `<i class="far fa-star" style="color:var(--text-dim); font-size:10px;"></i> <span style="font-size:10px; color:var(--text-dim);">No reviews</span>`;
+            return `
+                <div class="shahi-card" onclick="location.href='product.html?id=${p.id}&seller=${p.seller}'">
+                    ${ameerTag}
+                    <div class="cat-tag">${p.category || 'Shahi'}</div>
+                    <div class="img-container"><img src="${p.img}" loading="lazy"></div>
+                    <div class="p-name">${p.name}</div>
+                    <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px; font-size:11px; font-weight:800;">${stars}</div>
+                    <div class="card-bottom">
+                        <span class="price-now">Rs. ${p.price}</span>
+                        <div class="btn-view"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    window.intelligentSearch = (query) => {
+        const q = (typeof query === 'string' ? query : document.getElementById('headerSearch').value).toLowerCase().trim();
+        if(!q) { render(allProducts); return; }
+        render(allProducts.filter(p => p.name.toLowerCase().includes(q) || (p.category && p.category.toLowerCase().includes(q))));
+    };
+
+    // PWA Install
+    let shahiPrompt;
+    const shahiBtn = document.getElementById('shahi-install-btn');
+    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); shahiPrompt = e; shahiBtn.style.display = 'block'; });
+    shahiBtn.addEventListener('click', () => {
+        if (shahiPrompt) { shahiPrompt.prompt(); shahiPrompt.userChoice.then(c => { if(c.outcome==='accepted') shahiBtn.style.display='none'; shahiPrompt = null; }); }
+    });
+</script>
+</body>
+</html>
