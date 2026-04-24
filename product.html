@@ -122,6 +122,19 @@
             .related-card { flex:0 0 145px; }
             #product-container { margin:20px auto; }
         }
+
+        /* SHAHI MODAL */
+        #shahiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        .modal-card { background: var(--bg-surface); border: 2px solid var(--royal-gold); border-radius: 24px; padding: 40px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 50px rgba(197,160,89,0.2); animation: modalIn 0.3s ease-out; }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .modal-icon { font-size: 50px; margin-bottom: 20px; }
+        .modal-title { font-family: 'Epilogue', sans-serif; font-weight: 900; color: var(--royal-gold); margin-bottom: 10px; font-size: 20px; text-transform: uppercase; }
+        .modal-text { color: var(--text-light); margin-bottom: 30px; line-height: 1.6; }
+        .modal-btns { display: flex; gap: 12px; }
+        .modal-btn { flex: 1; padding: 15px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; transition: 0.3s; }
+        .btn-confirm { background: var(--royal-gold); color: #1a1a1a; }
+        .btn-cancel { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border); }
+        .btn-confirm:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold); }
     </style>
     <style>
         /* Auth Loader */
@@ -161,6 +174,19 @@
 </nav>
 
 <div class="container">
+
+<!-- SHAHI MODAL CONTAINER -->
+<div id="shahiModal">
+    <div class="modal-card">
+        <div class="modal-icon" id="modalIcon">👑</div>
+        <div class="modal-title" id="modalTitle">SALAM SARDAAR</div>
+        <div class="modal-text" id="modalText">Message here...</div>
+        <div class="modal-btns" id="modalBtns">
+            <button class="modal-btn btn-confirm" id="modalConfirmBtn">OK</button>
+            <button class="modal-btn btn-cancel" id="modalCancelBtn">CANCEL</button>
+        </div>
+    </div>
+</div>
 
 <!-- ORDER MODAL -->
 <div id="orderModal">
@@ -308,7 +334,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, get, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const firebaseConfig = {
@@ -360,9 +386,9 @@
                 logout.innerHTML = `<i class="fas fa-sign-out-alt"></i> Exit Saltanat`;
                 logout.onclick = (e) => { 
                     e.preventDefault(); 
-                    if (confirm("Are you sure you want to Exit Saltanat? (Sadaq-e-Sultan)")) {
+                    shahiConfirm("Are you sure you want to Exit Saltanat? (Sadaq-e-Sultan)", () => {
                         signOut(auth).then(() => { localStorage.clear(); window.location.reload(); });
-                    }
+                    });
                 };
                 authWrapper.appendChild(logout);
             }
@@ -395,6 +421,12 @@
 
     async function loadProductData() {
         if (!pID || !sID) return;
+        
+        // Track Visit
+        runTransaction(ref(db, `users/sardaars/${sID}/visits`), (current) => {
+            return (current || 0) + 1;
+        });
+
         try {
             const pSnap = await get(ref(db, `products/${sID}/${pID}`));
             if (!pSnap.exists()) { document.getElementById('product-root').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:var(--text-muted);">Product not found.</div>`; return; }
@@ -470,7 +502,7 @@
     }
 
     window.openOrderModal = () => {
-        if (!window.currentUser) { alert("Please login first to place an order."); window.location.href = "login.html"; return; }
+        if (!window.currentUser) { shahiAlert("Please login first to place an order."); window.location.href = "login.html"; return; }
         document.getElementById('orderModal').style.display = 'flex';
     };
 
@@ -479,7 +511,7 @@
         cart.push({ id: pID, seller: sID, sellerId: sID, name: window.currentProduct.name, price: window.currentProduct.price, img: window.currentProduct.img });
         localStorage.setItem('saltanatCart', JSON.stringify(cart));
         updateCartCount();
-        alert("Item added to cart!");
+        shahiAlert("Item added to cart! (Shahi Basket mein shamil ho gaya)", "✅");
     };
 
     window.changeMainImg = (url, el) => {
@@ -494,26 +526,85 @@
         const address = document.getElementById('custAddress').value.trim();
         const phone = document.getElementById('custPhone').value.trim();
         const postal = document.getElementById('custPostal').value.trim() || "N/A";
-        const email = document.getElementById('custEmail').value.trim() || "N/A";
-        if (!name || !address || !phone) { alert("Please fill all required fields!"); return; }
-        const submitBtn = e.target.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Placing Order...';
-        try {
-            const { ref: dbRef, push, set } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
-            const orderData = { productName: window.currentProduct.name || "Product", productPrice: window.currentProduct.price || "0", productId: pID || "unknown", customerName: name, customerAddress: address, customerPhone: phone, customerPostal: postal, customerEmail: email, sellerId: sID, timestamp: Date.now(), status: 'new' };
-            const ordersRef = dbRef(db, `orders/${sID}`);
-            const newOrderRef = push(ordersRef);
-            await set(newOrderRef, orderData);
-            if (window.sellerEmail) {
-                const scriptUrl = "https://script.google.com/macros/s/AKfycbwo6smhEV8TWPrWdBJ3SCFFj96AL6ucGHR4dRMAfCX5EpFSJuQnIwgMHmoWbzLaawzb/exec";
-                fetch(scriptUrl, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sellerEmail: window.sellerEmail, productName: orderData.productName, productPrice: orderData.productPrice, customerName: orderData.customerName, customerPhone: orderData.customerPhone, customerAddress: orderData.customerAddress }) }).catch(e => console.error("Email error:", e));
+        const email = document.getElementById('custEmail').value.trim();
+        
+        if (!name || !address || !phone) { shahiAlert("Please fill all required fields!"); return; }
+
+        // Email Validation
+        if (!email) { shahiAlert("Please enter your email for order updates."); return; }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            shahiAlert("Mubarak ho Sultan! Magar aapka email thik nahi lag raha. Plzz sahi email enter karein.");
+            return;
+        }
+
+        shahiConfirm("Sultan, kya aap waqe hi ye order place karna chahte hain?", async () => {
+            const submitBtn = document.getElementById('whatsappForm').querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Placing Order...';
+            try {
+                const { ref: dbRef, push, set } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
+                const orderData = { productName: window.currentProduct.name || "Product", productPrice: window.currentProduct.price || "0", productId: pID || "unknown", customerName: name, customerAddress: address, customerPhone: phone, customerPostal: postal, customerEmail: email, sellerId: sID, timestamp: Date.now(), status: 'new' };
+                const ordersRef = dbRef(db, `orders/${sID}`);
+                const newOrderRef = push(ordersRef);
+                await set(newOrderRef, orderData);
+                if (window.sellerEmail) {
+                    const scriptUrl = "https://script.google.com/macros/s/AKfycbwo6smhEV8TWPrWdBJ3SCFFj96AL6ucGHR4dRMAfCX5EpFSJuQnIwgMHmoWbzLaawzb/exec";
+                    fetch(scriptUrl, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sellerEmail: window.sellerEmail, productName: orderData.productName, productPrice: orderData.productPrice, customerName: orderData.customerName, customerPhone: orderData.customerPhone, customerAddress: orderData.customerAddress }) }).catch(e => console.error("Email error:", e));
+                }
+                
+                shahiAlert("Mubarak Ho Sultan! Aapka order receive ho gaya hai. Seller ki confirmation ke baad aapko email mil jayegi.", "✅");
+                document.getElementById('orderModal').style.display = 'none';
+                setTimeout(() => window.location.href = "index.html", 3000);
+            } catch (err) { 
+                console.error("Order error:", err); 
+                shahiAlert("Order failed: " + err.message, "❌"); 
+                submitBtn.disabled = false; 
+                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Finalize Order';
             }
-            alert("Order placed successfully! It will be delivered to you in 3-5 working days.");
-            document.getElementById('orderModal').style.display = 'none';
-        } catch (err) { console.error("Order error:", err); alert("Order failed: " + err.message); }
-        finally { submitBtn.disabled = false; submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Finalize Order'; }
+        });
     });
+
+    // ===== SHAHI MODAL SYSTEM =====
+    window.shahiAlert = (text, type = 'info') => {
+        const modal = document.getElementById('shahiModal');
+        const icon = document.getElementById('modalIcon');
+        const title = document.getElementById('modalTitle');
+        const content = document.getElementById('modalText');
+        const confirmBtn = document.getElementById('modalConfirmBtn');
+        const cancelBtn = document.getElementById('modalCancelBtn');
+
+        modal.style.display = 'flex';
+        cancelBtn.style.display = 'none';
+        content.innerText = text;
+        
+        if(type === '✅') { icon.innerText = '✅'; title.innerText = 'SHABASH SARDAAR'; }
+        else if(type === '❌') { icon.innerText = '❌'; title.innerText = 'GHALTI HO GAYI'; }
+        else { icon.innerText = '👑'; title.innerText = 'SHAHI PAIGAM'; }
+
+        confirmBtn.onclick = () => modal.style.display = 'none';
+    };
+
+    window.shahiConfirm = (text, onConfirm) => {
+        const modal = document.getElementById('shahiModal');
+        const icon = document.getElementById('modalIcon');
+        const title = document.getElementById('modalTitle');
+        const content = document.getElementById('modalText');
+        const confirmBtn = document.getElementById('modalConfirmBtn');
+        const cancelBtn = document.getElementById('modalCancelBtn');
+
+        modal.style.display = 'flex';
+        cancelBtn.style.display = 'block';
+        icon.innerText = '❓';
+        title.innerText = 'SHAHI TASDEEQ';
+        content.innerText = text;
+
+        confirmBtn.onclick = () => {
+            modal.style.display = 'none';
+            if(onConfirm) onConfirm();
+        };
+        cancelBtn.onclick = () => modal.style.display = 'none';
+    };
 
     function startAutoScroll() {
         const slider = document.getElementById('relatedSlider');

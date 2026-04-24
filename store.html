@@ -227,7 +227,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, onValue, get, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
@@ -237,6 +237,14 @@
     const params = new URLSearchParams(window.location.search);
     const sID = params.get('seller');
     if(!sID) location.href = "index.html";
+
+    // Track Store Visit
+    if (sID) {
+        const visitRef = ref(db, `users/sardaars/${sID}/visits`);
+        runTransaction(visitRef, (currentValue) => {
+            return (currentValue || 0) + 1;
+        });
+    }
 
     window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
 
