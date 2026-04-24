@@ -11,6 +11,12 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="royal.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("user_Xv8zN6p9L1Q7mK4j2"); // USER: Please update with your actual EmailJS Public Key
+        })();
+    </script>
     <style>
         .cart-nav { display:flex; align-items:center; justify-content:space-between; padding:18px 40px; border-bottom:1px solid var(--border); }
         .cart-nav .nav-logo { font-family:'Epilogue',sans-serif; font-size:20px; font-weight:900; color:var(--royal-gold); text-decoration:none; letter-spacing:2px; }
@@ -199,7 +205,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, push, set, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
@@ -301,6 +307,24 @@
                 if (!sID) { console.warn("Missing seller ID:", item); continue; }
                 const orderData = { productName:item.name, productPrice:item.price, productId:item.id, customerName:name, customerAddress:address, customerPhone:phone, customerPostal:postal, customerEmail:email, sellerId:sID, timestamp:Date.now(), status:'new' };
                 await set(push(ref(db, `orders/${sID}`)), orderData);
+
+                // Send Email Notification to Seller
+                get(ref(db, `users/sardaars/${sID}`)).then(snap => {
+                    if (snap.exists()) {
+                        const seller = snap.val();
+                        if (seller.email) {
+                            emailjs.send("service_saltanat", "template_order_alert", {
+                                to_email: seller.email,
+                                seller_name: seller.name || "Sardaar",
+                                customer_name: name,
+                                product_name: item.name,
+                                product_price: item.price,
+                                customer_phone: phone,
+                                order_link: "https://apnisaltanat.com/seller-dashboard.html"
+                            }).then(() => console.log("Email alert sent to Sardaar!")).catch(err => console.log("Email failed:", err));
+                        }
+                    }
+                });
             }
             alert("👑 Mubarak ho Sultan! Aapke sare orders place ho gaye. 3-5 working days mein delivery mil jaye gi.");
             localStorage.removeItem('saltanatCart');
