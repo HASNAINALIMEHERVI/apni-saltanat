@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="royal.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --sidebar-width: 280px;
@@ -453,6 +454,10 @@
         <div onclick="switchTab('orders')" class="nav-link" id="tab-orders-link">
             <i class="fas fa-shopping-cart"></i> <span>View Orders</span>
         </div>
+        <div onclick="requestNotificationPermission()" class="nav-link" id="notif-btn">
+            <i class="fas fa-bell"></i> <span>Royal Notifications</span>
+            <span id="notif-status" style="margin-left: auto; font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.05); color: var(--text-muted);">CHECKING</span>
+        </div>
         <a href="#" id="viewStoreLink" target="_blank" class="nav-link">
             <i class="fas fa-external-link-alt"></i> <span>My Store View</span>
         </a>
@@ -508,6 +513,16 @@
                 <div class="stat-icon-wrap"><i class="fas fa-clock"></i></div>
                 <div class="stat-label">Pending Orders</div>
                 <div class="stat-value" id="statPending">0</div>
+            </div>
+        </div>
+
+        <div class="shahi-table-card" style="margin-bottom: 40px; padding: 24px;">
+            <div class="table-header" style="padding: 0 0 20px 0; border-bottom: none;">
+                <h2>Sales Analytics</h2>
+                <div style="font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Revenue Trend (7 Days)</div>
+            </div>
+            <div style="height: 300px; position: relative;">
+                <canvas id="revenueChart"></canvas>
             </div>
         </div>
 
@@ -666,14 +681,17 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     import { getDatabase, ref, onValue, push, update, remove, get, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging.js";
 
     const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getDatabase(app);
+    const messaging = getMessaging(app);
 
     const IMGBB_KEY = '86566089ecf91f3b063625bccc076b1f';
     let uid, products = {}, files = [], existingUrls = [];
+    let revenueChart = null;
 
     // ===== UI HELPERS =====
     window.toggleSidebar = () => document.getElementById('sidebar').classList.toggle('active');
@@ -696,6 +714,7 @@
             uid = user.uid;
             document.getElementById('loader').style.display = 'none';
             loadSardaarData(user);
+            checkNotificationStatus();
         } else {
             window.location.href = 'login.html';
         }
@@ -818,7 +837,149 @@
             document.getElementById('ordersCountBadge').innerText = `${pendingCount} Pending`;
             document.getElementById('recentOrdersBody').innerHTML = recentHtml || '<tr><td colspan="5" style="text-align:center; padding:40px; color:var(--text-dim);">No recent orders.</td></tr>';
             document.getElementById('fullOrdersBody').innerHTML = fullHtml || '<tr><td colspan="5" style="text-align:center; padding:40px;">Waiting for orders...</td></tr>';
+            
+            // Update Analytics Chart
+            updateChart(orders);
         });
+    }
+
+    // ===== ANALYTICS LOGIC =====
+    function updateChart(orders) {
+        const ctx = document.getElementById('revenueChart');
+        if (!ctx) return;
+
+        const last7Days = [];
+        const revenueData = [];
+        const daysToProcess = 7;
+
+        for (let i = daysToProcess - 1; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            const dateStr = d.toLocaleDateString();
+            const label = d.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric' });
+            
+            last7Days.push(label);
+            
+            let dayTotal = 0;
+            orders.forEach(o => {
+                if (o.timestamp && new Date(o.timestamp).toLocaleDateString() === dateStr) {
+                    dayTotal += parseInt(o.productPrice || 0);
+                }
+            });
+            revenueData.push(dayTotal);
+        }
+
+        if (revenueChart) revenueChart.destroy();
+
+        revenueChart = new Chart(ctx.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: last7Days,
+                datasets: [{
+                    label: 'Revenue',
+                    data: revenueData,
+                    borderColor: '#c5a059',
+                    backgroundColor: 'rgba(197, 160, 89, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#c5a059',
+                    pointBorderColor: '#1a1a1a',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#2a2a2a',
+                        titleColor: '#c5a059',
+                        bodyColor: '#fff',
+                        borderColor: '#c5a059',
+                        borderWidth: 1,
+                        padding: 12,
+                        displayColors: false,
+                        callbacks: {
+                            label: (context) => `Rs. ${context.raw.toLocaleString()}`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255, 255, 255, 0.05)', drawBorder: false },
+                        ticks: { color: '#888', font: { size: 10 }, callback: (v) => 'Rs.' + v }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#888', font: { size: 10 } }
+                    }
+                }
+            }
+        });
+    }
+
+    // ===== NOTIFICATION LOGIC =====
+    window.requestNotificationPermission = async () => {
+        const btn = document.getElementById('notif-status');
+        btn.innerText = "WAIT...";
+
+        try {
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+                // Register Service Worker if not registered
+                if ('serviceWorker' in navigator) {
+                    const registration = await navigator.serviceWorker.register('sw-master.js');
+                    const token = await getToken(messaging, { 
+                        serviceWorkerRegistration: registration,
+                        vapidKey: 'BM-YOUR-VAPID-KEY-HERE' // USER: Please replace with your actual VAPID key from Firebase Console
+                    }).catch(e => {
+                        console.warn("Token fetch failed (VAPID might be missing):", e);
+                        return null;
+                    });
+
+                    if (token) {
+                        await update(ref(db, `users/sardaars/${uid}`), { fcmToken: token });
+                        alert("👑 Shahi Notifications Activated! You will receive alerts for new orders.");
+                    } else {
+                        alert("Permission granted! (VAPID key required for full activation in production).");
+                    }
+                    updateNotifUI('ON');
+                }
+            } else {
+                alert("Sultan, notifications block hain. Browser settings se allow karein.");
+                updateNotifUI('OFF');
+            }
+        } catch (err) {
+            console.error("Notif Error:", err);
+            updateNotifUI('OFF');
+        }
+    };
+
+    function checkNotificationStatus() {
+        if (!("Notification" in window)) return;
+        if (Notification.permission === 'granted') {
+            updateNotifUI('ON');
+        } else {
+            updateNotifUI('OFF');
+        }
+    }
+
+    function updateNotifUI(status) {
+        const el = document.getElementById('notif-status');
+        if (!el) return;
+        el.innerText = status;
+        if (status === 'ON') {
+            el.style.background = 'rgba(76, 175, 80, 0.1)';
+            el.style.color = '#4caf50';
+        } else {
+            el.style.background = 'rgba(244, 67, 54, 0.1)';
+            el.style.color = '#f44336';
+        }
     }
 
     // ===== PRODUCT ACTIONS =====
