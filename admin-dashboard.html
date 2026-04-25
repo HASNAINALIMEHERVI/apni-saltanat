@@ -181,9 +181,9 @@
         </div>
 
         <a class="nav-link active" onclick="switchTab('dashboard', this)"><i class="fas fa-chart-pie"></i> Overview</a>
-        <a class="nav-link" onclick="switchTab('requests', this)"><i class="fas fa-user-plus"></i> Merchant Requests <span class="badge" id="navBadgeRequests">0</span></a>
+        <a class="nav-link" onclick="switchTab('requests', this)"><i class="fas fa-user-plus"></i> Seller Requests <span class="badge" id="navBadgeRequests">0</span></a>
         <a class="nav-link" onclick="switchTab('users', this)"><i class="fas fa-users-cog"></i> User Control</a>
-        <a class="nav-link" onclick="switchTab('directory', this)"><i class="fas fa-address-book"></i> Merchant Directory</a>
+        <a class="nav-link" onclick="switchTab('directory', this)"><i class="fas fa-address-book"></i> Seller Directory</a>
         <a class="nav-link" onclick="switchTab('ledger', this)"><i class="fas fa-file-invoice-dollar"></i> Shahi Ledger</a>
         <a class="nav-link" onclick="switchTab('payments', this)"><i class="fas fa-receipt"></i> Payment Vault</a>
         <a class="nav-link" href="index.html" style="margin-top: auto;"><i class="fas fa-home"></i> Back to Marketplace</a>
@@ -209,7 +209,7 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon" style="background: rgba(255,215,0,0.1); color: var(--shahi-gold);"><i class="fas fa-crown"></i></div>
-                    <div><div class="stat-val" id="statSardaars">0</div><div class="stat-title">Total Merchants</div></div>
+                    <div><div class="stat-val" id="statSardaars">0</div><div class="stat-title">Total Sellers</div></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon" style="background: rgba(33,150,243,0.1); color: var(--accent-blue);"><i class="fas fa-users"></i></div>
@@ -227,7 +227,7 @@
             <div class="admin-card" style="text-align: center; padding: 60px 20px;">
                 <i class="fas fa-chess-king" style="font-size: 80px; color: var(--shahi-gold); margin-bottom: 20px; opacity: 0.8; filter: drop-shadow(0 0 20px var(--shahi-gold));"></i>
                 <h2 style="font-family: 'Outfit'; font-size: 32px; margin:0;">WELCOME ADMIN</h2>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 15px auto;">Use the navigation menu to manage Merchants, approve seller requests, verify treasury payments, and control user access across the system.</p>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 15px auto;">Use the navigation menu to manage Sellers, approve seller requests, verify treasury payments, and control user access across the system.</p>
             </div>
         </div>
 
@@ -262,10 +262,10 @@
         <!-- 4. SARDAAR DIRECTORY (admin4.html) -->
         <div id="tab-directory" class="tab-content">
             <div class="action-header">
-                <input type="text" id="searchDirectory" class="shahi-search" placeholder="Search merchant directory...">
+                <input type="text" id="searchDirectory" class="shahi-search" placeholder="Search seller directory...">
             </div>
             <div class="cards-grid" id="listDirectory">
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">Loading Merchant Directory...</div>
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">Loading Seller Directory...</div>
             </div>
         </div>
 
@@ -365,7 +365,7 @@
         
         const titles = {
             'dashboard': 'IMPERIAL OVERVIEW', 'requests': 'SARDAAR SUBMISSIONS',
-            'users': 'USER CONTROL CENTER', 'directory': 'MERCHANT DIRECTORY',
+            'users': 'USER CONTROL CENTER', 'directory': 'SELLER DIRECTORY',
             'ledger': 'SHAHI TREASURY LEDGER', 'payments': 'PAYMENT VERIFICATION VAULT'
         };
         document.getElementById('pageTitle').innerText = titles[tabId];
@@ -483,10 +483,10 @@
     }
 
     window.handleRequest = (id, newStatus) => {
-        if(confirm(newStatus === 'active' ? "Approve this merchant?" : "Reject this application?")) {
+        if(confirm(newStatus === 'active' ? "Approve this seller?" : "Reject this application?")) {
             update(ref(db, `users/sardaars/${id}`), { status: newStatus })
                 .then(() => {
-                    alert(newStatus === 'active' ? "Merchant Approved!" : "Application Rejected!");
+                    alert(newStatus === 'active' ? "Seller Approved!" : "Application Rejected!");
                     
                     // Fetch seller details to send email
                     get(ref(db, `users/sardaars/${id}`)).then(snap => {
@@ -572,7 +572,7 @@
         const term = document.getElementById('searchDirectory').value.toLowerCase();
         const filtered = activeSardaars.filter(s => Object.values(s).some(val => String(val).toLowerCase().includes(term)));
 
-        if(!filtered.length) { grid.innerHTML = '<div style="grid-column:1/-1; text-align:center;">No merchant records found.</div>'; return; }
+        if(!filtered.length) { grid.innerHTML = '<div style="grid-column:1/-1; text-align:center;">No seller records found.</div>'; return; }
 
         grid.innerHTML = filtered.map(s => `
             <div class="admin-card">
@@ -716,7 +716,7 @@
         list.innerHTML = dataArr.map(([id, p]) => `
             <div class="admin-card">
                 <span style="position:absolute; top:20px; right:20px; background:rgba(255,204,0,0.1); color:var(--shahi-gold); border:1px solid var(--shahi-gold); padding:4px 8px; border-radius:4px; font-size:10px; font-weight:bold;">UNVERIFIED</span>
-                <div class="card-label">Merchant Name</div><div class="card-val">${p.sellerName || 'N/A'}</div>
+                <div class="card-label">Seller Name</div><div class="card-val">${p.sellerName || 'N/A'}</div>
                 <div class="card-label">Store Identity</div><div class="card-val">${p.storeName || 'N/A'}</div>
                 <div class="card-label">Receipt Image</div>
                 <img src="${p.receiptUrl}" class="card-img" onclick="window.open('${p.receiptUrl}')" title="Click to view full image">

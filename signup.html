@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9236482420910781" crossorigin="anonymous"></script>
-    <title>Become a Merchant | Apni Saltanat</title>
+    <title>Become a Seller — Apni Saltanat | Pakistan's Premier Marketplace</title>
     <meta name="description" content="Become a part of Apni Saltanat — Open your store in Pakistan's royal marketplace, sell products and earn halal income. Register today!">
     <link rel="canonical" href="https://apnisaltanat.com/signup.html">
     <link rel="manifest" href="manifest.json">
@@ -224,31 +224,18 @@
             .doc-upload-grid { grid-template-columns:1fr; }
             .signup-page { padding:24px 16px; }
         }
-        /* SHAHI MODAL */
-        #shahiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-        .modal-card { background: var(--bg-surface); border: 2px solid var(--royal-gold); border-radius: 24px; padding: 40px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 50px rgba(197,160,89,0.2); animation: modalIn 0.3s ease-out; }
-        @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .modal-icon { font-size: 50px; margin-bottom: 20px; }
-        .modal-title { font-family: 'Epilogue', sans-serif; font-weight: 900; color: var(--royal-gold); margin-bottom: 10px; font-size: 20px; text-transform: uppercase; }
-        .modal-text { color: var(--text-light); margin-bottom: 30px; line-height: 1.6; }
-        .modal-btns { display: flex; gap: 12px; }
-        .modal-btn { flex: 1; padding: 15px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; transition: 0.3s; }
-        .btn-confirm { background: var(--royal-gold); color: #1a1a1a; }
-        .btn-cancel { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border); }
-        .btn-confirm:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold); }
     </style>
 </head>
 <body>
-    
+
 <!-- SHAHI MODAL CONTAINER -->
-<div id="shahiModal">
-    <div class="modal-card">
-        <div class="modal-icon" id="modalIcon">👑</div>
-        <div class="modal-title" id="modalTitle">WELCOME MERCHANT</div>
-        <div class="modal-text" id="modalText">Message here...</div>
-        <div class="modal-btns" id="modalBtns">
-            <button class="modal-btn btn-confirm" id="modalConfirmBtn">OK</button>
-            <button class="modal-btn btn-cancel" id="modalCancelBtn" style="display:none;">CANCEL</button>
+<div id="shahiModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:20000; align-items:center; justify-content:center; backdrop-filter:blur(10px);">
+    <div class="modal-card" style="background:var(--bg-surface); border:2px solid var(--royal-gold); border-radius:24px; padding:40px; width:90%; max-width:400px; text-align:center; box-shadow:0 0 50px rgba(197,160,89,0.2);">
+        <div class="modal-icon" id="modalIcon" style="font-size:50px; margin-bottom:20px;">👑</div>
+        <div class="modal-title" id="modalTitle" style="font-family:'Epilogue',sans-serif; font-weight:900; color:var(--royal-gold); margin-bottom:10px; font-size:20px; text-transform:uppercase;">WELCOME SELLER</div>
+        <div class="modal-text" id="modalText" style="color:var(--text-light); margin-bottom:30px; line-height:1.6;">Message here...</div>
+        <div class="modal-btns" id="modalBtns" style="display:flex; gap:12px;">
+            <button class="modal-btn btn-confirm" id="modalConfirmBtn" style="flex:1; padding:15px; border-radius:12px; border:none; font-weight:900; cursor:pointer; background:var(--royal-gold); color:#1a1a1a;">OK</button>
         </div>
     </div>
 </div>
@@ -269,7 +256,7 @@
 
     <!-- LEFT — Benefits Panel -->
     <div class="signup-left">
-        <div class="eyebrow"><i class="fas fa-crown"></i> New Merchants Welcome</div>
+        <div class="eyebrow"><i class="fas fa-crown"></i> New Sellers Welcome</div>
         <h1>Join <span>Apni Saltanat</span></h1>
         <p class="sub">Pakistan's most trusted royal marketplace. Open your store, sell products, and start your journey of halal earnings — completely free.</p>
 
@@ -285,7 +272,7 @@
                 <div class="benefit-icon"><i class="fas fa-crown"></i></div>
                 <div>
                     <h4>Elite Badge</h4>
-                    <p>The top 300 merchants receive the "Elite" badge and priority listing placement.</p>
+                    <p>The top 300 sellers receive the "Elite" badge and priority listing placement.</p>
                 </div>
             </div>
             <div class="benefit-item">
@@ -322,8 +309,8 @@
 
     <!-- RIGHT — Signup Form -->
     <div class="signup-card">
-        <h2 class="card-title">👑 Become a Merchant</h2>
-        <p class="card-sub">Create your account and start your business empire</p>
+        <h2 class="card-title">Become a Seller 👑</h2>
+        <p class="card-sub">Apply to join our royal circle of trusted sellers and grow your business.</p>
 
         <form id="signupForm">
 
@@ -455,85 +442,13 @@
         </form>
 
         <div class="link-text">
-            Already a Merchant? <a href="login.html">Login Now</a>
+            Already a Seller? <a href="login.html">Login Now</a>
         </div>
         <div class="terms-note">
             By signing up, you agree to our
             <a href="terms.html">Terms of Service</a>,
             <a href="privacy-policy.html">Privacy Policy</a> and
             <a href="instructions.html">Royal Manifesto</a>.
-        </div>
-    </div>
-</div>
-
-<!-- FOOTER -->
-<footer class="royal-footer" style="position:relative; z-index:2;">
-    <div class="footer-container">
-        <div class="footer-grid">
-            <div>
-                <div class="footer-brand">👑 APNI SALTANAT</div>
-                <p class="footer-desc">Pakistan's Royal Marketplace. High-quality products and trusted sellers. Every deal is a commitment.</p>
-                <div class="social-row" style="margin-top:20px;">
-                    <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/923011786494" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-            <div>
-                <div class="footer-col-title">Marketplace</div>
-                <ul class="footer-links">
-                    <li><a href="index.html">Marketplace</a></li>
-                    <li><a href="categories.html">Categories</a></li>
-                    <li><a href="seller-dashboard.html">Merchant Dashboard</a></li>
-                    <li><a href="signup.html">Become a Merchant</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-col-title">Imperial Hub</div>
-                <ul class="footer-links">
-                    <li><a href="faq.html">Help Center</a></li>
-                    <li><a href="instructions.html">Guidelines</a></li>
-                    <li><a href="about.html">Our Story</a></li>
-                    <li><a href="blog.html">Marketplace Blog</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="footer-col-title">Legal</div>
-                <ul class="footer-links">
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms & Conditions</a></li>
-                    <li><a href="refund-policy.html">Refund Policy</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-copy">
-            <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
-            <span>Every Deal is a Commitment 👑</span>
-        </div>
-    </div>
-</footer>
-
-<div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
-    <div class="menu-inner" onclick="event.stopPropagation()">
-        <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
-        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Marketplace</a>
-        <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
-        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Merchant Dashboard</a>
-        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Merchant</a>
-        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Marketplace Categories</a>
-
-        <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
-        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Guidelines</a>
-        <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
-        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Marketplace Blog</a>
-        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
-
-        <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
-            <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
-        </div>
-        <div style="padding-top:10px;">
-            <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
-            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Support</a>
         </div>
     </div>
 </div>
@@ -555,7 +470,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
     import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
@@ -565,8 +480,10 @@
     const auth = getAuth(app);
     const storage = getStorage(app);
 
+    let isRegistering = false;
+
     onAuthStateChanged(auth, u => {
-        if(u) {
+        if(u && !isRegistering) {
             const role = localStorage.getItem('userRole');
             if (role === 'sardaar') {
                 window.location.href = 'seller-dashboard.html';
@@ -575,12 +492,6 @@
             }
             return;
         }
-
-        const loginLink = document.getElementById('menuLogin');
-        const authWrapper = document.getElementById('authWrapper');
-        loginLink.innerHTML = `<i class="fas fa-sign-in-alt"></i> Join/Login`;
-        loginLink.href = 'login.html';
-        if (document.getElementById('logoutLink')) document.getElementById('logoutLink').remove();
     });
 
     const phoneInputField = document.querySelector("#phone");
@@ -589,7 +500,6 @@
         preferredCountries: ["pk", "ae", "sa", "gb", "us"],
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
-    document.querySelector(".iti").style.width = "100%";
 
     document.getElementById('togglePassword').addEventListener('click', function() {
         const pwField = document.getElementById('password');
@@ -609,6 +519,7 @@
 
     document.getElementById('signupForm').addEventListener('submit', async function(e) {
         e.preventDefault();
+        isRegistering = true;
         const btn = document.getElementById('submitBtn');
         const progressWrap = document.getElementById('uploadProgress');
         const progressFill = document.getElementById('progressFill');
@@ -630,47 +541,32 @@
         const fBack = document.getElementById('idBack').files[0];
 
         try {
-            const sardaarsSnap = await get(ref(db, 'users/sardaars'));
-            let existingData = null, oldUid = null;
-            if (sardaarsSnap.exists()) {
-                sardaarsSnap.forEach(child => {
-                    if (child.val().email === email) { existingData = child.val(); oldUid = child.key; }
-                });
-            }
-
             const userCredential = await createUserWithEmailAndPassword(auth, email, pwd);
             const user = userCredential.user;
 
             progressWrap.style.display = 'block';
             progressText.textContent = 'Uploading documents...';
-            const frontUrl = await uploadToFirebaseStorage(fFront, `cnic/${user.uid}/front_${Date.now()}_${fFront.name}`, (p) => { progressFill.style.width = p * 0.45 + '%'; });
-            const backUrl = await uploadToFirebaseStorage(fBack, `cnic/${user.uid}/back_${Date.now()}_${fBack.name}`, (p) => { progressFill.style.width = 45 + p * 0.45 + '%'; });
+            const frontUrl = await uploadToFirebaseStorage(fFront, `cnic/${user.uid}/front_${Date.now()}`, (p) => { progressFill.style.width = p * 0.45 + '%'; });
+            const backUrl = await uploadToFirebaseStorage(fBack, `cnic/${user.uid}/back_${Date.now()}`, (p) => { progressFill.style.width = 45 + p * 0.45 + '%'; });
 
             const userData = {
                 uid: user.uid, email, phone, address, userName, storeName, category, bankAccount, cnic,
-                role: 'sardaar', status: existingData ? existingData.status : 'pending',
-                idFrontURL: frontUrl, idBackURL: backUrl,
-                timestamp: Date.now()
+                role: 'sardaar', status: 'pending', idFrontURL: frontUrl, idBackURL: backUrl, timestamp: Date.now()
             };
 
             await set(ref(db, `users/sardaars/${user.uid}`), userData);
-            
-            shahiAlert("your details are submitted", "✅");
-            
-            // Wait for user to click OK before redirecting
-            document.getElementById('modalConfirmBtn').onclick = () => {
-                window.location.href = 'seller-dashboard.html';
-            };
+            shahiAlert("Signup successful! Welcome to the Royal Marketplace.", "✅");
+            document.getElementById('modalConfirmBtn').onclick = () => { window.location.href = 'seller-dashboard.html'; };
 
         } catch (error) {
             console.error(error);
             shahiAlert("Signup Failed: " + error.message, "❌");
             btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-crown"></i> Join the Marketplace';
+            isRegistering = false;
+            btn.innerHTML = 'JOIN THE MARKETPLACE <i class="fas fa-arrow-right"></i>';
         }
     });
 
-    // ===== SHAHI MODAL SYSTEM =====
     window.shahiAlert = (text, type = 'info') => {
         const modal = document.getElementById('shahiModal');
         const icon = document.getElementById('modalIcon');

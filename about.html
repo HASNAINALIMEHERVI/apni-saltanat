@@ -489,8 +489,8 @@
                 <ul class="footer-links">
                     <li><a href="index.html">Marketplace</a></li>
                     <li><a href="categories.html">Categories</a></li>
-                    <li><a href="seller-dashboard.html">Merchant Dashboard</a></li>
-                    <li><a href="signup.html">Become a Merchant</a></li>
+                    <li><a href="seller-dashboard.html">Seller Dashboard</a></li>
+                    <li><a href="signup.html">Become a Seller</a></li>
                 </ul>
             </div>
             <div>
@@ -524,8 +524,8 @@
         <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
         <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Marketplace</a>
         <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
-        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Merchant Dashboard</a>
-        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Merchant</a>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Seller Dashboard</a>
+        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Seller</a>
         <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Marketplace Categories</a>
 
         <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
@@ -560,7 +560,7 @@
         const loginLink = document.getElementById('menuLogin');
         const authWrapper = document.getElementById('authWrapper');
         if(u) {
-            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Merchant Profile`;
+            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Seller Profile`;
             loginLink.href = 'seller-dashboard.html';
             if (!document.getElementById('logoutLink')) {
                 const logout = document.createElement('a');

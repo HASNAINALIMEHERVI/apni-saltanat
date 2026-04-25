@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Merchant Panel | Apni Saltanat — Royal Dashboard</title>
+    <title>Seller Panel | Apni Saltanat — Royal Dashboard</title>
     <meta name="description" content="Manage your royal empire on Apni Saltanat — Pakistan's Premium Marketplace.">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -505,7 +505,7 @@
 <div id="shahiModal">
     <div class="modal-card">
         <div class="modal-icon" id="modalIcon">👑</div>
-        <div class="modal-title" id="modalTitle">HELLO MERCHANT</div>
+        <div class="modal-title" id="modalTitle">HELLO SELLER</div>
         <div class="modal-text" id="modalText">Message here...</div>
         <div class="modal-btns" id="modalBtns">
             <button class="modal-btn btn-confirm" id="modalConfirmBtn">OK</button>
@@ -518,7 +518,7 @@
 <div id="notifOverlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:10000; display:none; align-items:center; justify-content:center; backdrop-filter:blur(20px);">
     <div style="text-align:center; max-width:420px; padding:50px; background:var(--bg-surface); border:2px solid var(--royal-gold); border-radius:30px; box-shadow:0 0 100px rgba(197,160,89,0.3); animation: modalIn 0.5s ease-out;">
         <div style="font-size:70px; margin-bottom:25px;">👑</div>
-        <h2 style="font-family:'Epilogue',sans-serif; color:var(--royal-gold); margin-bottom:15px; font-size:24px; font-weight:900;">HELLO MERCHANT!</h2>
+        <h2 style="font-family:'Epilogue',sans-serif; color:var(--royal-gold); margin-bottom:15px; font-size:24px; font-weight:900;">HELLO SELLER!</h2>
         <p style="color:var(--text-light); line-height:1.8; margin-bottom:35px; font-size:16px;">Please click <b>OK</b> to activate your dashboard. Must click allow for order notifications.</p>
         <button onclick="acceptNotifs()" class="btn-gold" style="width:100%; height:60px; font-weight:900; font-size:18px; letter-spacing:1px; box-shadow:var(--shadow-gold);">OK, LET'S BEGIN 👑</button>
     </div>
@@ -526,7 +526,7 @@
 
 <div id="loader">
     <div class="spinner"></div>
-    <div style="font-family: 'Epilogue', sans-serif; font-weight: 900; color: var(--royal-gold); letter-spacing: 2px;">HELLO MERCHANT...</div>
+    <div style="font-family: 'Epilogue', sans-serif; font-weight: 900; color: var(--royal-gold); letter-spacing: 2px;">HELLO SELLER...</div>
 </div>
 
 <div class="mobile-toggle" onclick="toggleSidebar()">
@@ -537,7 +537,7 @@
 <aside class="shahi-sidebar" id="sidebar">
     <div class="sidebar-header">
         <div class="sidebar-logo"><i class="fas fa-crown"></i></div>
-        <div class="sidebar-title">MERCHANT PANEL</div>
+        <div class="sidebar-title">SELLER PANEL</div>
     </div>
 
     <nav class="sidebar-nav">
@@ -565,7 +565,7 @@
         <div class="user-profile">
             <div class="user-avatar"><i class="fas fa-user"></i></div>
             <div class="user-info">
-                <span class="name" id="displayUserName">Merchant</span>
+                <span class="name" id="displayUserName">Seller</span>
                 <span class="status" id="userStatusLabel">Royal Member</span>
             </div>
         </div>
@@ -589,7 +589,7 @@
     <section id="tab-dashboard" class="tab-content active">
         <div class="dashboard-header">
             <div class="welcome-msg">
-                <h1>Hello, <span id="welcomeName">Merchant</span>!</h1>
+                <h1>Hello, <span id="welcomeName">Seller</span>!</h1>
                 <p>Welcome to your royal command center.</p>
             </div>
             <button class="btn-gold" onclick="switchTab('products')"><i class="fas fa-plus"></i> Add Product</button>
@@ -1059,7 +1059,7 @@
         audioOrder.play().catch(e => console.log("Audio play blocked until interaction"));
         if (Notification.permission === "granted") {
             new Notification("👑 New Order Received!", {
-                body: `Merchant! You have received a new order from ${order.customerName} for Rs.${order.productPrice}.`,
+                body: `Seller! You have received a new order from ${order.customerName} for Rs.${order.productPrice}.`,
                 icon: 'favicon.png'
             });
         }
@@ -1080,7 +1080,7 @@
 
     // ===== ORDER ACTIONS =====
     window.confirmOrder = (orderKey) => {
-        shahiConfirm("Merchant, are you sure you want to confirm this order? The buyer will be notified.", async () => {
+        shahiConfirm("Seller, are you sure you want to confirm this order? The buyer will be notified.", async () => {
             try {
                 const snap = await get(ref(db, `orders/${uid}/${orderKey}`));
                 if(snap.exists()) {
@@ -1118,7 +1118,7 @@
     }
 
     window.deleteOrder = (orderKey) => {
-        shahiConfirm("Merchant, are you sure you want to delete this order? This action cannot be undone.", () => {
+        shahiConfirm("Seller, are you sure you want to delete this order? This action cannot be undone.", () => {
             remove(ref(db, `orders/${uid}/${orderKey}`)).then(() => {
                 shahiAlert("Order has been deleted.", "🗑️");
             });

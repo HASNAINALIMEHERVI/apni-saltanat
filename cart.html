@@ -157,8 +157,8 @@
         <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
         <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Royal Marketplace</a>
         <a href="cart.html" class="menu-item" style="color:var(--royal-gold); background:rgba(255,204,0,0.05); border-radius:12px; padding:12px 16px; margin:0 -8px;"><i class="fas fa-shopping-basket"></i> View My Cart</a>
-        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Merchant Dashboard</a>
-        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Merchant</a>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Seller Dashboard</a>
+        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Seller</a>
         <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Categories</a>
 
         <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Information Center</div>
@@ -194,8 +194,8 @@
                 <ul class="footer-links">
                     <li><a href="index.html">Royal Marketplace</a></li>
                     <li><a href="categories.html">Categories</a></li>
-                    <li><a href="seller-dashboard.html">Merchant Dashboard</a></li>
-                    <li><a href="signup.html">Become a Merchant</a></li>
+                    <li><a href="seller-dashboard.html">Seller Dashboard</a></li>
+                    <li><a href="signup.html">Become a Seller</a></li>
                 </ul>
             </div>
             <div>
@@ -244,7 +244,7 @@
 
         if(u) {
             currentUser = u;
-            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Merchant Profile`;
+            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Seller Profile`;
             loginLink.href = 'seller-dashboard.html';
             
             if (!document.getElementById('logoutLink')) {

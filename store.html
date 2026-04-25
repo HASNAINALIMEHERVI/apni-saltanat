@@ -350,7 +350,7 @@
                 <ul class="space-y-4 text-white/50 font-medium">
                     <li><a href="index.html" class="hover:text-gold-400">Royal Marketplace</a></li>
                     <li><a href="categories.html" class="hover:text-gold-400">Categories</a></li>
-                    <li><a href="signup.html" class="hover:text-gold-400">Become a Merchant</a></li>
+                    <li><a href="signup.html" class="hover:text-gold-400">Become a Seller</a></li>
                 </ul>
             </div>
             <div>
@@ -450,7 +450,7 @@
                 return;
             }
 
-            const name = (d.userName || d.name || 'Merchant').toUpperCase();
+            const name = (d.userName || d.name || 'Seller').toUpperCase();
             document.getElementById('navStoreName').innerHTML = `${name}`;
             document.getElementById('heroStoreName').innerText = `${name}'S STORE`;
 

@@ -69,13 +69,13 @@
 <div class="policy-content">
     <div class="policy-section">
         <div class="policy-section-header"><div class="policy-icon"><i class="fas fa-info-circle"></i></div><h2>1. Overview</h2></div>
-        <p>Apni Saltanat is a <strong>marketplace platform</strong> that connects independent buyers and sellers (Merchants) across Pakistan. Transactions are conducted directly between buyers and sellers.</p>
+        <p>Apni Saltanat is a <strong>marketplace platform</strong> that connects independent buyers and sellers (Sellers) across Pakistan. Transactions are conducted directly between buyers and sellers.</p>
         <p>As a platform, Apni Saltanat does not directly sell products and is <strong>not a party to transactions</strong> between buyers and sellers. However, we have established the following policies to ensure fairness.</p>
         <div class="info-box"><p><i class="fas fa-handshake" style="color:#00c864; margin-right:8px;"></i> Our goal is to ensure that every deal in the marketplace is a commitment to trust and quality.</p></div>
     </div>
     <div class="policy-section">
         <div class="policy-section-header"><div class="policy-icon"><i class="fas fa-box-open"></i></div><h2>2. Damaged or Defective Products</h2></div>
-        <p>If a product arrives damaged or defective, the <strong>Seller (Merchant) is fully responsible</strong> for compensation or replacement. Buyers should:</p>
+        <p>If a product arrives damaged or defective, the <strong>Seller is fully responsible</strong> for compensation or replacement. Buyers should:</p>
         <ul class="steps">
             <li><div><strong>Document the Damage</strong><span>Take clear photos or videos of the damaged product and its packaging upon receipt.</span></div></li>
             <li><div><strong>Contact the Seller</strong><span>Reach out via their WhatsApp or contact info on their store page within 48 hours of delivery.</span></div></li>
@@ -151,8 +151,8 @@
                 <ul class="footer-links">
                     <li><a href="index.html">Marketplace</a></li>
                     <li><a href="categories.html">Categories</a></li>
-                    <li><a href="seller-dashboard.html">Merchant Dashboard</a></li>
-                    <li><a href="signup.html">Become a Merchant</a></li>
+                    <li><a href="seller-dashboard.html">Seller Dashboard</a></li>
+                    <li><a href="signup.html">Become a Seller</a></li>
                 </ul>
             </div>
             <div>
@@ -161,7 +161,7 @@
                     <li><a href="about.html">Our Story</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
                     <li><a href="blog.html">Marketplace Blog</a></li>
-                    <li><a href="instructions.html">Merchant Guidelines</a></li>
+                    <li><a href="instructions.html">Seller Guidelines</a></li>
                 </ul>
             </div>
             <div>
@@ -186,12 +186,12 @@
         <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
         <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Marketplace</a>
         <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
-        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Merchant Dashboard</a>
-        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Merchant</a>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Seller Dashboard</a>
+        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Seller</a>
         <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Marketplace Categories</a>
 
         <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
-        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Merchant Guidelines</a>
+        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Seller Guidelines</a>
         <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
         <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Marketplace Blog</a>
         <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
@@ -233,7 +233,7 @@
         const loginLink = document.getElementById('menuLogin');
         const authWrapper = document.getElementById('authWrapper');
         if(u) {
-            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Merchant Profile`;
+            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Seller Profile`;
             loginLink.href = 'seller-dashboard.html';
             if (!document.getElementById('logoutLink')) {
                 const logout = document.createElement('a');
