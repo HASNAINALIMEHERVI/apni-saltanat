@@ -327,6 +327,42 @@
 
         <form id="signupForm">
 
+            <!-- Full Name -->
+            <div class="field-group">
+                <label>Full Name (As per CNIC)</label>
+                <div class="field-wrap">
+                    <i class="fas fa-user field-icon"></i>
+                    <input type="text" id="userName" class="royal-field-input" placeholder="Enter your legal name" required>
+                </div>
+            </div>
+
+            <!-- Store Name -->
+            <div class="field-group">
+                <label>Store Name</label>
+                <div class="field-wrap">
+                    <i class="fas fa-store field-icon"></i>
+                    <input type="text" id="storeName" class="royal-field-input" placeholder="Your Imperial Store Name" required>
+                </div>
+            </div>
+
+            <!-- Category -->
+            <div class="field-group">
+                <label>Business Category</label>
+                <div class="field-wrap">
+                    <i class="fas fa-tags field-icon"></i>
+                    <select id="storeCategory" class="royal-field-input" style="appearance: none; padding-left: 45px;" required>
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Groceries">Groceries</option>
+                        <option value="Home & Decor">Home & Decor</option>
+                        <option value="Health & Beauty">Health & Beauty</option>
+                        <option value="Handicrafts">Handicrafts</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+
             <!-- Email -->
             <div class="field-group">
                 <label>Email Address</label>
@@ -341,15 +377,6 @@
                 <label>Contact Number (With Country Code)</label>
                 <div class="field-wrap">
                     <input type="tel" id="phone" class="royal-field-input no-icon" style="padding-left:54px !important;" required>
-                </div>
-            </div>
-
-            <!-- Full Name -->
-            <div class="field-group">
-                <label>Full Name (As per CNIC)</label>
-                <div class="field-wrap">
-                    <i class="fas fa-user field-icon"></i>
-                    <input type="text" id="userName" class="royal-field-input" placeholder="Enter your legal name" required>
                 </div>
             </div>
 
@@ -540,7 +567,6 @@
 
     onAuthStateChanged(auth, u => {
         if(u) {
-            // If already logged in, no need to sign up again
             const role = localStorage.getItem('userRole');
             if (role === 'sardaar') {
                 window.location.href = 'seller-dashboard.html';
@@ -592,10 +618,12 @@
         btn.disabled = true;
 
         const email = document.getElementById('email').value.trim();
-        const phone = phoneInput.getNumber();
-        const address = document.getElementById('address').value.trim();
         const pwd = document.getElementById('password').value;
         const userName = document.getElementById('userName').value.trim();
+        const storeName = document.getElementById('storeName').value.trim();
+        const category = document.getElementById('storeCategory').value;
+        const phone = phoneInput.getNumber();
+        const address = document.getElementById('address').value.trim();
         const bankAccount = document.getElementById('bankAccountNumber').value.trim();
         const cnic = document.getElementById('idCard').value.trim();
         const fFront = document.getElementById('idFront').files[0];
@@ -619,7 +647,7 @@
             const backUrl = await uploadToFirebaseStorage(fBack, `cnic/${user.uid}/back_${Date.now()}_${fBack.name}`, (p) => { progressFill.style.width = 45 + p * 0.45 + '%'; });
 
             const userData = {
-                uid: user.uid, email, phone, address, userName, bankAccount, cnic,
+                uid: user.uid, email, phone, address, userName, storeName, category, bankAccount, cnic,
                 role: 'sardaar', status: existingData ? existingData.status : 'pending',
                 idFrontURL: frontUrl, idBackURL: backUrl,
                 timestamp: Date.now()
@@ -660,7 +688,16 @@
         confirmBtn.onclick = () => modal.style.display = 'none';
     };
 
-</script>
+    <!-- Royal Modal -->
+    <div id="shahiModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(8px);">
+        <div style="background:var(--royal-dark); border:1px solid var(--gold-primary); border-radius:15px; padding:30px; max-width:400px; width:100%; text-align:center; box-shadow:0 0 30px rgba(255,215,0,0.2);">
+            <div id="modalIcon" style="font-size:3.5rem; margin-bottom:15px;">👑</div>
+            <h3 id="modalTitle" style="color:var(--gold-primary); letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">System Message</h3>
+            <p id="modalText" style="color:var(--text-muted); line-height:1.6; margin-bottom:25px;"></p>
+            <button id="modalConfirmBtn" style="background:var(--gold-primary); color:black; border:none; padding:12px 30px; border-radius:8px; font-weight:800; cursor:pointer; width:100%; letter-spacing:1px; transition:0.3s;">UNDERSTOOD</button>
+        </div>
+    </div>
+
 </script>
 </body>
 </html>

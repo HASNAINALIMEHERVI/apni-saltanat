@@ -370,9 +370,8 @@
                 };
             }
         } else {
-            // Guest mode: Allow products to load, but keep login link visible
-            loginLink.innerHTML = `<i class="fas fa-sign-in-alt"></i> Join/Login`;
-            loginLink.href = 'login.html';
+            // Guest mode: Redirect to login page
+            window.location.href = 'login.html';
         }
 
         // Always remove loader for all users (guests and logged in)
