@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sultan Dashboard | Apni Saltanat</title>
+    <title>Admin Dashboard | Apni Saltanat</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -177,16 +177,16 @@
         <div class="brand">
             <i class="fas fa-crown"></i>
             <h2>APNI <span>SALTANAT</span></h2>
-            <div style="font-size: 12px; color: var(--shahi-gold); letter-spacing: 2px; margin-top: 5px;">SULTAN DASHBOARD</div>
+            <div style="font-size: 12px; color: var(--shahi-gold); letter-spacing: 2px; margin-top: 5px;">ADMIN DASHBOARD</div>
         </div>
 
         <a class="nav-link active" onclick="switchTab('dashboard', this)"><i class="fas fa-chart-pie"></i> Overview</a>
-        <a class="nav-link" onclick="switchTab('requests', this)"><i class="fas fa-user-plus"></i> Sardaar Requests <span class="badge" id="navBadgeRequests">0</span></a>
+        <a class="nav-link" onclick="switchTab('requests', this)"><i class="fas fa-user-plus"></i> Merchant Requests <span class="badge" id="navBadgeRequests">0</span></a>
         <a class="nav-link" onclick="switchTab('users', this)"><i class="fas fa-users-cog"></i> User Control</a>
-        <a class="nav-link" onclick="switchTab('directory', this)"><i class="fas fa-address-book"></i> Sardaar Directory</a>
+        <a class="nav-link" onclick="switchTab('directory', this)"><i class="fas fa-address-book"></i> Merchant Directory</a>
         <a class="nav-link" onclick="switchTab('ledger', this)"><i class="fas fa-file-invoice-dollar"></i> Shahi Ledger</a>
         <a class="nav-link" onclick="switchTab('payments', this)"><i class="fas fa-receipt"></i> Payment Vault</a>
-        <a class="nav-link" href="index.html" style="margin-top: auto;"><i class="fas fa-home"></i> Back to Bazaar</a>
+        <a class="nav-link" href="index.html" style="margin-top: auto;"><i class="fas fa-home"></i> Back to Marketplace</a>
         <a class="nav-link" onclick="logout()" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 
@@ -194,11 +194,11 @@
     <div class="shahi-main">
         <div class="top-bar">
             <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fas fa-bars"></i></button>
-            <h1 class="page-title" id="pageTitle">IMPERIAL OVERVIEW</h1>
+            <h1 class="page-title" id="pageTitle">ADMIN OVERVIEW</h1>
             <div class="user-profile">
                 <i class="fas fa-user-shield" style="color: var(--shahi-gold); font-size: 20px;"></i>
                 <div style="text-align: right;">
-                    <div style="font-weight: 800; font-size: 14px; color: var(--shahi-gold);">SULTAN</div>
+                    <div style="font-weight: 800; font-size: 14px; color: var(--shahi-gold);">ADMIN</div>
                     <div style="font-size: 10px; color: var(--text-muted);">Admin Access</div>
                 </div>
             </div>
@@ -209,7 +209,7 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon" style="background: rgba(255,215,0,0.1); color: var(--shahi-gold);"><i class="fas fa-crown"></i></div>
-                    <div><div class="stat-val" id="statSardaars">0</div><div class="stat-title">Total Sardaars</div></div>
+                    <div><div class="stat-val" id="statSardaars">0</div><div class="stat-title">Total Merchants</div></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon" style="background: rgba(33,150,243,0.1); color: var(--accent-blue);"><i class="fas fa-users"></i></div>
@@ -226,8 +226,8 @@
             </div>
             <div class="admin-card" style="text-align: center; padding: 60px 20px;">
                 <i class="fas fa-chess-king" style="font-size: 80px; color: var(--shahi-gold); margin-bottom: 20px; opacity: 0.8; filter: drop-shadow(0 0 20px var(--shahi-gold));"></i>
-                <h2 style="font-family: 'Outfit'; font-size: 32px; margin:0;">LONG LIVE THE SULTAN</h2>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 15px auto;">Use the navigation menu to manage Sardaars, approve merchant requests, verify treasury payments, and control user access across the empire.</p>
+                <h2 style="font-family: 'Outfit'; font-size: 32px; margin:0;">WELCOME ADMIN</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 15px auto;">Use the navigation menu to manage Merchants, approve seller requests, verify treasury payments, and control user access across the system.</p>
             </div>
         </div>
 
@@ -485,9 +485,44 @@
     window.handleRequest = (id, newStatus) => {
         if(confirm(newStatus === 'active' ? "Approve this merchant?" : "Reject this application?")) {
             update(ref(db, `users/sardaars/${id}`), { status: newStatus })
-                .then(() => alert(newStatus === 'active' ? "Merchant Approved!" : "Application Rejected!"));
+                .then(() => {
+                    alert(newStatus === 'active' ? "Merchant Approved!" : "Application Rejected!");
+                    
+                    // Fetch seller details to send email
+                    get(ref(db, `users/sardaars/${id}`)).then(snap => {
+                        if (snap.exists()) {
+                            const data = snap.val();
+                            if (data.email) {
+                                notifySardaarStatusUpdate(data.email, newStatus, data.name || data.userName);
+                            }
+                        }
+                    });
+                });
         }
     };
+
+    async function notifySardaarStatusUpdate(email, status, name) {
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbwo6smhEV8TWPrWdBJ3SCFFj96AL6ucGHR4dRMAfCX5EpFSJuQnIwgMHmoWbzLaawzb/exec";
+        const isApproved = status === 'active';
+        const subject = isApproved ? "Verification Approved! - Apni Saltanat" : "Verification Update - Apni Saltanat";
+        const message = isApproved 
+            ? `Hello ${name}! u are approved and can sell now: https://apnisaltanat.com/seller-dashboard.html`
+            : `Hello ${name}! put your details correctly. Please log in to your dashboard to see more details and update your information.`;
+
+        const payload = {
+            targetEmail: email,
+            subject: subject,
+            message: message,
+            customerName: name,
+            status: isApproved ? "Approved" : "Rejected"
+        };
+
+        try {
+            fetch(scriptUrl, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+        } catch (e) {
+            console.error("Email Notify Error:", e);
+        }
+    }
     document.getElementById('searchRequests').addEventListener('input', renderRequests);
 
     // --- TAB: USER CONTROL ---

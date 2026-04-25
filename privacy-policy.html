@@ -280,10 +280,10 @@
             <div>
                 <div class="footer-col-title">Marketplace</div>
                 <ul class="footer-links">
-                    <li><a href="index.html">Shahi Bazaar</a></li>
+                    <li><a href="index.html">Marketplace</a></li>
                     <li><a href="categories.html">Categories</a></li>
-                    <li><a href="seller-dashboard.html">Sardaar Dashboard</a></li>
-                    <li><a href="signup.html">Become a Sardaar</a></li>
+                    <li><a href="seller-dashboard.html">Merchant Dashboard</a></li>
+                    <li><a href="signup.html">Become a Merchant</a></li>
                 </ul>
             </div>
             <div>
@@ -291,15 +291,15 @@
                 <ul class="footer-links">
                     <li><a href="about.html">Our Story</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="blog.html">Saltanat Blog</a></li>
-                    <li><a href="instructions.html">Shahi Paigam</a></li>
+                    <li><a href="blog.html">Marketplace Blog</a></li>
+                    <li><a href="instructions.html">Merchant Guidelines</a></li>
                 </ul>
             </div>
             <div>
                 <div class="footer-col-title">Legal</div>
                 <ul class="footer-links">
                     <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="disclaimer.html">Shahi Disclaimer</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
                     <li><a href="terms.html">Terms & Conditions</a></li>
                     <li><a href="refund-policy.html">Refund Policy</a></li>
                 </ul>
@@ -315,16 +315,16 @@
 <div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
     <div class="menu-inner" onclick="event.stopPropagation()">
         <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
-        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Shahi Bazaar</a>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Marketplace</a>
         <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
-        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Sardaar Dashboard</a>
-        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Sardaar</a>
-        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Shahi Categories</a>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Merchant Dashboard</a>
+        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Merchant</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Marketplace Categories</a>
 
         <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
-        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Shahi Paigam</a>
+        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Merchant Guidelines</a>
         <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
-        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Saltanat Blog</a>
+        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Marketplace Blog</a>
         <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
 
         <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
@@ -332,13 +332,13 @@
         </div>
         <div style="padding-top:10px;">
             <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
-            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Sardaar</a>
+            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Support</a>
         </div>
     </div>
 </div>
 
 <div id="cookie-consent" style="position:fixed; bottom:24px; left:24px; background:var(--bg-surface); border:1px solid var(--border-gold); padding:24px; border-radius:var(--radius-lg); box-shadow:0 30px 60px rgba(0,0,0,0.8); z-index:10000; width:min(380px, calc(100vw - 48px)); display:none; border-left:4px solid var(--royal-gold);">
-    <div style="font-family:'Epilogue',sans-serif; font-size:15px; font-weight:900; color:var(--royal-gold); margin-bottom:10px; display:flex; align-items:center; gap:10px;"><i class="fas fa-shield-halved"></i> Shahi Privacy Notice</div>
+    <div style="font-family:'Epilogue',sans-serif; font-size:15px; font-weight:900; color:var(--royal-gold); margin-bottom:10px; display:flex; align-items:center; gap:10px;"><i class="fas fa-shield-halved"></i> Marketplace Privacy Notice</div>
     <p style="font-size:12px; color:var(--text-muted); line-height:1.7; margin-bottom:18px;">Apni Saltanat uses cookies to deliver a premium experience and to show relevant ads through Google AdSense. By continuing, you agree to our royal manifesto.</p>
     <div style="display:flex; gap:12px;">
         <button onclick="acceptCookies()" class="btn-gold" style="flex:1; height:44px; font-size:12px; font-weight:900; cursor:pointer;">I ACCEPT</button>
@@ -364,7 +364,7 @@
         const loginLink = document.getElementById('menuLogin');
         const authWrapper = document.getElementById('authWrapper');
         if(u) {
-            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Sardaar Profile`;
+            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Merchant Profile`;
             loginLink.href = 'seller-dashboard.html';
             if (!document.getElementById('logoutLink')) {
                 const logout = document.createElement('a');
@@ -373,10 +373,10 @@
                 logout.className = 'menu-item';
                 logout.style.color = '#ff4d4d';
                 logout.style.marginTop = '12px';
-                logout.innerHTML = `<i class="fas fa-sign-out-alt"></i> Exit Saltanat`;
+                logout.innerHTML = `<i class="fas fa-sign-out-alt"></i> Exit Marketplace`;
                 logout.onclick = (e) => { 
                     e.preventDefault(); 
-                    if (confirm("Are you sure you want to Exit Saltanat? (Sadaq-e-Sultan)")) {
+                    if (confirm("Are you sure you want to Exit Marketplace?")) {
                         signOut(auth).then(() => { localStorage.clear(); window.location.reload(); });
                     }
                 };
