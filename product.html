@@ -19,6 +19,7 @@
     <link rel="canonical" href="https://apnisaltanat.com/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="royal.css">
+    <script src="theme-manager.js"></script>
     <style>
         /* ===== PRODUCT PAGE ===== */
         #product-container { max-width:1100px; margin:40px auto; padding:0 20px; display:flex; flex-direction:column; gap:24px; }
@@ -94,16 +95,16 @@
         .rating-input { display:flex; gap:6px; margin-bottom:14px; }
         .rating-input i { font-size:22px; color:var(--border); cursor:pointer; transition:0.2s; }
         .rating-input i.active { color:var(--royal-gold); }
-        .review-textarea { width:100%; padding:14px 18px; background:#111; border:1.5px solid var(--border); border-radius:var(--radius-md); color:var(--text-light); outline:none; font-family:'Manrope',sans-serif; font-size:14px; min-height:100px; margin-bottom:14px; resize:vertical; transition:var(--transition); }
+        .review-textarea { width:100%; padding:14px 18px; background:var(--bg-deep); border:1.5px solid var(--border); border-radius:var(--radius-md); color:var(--text-main); outline:none; font-family:'Manrope',sans-serif; font-size:14px; min-height:100px; margin-bottom:14px; resize:vertical; transition:var(--transition); }
         .review-textarea:focus { border-color:var(--border-gold); }
         .review-textarea::placeholder { color:var(--text-dim); }
 
         /* Order Modal */
-        #orderModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(6px); }
+        #orderModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(6px); }
         .modal-box { background:var(--bg-surface); width:100%; max-width:500px; border-radius:var(--radius-lg); padding:36px; position:relative; border:1px solid var(--border-gold); animation:slideUp 0.3s ease-out; }
         .modal-box h2 { font-family:'Epilogue',sans-serif; font-size:24px; font-weight:900; color:var(--royal-gold); margin-bottom:6px; }
         .modal-box p { color:var(--text-muted); font-size:13px; margin-bottom:20px; }
-        .modal-input { width:100%; padding:13px 18px; background:#111; border:1.5px solid var(--border); border-radius:var(--radius-md); color:var(--text-light); outline:none; font-family:'Manrope',sans-serif; font-size:14px; margin-bottom:12px; transition:var(--transition); }
+        .modal-input { width:100%; padding:13px 18px; background:var(--bg-deep); border:1.5px solid var(--border); border-radius:var(--radius-md); color:var(--text-main); outline:none; font-family:'Manrope',sans-serif; font-size:14px; margin-bottom:12px; transition:var(--transition); }
         .modal-input:focus { border-color:var(--border-gold); }
         .modal-input::placeholder { color:var(--text-dim); }
         @keyframes slideUp { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
@@ -124,7 +125,7 @@
         }
 
         /* SHAHI MODAL */
-        #shahiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        #shahiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
         .modal-card { background: var(--bg-surface); border: 2px solid var(--royal-gold); border-radius: 24px; padding: 40px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 50px rgba(197,160,89,0.2); animation: modalIn 0.3s ease-out; }
         @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         .modal-icon { font-size: 50px; margin-bottom: 20px; }
@@ -138,7 +139,7 @@
     </style>
     <style>
         /* Auth Loader */
-        #shahi-auth-loader { position:fixed; inset:0; background:#080808; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:0.5s; }
+        #shahi-auth-loader { position:fixed; inset:0; background:var(--bg-dark); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:0.5s; }
         .loader-content { text-align:center; animation:pulse 2s infinite; }
         @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.7; transform:scale(0.95); } }
     </style>
@@ -262,9 +263,9 @@
 <div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
     <div class="menu-inner" onclick="event.stopPropagation()">
         <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
-        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Marketplace</a>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Royal Marketplace</a>
         <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
-        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Seller Dashboard</a>
+        <a href="seller-dashboard.html" class="menu-item" id="menuDashboard" style="display:none;"><i class="fas fa-th-large"></i> Seller Dashboard</a>
         <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Seller</a>
         <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Categories</a>
 
@@ -276,10 +277,14 @@
 
         <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
             <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
+            <a href="#" class="menu-item" id="menuLogout" style="display:none; color:var(--danger);"><i class="fas fa-sign-out-alt"></i> Exit Marketplace</a>
+        </div>
+        <div style="padding-top:10px;">
+            <div id="theme-picker-container"></div>
         </div>
         <div style="padding-top:10px;">
             <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
-            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> Contact Support</a>
+            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Support</a>
         </div>
     </div>
 </div>
@@ -302,7 +307,7 @@
                 <ul class="footer-links">
                     <li><a href="index.html">Marketplace</a></li>
                     <li><a href="categories.html">Categories</a></li>
-                    <li><a href="seller-dashboard.html">Seller Dashboard</a></li>
+                    <li><a href="seller-dashboard.html" id="footerDashboard" style="display:none;">Seller Dashboard</a></li>
                     <li><a href="signup.html">Become a Seller</a></li>
                 </ul>
             </div>
@@ -332,23 +337,10 @@
 </footer>
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, get, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { auth, db } from "./auth-manager.js";
+    import { ref, get, runTransaction, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc",
-        authDomain: "apnisaltanat.com",
-        databaseURL: "https://apni-saltanat-default-rtdb.firebaseio.com",
-        projectId: "apni-saltanat",
-        storageBucket: "apni-saltanat.firebasestorage.app",
-        messagingSenderId: "691941073239",
-        appId: "1:691941073239:web:9e0b568eccc347a0c0de12"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const auth = getAuth(app);
     const params = new URLSearchParams(window.location.search);
     const pID = params.get('id'), sID = params.get('seller');
 
@@ -366,49 +358,8 @@
     updateCartCount();
 
     onAuthStateChanged(auth, (user) => {
+        window.currentUser = user;
         const loader = document.getElementById('shahi-auth-loader');
-        if (user) {
-            window.currentUser = user;
-            const loginLink = document.getElementById('menuLogin');
-            const authWrapper = document.getElementById('authWrapper');
-            
-            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Seller Profile`;
-            loginLink.href = 'seller-dashboard.html';
-            
-            if (!document.getElementById('logoutLink')) {
-                const logout = document.createElement('a');
-                logout.id = 'logoutLink';
-                logout.href = '#';
-                logout.className = 'menu-item';
-                logout.style.color = '#ff4d4d';
-                logout.style.marginTop = '12px';
-                logout.innerHTML = `<i class="fas fa-sign-out-alt"></i> Logout`;
-                logout.onclick = (e) => { 
-                    e.preventDefault(); 
-                    shahiConfirm("Are you sure you want to log out?", () => {
-                        signOut(auth).then(() => { localStorage.clear(); window.location.reload(); });
-                    });
-                };
-                authWrapper.appendChild(logout);
-            }
-
-            get(ref(db, `users/sardaars/${user.uid}`)).then(s => {
-                if (s.exists()) {
-                    const profileTrigger = document.getElementById('profileTrigger');
-                    profileTrigger.href = `seller-dashboard.html?seller=${user.uid}`;
-                    profileTrigger.style.display = 'flex';
-                }
-            });
-        } else {
-            // Guest mode: Still set up links but don't redirect
-            const loginLink = document.getElementById('menuLogin');
-            if(loginLink) {
-                loginLink.innerHTML = `<i class="fas fa-sign-in-alt"></i> Join/Login`;
-                loginLink.href = 'login.html';
-            }
-        }
-
-        // Always remove loader for everyone
         if(loader) {
             loader.style.opacity = '0';
             setTimeout(() => { 
@@ -542,9 +493,8 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Placing Order...';
             try {
-                const { ref: dbRef, push, set } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
                 const orderData = { productName: window.currentProduct.name || "Product", productPrice: window.currentProduct.price || "0", productId: pID || "unknown", customerName: name, customerAddress: address, customerPhone: phone, customerPostal: postal, customerEmail: email, sellerId: sID, timestamp: Date.now(), status: 'new' };
-                const ordersRef = dbRef(db, `orders/${sID}`);
+                const ordersRef = ref(db, `orders/${sID}`);
                 const newOrderRef = push(ordersRef);
                 await set(newOrderRef, orderData);
                 if (window.sellerEmail) {
@@ -649,13 +599,12 @@
         const btn = document.getElementById('reviewBtn');
         btn.disabled = true; btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Submitting...';
         try {
-            const { push, set, ref: dbRef } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
             let userName = "Marketplace User";
-            const buyerSnap = await get(dbRef(db, `users/buyers/${window.currentUser.uid}`));
-            const sardaarSnap = await get(dbRef(db, `users/sardaars/${window.currentUser.uid}`));
+            const buyerSnap = await get(ref(db, `users/buyers/${window.currentUser.uid}`));
+            const sardaarSnap = await get(ref(db, `users/sardaars/${window.currentUser.uid}`));
             if (buyerSnap.exists()) userName = buyerSnap.val().name;
             else if (sardaarSnap.exists()) userName = sardaarSnap.val().name;
-            await set(push(dbRef(db, `reviews/${pID}`)), { uid: window.currentUser.uid, userName, rating: window.selectedRating, text, timestamp: Date.now() });
+            await set(push(ref(db, `reviews/${pID}`)), { uid: window.currentUser.uid, userName, rating: window.selectedRating, text, timestamp: Date.now() });
             alert("Review submitted successfully!");
             document.getElementById('reviewText').value = '';
             window.selectedRating = 0;
@@ -682,6 +631,11 @@
     }
 
     loadProductData();
+
+    // Initialize theme picker
+    if (window.ThemeManager) {
+        ThemeManager.injectThemePicker('theme-picker-container', true);
+    }
 </script>
 </body>
 </html>

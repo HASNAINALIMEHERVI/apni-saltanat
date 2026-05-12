@@ -7,20 +7,28 @@
 
 /* ---- TOKENS ---- */
 :root {
-    --bg-dark:       #131313;
-    --bg-surface:    #1c1c1c;
-    --bg-deep:       #0d0d0d;
+    /* Base Colors - Managed by ThemeManager */
     --royal-gold:    #FFCC00;
     --gold-light:    #FFE566;
     --gold-dim:      #9a7c00;
     --accent-blue:   #2196F3;
     --blue-dark:     #1565C0;
-    --text-light:    #e5e2e1;
-    --text-muted:    #9a9078;
-    --text-dim:      #555;
-    --border:        rgba(255, 255, 255, 0.07);
-    --border-gold:   rgba(255, 204, 0, 0.25);
-    --shadow-gold:   0 8px 30px rgba(255, 204, 0, 0.15);
+    
+    /* Adaptable Colors */
+    --bg-dark:       var(--bg-dark, #131313);
+    --bg-surface:    var(--bg-surface, #1c1c1c);
+    --bg-deep:       var(--bg-deep, #0d0d0d);
+    --text-light:    var(--text-main, #e5e2e1);
+    --text-main:     var(--text-main, #e5e2e1);
+    --text-muted:    var(--text-muted, #9a9078);
+    --text-dim:      var(--text-dim, #555);
+    --border:        var(--border, rgba(255, 255, 255, 0.07));
+    --border-gold:   var(--border-gold, rgba(255, 204, 0, 0.25));
+    --shadow-gold:   var(--shadow-gold, 0 8px 30px rgba(255, 204, 0, 0.15));
+    --glass-bg:      var(--glass-bg, rgba(19, 19, 19, 0.9));
+    --glass-border:  var(--glass-border, rgba(255, 255, 255, 0.07));
+
+    /* Fixed Tokens */
     --shadow-dark:   0 20px 60px rgba(0, 0, 0, 0.5);
     --radius-sm:     12px;
     --radius-md:     20px;
@@ -43,7 +51,7 @@ body {
     font-family: 'Manrope', sans-serif;
     background: var(--bg-dark);
     /* "Live" Mesh Gradient Background */
-    background: linear-gradient(0deg, #131313, #1a1200, #131313);
+    background: var(--gradient, linear-gradient(0deg, #131313, #1a1200, #131313));
     background-size: 400% 400%;
     animation: meshGradient 20s ease infinite;
     color: var(--text-light);
@@ -101,10 +109,10 @@ body::before {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(19, 19, 19, 0.9);
+    background: var(--glass-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--glass-border);
     padding: 0;
     height: 72px;
     display: flex;
@@ -314,10 +322,10 @@ body::before {
 .royal-input {
     width: 100%;
     padding: 14px 18px;
-    background: #111;
+    background: var(--bg-deep);
     border: 1.5px solid var(--border);
     border-radius: var(--radius-md);
-    color: var(--text-light);
+    color: var(--text-main);
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
     outline: none;
@@ -334,10 +342,10 @@ body::before {
 .royal-select {
     width: 100%;
     padding: 14px 18px;
-    background: #111;
+    background: var(--bg-deep);
     border: 1.5px solid var(--border);
     border-radius: var(--radius-md);
-    color: var(--text-light);
+    color: var(--text-main);
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
     outline: none;
@@ -607,9 +615,9 @@ body::before {
 }
 
 /* ========== MENU OVERLAY ========== */
-.menu-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:9000; opacity:0; pointer-events:none; transition:0.4s; }
+.menu-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); backdrop-filter:blur(10px); z-index:9000; opacity:0; pointer-events:none; transition:0.4s; }
 .menu-overlay.active { opacity:1; pointer-events:all; }
-.menu-inner { position:absolute; top:0; right:0; height:100%; width:300px; background:var(--bg-surface); padding:80px 40px 40px; display:flex; flex-direction:column; gap:20px; box-shadow:-20px 0 60px rgba(0,0,0,0.5); transform:translateX(100%); transition:0.4s cubic-bezier(0.19, 1, 0.22, 1); overflow-y:auto; scrollbar-width:thin; }
+.menu-inner { position:absolute; top:0; right:0; height:100%; width:300px; background:var(--bg-surface); padding:80px 40px 40px; display:flex; flex-direction:column; gap:20px; box-shadow:-20px 0 60px rgba(0,0,0,0.2); transform:translateX(100%); transition:0.4s cubic-bezier(0.19, 1, 0.22, 1); overflow-y:auto; scrollbar-width:thin; }
 .menu-overlay.active .menu-inner { transform:translateX(0); }
 .menu-item { display:flex; align-items:center; gap:14px; color:var(--text-muted); text-decoration:none; font-size:16px; font-weight:700; transition:0.2s; }
 .menu-item:hover { color:var(--royal-gold); transform:translateX(6px); }

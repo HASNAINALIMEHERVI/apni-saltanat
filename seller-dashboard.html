@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="royal.css">
+    <script src="theme-manager.js"></script>
     <style>
         :root {
             --sidebar-width: 280px;
@@ -359,9 +360,9 @@
             display: none;
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            background: rgba(10, 8, 0, 0.85);
+            background: var(--bg-dark);
             backdrop-filter: blur(15px);
-            border-top: 1px solid rgba(255, 204, 0, 0.2);
+            border-top: 1px solid var(--border);
             z-index: 5000;
             padding: 10px 20px 25px; /* padding for safe area */
             justify-content: space-between;
@@ -486,7 +487,7 @@
         .stat-pending .stat-icon-wrap { background: rgba(255, 77, 77, 0.1); color: #ff4d4d; border-color: rgba(255, 77, 77, 0.2); }
 
         /* SHAHI MODAL */
-        #shahiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        #shahiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
         .modal-card { background: var(--bg-surface); border: 2px solid var(--royal-gold); border-radius: 24px; padding: 40px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 50px rgba(197,160,89,0.2); animation: modalIn 0.3s ease-out; }
         @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         .modal-icon { font-size: 50px; margin-bottom: 20px; }
@@ -515,7 +516,7 @@
 </div>
 
 <!-- ROYAL NOTIFICATION OVERLAY -->
-<div id="notifOverlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:10000; display:none; align-items:center; justify-content:center; backdrop-filter:blur(20px);">
+<div id="notifOverlay" style="position:fixed; inset:0; background:var(--bg-dark); z-index:10000; display:none; align-items:center; justify-content:center; backdrop-filter:blur(20px);">
     <div style="text-align:center; max-width:420px; padding:50px; background:var(--bg-surface); border:2px solid var(--royal-gold); border-radius:30px; box-shadow:0 0 100px rgba(197,160,89,0.3); animation: modalIn 0.5s ease-out;">
         <div style="font-size:70px; margin-bottom:25px;">👑</div>
         <h2 style="font-family:'Epilogue',sans-serif; color:var(--royal-gold); margin-bottom:15px; font-size:24px; font-weight:900;">HELLO SELLER!</h2>
@@ -569,11 +570,20 @@
                 <span class="status" id="userStatusLabel">Royal Member</span>
             </div>
         </div>
+        <div id="dashboard-theme-picker" style="margin-bottom: 20px; padding: 0 10px;"></div>
         <button onclick="handleLogout()" class="btn-outline" style="width: 100%; border-color: rgba(244,67,54,0.2); color: #f44336;">
             <i class="fas fa-sign-out-alt"></i> Logout
         </button>
     </div>
 </aside>
+<script>
+    // Initialize theme picker in the dashboard sidebar
+    window.addEventListener('load', () => {
+        if (window.ThemeManager) {
+            ThemeManager.injectThemePicker('dashboard-theme-picker', true);
+        }
+    });
+</script>
 
 <!-- MAIN CONTENT -->
 <main class="shahi-main">
@@ -819,16 +829,12 @@
 </div>
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getDatabase, ref, onValue, push, update, remove, get, set, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { app, auth, db } from "./auth-manager.js";
+    import { onValue, ref, push, update, remove, get, set, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
     import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging.js";
 
-    const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getDatabase(app);
     const storage = getStorage(app);
     const messaging = getMessaging(app);
     const audioOrder = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); // Shahi Chime
@@ -860,10 +866,9 @@
         if (user) {
             uid = user.uid;
             document.getElementById('loader').style.display = 'none';
+            // loadSardaarData is called, but auth-manager.js will redirect if not a sardaar
             loadSardaarData(user);
-            checkNotificationStatus(true); // Show overlay if needed
-        } else {
-            window.location.href = 'login.html';
+            checkNotificationStatus(true); 
         }
     });
 

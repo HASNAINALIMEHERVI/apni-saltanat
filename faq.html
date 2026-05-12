@@ -11,6 +11,7 @@
     <meta name="theme-color" content="#000000">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="royal.css">
+    <script src="theme-manager.js"></script>
     <style>
         .faq-hero {
             padding: 80px 40px 60px;
@@ -361,7 +362,7 @@
                 <ul class="footer-links">
                     <li><a href="index.html">Marketplace</a></li>
                     <li><a href="categories.html">Categories</a></li>
-                    <li><a href="seller-dashboard.html">Seller Dashboard</a></li>
+                    <li><a href="seller-dashboard.html" id="footerDashboard" style="display:none;">Seller Dashboard</a></li>
                     <li><a href="signup.html">Become a Seller</a></li>
                 </ul>
             </div>
@@ -395,7 +396,7 @@
         <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
         <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Marketplace</a>
         <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
-        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Seller Dashboard</a>
+        <a href="seller-dashboard.html" class="menu-item" id="menuDashboard" style="display:none;"><i class="fas fa-th-large"></i> Seller Dashboard</a>
         <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Seller</a>
         <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Marketplace Categories</a>
 
@@ -409,6 +410,9 @@
             <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
         </div>
         <div style="padding-top:10px;">
+            <div id="theme-picker-container"></div>
+        </div>
+        <div style="padding-top:10px;">
             <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
             <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Support</a>
         </div>
@@ -416,6 +420,11 @@
 </div>
 
 <script>
+    window.addEventListener('load', () => {
+        if (window.ThemeManager) {
+            ThemeManager.injectThemePicker('theme-picker-container', true);
+        }
+    });
     window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
 
     window.toggleFaq = (btn) => {
@@ -441,17 +450,34 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getDatabase(app);
 
     onAuthStateChanged(auth, u => {
         const loginLink = document.getElementById('menuLogin');
         const authWrapper = document.getElementById('authWrapper');
+        const menuDashboard = document.getElementById('menuDashboard');
+        const footerDashboard = document.getElementById('footerDashboard');
+
         if(u) {
-            loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Seller Profile`;
-            loginLink.href = 'seller-dashboard.html';
+            get(ref(db, `users/sardaars/${u.uid}`)).then(snapshot => {
+                if (snapshot.exists()) {
+                    loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Admin Panel`;
+                    loginLink.href = 'seller-dashboard.html';
+                    if (menuDashboard) menuDashboard.style.display = 'flex';
+                    if (footerDashboard) footerDashboard.style.display = 'block';
+                } else {
+                    loginLink.innerHTML = `<i class="fas fa-user-circle"></i> My Profile`;
+                    loginLink.href = 'profile.html';
+                    if (menuDashboard) menuDashboard.style.display = 'none';
+                    if (footerDashboard) footerDashboard.style.display = 'none';
+                }
+            });
+
             if (!document.getElementById('logoutLink')) {
                 const logout = document.createElement('a');
                 logout.id = 'logoutLink';
@@ -471,6 +497,8 @@
         } else {
             loginLink.innerHTML = `<i class="fas fa-sign-in-alt"></i> Join/Login`;
             loginLink.href = 'login.html';
+            if (menuDashboard) menuDashboard.style.display = 'none';
+            if (footerDashboard) footerDashboard.style.display = 'none';
             if (document.getElementById('logoutLink')) document.getElementById('logoutLink').remove();
         }
     });

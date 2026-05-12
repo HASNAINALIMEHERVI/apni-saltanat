@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&family=Manrope:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="royal.css">
+    <script src="theme-manager.js"></script>
     <style>
         :root {
             --glass: rgba(255, 255, 255, 0.03);
@@ -51,11 +52,11 @@
         }
 
         body {
-            background-color: var(--deep-obsidian);
+            background-color: var(--bg-dark);
             overflow-x: hidden;
             background-image: var(--royal-glow);
             background-attachment: fixed;
-            color: #fff;
+            color: var(--text-main);
             margin: 0;
             font-family: 'Manrope', sans-serif;
         }
@@ -99,7 +100,7 @@
             align-items: center;
             justify-content: center;
             padding: 80px;
-            background: #000;
+            background: var(--bg-dark);
         }
 
         .login-left-bg {
@@ -113,7 +114,7 @@
         .login-left-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.6) 100%);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, rgba(5,5,5,0.6) 100%);
         }
 
         .left-content {
@@ -171,13 +172,13 @@
         }
 
         .form-card {
-            background: rgba(15, 15, 15, 0.6);
+            background: var(--glass-bg);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--glass-border);
             border-radius: 40px;
             padding: 50px;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.02);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.02);
             position: relative;
             overflow: hidden;
         }
@@ -194,7 +195,7 @@
             font-family: 'Epilogue', sans-serif;
             font-size: 36px;
             font-weight: 900;
-            color: #FFF;
+            color: var(--text-main);
             margin-bottom: 12px;
             letter-spacing: -1px;
         }
@@ -239,10 +240,10 @@
         .shahi-input {
             width: 100%;
             padding: 18px 24px 18px 56px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1.5px solid rgba(255, 255, 255, 0.05);
+            background: var(--bg-deep);
+            border: 1.5px solid var(--border);
             border-radius: 20px;
-            color: #FFF;
+            color: var(--text-main);
             font-family: 'Manrope', sans-serif;
             font-size: 16px;
             outline: none;
@@ -264,7 +265,7 @@
         .btn-premium {
             width: 100%;
             height: 64px;
-            background: linear-gradient(135deg, #D4AF37 0%, #C5A059 100%);
+            background: var(--royal-gold);
             border: none;
             border-radius: 20px;
             color: #000;
@@ -318,7 +319,7 @@
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 20px;
-            color: #FFF;
+            color: var(--text-main);
             font-family: 'Manrope', sans-serif;
             font-weight: 700;
             font-size: 15px;
@@ -375,7 +376,7 @@
     <canvas id="bg-canvas"></canvas>
 
     <!-- Floating Menu Trigger -->
-    <div onclick="toggleMenu()" style="position:fixed; top:30px; right:30px; width:56px; height:56px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; cursor:pointer; color:#fff; font-size:22px; transition:0.3s; z-index:1000; backdrop-filter:blur(15px);" onmouseover="this.style.borderColor='var(--accent-gold)'; this.style.transform='scale(1.1)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='scale(1)';">
+    <div onclick="toggleMenu()" style="position:fixed; top:30px; right:30px; width:56px; height:56px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; cursor:pointer; color:#fff; font-size:22px; z-index:1000; backdrop-filter:blur(15px); transition:0.3s;">
         <i class="fas fa-bars-staggered"></i>
     </div>
 
@@ -431,13 +432,6 @@
 
                     <p id="msg" style="margin-top: 20px; font-size: 14px; text-align: center; min-height: 20px;"></p>
 
-                    <div class="divider">Or Authenticate via</div>
-
-                    <button id="googleLoginBtn" class="google-btn">
-                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style="width: 20px;">
-                        Sign in with Google
-                    </button>
-
                     <div class="footer-links-row">
                         New to the Saltanat? <a href="#" id="signupTrigger">Apply for Access</a>
                     </div>
@@ -465,11 +459,12 @@
         <div style="font-size:12px; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:3px; margin-bottom:40px; font-weight:800;">Navigation Hub</div>
         <div style="display:flex; flex-direction:column; gap:30px;">
             <a href="index.html" style="color:#fff; text-decoration:none; font-size:24px; font-weight:800; display:flex; align-items:center; gap:20px;"><i class="fas fa-home" style="color:var(--accent-gold); width:30px;"></i> Marketplace</a>
-            <a href="seller-dashboard.html" style="color:#fff; text-decoration:none; font-size:24px; font-weight:800; display:flex; align-items:center; gap:20px;"><i class="fas fa-th-large" style="color:var(--accent-gold); width:30px;"></i> Dashboard</a>
-            <a href="instructions.html" style="color:#fff; text-decoration:none; font-size:24px; font-weight:800; display:flex; align-items:center; gap:20px;"><i class="fas fa-scroll" style="color:var(--accent-gold); width:30px;"></i> Guidelines</a>
-            <a href="about.html" style="color:#fff; text-decoration:none; font-size:24px; font-weight:800; display:flex; align-items:center; gap:20px;"><i class="fas fa-crown" style="color:var(--accent-gold); width:30px;"></i> Our Story</a>
+            <a href="seller-dashboard.html" id="menuDashboard" style="color:#fff; text-decoration:none; font-size:24px; font-weight:800; display:flex; align-items:center; gap:20px;"><i class="fas fa-th-large" style="color:var(--accent-gold); width:30px;"></i> Dashboard</a>
+            <a href="login.html" id="menuLogin" style="color:#fff; text-decoration:none; font-size:24px; font-weight:800; display:flex; align-items:center; gap:20px;"><i class="fas fa-sign-in-alt" style="color:var(--accent-gold); width:30px;"></i> Join/Login</a>
+            <a href="#" id="menuLogout" style="display:none; color:#ff4d4d; text-decoration:none; font-size:24px; font-weight:800; display:flex; align-items:center; gap:20px;"><i class="fas fa-sign-out-alt" style="width:30px;"></i> Exit Marketplace</a>
         </div>
-        <div style="margin-top:80px;">
+        <div id="login-theme-picker" style="margin-top: 30px;"></div>
+        <div style="margin-top:40px;">
              <a href="https://wa.me/923011786494" style="padding:20px; background:rgba(37,211,102,0.1); border-radius:20px; display:flex; align-items:center; gap:15px; color:#25D366; text-decoration:none; font-weight:800;">
                 <i class="fab fa-whatsapp" style="font-size:24px;"></i> Elite Support
              </a>
@@ -477,35 +472,9 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getDatabase, ref, get, set as rtdbSet } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc",
-            authDomain: "apni-saltanat.firebaseapp.com",
-            databaseURL: "https://apni-saltanat-default-rtdb.firebaseio.com",
-            projectId: "apni-saltanat",
-            storageBucket: "apni-saltanat.firebasestorage.app",
-            messagingSenderId: "691941073239",
-            appId: "1:691941073239:web:9e0b568eccc347a0c0de12"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getDatabase(app);
-        const dbFirestore = getFirestore(app);
-        const googleProvider = new GoogleAuthProvider();
-
-        // --- Auth Observer ---
-        onAuthStateChanged(auth, u => {
-            if(u) {
-                const role = localStorage.getItem('userRole');
-                if (role === 'sardaar') window.location.href = 'seller-dashboard.html';
-                else window.location.href = 'index.html';
-            }
-        });
+        import { app, auth, db } from "./auth-manager.js";
+        import { signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         // --- Background Particles ---
         const canvas = document.getElementById('bg-canvas');
@@ -593,32 +562,11 @@
                 const userCredential = await signInWithEmailAndPassword(auth, identifier, password);
                 const user = userCredential.user;
 
-                // Check Role
-                const sardaarSnap = await get(ref(db, `users/sardaars/${user.uid}`));
-                if (sardaarSnap.exists()) {
-                    localStorage.setItem('userRole', 'sardaar');
-                    window.location.href = 'seller-dashboard.html';
-                } else {
-                    localStorage.setItem('userRole', 'buyer');
-                    window.location.href = 'index.html';
-                }
-
+                // Role check is handled by auth-manager.js upon redirection
             } catch (error) {
                 console.error(error);
                 showMsg("Access Denied: " + error.message, "#ff4d4d");
                 resetBtn();
-            }
-        });
-
-        // --- Google Sign-In ---
-        document.getElementById('googleLoginBtn').addEventListener('click', async () => {
-            try {
-                const result = await signInWithPopup(auth, googleProvider);
-                // Simple logic for brevity in this redesign
-                localStorage.setItem('userRole', 'buyer');
-                window.location.href = 'index.html';
-            } catch (e) {
-                showMsg("Google Auth Failed", "#ff4d4d");
             }
         });
 
@@ -641,6 +589,11 @@
         signupTrigger.onclick = (e) => { e.preventDefault(); signupModal.style.display = 'flex'; };
         closeModal.onclick = () => signupModal.style.display = 'none';
         window.onclick = (e) => { if(e.target === signupModal) signupModal.style.display = 'none'; };
+
+        // Initialize theme picker
+        if (window.ThemeManager) {
+            ThemeManager.injectThemePicker('login-theme-picker', true);
+        }
 
     </script>
 </body>

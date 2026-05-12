@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Seller Store | Apni Saltanat</title>
     <meta name="description" content="Browse products from this verified Apni Saltanat seller." />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9236482420910781" crossorigin="anonymous"></script>
-    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9236482420910781"
+        crossorigin="anonymous"></script>
+
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#020617" />
+    <script src="theme-manager.js"></script>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,15 +31,23 @@
                             200: '#fff2b8',
                             300: '#ffe88a',
                             400: '#ffdb52',
-                            500: '#ffcc00', // royal-gold
+                            500: 'var(--royal-gold)', 
                             600: '#e6b800',
                             700: '#b38f00',
                             800: '#806600',
                             900: '#4d3d00',
+                        },
+                        shahi: {
+                            bg: 'var(--bg-dark)',
+                            surface: 'var(--bg-surface)',
+                            deep: 'var(--bg-deep)',
+                            text: 'var(--text-main)',
+                            muted: 'var(--text-muted)',
+                            border: 'var(--border)',
                         }
                     },
                     boxShadow: {
-                        'glow': '0 0 30px rgba(255, 204, 0, 0.4)',
+                        'glow': 'var(--shadow-gold)',
                     }
                 }
             }
@@ -46,7 +57,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
 
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -54,43 +67,78 @@
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <!-- FontAwesome for specific icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020617; color: #fff; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #020617; border-left: 1px solid rgba(255,255,255,0.05); }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #ffdb52, #b38f00); border-radius: 999px; }
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+            border-left: 1px solid var(--border);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ffdb52, #b38f00);
+            border-radius: 999px;
+        }
 
         .mesh-bg {
-            background-color: #020617;
-            background-image: 
-                radial-gradient(ellipse at 10% 20%, rgba(255, 204, 0, 0.1) 0%, transparent 60%),
-                radial-gradient(ellipse at 90% 10%, rgba(200, 150, 0, 0.1) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 90%, rgba(255, 220, 50, 0.05) 0%, transparent 60%);
+            background: var(--gradient);
+            background-attachment: fixed;
         }
 
         .glass-dark {
-            background: rgba(15, 23, 42, 0.4);
+            background: var(--glass-bg);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
         }
-        
+
         .glass-pill {
-            background: rgba(2, 6, 23, 0.6);
+            background: var(--glass-bg);
             backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 204, 0, 0.2);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .btn-premium {
@@ -99,399 +147,643 @@
             position: relative;
             z-index: 1;
             overflow: hidden;
-            transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s;
         }
+
         .btn-premium::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(135deg, #ffcc00, #997a00);
-            z-index: -1; opacity: 0; transition: opacity 0.3s;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        .btn-premium:hover { transform: scale(1.05); box-shadow: var(--tw-shadow-glow); }
-        .btn-premium:hover::before { opacity: 1; }
+
+        .btn-premium:hover {
+            transform: scale(1.05);
+            box-shadow: var(--tw-shadow-glow);
+        }
+
+        .btn-premium:hover::before {
+            opacity: 1;
+        }
 
         .text-gradient {
-            background: linear-gradient(to right, #ffdb52, #ffffff);
+            background: linear-gradient(to right, var(--royal-gold), var(--text-main));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         @keyframes spark-float {
-            0%   { transform: translate(0, 0) scale(1); opacity: 0; }
-            20%  { opacity: 0.8; }
-            80%  { opacity: 0.4; transform: translate(var(--drift), -80vh) scale(1.2); }
-            100% { transform: translate(calc(var(--drift) * 1.5), -120vh) scale(0.5); opacity: 0; }
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            80% {
+                opacity: 0.4;
+                transform: translate(var(--drift), -80vh) scale(1.2);
+            }
+
+            100% {
+                transform: translate(calc(var(--drift) * 1.5), -120vh) scale(0.5);
+                opacity: 0;
+            }
         }
+
         .spark {
-            position: fixed; bottom: -50px;
+            position: fixed;
+            bottom: -50px;
             background: #ffcc00;
             border-radius: 50%;
             box-shadow: 0 0 15px #ffcc00, 0 0 30px #ffdb52;
-            pointer-events: none; z-index: 0;
+            pointer-events: none;
+            z-index: 0;
             animation: spark-float linear infinite;
         }
 
-        .hero-slider { position: relative; width: 100%; max-width: 500px; height: 500px; border-radius: 2rem; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
-        @media (max-width: 1024px) { .hero-slider { max-width: 420px; height: 420px; } }
-        @media (max-width: 640px) { .hero-slider { max-width: 100%; height: 250px; } }
-        
-        .hero-slide { position: absolute; inset: 0; opacity: 0; transform: scale(1.08); transition: opacity 1s ease, transform 1s ease; }
-        .hero-slide.active { opacity: 1; transform: scale(1); z-index: 2; }
-        .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-slider {
+                max-width: 420px;
+                height: 420px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-slider {
+                max-width: 100%;
+                height: 250px;
+            }
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transform: scale(1.08);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 2;
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         .wa-float {
-            position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px;
-            background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 10px 30px rgba(37,211,102,0.4); z-index: 999; transition: all 0.3s;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s;
         }
-        @media (min-width: 640px) { .wa-float { bottom: 30px; right: 30px; width: 64px; height: 64px; } }
+
+        @media (min-width: 640px) {
+            .wa-float {
+                bottom: 30px;
+                right: 30px;
+                width: 64px;
+                height: 64px;
+            }
+        }
+
         .wa-float::after {
-            content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #25D366;
-            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; z-index: -1;
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid #25D366;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+            z-index: -1;
         }
-        @keyframes ping { 75%, 100% { transform: scale(1.6); opacity: 0; } }
-        .wa-float:hover { transform: scale(1.1) rotate(5deg); box-shadow: 0 15px 40px rgba(37,211,102,0.6); }
+
+        @keyframes ping {
+
+            75%,
+            100% {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        .wa-float:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+        }
 
         #loader {
-            position: fixed; inset: 0; background: #020617; z-index: 9999;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            position: fixed;
+            inset: 0;
+            background: var(--bg-dark);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             transition: opacity 0.8s, visibility 0.8s;
         }
-        .loader-bar { width: 200px; height: 2px; background: rgba(255,255,255,0.1); margin-top: 40px; border-radius: 99px; overflow: hidden; position: relative; }
-        .loader-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: linear-gradient(to right, #ffdb52, #ffcc00); }
-        
-        /* Grid card image constraint */
-        .product-img-wrap { width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); border-radius: 1rem; margin-bottom: 1rem; overflow: hidden; position: relative; }
-        .product-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; transition: 0.5s; }
-        .hover-card:hover .product-img-wrap img { transform: scale(1.1) rotate(2deg); }
 
-        .mid-store-banner { width:100%; border-radius:2rem; overflow:hidden; margin:40px 0; border:1px solid rgba(255,255,255,0.1); position:relative; cursor:pointer; }
-        .mid-store-banner img { width:100%; height:100%; object-fit:cover; transition:0.5s; }
-        .mid-store-banner:hover img { transform:scale(1.02); }
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: var(--border);
+            margin-top: 40px;
+            border-radius: 99px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #ffdb52, #ffcc00);
+        }
+
+        /* Grid card image constraint */
+        .product-img-wrap {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-deep);
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img-wrap img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: 0.5s;
+        }
+
+        .hover-card:hover .product-img-wrap img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .mid-store-banner {
+            width: 100%;
+            border-radius: 2rem;
+            overflow: hidden;
+            margin: 40px 0;
+            border: 1px solid var(--border);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .mid-store-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .mid-store-banner:hover img {
+            transform: scale(1.02);
+        }
     </style>
 </head>
+
 <body class="mesh-bg relative">
 
-<div id="loader">
-    <i class="fas fa-crown text-gold-500 text-6xl animate-pulse"></i>
-    <div class="loader-bar"><div class="loader-progress" id="loader-progress"></div></div>
-    <span class="mt-4 text-gold-400 text-xs font-bold uppercase tracking-[0.3em] animate-pulse">Loading Store...</span>
-</div>
-
-<div id="spark-container"></div>
-
-<!-- NAVBAR -->
-<div class="fixed top-4 left-0 w-full z-50 px-4 flex justify-center">
-    <nav class="glass-pill w-full max-w-6xl px-3 py-2 rounded-full flex items-center justify-between" id="navbar">
-        <a href="index.html" class="flex items-center gap-3 pl-2 group">
-            <div class="w-11 h-11 rounded-full bg-[#111] border-2 border-gold-500 shadow-glow flex items-center justify-center relative overflow-hidden p-1 transition-all">
-                <img id="navLogo" src="favicon.png" alt="Logo" class="h-full w-full object-contain relative z-10 transition-transform group-hover:scale-110 rounded-full" />
-            </div>
-            <span class="text-2xl font-heading font-black tracking-tight text-white hidden sm:block" id="navStoreName">Apni<span class="text-gold-500">Saltanat</span></span>
-        </a>
-        <div class="hidden md:flex items-center gap-1 bg-white/5 rounded-full px-2 py-1 border border-white/5">
-            <a href="index.html" class="text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all">Back to Marketplace</a>
-            <a href="#products" class="text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all">Products</a>
-            <a href="cart.html" class="text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all">My Cart <span id="cartCount" class="bg-gold-500 text-black px-1.5 py-0.5 rounded-full text-xs ml-1">0</span></a>
+    <div id="loader">
+        <i class="fas fa-crown text-gold-500 text-6xl animate-pulse"></i>
+        <div class="loader-bar">
+            <div class="loader-progress" id="loader-progress"></div>
         </div>
-        <div class="flex items-center gap-3 pr-1">
-            <a href="#contact" class="hidden sm:inline-flex btn-premium text-sm font-heading font-bold px-6 py-2.5 rounded-full shadow-glow">Contact Seller</a>
-            <!-- Mobile Menu Toggle -->
-            <button id="mobileMenuBtn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white">
-                <i data-lucide="menu" class="w-5 h-5"></i>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Mobile Dropdown Menu -->
-    <div id="mobileMenu" class="absolute top-[80px] left-4 right-4 glass-dark rounded-3xl p-6 flex flex-col gap-4 border border-gold-400/20 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 translate-y-[-20px] md:hidden">
-        <a href="index.html" class="mobile-link text-lg font-medium text-white hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-white/5">
-            <i data-lucide="home" class="w-5 h-5 text-gold-500"></i> Back to Marketplace
-        </a>
-        <a href="#products" class="mobile-link text-lg font-medium text-white hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-white/5">
-            <i data-lucide="package" class="w-5 h-5 text-gold-500"></i> Products
-        </a>
-        <a href="cart.html" class="mobile-link text-lg font-medium text-white hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-white/5">
-            <i data-lucide="shopping-cart" class="w-5 h-5 text-gold-500"></i> My Cart <span id="mobileCartCount" class="bg-gold-500 text-black px-2 py-0.5 rounded-full text-xs ml-auto font-bold">0</span>
-        </a>
-        <a href="#contact" class="mobile-link btn-premium text-center font-heading font-bold py-3 rounded-full mt-2">
-            Contact Seller
-        </a>
+        <span class="mt-4 text-gold-400 text-xs font-bold uppercase tracking-[0.3em] animate-pulse">Loading
+            Store...</span>
     </div>
-</div>
 
-<!-- HERO -->
-<section id="hero" class="relative min-h-[100dvh] flex items-center pt-28 pb-20 justify-center overflow-hidden">
-    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center">
-        
-        <div id="hero-text" class="space-y-8 text-center lg:text-left">
-            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold-400/30 bg-gold-500/10 backdrop-blur-md">
-                    <i data-lucide="crown" class="w-4 h-4 text-gold-400"></i>
-                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-gold-300">Verified Seller</span>
+    <div id="spark-container"></div>
+
+    <!-- NAVBAR -->
+    <div class="fixed top-4 left-0 w-full z-50 px-4 flex justify-center">
+        <nav class="glass-pill w-full max-w-6xl px-3 py-2 rounded-full flex items-center justify-between" id="navbar">
+            <a href="index.html" class="flex items-center gap-3 pl-2 group">
+                <div
+                    class="w-11 h-11 rounded-full bg-shahi-deep border-2 border-gold-500 shadow-glow flex items-center justify-center relative overflow-hidden p-1 transition-all">
+                    <img id="navLogo" src="favicon.png" alt="Logo"
+                        class="h-full w-full object-contain relative z-10 transition-transform group-hover:scale-110 rounded-full" />
                 </div>
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#25D366]/30 bg-[#25D366]/10 backdrop-blur-md">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-[#25D366]"></i>
-                    <span class="text-xs font-bold uppercase tracking-[0.1em] text-white">Trust & Quality</span>
-                </div>
+                <span class="text-2xl font-heading font-black tracking-tight text-white hidden sm:block"
+                    id="navStoreName">Apni<span class="text-gold-500">Saltanat</span></span>
+            </a>
+            <div class="hidden md:flex items-center gap-1 bg-shahi-surface/30 rounded-full px-2 py-1 border border-shahi-border">
+                <a href="index.html"
+                    class="text-sm font-medium text-shahi-text/70 hover:text-shahi-text hover:bg-shahi-surface/20 px-4 py-2 rounded-full transition-all">Back
+                    to Marketplace</a>
+                <a href="#products"
+                    class="text-sm font-medium text-shahi-text/70 hover:text-shahi-text hover:bg-shahi-surface/20 px-4 py-2 rounded-full transition-all">Products</a>
+                <a href="cart.html"
+                    class="text-sm font-medium text-shahi-text/70 hover:text-shahi-text hover:bg-shahi-surface/20 px-4 py-2 rounded-full transition-all">My
+                    Cart <span id="cartCount"
+                        class="bg-gold-500 text-black px-1.5 py-0.5 rounded-full text-xs ml-1">0</span></a>
             </div>
-            
-            <h1 class="text-5xl sm:text-6xl lg:text-8xl font-heading font-black leading-[1.05] tracking-tight text-white drop-shadow-2xl">
-                Welcome to <br class="hidden md:block"/>
-                <span class="text-gradient" id="heroStoreName">The Store</span>
-            </h1>
-            
-            <p class="text-white/70 text-lg sm:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed font-body">
-                Premium quality products, trusted service, and direct delivery across Pakistan. Explore our exclusive collection below.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 pt-4">
-                <a href="#products" class="btn-premium px-8 py-4 rounded-full font-heading font-bold text-base w-full sm:w-auto text-center inline-flex items-center justify-center gap-2 group">
-                    <span>Shop Now</span>
-                    <i data-lucide="shopping-bag" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+            <div class="flex items-center gap-3 pr-1">
+                <a href="profile.html" id="profileTrigger" style="display:none;" class="w-10 h-10 rounded-full bg-gold-500 flex items-center justify-center text-black shadow-glow hover:scale-110 transition-all">
+                    <i class="fas fa-user-circle text-xl"></i>
                 </a>
-                <a id="heroContactBtn" href="#contact" class="px-8 py-4 rounded-full font-heading font-bold text-base text-white border border-white/20 hover:bg-white/10 transition-all w-full sm:w-auto text-center">
-                    Contact Us
-                </a>
+                <a href="#contact"
+                    class="hidden sm:inline-flex btn-premium text-sm font-heading font-bold px-6 py-2.5 rounded-full shadow-glow">Contact
+                    Seller</a>
+                <!-- Mobile Menu Toggle -->
+                <button id="mobileMenuBtn"
+                    class="md:hidden w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
             </div>
+        </nav>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu"
+            class="absolute top-[80px] left-4 right-4 glass-dark rounded-3xl p-6 flex flex-col gap-4 border border-gold-400/20 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 translate-y-[-20px] md:hidden">
+            <a href="index.html"
+                class="mobile-link text-lg font-medium text-shahi-text hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+                <i data-lucide="home" class="w-5 h-5 text-gold-500"></i> Back to Marketplace
+            </a>
+            <a href="#products"
+                class="mobile-link text-lg font-medium text-shahi-text hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+                <i data-lucide="package" class="w-5 h-5 text-gold-500"></i> Products
+            </a>
+            <a href="cart.html"
+                class="mobile-link text-lg font-medium text-shahi-text hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+                <i data-lucide="shopping-cart" class="w-5 h-5 text-gold-500"></i> My Cart <span id="mobileCartCount"
+                    class="bg-gold-500 text-black px-2 py-0.5 rounded-full text-xs ml-auto font-bold">0</span>
+            </a>
+            
+            <a href="seller-dashboard.html" id="menuDashboard" style="display:none;"
+                class="mobile-link text-lg font-medium text-shahi-text hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 text-gold-500"></i> Seller Dashboard
+            </a>
+
+            <a href="login.html" id="menuLogin"
+                class="mobile-link text-lg font-medium text-shahi-text hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+                <i data-lucide="log-in" class="w-5 h-5 text-gold-500"></i> Join/Login
+            </a>
+
+            <a href="#" id="menuLogout" style="display:none;"
+                class="mobile-link text-lg font-medium text-red-500 hover:text-red-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+                <i data-lucide="log-out" class="w-5 h-5 text-red-500"></i> Exit Marketplace
+            </a>
+
+            <div id="theme-picker-container" class="mt-2 border-t border-shahi-border pt-4"></div>
+            <a href="#contact"
+                class="mobile-link btn-premium text-center font-heading font-bold py-3 rounded-full mt-2">
+                Contact Seller
+            </a>
         </div>
+    </div>
+    <script>
+        // Initialize theme picker in the mobile menu
+        window.addEventListener('load', () => {
+            if (window.ThemeManager) {
+                ThemeManager.injectThemePicker('theme-picker-container', true);
+            }
+        });
+    </script>
 
-        <div id="hero-bottle" class="flex justify-center lg:justify-end relative">
-            <div class="absolute inset-0 bg-gradient-to-tr from-gold-500/20 to-transparent blur-3xl -z-10 rounded-full scale-150"></div>
-            <div class="hero-slider border border-white/10" id="heroSlider">
-                <!-- Banners will be injected here -->
-                <div class="hero-slide active">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-10 opacity-60"></div>
-                    <div class="w-full h-full bg-[#111] flex items-center justify-center text-gold-500">
-                        <i class="fas fa-store text-6xl"></i>
+    <!-- HERO -->
+    <section id="hero" class="relative min-h-[100dvh] flex items-center pt-28 pb-20 justify-center overflow-hidden">
+        <div
+            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold-500/10 rounded-full blur-[120px] pointer-events-none">
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center">
+
+            <div id="hero-text" class="space-y-8 text-center lg:text-left">
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold-400/30 bg-gold-500/10 backdrop-blur-md">
+                        <i data-lucide="crown" class="w-4 h-4 text-gold-400"></i>
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-gold-300">Verified Seller</span>
+                    </div>
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#25D366]/30 bg-[#25D366]/10 backdrop-blur-md">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-[#25D366]"></i>
+                        <span class="text-xs font-bold uppercase tracking-[0.1em] text-white">Trust & Quality</span>
+                    </div>
+                </div>
+
+                <h1
+                    class="text-5xl sm:text-6xl lg:text-8xl font-heading font-black leading-[1.05] tracking-tight text-shahi-text drop-shadow-2xl">
+                    Welcome to <br class="hidden md:block" />
+                    <span class="text-gradient" id="heroStoreName">The Store</span>
+                </h1>
+
+                <p class="text-shahi-text/70 text-lg sm:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed font-body">
+                    Premium quality products, trusted service, and direct delivery across Pakistan. Explore our
+                    exclusive collection below.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 pt-4">
+                    <a href="#products"
+                        class="btn-premium px-8 py-4 rounded-full font-heading font-bold text-base w-full sm:w-auto text-center inline-flex items-center justify-center gap-2 group">
+                        <span>Shop Now</span>
+                        <i data-lucide="shopping-bag" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a id="heroContactBtn" href="#contact"
+                        class="px-8 py-4 rounded-full font-heading font-bold text-base text-shahi-text border border-shahi-border hover:bg-shahi-surface/20 transition-all w-full sm:w-auto text-center">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+
+            <div id="hero-bottle" class="flex justify-center lg:justify-end relative">
+                <div
+                    class="absolute inset-0 bg-gradient-to-tr from-gold-500/20 to-transparent blur-3xl -z-10 rounded-full scale-150">
+                </div>
+                <div class="hero-slider border border-white/10" id="heroSlider">
+                    <!-- Banners will be injected here -->
+                    <div class="hero-slide active">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-shahi-bg via-transparent to-transparent z-10 opacity-60">
+                        </div>
+                        <div class="w-full h-full bg-shahi-deep flex items-center justify-center text-gold-500">
+                            <i class="fas fa-store text-6xl"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- PRODUCTS GRID -->
-<section id="products" class="relative py-28 bg-[#01040d] text-white border-t border-white/5 overflow-hidden">
-    <div class="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-gold-500/5 to-transparent pointer-events-none"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-6">
-        
-        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 section-title">
-            <span class="px-4 py-1.5 rounded-full bg-gold-500/10 text-gold-400 text-xs font-bold uppercase tracking-widest border border-gold-400/20">Exclusive Collection</span>
-            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-black leading-[1.1] text-white">
-                Our Premium <br/><span class="text-gradient">Products</span>
-            </h2>
+    <!-- PRODUCTS GRID -->
+    <section id="products" class="relative py-28 bg-shahi-deep text-shahi-text border-t border-shahi-border overflow-hidden">
+        <div
+            class="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-gold-500/5 to-transparent pointer-events-none">
         </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
 
-        <!-- SEARCH BAR -->
-        <div class="max-w-2xl mx-auto mb-12 relative z-20">
-            <div class="absolute inset-y-0 left-5 flex items-center pointer-events-none">
-                <i data-lucide="search" class="w-5 h-5 text-white/50"></i>
-            </div>
-            <input type="text" id="searchInput" placeholder="Search products by name..." class="w-full bg-[#111]/80 backdrop-blur-md border border-white/10 rounded-full py-4 pl-14 pr-6 text-white placeholder-white/40 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-all shadow-glow text-lg font-medium">
-        </div>
-
-        <!-- Mid Banner top (optional) -->
-        <div id="midBannerContainer" class="hidden"></div>
-
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6" id="products-list">
-            <!-- Products injected here -->
-            <div style="grid-column:1/-1; text-align:center; padding:80px 0;">
-                <i class="fas fa-circle-notch fa-spin text-gold-500 text-4xl"></i>
-                <p class="text-white/50 mt-4">Loading inventory...</p>
-            </div>
-        </div>
-        
-        <!-- Footer Banner bottom (optional) -->
-        <div id="footerBannerContainer" class="hidden mt-12"></div>
-
-    </div>
-</section>
-
-<!-- CONTACT SECTION -->
-<section id="contact" class="relative py-20 bg-[#020617]">
-    <div class="max-w-6xl mx-auto px-6">
-        <div class="rounded-[2.5rem] p-6 sm:p-12 md:p-20 text-center shadow-2xl relative overflow-hidden bg-[#04091a] border border-white/10 isolate">
-            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-[#ffdb52] to-[#ffcc00] rounded-full blur-3xl opacity-10 transform translate-x-1/3 -translate-y-1/3"></div>
-            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] z-0"></div>
-
-            <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
-                <div class="w-24 h-24 bg-white/5 border border-white/10 rounded-[2rem] flex items-center justify-center shadow-2xl mb-8 rotate-3 transform hover:rotate-6 transition-transform">
-                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-[#25D366]"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                </div>
-                <h2 class="text-3xl sm:text-5xl font-heading font-black text-white leading-[1.1] mb-6 drop-shadow-lg">
-                    Have questions? Chat on <br/> <span class="text-[#25D366]">WhatsApp</span>
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 section-title">
+                <span
+                    class="px-4 py-1.5 rounded-full bg-gold-500/10 text-gold-400 text-xs font-bold uppercase tracking-widest border border-gold-400/20">Exclusive
+                    Collection</span>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-black leading-[1.1] text-shahi-text">
+                    Our Premium <br /><span class="text-gradient">Products</span>
                 </h2>
-                <p class="text-white/80 font-medium text-lg mb-10 max-w-lg">
-                    Tap the button to chat with the seller directly. Get quick answers and support for your orders.
-                </p>
-                <a id="mainWhatsAppBtn" href="#" target="_blank" class="bg-[#25D366] text-white px-10 py-5 rounded-full font-heading font-bold text-xl inline-flex items-center gap-3 shadow-[0_20px_40px_rgba(37,211,102,0.4)] hover:scale-105 transition-all">
-                    <i class="fab fa-whatsapp text-2xl"></i> Contact us
-                </a>
+            </div>
+
+            <!-- SEARCH BAR -->
+            <div class="max-w-2xl mx-auto mb-12 relative z-20">
+                <div class="absolute inset-y-0 left-5 flex items-center pointer-events-none">
+                    <i data-lucide="search" class="w-5 h-5 text-shahi-text/50"></i>
+                </div>
+                <input type="text" id="searchInput" placeholder="Search products by name..."
+                    class="w-full bg-shahi-deep/80 backdrop-blur-md border border-shahi-border rounded-full py-4 pl-14 pr-6 text-shahi-text placeholder-shahi-text/40 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-all shadow-glow text-lg font-medium">
+            </div>
+
+            <!-- Mid Banner top (optional) -->
+            <div id="midBannerContainer" class="hidden"></div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
+                id="products-list">
+                <!-- Products injected here -->
+                <div style="grid-column:1/-1; text-align:center; padding:80px 0;">
+                    <i class="fas fa-circle-notch fa-spin text-gold-500 text-4xl"></i>
+                    <p class="text-shahi-text/50 mt-4">Loading inventory...</p>
+                </div>
+            </div>
+
+            <!-- Footer Banner bottom (optional) -->
+            <div id="footerBannerContainer" class="hidden mt-12"></div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="relative py-20 bg-shahi-bg">
+        <div class="max-w-6xl mx-auto px-6">
+            <div
+                class="rounded-[2.5rem] p-6 sm:p-12 md:p-20 text-center shadow-2xl relative overflow-hidden bg-shahi-deep border border-shahi-border isolate">
+                <div
+                    class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-[#ffdb52] to-[#ffcc00] rounded-full blur-3xl opacity-10 transform translate-x-1/3 -translate-y-1/3">
+                </div>
+                <div
+                    class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] z-0">
+                </div>
+
+                <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
+                    <div
+                        class="w-24 h-24 bg-white/5 border border-white/10 rounded-[2rem] flex items-center justify-center shadow-2xl mb-8 rotate-3 transform hover:rotate-6 transition-transform">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-[#25D366]">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                        </svg>
+                    </div>
+                    <h2
+                        class="text-3xl sm:text-5xl font-heading font-black text-shahi-text leading-[1.1] mb-6 drop-shadow-lg">
+                        Have questions? Chat on <br /> <span class="text-[#25D366]">WhatsApp</span>
+                    </h2>
+                    <p class="text-shahi-text/80 font-medium text-lg mb-10 max-w-lg">
+                        Tap the button to chat with the seller directly. Get quick answers and support for your orders.
+                    </p>
+                    <a id="mainWhatsAppBtn" href="#" target="_blank"
+                        class="bg-[#25D366] text-white px-10 py-5 rounded-full font-heading font-bold text-xl inline-flex items-center gap-3 shadow-[0_20px_40px_rgba(37,211,102,0.4)] hover:scale-105 transition-all">
+                        <i class="fab fa-whatsapp text-2xl"></i> Contact us
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- FOOTER -->
-<footer class="relative pt-24 pb-12 overflow-hidden bg-[#0a0f1e] text-white">
-    <div class="relative z-10 max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-white/10 pb-16">
-            <div class="lg:col-span-2 space-y-6">
-                <a href="index.html" class="flex items-center gap-4">
-                    <span class="text-3xl font-heading font-black tracking-tight">Apni<span class="text-gold-500">Saltanat</span></span>
-                </a>
-                <p class="text-white/50 leading-relaxed font-medium max-w-sm">
-                    Pakistan's Premier Marketplace. High-quality products and trusted sellers. Every deal is a commitment.
-                </p>
+    <!-- FOOTER -->
+    <footer class="relative pt-24 pb-12 overflow-hidden bg-shahi-deep text-shahi-text">
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-shahi-border pb-16">
+                <div class="lg:col-span-2 space-y-6">
+                    <a href="index.html" class="flex items-center gap-4">
+                        <span class="text-3xl font-heading font-black tracking-tight">Apni<span
+                                class="text-gold-500">Saltanat</span></span>
+                    </a>
+                    <p class="text-shahi-text/50 leading-relaxed font-medium max-w-sm">
+                        Pakistan's Premier Marketplace. High-quality products and trusted sellers. Every deal is a
+                        commitment.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-heading font-bold text-lg mb-6 text-shahi-text">Marketplace</h4>
+                    <ul class="space-y-4 text-shahi-text/50 font-medium">
+                        <li><a href="index.html" class="hover:text-gold-400">Royal Marketplace</a></li>
+                        <li><a href="categories.html" class="hover:text-gold-400">Categories</a></li>
+                        <li><a href="signup.html" class="hover:text-gold-400">Become a Seller</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading font-bold text-lg mb-6 text-shahi-text">Legal</h4>
+                    <ul class="space-y-4 text-shahi-text/50 font-medium">
+                        <li><a href="privacy-policy.html" class="hover:text-gold-400">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-gold-400">Terms & Conditions</a></li>
+                    </ul>
+                </div>
             </div>
-            <div>
-                <h4 class="font-heading font-bold text-lg mb-6 text-white">Marketplace</h4>
-                <ul class="space-y-4 text-white/50 font-medium">
-                    <li><a href="index.html" class="hover:text-gold-400">Royal Marketplace</a></li>
-                    <li><a href="categories.html" class="hover:text-gold-400">Categories</a></li>
-                    <li><a href="signup.html" class="hover:text-gold-400">Become a Seller</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-heading font-bold text-lg mb-6 text-white">Legal</h4>
-                <ul class="space-y-4 text-white/50 font-medium">
-                    <li><a href="privacy-policy.html" class="hover:text-gold-400">Privacy Policy</a></li>
-                    <li><a href="terms.html" class="hover:text-gold-400">Terms & Conditions</a></li>
-                </ul>
+            <div class="pt-8 text-center text-shahi-text/30 text-sm font-medium">
+                <p>&copy; 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</p>
             </div>
         </div>
-        <div class="pt-8 text-center text-white/30 text-sm font-medium">
-            <p>&copy; 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</p>
-        </div>
-    </div>
-</footer>
+    </footer>
 
-<a id="floatingWhatsApp" href="#" target="_blank" class="wa-float" style="display:none;" aria-label="Chat on WhatsApp">
-    <i class="fab fa-whatsapp text-3xl text-white"></i>
-</a>
+    <a id="floatingWhatsApp" href="#" target="_blank" class="wa-float" style="display:none;"
+        aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp text-3xl text-white"></i>
+    </a>
 
-<!-- FIREBASE & LOGIC -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, onValue, get, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    <!-- FIREBASE & LOGIC -->
+    <script type="module">
+        import { auth, db, logout } from "./auth-manager.js";
+        import { ref, onValue, get, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-    const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const auth = getAuth(app);
-    const params = new URLSearchParams(window.location.search);
-    const sID = params.get('seller');
-    if(!sID) location.href = "index.html";
+        const params = new URLSearchParams(window.location.search);
+        const sID = params.get('seller');
+        if (!sID) location.href = "index.html";
 
-    // Track Visit
-    const visitRef = ref(db, `users/sardaars/${sID}/visits`);
-    runTransaction(visitRef, (currentValue) => (currentValue || 0) + 1);
+        // Track Visit
+        const visitRef = ref(db, `users/sardaars/${sID}/visits`);
+        runTransaction(visitRef, (currentValue) => (currentValue || 0) + 1);
 
-    function updateCartCount() { 
-        const cart = JSON.parse(localStorage.getItem('saltanatCart')) || [];
-        const count = cart.length;
-        const mainCount = document.getElementById('cartCount');
-        if(mainCount) mainCount.innerText = count; 
-        const mobCount = document.getElementById('mobileCartCount');
-        if(mobCount) mobCount.innerText = count;
-    }
-    updateCartCount();
-
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    let menuOpen = false;
-
-    mobileMenuBtn.addEventListener('click', () => {
-        menuOpen = !menuOpen;
-        if (menuOpen) {
-            mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
-            mobileMenu.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
-            mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-5 h-5"></i>';
-        } else {
-            mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-            mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
-            mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-5 h-5"></i>';
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('saltanatCart')) || [];
+            const count = cart.length;
+            const mainCount = document.getElementById('cartCount');
+            if (mainCount) mainCount.innerText = count;
+            const mobCount = document.getElementById('mobileCartCount');
+            if (mobCount) mobCount.innerText = count;
         }
-        if (window.lucide) lucide.createIcons();
-    });
+        updateCartCount();
 
-    document.querySelectorAll('.mobile-link').forEach(link => {
-        link.addEventListener('click', () => {
-            menuOpen = false;
-            mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-            mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
-            mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-5 h-5"></i>';
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+                mobileMenu.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-5 h-5"></i>';
+            } else {
+                mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+                mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-5 h-5"></i>';
+            }
             if (window.lucide) lucide.createIcons();
         });
-    });
 
-    // GSAP
-    gsap.registerPlugin(ScrollTrigger);
-
-    function triggerGSAP() {
-        gsap.utils.toArray('.section-title').forEach(title => {
-            gsap.from(title, { scrollTrigger: { trigger: title, start: 'top 85%' }, y: 50, opacity: 0, duration: 1, ease: 'power3.out' });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (link.id === 'menuLogout') return; // Handled by auth-manager
+                menuOpen = false;
+                mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+                mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-5 h-5"></i>';
+                if (window.lucide) lucide.createIcons();
+            });
         });
-        gsap.utils.toArray('.hover-card').forEach((card, i) => {
-            gsap.from(card, { scrollTrigger: { trigger: card, start: 'top 90%' }, y: 60, opacity: 0, duration: 0.8, ease: 'back.out(1.5)' });
-        });
-    }
 
-    // Load Store Data
-    get(ref(db, `users/sardaars/${sID}`)).then(async (s) => {
-        if(s.exists()) {
-            const d = s.val();
-            
-            if (d.status === 'blocked' || d.status === 'unpaid') {
-                document.getElementById('products-list').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:#f44336;"><i class="fas fa-ban text-6xl mb-4"></i><h3 class="text-2xl font-heading">This store is currently unavailable.</h3></div>`;
-                return;
-            }
 
-            const name = (d.userName || d.name || 'Seller').toUpperCase();
-            document.getElementById('navStoreName').innerHTML = `${name}`;
-            document.getElementById('heroStoreName').innerText = `${name}'S STORE`;
 
-            if (d.storeLogo) document.getElementById('navLogo').src = d.storeLogo;
-            
-            if (d.phone) {
-                const waLink = `https://wa.me/${d.phone.replace(/[^0-9]/g,'')}`;
-                document.getElementById('heroContactBtn').href = waLink;
-                document.getElementById('mainWhatsAppBtn').href = waLink;
-                document.getElementById('floatingWhatsApp').href = waLink;
-                document.getElementById('floatingWhatsApp').style.display = 'flex';
-            }
+        // GSAP
+        gsap.registerPlugin(ScrollTrigger);
 
-            // Banners Slider Setup
-            const heroSlider = document.getElementById('heroSlider');
-            let slideCount = 0;
-            if (d.storeBanners) {
-                const banners = d.storeBanners.split('|').filter(b => b.trim() !== '');
-                if (banners.length > 0) {
-                    heroSlider.innerHTML = banners.map((url, i) => `
-                        <div class="hero-slide ${i===0?'active':''}">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-10 opacity-60"></div>
+        function triggerGSAP() {
+            gsap.utils.toArray('.section-title').forEach(title => {
+                gsap.from(title, { scrollTrigger: { trigger: title, start: 'top 85%' }, y: 50, opacity: 0, duration: 1, ease: 'power3.out' });
+            });
+            gsap.utils.toArray('.hover-card').forEach((card, i) => {
+                gsap.from(card, { scrollTrigger: { trigger: card, start: 'top 90%' }, y: 60, opacity: 0, duration: 0.8, ease: 'back.out(1.5)' });
+            });
+        }
+
+        // Load Store Data
+        get(ref(db, `users/sardaars/${sID}`)).then(async (s) => {
+            if (s.exists()) {
+                const d = s.val();
+
+                if (d.status === 'blocked' || d.status === 'unpaid') {
+                    document.getElementById('products-list').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:#f44336;"><i class="fas fa-ban text-6xl mb-4"></i><h3 class="text-2xl font-heading">This store is currently unavailable.</h3></div>`;
+                    return;
+                }
+
+                const name = (d.userName || d.name || 'Seller').toUpperCase();
+                document.getElementById('navStoreName').innerHTML = `${name}`;
+                document.getElementById('heroStoreName').innerText = `${name}'S STORE`;
+
+                if (d.storeLogo) document.getElementById('navLogo').src = d.storeLogo;
+
+                if (d.phone) {
+                    const waLink = `https://wa.me/${d.phone.replace(/[^0-9]/g, '')}`;
+                    document.getElementById('heroContactBtn').href = waLink;
+                    document.getElementById('mainWhatsAppBtn').href = waLink;
+                    document.getElementById('floatingWhatsApp').href = waLink;
+                    document.getElementById('floatingWhatsApp').style.display = 'flex';
+                }
+
+                // Banners Slider Setup
+                const heroSlider = document.getElementById('heroSlider');
+                let slideCount = 0;
+                if (d.storeBanners) {
+                    const banners = d.storeBanners.split('|').filter(b => b.trim() !== '');
+                    if (banners.length > 0) {
+                        heroSlider.innerHTML = banners.map((url, i) => `
+                        <div class="hero-slide ${i === 0 ? 'active' : ''}">
+                            <div class="absolute inset-0 bg-gradient-to-t from-shahi-bg via-transparent to-transparent z-10 opacity-60"></div>
                             <img src="${url}">
                         </div>`).join('');
-                    slideCount = banners.length;
+                        slideCount = banners.length;
+                    }
                 }
-            }
-            if (slideCount > 1) {
-                const slides = heroSlider.querySelectorAll('.hero-slide');
-                let cur = 0;
-                setInterval(() => {
-                    slides[cur].classList.remove('active');
-                    cur = (cur + 1) % slides.length;
-                    slides[cur].classList.add('active');
-                }, 4000);
-            }
+                if (slideCount > 1) {
+                    const slides = heroSlider.querySelectorAll('.hero-slide');
+                    let cur = 0;
+                    setInterval(() => {
+                        slides[cur].classList.remove('active');
+                        cur = (cur + 1) % slides.length;
+                        slides[cur].classList.add('active');
+                    }, 4000);
+                }
 
-            // Mid & Footer Banners
-            if (d.midBanner) {
-                const mc = document.getElementById('midBannerContainer');
-                mc.innerHTML = `
+                // Mid & Footer Banners
+                if (d.midBanner) {
+                    const mc = document.getElementById('midBannerContainer');
+                    mc.innerHTML = `
                 <div class="glass-dark rounded-[2.5rem] p-8 sm:p-12 border border-gold-400/20 grid lg:grid-cols-2 gap-12 items-center relative overflow-hidden mb-16">
                     <div class="absolute -right-20 -top-20 w-96 h-96 bg-gold-600/20 blur-[100px] rounded-full pointer-events-none"></div>
                     <div class="space-y-6 relative z-10 text-center lg:text-left">
@@ -506,11 +798,11 @@
                         <img src="${d.midBanner}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                 </div>`;
-                mc.classList.remove('hidden');
-            }
-            if (d.footerBanner) {
-                const fc = document.getElementById('footerBannerContainer');
-                fc.innerHTML = `
+                    mc.classList.remove('hidden');
+                }
+                if (d.footerBanner) {
+                    const fc = document.getElementById('footerBannerContainer');
+                    fc.innerHTML = `
                 <div class="glass-dark rounded-[2.5rem] p-8 sm:p-12 border border-gold-400/20 grid lg:grid-cols-2 gap-12 items-center relative overflow-hidden mt-16">
                     <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-gold-600/20 blur-[100px] rounded-full pointer-events-none"></div>
                     <div class="relative z-10 w-full h-[300px] sm:h-[400px] rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(255,204,0,0.15)] border border-white/10 order-2 lg:order-1 group">
@@ -525,115 +817,116 @@
                         <p class="text-white/60 text-lg leading-relaxed font-medium">We take pride in delivering top-tier products. Our commitment to excellence ensures that every item meets the highest standards of quality.</p>
                     </div>
                 </div>`;
-                fc.classList.remove('hidden');
-            }
-            if (window.lucide) {
-                lucide.createIcons();
-            }
+                    fc.classList.remove('hidden');
+                }
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
 
-            // Load Products
-            let allProducts = [];
-            
-            function renderProducts(arr) {
-                let html = "";
-                arr.forEach((p) => {
-                    const stars = p.pRating > 0 ? `<i class="fas fa-star text-gold-500 text-[10px] sm:text-base"></i> ${p.pRating} <span class="text-white/50 text-[10px] sm:text-xs">(${p.pReviewCount})</span>` : `<span class="text-white/40 text-[10px] sm:text-xs">No reviews</span>`;
-                    html += `
-                    <div class="glass-dark border border-white/10 rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 text-center flex flex-col items-center hover-card bg-[#0a0f1e]/60 relative hover:border-gold-500/30 transition-all cursor-pointer" onclick="location.href='product.html?id=${p.id}&seller=${sID}'">
-                        <div class="product-img-wrap border border-white/5 h-[120px] sm:h-[200px] mb-3 sm:mb-4">
+                // Load Products
+                let allProducts = [];
+
+                function renderProducts(arr) {
+                    let html = "";
+                    arr.forEach((p) => {
+                        const stars = p.pRating > 0 ? `<i class="fas fa-star text-gold-500 text-[10px] sm:text-base"></i> ${p.pRating} <span class="text-shahi-text/50 text-[10px] sm:text-xs">(${p.pReviewCount})</span>` : `<span class="text-shahi-text/40 text-[10px] sm:text-xs">No reviews</span>`;
+                        html += `
+                    <div class="glass-dark border border-shahi-border rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 text-center flex flex-col items-center hover-card bg-shahi-surface/60 relative hover:border-gold-500/30 transition-all cursor-pointer" onclick="location.href='product.html?id=${p.id}&seller=${sID}'">
+                        <div class="product-img-wrap border border-shahi-border h-[120px] sm:h-[200px] mb-3 sm:mb-4">
                             <img src="${p.img}" loading="lazy" />
                         </div>
-                        <h3 class="text-sm sm:text-xl font-heading font-bold text-white mb-1 sm:mb-2 line-clamp-2 min-h-[40px] sm:min-h-[56px]">${p.name}</h3>
+                        <h3 class="text-sm sm:text-xl font-heading font-bold text-shahi-text mb-1 sm:mb-2 line-clamp-2 min-h-[40px] sm:min-h-[56px]">${p.name}</h3>
                         <div class="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2 text-xs sm:text-sm">${stars}</div>
                         <div class="flex items-baseline justify-center gap-1 sm:gap-2 mb-3 sm:mb-6 mt-1 sm:mt-2">
                             <span class="text-base sm:text-2xl font-heading font-bold text-gold-400">Rs. ${p.price}</span>
                         </div>
-                        <a href="product.html?id=${p.id}&seller=${sID}" class="w-full py-2 sm:py-3.5 rounded-full font-heading font-bold text-xs sm:text-base text-white bg-white/5 hover:bg-gold-500 hover:text-black border border-white/10 transition-colors mt-auto flex justify-center items-center gap-1 sm:gap-2">View details</a>
+                        <a href="product.html?id=${p.id}&seller=${sID}" class="w-full py-2 sm:py-3.5 rounded-full font-heading font-bold text-xs sm:text-base text-shahi-text bg-shahi-surface/30 hover:bg-gold-500 hover:text-black border border-shahi-border transition-colors mt-auto flex justify-center items-center gap-1 sm:gap-2">View details</a>
                     </div>`;
-                });
-                
-                if (arr.length === 0) {
-                     html = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:rgba(255,255,255,0.5);">No products found matching your search.</div>`;
-                }
-                
-                document.getElementById('products-list').innerHTML = html;
-            }
+                    });
 
-            onValue(ref(db, `products/${sID}`), async (snap) => {
-                if(snap.exists()) {
-                    const reviewsSnap = await get(ref(db, 'reviews'));
-                    const allReviews = reviewsSnap.exists() ? reviewsSnap.val() : {};
-                    const data = snap.val();
-                    allProducts = [];
-                    for(let id in data) {
-                        let pRating=0, pReviewCount=0;
-                        if (allReviews[id]) { 
-                            const reviews=Object.values(allReviews[id]); 
-                            pReviewCount=reviews.length; 
-                            pRating=(reviews.reduce((a,r)=>a+parseInt(r.rating),0)/pReviewCount).toFixed(1); 
-                        }
-                        allProducts.push({ id, pRating, pReviewCount, ...data[id] });
+                    if (arr.length === 0) {
+                        html = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:rgba(255,255,255,0.5);">No products found matching your search.</div>`;
                     }
-                    allProducts.sort((a,b) => (b.timestamp||0)-(a.timestamp||0));
-                    
-                    renderProducts(allProducts);
-                    triggerGSAP();
-                } else {
-                    document.getElementById('products-list').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:rgba(255,255,255,0.5);">No products in this store yet.</div>`;
+
+                    document.getElementById('products-list').innerHTML = html;
                 }
-            });
 
-            // Search Filter Listener
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    const q = e.target.value.toLowerCase();
-                    const filtered = allProducts.filter(p => (p.name || '').toLowerCase().includes(q) || (p.description || '').toLowerCase().includes(q) || (p.category || '').toLowerCase().includes(q));
-                    renderProducts(filtered);
+                onValue(ref(db, `products/${sID}`), async (snap) => {
+                    if (snap.exists()) {
+                        const reviewsSnap = await get(ref(db, 'reviews'));
+                        const allReviews = reviewsSnap.exists() ? reviewsSnap.val() : {};
+                        const data = snap.val();
+                        allProducts = [];
+                        for (let id in data) {
+                            let pRating = 0, pReviewCount = 0;
+                            if (allReviews[id]) {
+                                const reviews = Object.values(allReviews[id]);
+                                pReviewCount = reviews.length;
+                                pRating = (reviews.reduce((a, r) => a + parseInt(r.rating), 0) / pReviewCount).toFixed(1);
+                            }
+                            allProducts.push({ id, pRating, pReviewCount, ...data[id] });
+                        }
+                        allProducts.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+                        renderProducts(allProducts);
+                        triggerGSAP();
+                    } else {
+                        document.getElementById('products-list').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:rgba(255,255,255,0.5);">No products in this store yet.</div>`;
+                    }
                 });
+
+                // Search Filter Listener
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.addEventListener('input', (e) => {
+                        const q = e.target.value.toLowerCase();
+                        const filtered = allProducts.filter(p => (p.name || '').toLowerCase().includes(q) || (p.description || '').toLowerCase().includes(q) || (p.category || '').toLowerCase().includes(q));
+                        renderProducts(filtered);
+                    });
+                }
+
+            } else {
+                document.getElementById('products-list').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:rgba(255,255,255,0.5);">Store not found.</div>`;
             }
+        });
 
-        } else {
-            document.getElementById('products-list').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:rgba(255,255,255,0.5);">Store not found.</div>`;
-        }
-    });
+        // Loader & Bubbles
+        window.addEventListener('load', () => {
+            if (window.lucide) lucide.createIcons();
+            let prog = 0;
+            const interval = setInterval(() => {
+                prog += Math.random() * 30;
+                if (prog >= 100) {
+                    prog = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        document.getElementById('loader').style.opacity = '0';
+                        document.getElementById('loader').style.visibility = 'hidden';
+                        const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
+                        tl.from('#navbar', { y: -100, opacity: 0, duration: 1 })
+                            .from('#hero-text > *', { y: 40, opacity: 0, stagger: 0.1 }, "-=0.6")
+                            .from('#hero-bottle', { opacity: 0, duration: 1.5, ease: 'expo.out' }, "-=1");
+                    }, 500);
+                }
+                document.getElementById('loader-progress').style.width = prog + '%';
+            }, 100);
 
-    // Loader & Bubbles
-    window.addEventListener('load', () => {
-        if (window.lucide) lucide.createIcons();
-        let prog = 0;
-        const interval = setInterval(() => {
-            prog += Math.random() * 30;
-            if (prog >= 100) {
-                prog = 100;
-                clearInterval(interval);
-                setTimeout(() => {
-                    document.getElementById('loader').style.opacity = '0';
-                    document.getElementById('loader').style.visibility = 'hidden';
-                    const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 }});
-                    tl.from('#navbar', { y: -100, opacity: 0, duration: 1 })
-                      .from('#hero-text > *', { y: 40, opacity: 0, stagger: 0.1 }, "-=0.6")
-                      .from('#hero-bottle', { opacity: 0, duration: 1.5, ease: 'expo.out' }, "-=1");
-                }, 500);
+            const bc = document.getElementById('spark-container');
+            for (let i = 0; i < 25; i++) {
+                const s = document.createElement('div');
+                s.className = 'spark';
+                const size = Math.random() * 4 + 2;
+                s.style.width = size + 'px';
+                s.style.height = size + 'px';
+                s.style.left = (Math.random() * 100) + 'vw';
+                s.style.animationDelay = (Math.random() * 10) + 's';
+                s.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                s.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
+                bc.appendChild(s);
             }
-            document.getElementById('loader-progress').style.width = prog + '%';
-        }, 100);
-
-        const bc = document.getElementById('spark-container');
-        for (let i = 0; i < 25; i++) {
-            const s = document.createElement('div');
-            s.className = 'spark';
-            const size = Math.random() * 4 + 2; 
-            s.style.width = size + 'px';
-            s.style.height = size + 'px';
-            s.style.left = (Math.random() * 100) + 'vw';
-            s.style.animationDelay = (Math.random() * 10) + 's';
-            s.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            s.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
-            bc.appendChild(s);
-        }
-    });
-</script>
+        });
+    </script>
 
 </body>
+
 </html>

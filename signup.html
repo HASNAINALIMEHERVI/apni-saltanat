@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <link rel="stylesheet" href="royal.css">
+    <script src="theme-manager.js"></script>
     <style>
         /* ===== SIGNUP PAGE LAYOUT ===== */
         body { min-height:100vh; display:flex; flex-direction:column; background:var(--bg-dark); }
@@ -141,9 +142,9 @@
         }
         .royal-field-input {
             width:100%; padding:14px 18px 14px 46px;
-            background:#111;
+            background:var(--bg-deep);
             border:1.5px solid var(--border);
-            border-radius:var(--radius-md); color:var(--text-light);
+            border-radius:var(--radius-md); color:var(--text-main);
             outline:none; transition:var(--transition);
             font-family:'Manrope',sans-serif; font-size:14px;
         }
@@ -165,7 +166,7 @@
         .doc-upload-label {
             display:flex; flex-direction:column; align-items:center; justify-content:center;
             gap:8px; padding:16px 10px;
-            background:#111; border:1.5px dashed var(--border);
+            background:var(--bg-deep); border:1.5px dashed var(--border);
             border-radius:var(--radius-md); cursor:pointer;
             transition:var(--transition); text-align:center; position:relative;
         }
@@ -229,7 +230,7 @@
 <body>
 
 <!-- SHAHI MODAL CONTAINER -->
-<div id="shahiModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:20000; align-items:center; justify-content:center; backdrop-filter:blur(10px);">
+<div id="shahiModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:20000; align-items:center; justify-content:center; backdrop-filter:blur(10px);">
     <div class="modal-card" style="background:var(--bg-surface); border:2px solid var(--royal-gold); border-radius:24px; padding:40px; width:90%; max-width:400px; text-align:center; box-shadow:0 0 50px rgba(197,160,89,0.2);">
         <div class="modal-icon" id="modalIcon" style="font-size:50px; margin-bottom:20px;">👑</div>
         <div class="modal-title" id="modalTitle" style="font-family:'Epilogue',sans-serif; font-weight:900; color:var(--royal-gold); margin-bottom:10px; font-size:20px; text-transform:uppercase;">WELCOME SELLER</div>
@@ -453,6 +454,43 @@
     </div>
 </div>
 
+<div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
+    <div class="menu-inner" onclick="event.stopPropagation()">
+        <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Royal Marketplace</a>
+        <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Seller Dashboard</a>
+        <a href="signup.html" class="menu-item" style="color:var(--royal-gold); background:rgba(255,204,0,0.05); border-radius:12px; padding:12px 16px; margin:0 -8px;"><i class="fas fa-user-plus"></i> Become a Seller</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Categories</a>
+
+        <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Information Center</div>
+        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Guidelines</a>
+        <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
+        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Marketplace Blog</a>
+        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
+
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
+            <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
+            <a href="#" class="menu-item" id="menuLogout" style="display:none; color:var(--danger);"><i class="fas fa-sign-out-alt"></i> Exit Marketplace</a>
+        </div>
+        <div style="padding-top:10px;">
+            <div id="theme-picker-container"></div>
+        </div>
+        <div style="padding-top:10px;">
+            <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
+            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Support</a>
+        </div>
+        <script>
+            // Initialize theme picker in the menu
+            window.addEventListener('load', () => {
+                if (window.ThemeManager) {
+                    ThemeManager.injectThemePicker('theme-picker-container', true);
+                }
+            });
+        </script>
+    </div>
+</div>
+
 <script>
     window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
     function previewDoc(input, previewId) {
@@ -481,18 +519,42 @@
     const storage = getStorage(app);
 
     let isRegistering = false;
+    const params = new URLSearchParams(window.location.search);
+    const isGoogleFlow = params.has('email');
 
     onAuthStateChanged(auth, u => {
         if(u && !isRegistering) {
-            const role = localStorage.getItem('userRole');
-            if (role === 'sardaar') {
-                window.location.href = 'seller-dashboard.html';
-            } else {
-                window.location.href = 'index.html';
-            }
-            return;
+            // Check if user has a role already
+            get(ref(db, `users/sardaars/${u.uid}`)).then(snap => {
+                if(snap.exists()) {
+                    localStorage.setItem('userRole', 'sardaar');
+                    window.location.href = 'seller-dashboard.html';
+                } else {
+                    get(ref(db, `users/buyers/${u.uid}`)).then(bSnap => {
+                        if(bSnap.exists()) {
+                            localStorage.setItem('userRole', 'buyer');
+                            window.location.href = 'index.html';
+                        } else if (!isGoogleFlow) {
+                            // Only redirect if NOT in google signup flow
+                            window.location.href = 'index.html';
+                        }
+                    });
+                }
+            });
         }
     });
+
+    // Pre-fill Google Data
+    if (isGoogleFlow) {
+        window.addEventListener('load', () => {
+            document.getElementById('email').value = params.get('email');
+            document.getElementById('email').readOnly = true;
+            document.getElementById('userName').value = params.get('name');
+            const pwGroup = document.getElementById('password').closest('.field-group');
+            if(pwGroup) pwGroup.style.display = 'none';
+            document.getElementById('password').removeAttribute('required');
+        });
+    }
 
     const phoneInputField = document.querySelector("#phone");
     const phoneInput = window.intlTelInput(phoneInputField, {
@@ -541,8 +603,12 @@
         const fBack = document.getElementById('idBack').files[0];
 
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, pwd);
-            const user = userCredential.user;
+            let user = auth.currentUser;
+            
+            if (!user) {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, pwd);
+                user = userCredential.user;
+            }
 
             progressWrap.style.display = 'block';
             progressText.textContent = 'Uploading documents...';
