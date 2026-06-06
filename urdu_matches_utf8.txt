@@ -1,0 +1,456 @@
+
+=== admin-dashboard.html ===
+  6: <title>Admin Dashboard | Apni Saltanat</title>
+  16: --shahi-gold: #2ecc71;
+  17: --shahi-gold-dim: rgba(46, 204, 113, 0.15);
+  18: --shahi-black: #ffffff;
+  19: --shahi-card: #ffffff;
+  20: --shahi-border: #d4edda;
+  39: .shahi-sidebar {
+  42: border-right: 1px solid var(--shahi-border);
+  58: .brand i { font-size: 40px; color: var(--shahi-gold); margin-bottom: 10px; filter: drop-shadow(0 0 10px rgba(46, 204, 113, 0.3)); }
+  60: .brand span { color: var(--shahi-gold); }
+  82: border: 1px solid var(--shahi-border);
+  93: .shahi-main {
+  104: .user-profile { display: flex; align-items: center; gap: 15px; background: var(--shahi-card); padding: 10px 20px; border-radius: 30px; border: 1px solid var(--shahi-border); color: var(--text-main); }
+  112: .shahi-search {
+  114: border: 1px solid var(--shahi-border); background: var(--shahi-card);
+  119: .shahi-search:focus { border-color: var(--shahi-gold); box-shadow: 0 0 15px rgba(46,204,113,0.1); }
+  121: .shahi-btn {
+  122: background: var(--shahi-gold); color: var(--text-main); padding: 10px 20px; border: none;
+  125: .shahi-btn:hover { background: #27ae60; color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(46,204,113,0.25); }
+  128: .table-wrap { overflow-x: auto; background: var(--shahi-card); border: 1px solid var(--shahi-border); border-radius: 16px; margin-bottom: 30px; }
+  130: th { background: #f1fbf6; color: var(--text-main); font-size: 11px; text-transform: uppercase; padding: 20px; text-align: left; letter-spacing: 1px; border-bottom: 1px solid var(--shahi-border); }
+  139: .doc-link { color: var(--text-muted); text-decoration: none; font-size: 11px; border: 1px dashed var(--shahi-gold); padding: 4px 8px; border-radius: 4px; display: inline-block; margin-right: 5px; }
+  143: padding: 8px 12px; border-radius: 8px; font-weight: 800; background: #f1fbf6; color: var(--text-main); border: 1px solid var(--shahi-border);
+  149: .admin-card { background: var(--shahi-card); border: 1px solid var(--shahi-border); border-radius: 16px; padding: 25px; transition: 0.3s; position: relative; color: var(--text-main); }
+  150: .admin-card:hover { transform: translateY(-5px); border-color: var(--shahi-gold); box-shadow: 0 10px 20px rgba(46,204,113,0.08); }
+  153: .card-img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin: 15px 0; border: 1px solid var(--shahi-border); cursor: pointer; }
+  157: .stat-card { background: var(--shahi-card); padding: 25px; border-radius: 16px; border: 1px solid var(--shahi-border); display: flex; align-items: center; gap: 20px; color: var(--text-main); }
+  163: .mobile-menu-btn { display: none; background: none; border: none; color: var(--shahi-gold); font-size: 24px; cursor: pointer; }
+  165: .shahi-sidebar { transform: translateX(-100%); }
+  166: .shahi-sidebar.open { transform: translateX(0); }
+  167: .shahi-main { margin-left: 0; padding: 20px; }
+  286: <h2>APNI SALTANAT</h2>
+  294: <input type="email" id="adminEmail" class="admin-login-input" placeholder="saltanatapni@gmail.com" required value="saltanatapni@gmail.com">
+  309: <div class="shahi-sidebar" id="sidebar">
+  312: <h2>APNI <span>SALTANAT</span></h2>
+  313: <div style="font-size: 12px; color: var(--shahi-gold); letter-spacing: 2px; margin-top: 5px;">ADMIN DASHBOARD</div>
+  323: <div class="shahi-main">
+  328: <i class="fas fa-user-shield" style="color: var(--shahi-gold); font-size: 20px;"></i>
+  330: <div style="font-weight: 800; font-size: 14px; color: var(--shahi-gold);">ADMIN</div>
+  339: <input type="text" id="searchRequests" class="shahi-search" placeholder="Search pending applications...">
+  340: <button class="shahi-btn" onclick="exportExcel('tableRequests', 'Pending_Sellers')"><i class="fas fa-file-excel"></i> EXCEL REPORT</button>
+  353: <input type="text" id="searchUsers" class="shahi-search" placeholder="Search by name or email...">
+  354: <button class="shahi-btn" onclick="exportExcel('tableUsers', 'User_Control')"><i class="fas fa-file-excel"></i> EXCEL REPORT</button>
+  386: const isAdmin = user && (user.uid === ADMIN_UID || (user.email && user.email.toLowerCase() === 'saltanatapni@gmail.com'));
+  434: 'ledger': 'SHAHI TREASURY LEDGER', 'payments': 'PAYMENT VERIFICATION VAULT'
+  529: <td><small style="color:var(--shahi-gold)">${item.id}</small></td>
+  579: const subject = isApproved ? "Verification Approved! - Apni Saltanat" : "Verification Update - Apni Saltanat";
+  581: ? `Hello ${name}! u are approved and can sell now: https://apnisaltanat.com/seller-dashboard.html`
+  616: <td><span style="background:${user.role==='SELLER'?'rgba(255,215,0,0.1)':'rgba(33,150,243,0.1)'}; color:${user.role==='SELLER'?'var(--shahi-gold)':'var(--accent-blue)'}; padding:4px 8px; border-radius
+  670: <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--shahi-border); padding-bottom:15px; margin-bottom:15px;">
+  747: <td><input type="checkbox" class="ledger-cb" data-uid="${s.id}" ${hasPaid||ledgerIsFrozen?'disabled':''} style="accent-color:var(--shahi-gold); cursor:pointer;" onchange="updateBulkBtn()"></td>
+  748: <td><b style="color:var(--text-main)">${s.userName||s.name||'Seller'}</b> ${ledgerIsFrozen?'<i class="fas fa-lock" style="color:var(--shahi-gold); font-size:10px;"></i>':''}<br><small style="color:var
+  839: <span style="position:absolute; top:20px; right:20px; background:rgba(255,204,0,0.1); color:var(--shahi-gold); border:1px solid var(--shahi-gold); padding:4px 8px; border-radius:4px; font-size:10px; f
+  844: <button class="shahi-btn" style="width:100%; justify-content:center; background:var(--success); margin-top:10px;" onclick="confirmPayment('${id}')"><i class="fas fa-check-circle"></i> APPROVE PAYMENT<
+
+=== become-seller.html ===
+  6: <title>Become a Seller — Apni Saltanat | Pakistan's Premier Marketplace</title>
+  7: <meta name="description" content="Become a part of Apni Saltanat — Open your store in Pakistan's royal marketplace, sell products and earn halal income. Register today!">
+  8: <link rel="canonical" href="https://apnisaltanat.com/become-seller.html">
+  227: <!-- SHAHI MODAL CONTAINER -->
+  228: <div id="shahiModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:20000; align-items:center; justify-content:center; backdrop-filter:blur(10px);">
+  241: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  377: shahiAlert("You must be logged in to apply.", "❌");
+  385: shahiAlert("Please enter a valid WhatsApp number.", "❌");
+  414: shahiAlert("Your request has been submitted. The admin will review it shortly.", "✅");
+  419: shahiAlert("Submission Failed: " + error.message, "❌");
+  425: window.shahiAlert = (text, type = 'info') => {
+  426: const modal = document.getElementById('shahiModal');
+
+=== cart.html ===
+  6: <title>My Cart | Apni Saltanat</title>
+  7: <meta name="description" content="Review your cart items and place your order from Apni Saltanat marketplace.">
+  63: /* SHAHI MODAL */
+  64: #shahiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+  78: #shahi-auth-loader { position:fixed; inset:0; background:var(--bg-dark); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:0.5s; }
+  85: <!-- SHAHI AUTH LOADER -->
+  86: <div id="shahi-auth-loader">
+  90: <p style="color:var(--royal-gold); margin-top:24px; font-family:'Epilogue',sans-serif; font-weight:900; letter-spacing:4px; font-size:11px; text-transform:uppercase;">Apni Saltanat</p>
+  96: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  144: <!-- SHAHI MODAL CONTAINER -->
+  145: <div id="shahiModal">
+  188: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  191: <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+  192: <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+  222: <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+  235: let cart = JSON.parse(localStorage.getItem('saltanatCart')) || [];
+  239: const loader = document.getElementById('shahi-auth-loader');
+  275: window.removeItem = (index) => { cart.splice(index, 1); localStorage.setItem('saltanatCart', JSON.stringify(cart)); window.renderCart(); };
+  278: if (!currentUser) { shahiAlert("Please login first to place orders."); window.location.href = "login.html"; return; }
+  291: if (!name || !address || !phone) { shahiAlert("Please fill all required delivery details!"); return; }
+  294: if (!email) { shahiAlert("Please enter your email for order updates."); return; }
+  297: shahiAlert("Please enter a valid email address for order updates.");
+  301: shahiConfirm("Are you sure you want to place this order?", async () => {
+  327: shahiAlert("Your order has been placed! You will receive a confirmation email once the seller approves it.", "✅");
+  329: localStorage.removeItem('saltanatCart');
+  334: shahiAlert("Order failed: " + error.message, "❌");
+  350: subject: "New Order! - Apni Saltanat",
+  351: message: `Hello Seller! You have received a new order.\n\nCustomer: ${order.customerName}\nProduct: ${order.productName}\nPrice: Rs. ${order.productPrice}\n\nCheck your dashboard: https://apnisaltanat
+  364: // ===== SHAHI MODAL SYSTEM =====
+  365: window.shahiAlert = (text, type = 'info') => {
+  366: const modal = document.getElementById('shahiModal');
+  384: window.shahiConfirm = (text, onConfirm) => {
+  385: const modal = document.getElementById('shahiModal');
+  414: localStorage.setItem('saltanatCart', JSON.stringify(cart));
+  415: shahiAlert("Some products were removed from your cart because those sellers are currently inactive.", "⚠️");
+
+=== contact.html ===
+  38: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  70: <p>support@apnisaltanat.com</p>
+  76: <a href="https://www.facebook.com/apnisaltanat.official" target="_blank" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); bo
+  77: <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); 
+  115: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  143: <span>© 2026 Apni Saltanat | By Bablu Architect</span>
+  186: const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", st
+
+=== disclaimer.html ===
+  7: <title>Disclaimer — Apni Saltanat | Legal Oversight</title>
+  8: <meta name="description" content="Legal disclaimer for Apni Saltanat marketplace. Information about content accuracy, third-party links, and marketplace liability.">
+  28: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  42: <p>The information provided on Apni Saltanat (the "Website") is for general informational purposes only. While we strive to maintain the highest standards of accuracy ("Every Deal is a Commitment"), w
+  45: <p>Apni Saltanat operates as an open marketplace where independent sellers list their goods. We do not own the products sold by these sellers. Any dispute regarding quality, delivery, or authenticity 
+  62: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  90: <span>© 2026 Apni Saltanat | By Bablu Architect</span>
+  128: const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", st
+
+=== faq.html ===
+  6: <title>FAQ — Questions & Answers | Apni Saltanat</title>
+  7: <meta name="description" content="Apni Saltanat frequently asked questions — Q&A for buyers and sellers. Learn everything about us and our marketplace.">
+  8: <link rel="canonical" href="https://apnisaltanat.com/faq.html">
+  167: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  202: <span>Is shopping on Apni Saltanat safe?</span>
+  206: Yes! On Apni Saltanat, we only allow verified sellers to list. Every seller's CNIC and documents are verified. If there's an issue, we are available to help via WhatsApp or email.
+  268: Currently, there is no commission or per-sale fee on Apni Saltanat. You receive payment directly from the customer. We only provide the platform. A subscription model may be introduced in the future w
+  322: Payments are made directly between the customer and the seller. Common methods: Easypaisa, JazzCash, bank transfer, or COD (Cash on Delivery). Sellers specify their preferred method in the listing or 
+  352: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  355: <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+  356: <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+  386: <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+  451: const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", st
+
+=== index.html ===
+  7: <title>Apni Saltanat | Pakistan's Royal Marketplace — Royal Bazaar</title>
+  8: <meta name="title" content="Apni Saltanat | Pakistan's Royal Marketplace">
+  9: <meta name="description" content="Shop at Apni Saltanat, Pakistan's most trusted royal marketplace. Discover premium products including electronics, fashion, and daily essentials at fair prices. Every
+  10: <meta name="keywords" content="Apni Saltanat, Online Shopping Pakistan, Royal Bazaar, Marketplace Pakistan, Best Online Store, Electronics Pakistan, Fashion Marketplace, Bablu Architect, Buy Online Pa
+  18: <meta property="og:url" content="https://apnisaltanat.com/">
+  19: <meta property="og:title" content="Apni Saltanat | Pakistan's Royal Marketplace">
+  21: <meta property="og:image" content="https://apnisaltanat.com/favicon.png">
+  23: <meta property="twitter:url" content="https://apnisaltanat.com/">
+  24: <meta property="twitter:title" content="Apni Saltanat | Pakistan's Royal Marketplace">
+  25: <meta property="twitter:description" content="Shop the best deals in Pakistan at Apni Saltanat. Quality and trust delivered to your doorstep.">
+  26: <meta property="twitter:image" content="https://apnisaltanat.com/favicon.png">
+  27: <link rel="canonical" href="https://apnisaltanat.com/">
+  35: .shahi-mega-menu { position:absolute; top:calc(100% + 12px); left:0; background:var(--bg-surface); visibility:hidden; opacity:0; transition: visibility 0s 0.6s, opacity 0.6s ease; display:grid; grid-t
+  36: .cat-trigger:hover .shahi-mega-menu { visibility:visible; opacity:1; transition: visibility 0s 0s, opacity 0.3s ease; }
+  101: .shahi-card { background:var(--bg-surface); border-radius:var(--radius-lg); padding:12px; transition:var(--transition); border:1px solid var(--border); display:flex; flex-direction:column; cursor:poin
+  102: .shahi-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.4); border-color:var(--border-gold); }
+  105: .shahi-card:hover .img-container img { transform:scale(1.07); }
+  116: #shahi-install-btn { display:none; position:fixed; bottom:110px; left:20px; background:var(--royal-gold); color:#131313; padding:11px 18px; border-radius:var(--radius-pill); border:none; font-weight:9
+  117: #shahi-wazeer-btn { position:fixed; bottom:36px; right:110px; display:flex; align-items:center; gap:10px; background:var(--glass-bg); color:var(--text-main); padding:12px 20px; border-radius:var(--rad
+  118: #shahi-wazeer-btn:hover { transform:translateY(-3px); border-color:var(--royal-gold); }
+  132: .shahi-card { border-radius:var(--radius-md); padding:8px; }
+  139: #shahi-wazeer-btn { display:none; }
+  141: .shahi-mega-menu { position:fixed; top:72px; left:12px; right:12px; width:auto; border-radius:var(--radius-md); grid-template-columns:1fr; grid-template-rows:auto auto auto; height:auto; max-height:ca
+  147: #shahi-auth-loader { position:fixed; inset:0; background:var(--bg-dark); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:0.5s; }
+  154: <!-- SHAHI AUTH LOADER -->
+  155: <div id="shahi-auth-loader">
+  159: <p style="color:var(--royal-gold); margin-top:24px; font-family:'Epilogue',sans-serif; font-weight:900; letter-spacing:4px; font-size:11px; text-transform:uppercase;">Apni Saltanat</p>
+  170: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  175: <div class="shahi-mega-menu">
+  244: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  247: <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+  248: <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+  276: <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+  343: function acceptCookies() { localStorage.setItem('saltanat_cookies', 'true'); document.getElementById('cookie-consent').style.display='none'; }
+  344: window.addEventListener('load', () => { setTimeout(() => { if(!localStorage.getItem('saltanat_cookies')) document.getElementById('cookie-consent').style.display='block'; }, 2000); });
+  357: const updateCartCount = () => { const cart = JSON.parse(localStorage.getItem('saltanatCart') || '[]'); cartCount.innerText = cart.length; };
+  463: <div class="shahi-card" onclick="location.href='product.html?id=${p.id}&seller=${p.seller}'">
+  485: let shahiPrompt;
+  486: const shahiBtn = document.getElementById('shahi-install-btn');
+  487: if (shahiBtn) {
+  488: window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); shahiPrompt = e; shahiBtn.style.display = 'block'; });
+  489: shahiBtn.addEventListener('click', () => {
+  490: if (shahiPrompt) { shahiPrompt.prompt(); shahiPrompt.userChoice.then(c => { if(c.outcome==='accepted') shahiBtn.style.display='none'; shahiPrompt = null; }); }
+  556: const isAdmin = user.email === 'saltanatapni@gmail.com' || user.uid === 'qnWFjg3XNlO7jHDhz84bPJMikP72';
+
+=== instructions.html ===
+  7: <title>Marketplace Guidelines | Seller Guide — Apni Saltanat</title>
+  8: <meta name="description" content="Official seller guide and rules for Apni Saltanat. Learn how to set up your account, upload products, and conduct ethical trade.">
+  209: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  233: <h2 class="section-title" style="text-align:center; margin-bottom:10px;">How to Use Apni Saltanat</h2>
+  238: title="How to use Apni Saltanat"
+  351: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  354: <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+  355: <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+  385: <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+  420: <p style="font-size:12px; color:var(--text-muted); line-height:1.7; margin-bottom:18px;">Apni Saltanat uses cookies to deliver a premium experience and to show relevant ads through Google AdSense. By 
+  428: function acceptCookies() { localStorage.setItem('saltanat_cookies', 'true'); document.getElementById('cookie-consent').style.display='none'; }
+  433: if(!localStorage.getItem('saltanat_cookies')) document.getElementById('cookie-consent').style.display='block';
+  455: const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", st
+
+=== login.html ===
+  8: <title>Login — Apni Saltanat | Pakistan's Premier Marketplace</title>
+  9: <meta name="title" content="Apni Saltanat | Pakistan's Premier Marketplace">
+  11: content="Shop at Apni Saltanat, Pakistan's most trusted online Marketplace. Discover a wide variety of premium products including electronics, fashion, and daily essentials at fair prices. Every deal 
+  13: content="Apni Saltanat, Online Shopping Pakistan, Marketplace Pakistan, Best Online Store, Electronics Pakistan, Fashion Marketplace, Bablu Architect, Buy Online Pakistan">
+  27: <meta property="og:url" content="https://apnisaltanat.com/">
+  28: <meta property="og:title" content="Apni Saltanat | Pakistan's Premier Marketplace">
+  31: <meta property="og:image" content="https://apnisaltanat.com/favicon.png">
+  34: <meta property="twitter:url" content="https://apnisaltanat.com/">
+  35: <meta property="twitter:title" content="Apni Saltanat | Pakistan's Premier Marketplace">
+  37: content="Shop the best deals in Pakistan at Apni Saltanat. Quality and trust delivered to your doorstep.">
+  38: <meta property="twitter:image" content="https://apnisaltanat.com/favicon.png">
+  40: <link rel="canonical" href="https://apnisaltanat.com/">
+  238: .shahi-input {
+  252: .shahi-input:focus {
+  259: .shahi-input:focus + i {
+  359: <h1 class="left-brand-name">Apni<br>Saltanat</h1>
+  382: <input type="email" id="loginIdentifier" class="shahi-input" placeholder="seller@apnisaltanat.com" required>
+  390: <input type="password" id="password" class="shahi-input" placeholder="••••••••" required>
+  409: New to the Saltanat? <a href="#" id="signupTrigger">Apply for Access</a>
+  421: <h3 style="font-family:'Epilogue',sans-serif; font-size:28px; font-weight:900; margin-bottom:15px; color:var(--text-main);">Join the Saltanat</h3>
+
+=== privacy-policy.html ===
+  7: <title>Privacy Policy | Apni Saltanat</title>
+  8: <meta name="description" content="Read the Privacy Policy of Apni Saltanat. We are committed to protecting your personal information and your right to privacy.">
+  9: <link rel="canonical" href="https://apnisaltanat.com/privacy-policy.html">
+  116: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  142: <p>Welcome to <strong>Apni Saltanat</strong> ("we," "our," or "us"). We operate the website <a href="https://apnisaltanat.com">apnisaltanat.com</a>, Pakistan's premier online marketplace connecting bu
+  248: <p>Apni Saltanat is not directed at children under 13. We do not knowingly collect personal information from children under 13. Contact us immediately if you believe a child has provided their informa
+  263: <a href="mailto:apnisaltanat.official@gmail.com" class="btn-blue"><i class="fas fa-paper-plane"></i> Email Us</a>
+  273: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  276: <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+  277: <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+  308: <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+  339: <p style="font-size:12px; color:var(--text-muted); line-height:1.7; margin-bottom:18px;">Apni Saltanat uses cookies to deliver a premium experience and to show relevant ads through Google AdSense. By 
+  348: function acceptCookies() { localStorage.setItem('saltanat_cookies', 'true'); document.getElementById('cookie-consent').style.display='none'; }
+  349: window.addEventListener('load', () => { setTimeout(() => { if(!localStorage.getItem('saltanat_cookies')) document.getElementById('cookie-consent').style.display='block'; }, 2000); });
+  357: const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", st
+
+=== product.html ===
+  7: <title>Product Details | Apni Saltanat</title>
+  8: <meta name="description" content="View product details, price, and reviews on Apni Saltanat. Order now and get it delivered to your doorstep across Pakistan.">
+  16: <meta property="og:url" content="https://apnisaltanat.com/">
+  17: <meta property="og:title" content="Apni Saltanat | Pakistan's Premier Marketplace">
+  18: <meta property="og:image" content="https://apnisaltanat.com/favicon.png">
+  19: <link rel="canonical" href="https://apnisaltanat.com/">
+  127: /* SHAHI MODAL */
+  128: #shahiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+  142: #shahi-auth-loader { position:fixed; inset:0; background:var(--bg-dark); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:0.5s; }
+  149: <!-- SHAHI AUTH LOADER -->
+  150: <div id="shahi-auth-loader">
+  154: <p style="color:var(--royal-gold); margin-top:24px; font-family:'Epilogue',sans-serif; font-weight:900; letter-spacing:4px; font-size:11px; text-transform:uppercase;">Apni Saltanat</p>
+  162: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  179: <!-- SHAHI MODAL CONTAINER -->
+  180: <div id="shahiModal">
+  295: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  298: <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+  299: <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+  330: <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+  351: const cart = JSON.parse(localStorage.getItem('saltanatCart')) || [];
+  358: const loader = document.getElementById('shahi-auth-loader');
+  453: if (!window.currentUser) { shahiAlert("Please login first to place an order."); window.location.href = "login.html"; return; }
+  458: const cart = JSON.parse(localStorage.getItem('saltanatCart')) || [];
+  460: localStorage.setItem('saltanatCart', JSON.stringify(cart));
+  462: shahiAlert("Item added to cart!", "✅");
+  479: if (!name || !address || !phone) { shahiAlert("Please fill all required fields!"); return; }
+  482: if (!email) { shahiAlert("Please enter your email for order updates."); return; }
+  485: shahiAlert("Please enter a valid email address.");
+  489: shahiConfirm("Are you sure you want to place this order?", async () => {
+  503: shahiAlert("Order placed successfully! You will receive an email once the seller confirms.", "✅");
+  508: shahiAlert("Order failed: " + err.message, "❌");
+  515: // ===== SHAHI MODAL SYSTEM =====
+  516: window.shahiAlert = (text, type = 'info') => {
+  517: const modal = document.getElementById('shahiModal');
+  535: window.shahiConfirm = (text, onConfirm) => {
+  536: const modal = document.getElementById('shahiModal');
+
+=== profile.html ===
+  6: <title>My Account | Apni Saltanat</title>
+  7: <meta name="description" content="Manage your Apni Saltanat seller profile, update contact details, change password, and manage store banners.">
+  70: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  188: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  207: <span>© 2026 Apni Saltanat | By Bablu Architect</span>
+
+=== refund-policy.html ===
+  7: <title>Refund & Return Policy | Apni Saltanat</title>
+  8: <meta name="description" content="Understand the Refund and Return Policy of Apni Saltanat marketplace. Learn about how disputes, damaged products, and returns are handled.">
+  9: <link rel="canonical" href="https://apnisaltanat.com/refund-policy.html">
+  53: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  73: <p>Apni Saltanat is a <strong>marketplace platform</strong> that connects independent buyers and sellers (Sellers) across Pakistan. Transactions are conducted directly between buyers and sellers.</p>
+  74: <p>As a platform, Apni Saltanat does not directly sell products and is <strong>not a party to transactions</strong> between buyers and sellers. However, we have established the following policies to e
+  84: <li><div><strong>Escalate If Needed</strong><span>If the seller is unresponsive or refuses, contact Apni Saltanat admin. Repeated offending sellers may be blocked.</span></div></li>
+  100: <li>Refunds are processed directly by the <strong>seller</strong> to the buyer — Apni Saltanat does not process or hold any buyer payments.</li>
+  122: <li>Either party may contact the Apni Saltanat admin team for mediation.</li>
+  124: <li>Admin decisions are advisory — Apni Saltanat is not liable for enforcing private financial settlements.</li>
+  134: <a href="mailto:apnisaltanat.official@gmail.com" class="btn-outline"><i class="fas fa-envelope"></i> Email</a>
+  142: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  145: <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+  146: <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+  177: <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+  208: <p style="font-size:12px; color:var(--text-muted); line-height:1.7; margin-bottom:18px;">Apni Saltanat uses cookies to deliver a premium experience and to show relevant ads through Google AdSense. By 
+  217: function acceptCookies() { localStorage.setItem('saltanat_cookies', 'true'); document.getElementById('cookie-consent').style.display='none'; }
+  218: window.addEventListener('load', () => { setTimeout(() => { if(!localStorage.getItem('saltanat_cookies')) document.getElementById('cookie-consent').style.display='block'; }, 2000); });
+  226: const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", st
+
+=== seller-dashboard.html ===
+  6: <title>Seller Panel | Apni Saltanat — Royal Dashboard</title>
+  7: <meta name="description" content="Manage your royal empire on Apni Saltanat — Pakistan's Premium Marketplace.">
+  26: .shahi-sidebar {
+  156: .shahi-main {
+  187: .shahi-stats-grid {
+  194: .shahi-stat-card {
+  204: .shahi-stat-card:hover {
+  210: .shahi-stat-card::before {
+  220: .shahi-stat-card:hover::before { opacity: 1; }
+  267: .shahi-table-card {
+  297: .shahi-table {
+  302: .shahi-table th {
+  314: .shahi-table td {
+  322: .shahi-table tr:hover td {
+  435: .shahi-sidebar { transform: translateX(-100%); z-index: 6000; box-shadow: var(--shadow-dark); }
+  436: .shahi-sidebar.active { transform: translateX(0); }
+  437: .shahi-main { margin-left: 0; padding: 80px 20px 40px; }
+  439: .shahi-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  446: .shahi-main { padding: 30px 15px 100px; }
+  449: .shahi-stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  450: .shahi-stat-card { padding: 16px; }
+  486: .shahi-stat-card.stat-products { border-color: rgba(255, 204, 0, 0.2); background: rgba(255, 204, 0, 0.05); }
+  489: /* SHAHI MODAL */
+  490: #shahiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+  505: <!-- SHAHI MODAL CONTAINER -->
+  506: <div id="shahiModal">
+  538: <aside class="shahi-sidebar" id="sidebar">
+  589: <main class="shahi-main">
+  608: <div class="shahi-stats-grid">
+  609: <div class="shahi-stat-card stat-revenue">
+  614: <div class="shahi-stat-card stat-sales" style="border-color: rgba(0, 200, 83, 0.2); background: rgba(0, 200, 83, 0.05);">
+  619: <div class="shahi-stat-card stat-orders">
+  625: <div class="shahi-stat-card stat-products">
+  631: <div class="shahi-stat-card stat-visits" style="border-color: rgba(156, 39, 176, 0.2); background: rgba(156, 39, 176, 0.05);">
+  636: <div class="shahi-stat-card stat-pending">
+  643: <div class="shahi-table-card">
+  649: <table class="shahi-table">
+  738: <button id="uploadBtn" class="btn-gold" style="width: 100%;"><i class="fas fa-crown"></i> Publish to Saltanat</button>
+  756: <div class="shahi-table-card">
+  762: <table class="shahi-table">
+  790: <div class="shahi-table-card">
+  792: <table class="shahi-table">
+  876: shahiConfirm("Are you sure you want to logout from the dashboard?", () => {
+  1035: const waLink = `https://wa.me/${o.customerPhone.replace(/[^0-9]/g,'')}?text=Hello%20${encodeURIComponent(o.customerName)}!%20Calling%20from%20Apni%20Saltanat%20to%20confirm%20your%20order.`;
+  1105: shahiConfirm("Seller, are you sure you want to confirm this order? The buyer will be notified.", async () => {
+  1112: shahiAlert("Order confirmed successfully! 👑", "✅");
+  1115: shahiAlert("Error: " + error.message, "❌");
+  1127: subject: "Order Confirmation - Apni Saltanat",
+  1143: shahiConfirm("Seller, are you sure you want to delete this order? This action cannot be undone.", () => {
+  1145: shahiAlert("Order has been deleted.", "🗑️");
+  1150: // ===== SHAHI MODAL LOGIC (Centered & Royal) =====
+  1151: function shahiAlert(msg, icon = '👑') {
+  1152: const modal = document.getElementById('shahiModal');
+  1161: function shahiConfirm(msg, onConfirm, icon = '❓') {
+  1162: const modal = document.getElementById('shahiModal');
+  1189: shahiAlert("Alert! Notifications are blocked. Please click Allow for order notifications in your browser settings.", "⚠️");
+  1250: shahiConfirm("Are you sure you want to remove this product from the store?", () => {
+  1255: shahiConfirm("Are you sure you want to delete this order?", () => {
+  1289: if (!name || !price) return shahiAlert("Alert! Product Name and Price are required!", "⚠️");
+  1290: if (files.length === 0 && existingUrls.length === 0) return shahiAlert("Please upload at least one product image!", "🖼️");
+  1330: shahiAlert("👑 Product Updated!");
+  1333: shahiAlert("👑 Product Published!");
+  1337: shahiAlert("Error: " + e.message, "❌");
+
+=== signup.html ===
+  6: <title>Register | Apni Saltanat</title>
+  7: <meta name="description" content="Create your account on Apni Saltanat — shop premium products from Pakistan's royal marketplace. Free registration, instant access.">
+  8: <link rel="canonical" href="https://apnisaltanat.com/signup.html">
+  114: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  183: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  186: <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+  187: <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+  215: <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+  260: const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", st
+  295: alert("🎉 Welcome to Apni Saltanat! Your account has been created successfully.");
+
+=== store.html ===
+  7: <title>Seller Store | Apni Saltanat</title>
+  8: <meta name="description" content="Browse products from this verified Apni Saltanat seller." />
+  40: shahi: {
+  403: class="w-11 h-11 rounded-full bg-shahi-deep border-2 border-gold-500 shadow-glow flex items-center justify-center relative overflow-hidden p-1 transition-all">
+  408: id="navStoreName">Apni<span class="text-gold-500">Saltanat</span></span>
+  410: <div class="hidden md:flex items-center gap-1 bg-shahi-surface/30 rounded-full px-2 py-1 border border-shahi-border">
+  412: class="text-sm font-medium text-shahi-text/70 hover:text-shahi-text hover:bg-shahi-surface/20 px-4 py-2 rounded-full transition-all">Back
+  415: class="text-sm font-medium text-shahi-text/70 hover:text-shahi-text hover:bg-shahi-surface/20 px-4 py-2 rounded-full transition-all">Products</a>
+  417: class="text-sm font-medium text-shahi-text/70 hover:text-shahi-text hover:bg-shahi-surface/20 px-4 py-2 rounded-full transition-all">My
+  440: class="mobile-link text-lg font-medium text-shahi-text hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+  444: class="mobile-link text-lg font-medium text-shahi-text hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+  448: class="mobile-link text-lg font-medium text-shahi-text hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+  454: class="mobile-link text-lg font-medium text-shahi-text hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+  459: class="mobile-link text-lg font-medium text-shahi-text hover:text-gold-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+  464: class="mobile-link text-lg font-medium text-red-500 hover:text-red-400 flex items-center gap-3 pb-3 border-b border-shahi-border">
+  468: <div id="theme-picker-container" class="mt-2 border-t border-shahi-border pt-4"></div>
+  506: class="text-5xl sm:text-6xl lg:text-8xl font-heading font-black leading-[1.05] tracking-tight text-shahi-text drop-shadow-2xl">
+  511: <p class="text-shahi-text/70 text-lg sm:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed font-body">
+  523: class="px-8 py-4 rounded-full font-heading font-bold text-base text-shahi-text border border-shahi-border hover:bg-shahi-surface/20 transition-all w-full sm:w-auto text-center">
+  537: class="absolute inset-0 bg-gradient-to-t from-shahi-bg via-transparent to-transparent z-10 opacity-60">
+  539: <div class="w-full h-full bg-shahi-deep flex items-center justify-center text-gold-500">
+  549: <section id="products" class="relative py-28 bg-shahi-deep text-shahi-text border-t border-shahi-border overflow-hidden">
+  559: <h2 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-black leading-[1.1] text-shahi-text">
+  567: <i data-lucide="search" class="w-5 h-5 text-shahi-text/50"></i>
+  570: class="w-full bg-shahi-deep/80 backdrop-blur-md border border-shahi-border rounded-full py-4 pl-14 pr-6 text-shahi-text placeholder-shahi-text/40 focus:outline-none focus:border-gold-500 focus:ring-1 
+  581: <p class="text-shahi-text/50 mt-4">Loading inventory...</p>
+  592: <section id="contact" class="relative py-20 bg-shahi-bg">
+  595: class="rounded-[2.5rem] p-6 sm:p-12 md:p-20 text-center shadow-2xl relative overflow-hidden bg-shahi-deep border border-shahi-border isolate">
+  612: class="text-3xl sm:text-5xl font-heading font-black text-shahi-text leading-[1.1] mb-6 drop-shadow-lg">
+  615: <p class="text-shahi-text/80 font-medium text-lg mb-10 max-w-lg">
+  628: <footer class="relative pt-24 pb-12 overflow-hidden bg-shahi-deep text-shahi-text">
+  630: <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-shahi-border pb-16">
+  634: class="text-gold-500">Saltanat</span></span>
+  636: <p class="text-shahi-text/50 leading-relaxed font-medium max-w-sm">
+  642: <h4 class="font-heading font-bold text-lg mb-6 text-shahi-text">Marketplace</h4>
+  643: <ul class="space-y-4 text-shahi-text/50 font-medium">
+  650: <h4 class="font-heading font-bold text-lg mb-6 text-shahi-text">Legal</h4>
+  651: <ul class="space-y-4 text-shahi-text/50 font-medium">
+  657: <div class="pt-8 text-center text-shahi-text/30 text-sm font-medium">
+  658: <p>&copy; 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</p>
+  682: const cart = JSON.parse(localStorage.getItem('saltanatCart')) || [];
+  767: <div class="absolute inset-0 bg-gradient-to-t from-shahi-bg via-transparent to-transparent z-10 opacity-60"></div>
+  832: const stars = p.pRating > 0 ? `<i class="fas fa-star text-gold-500 text-[10px] sm:text-base"></i> ${p.pRating} <span class="text-shahi-text/50 text-[10px] sm:text-xs">(${p.pReviewCount})</span>` : `<s
+  834: <div class="glass-dark border border-shahi-border rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 text-center flex flex-col items-center hover-card bg-shahi-surface/60 relative hover:border-gold-500/30 trans
+  835: <div class="product-img-wrap border border-shahi-border h-[120px] sm:h-[200px] mb-3 sm:mb-4">
+  838: <h3 class="text-sm sm:text-xl font-heading font-bold text-shahi-text mb-1 sm:mb-2 line-clamp-2 min-h-[40px] sm:min-h-[56px]">${p.name}</h3>
+  843: <a href="product.html?id=${p.id}&seller=${sID}" class="w-full py-2 sm:py-3.5 rounded-full font-heading font-bold text-xs sm:text-base text-shahi-text bg-shahi-surface/30 hover:bg-gold-500 hover:text-b
+
+=== terms.html ===
+  7: <title>Terms of Service | Apni Saltanat</title>
+  8: <meta name="description" content="Read the Terms of Service for Apni Saltanat marketplace. Understand the rules, guidelines, and agreements for using our platform as a buyer or seller.">
+  9: <link rel="canonical" href="https://apnisaltanat.com/terms.html">
+  46: <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"
+  59: <p>By using Apni Saltanat, you agree to these terms. Please read them carefully before using our platform.</p>
+  66: <p>By accessing or using Apni Saltanat at <a href="https://apnisaltanat.com">apnisaltanat.com</a>, you confirm that you are at least 18 years old and agree to be bound by these Terms of Service and ou
+  67: <div class="warn-box"><p><i class="fas fa-exclamation-triangle" style="color:#ff9800; margin-right:8px;"></i> These Terms apply to all visitors, users, buyers, and sellers on the Apni Saltanat platfor
+  82: <p>To become a Seller (Seller) on Apni Saltanat, you must:</p>
+  94: <p>The following are strictly prohibited on Apni Saltanat:</p>
+  107: <p>Transactions between buyers and sellers are conducted directly — Apni Saltanat does not process buyer-seller payments. Accepted seller payment methods:</p>
+  117: <p>All content on the Apni Saltanat website — including logos, design, text, and graphics — is owned by Apni Saltanat (by Bablu Architect) and is protected by copyright law.</p>
+  125: <p>Apni Saltanat acts as a marketplace platform. We are <strong>not responsible</strong> for:</p>
+  142: <a href="mailto:apnisaltanat.official@gmail.com" class="btn-outline"><i class="fas fa-paper-plane"></i> Email</a>
+  150: <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inli
+  153: <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+  154: <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+  185: <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+  216: <p style="font-size:12px; color:var(--text-muted); line-height:1.7; margin-bottom:18px;">Apni Saltanat uses cookies to deliver a premium experience and to show relevant ads through Google AdSense. By 
+  225: function acceptCookies() { localStorage.setItem('saltanat_cookies', 'true'); document.getElementById('cookie-consent').style.display='none'; }
+  226: window.addEventListener('load', () => { setTimeout(() => { if(!localStorage.getItem('saltanat_cookies')) document.getElementById('cookie-consent').style.display='block'; }, 2000); });
+  234: const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", st

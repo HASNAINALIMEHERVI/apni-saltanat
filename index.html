@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9236482420910781" crossorigin="anonymous"></script>
-    <title>Apni Saltanat | Pakistan's Royal Marketplace — Shahi Bazaar</title>
+    <title>Apni Saltanat | Pakistan's Royal Marketplace — Royal Bazaar</title>
     <meta name="title" content="Apni Saltanat | Pakistan's Royal Marketplace">
     <meta name="description" content="Shop at Apni Saltanat, Pakistan's most trusted royal marketplace. Discover premium products including electronics, fashion, and daily essentials at fair prices. Every deal is a commitment to trust.">
-    <meta name="keywords" content="Apni Saltanat, Online Shopping Pakistan, Shahi Bazaar, Marketplace Pakistan, Best Online Store, Electronics Pakistan, Fashion Marketplace, Bablu Architect, Buy Online Pakistan">
+    <meta name="keywords" content="Apni Saltanat, Online Shopping Pakistan, Royal Bazaar, Marketplace Pakistan, Best Online Store, Electronics Pakistan, Fashion Marketplace, Bablu Architect, Buy Online Pakistan">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
     <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }</script>
@@ -113,8 +113,6 @@
         /* ===== FLOATING BUTTONS ===== */
         .whatsapp-float { position:fixed; width:56px; height:56px; bottom:36px; right:36px; background:#25d366; color:#fff; border-radius:50%; text-align:center; font-size:26px; box-shadow:0 8px 25px rgba(37,211,102,0.35); z-index:5000; display:flex; align-items:center; justify-content:center; text-decoration:none; transition:var(--transition); }
         .whatsapp-float:hover { transform:scale(1.1); background:#128c7e; }
-        .btn-become-seller { position:fixed; bottom:36px; left:36px; background:linear-gradient(135deg,#FFEDC3,#FFCC00); color:#131313; padding:14px 22px; border-radius:var(--radius-pill); text-decoration:none; font-size:13px; font-weight:900; text-transform:uppercase; display:flex; align-items:center; gap:10px; box-shadow:0 10px 30px rgba(255,204,0,0.35); z-index:4000; transition:var(--transition); border:2px solid rgba(255,255,255,0.3); font-family:'Epilogue',sans-serif; letter-spacing:1px; }
-        .btn-become-seller:hover { transform:scale(1.05) translateY(-4px); box-shadow:0 16px 40px rgba(255,204,0,0.5); }
         #shahi-install-btn { display:none; position:fixed; bottom:110px; left:20px; background:var(--royal-gold); color:#131313; padding:11px 18px; border-radius:var(--radius-pill); border:none; font-weight:900; font-size:12px; z-index:4500; box-shadow:0 8px 20px rgba(0,0,0,0.3); cursor:pointer; font-family:'Epilogue',sans-serif; }
         #shahi-wazeer-btn { position:fixed; bottom:36px; right:110px; display:flex; align-items:center; gap:10px; background:var(--glass-bg); color:var(--text-main); padding:12px 20px; border-radius:var(--radius-pill); text-decoration:none; z-index:4500; box-shadow:0 8px 25px rgba(0,0,0,0.4); font-family:'Epilogue',sans-serif; font-weight:800; border:1.5px solid var(--border-gold); transition:var(--transition); }
         #shahi-wazeer-btn:hover { transform:translateY(-3px); border-color:var(--royal-gold); }
@@ -137,7 +135,6 @@
             .price-now { font-size:15px; }
             .btn-view { width:26px; height:26px; border-radius:6px; font-size:10px; }
             .cat-tag { font-size:7px; padding:2px 6px; }
-            .btn-become-seller { bottom:20px; left:20px; padding:11px 16px; font-size:11px; }
             .whatsapp-float { bottom:20px; right:20px; width:48px; height:48px; font-size:22px; }
             #shahi-wazeer-btn { display:none; }
             .hero-stats { gap:24px; }
@@ -170,7 +167,7 @@
     <!-- NAVBAR -->
     <nav class="royal-nav">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">👑 APNI SALTANAT</a>
+            <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"> APNI SALTANAT</a>
             <div class="cat-trigger" style="position:relative;">
                 <i class="fas fa-th-large"></i>
                 <span>Categories</span>
@@ -208,11 +205,11 @@
             <h1 class="hero-title">ROYAL <span>MARKETPLACE</span></h1>
             <p class="hero-sub">Every deal in the Marketplace is a commitment to trust and quality.</p>
             <div class="hero-actions">
-                <a href="signup.html" class="btn-royal" style="padding:14px 28px; background:var(--royal-gold); color:#000; border-radius:30px; font-weight:800; text-decoration:none;"><i class="fas fa-store"></i> Become a Seller</a>
-                <a href="about.html" class="btn-outline" style="padding:14px 28px; border:1px solid var(--border-gold); color:var(--royal-gold); border-radius:30px; font-weight:800; text-decoration:none;"><i class="fas fa-info-circle"></i> Our Story</a>
+                <a href="#products-list" class="btn-royal" style="padding:14px 28px; background:var(--royal-gold); color:#000; border-radius:30px; font-weight:800; text-decoration:none;"><i class="fas fa-shopping-bag"></i> Shop Now</a>
+                <a href="instructions.html" class="btn-outline" style="padding:14px 28px; border:1px solid var(--border-gold); color:var(--royal-gold); border-radius:30px; font-weight:800; text-decoration:none;"><i class="fas fa-scroll"></i> Guidelines</a>
             </div>
             <div class="hero-stats">
-                <div class="hero-stat"><span class="hero-stat-val">300+</span><div class="hero-stat-lbl">Sellers</div></div>
+                <div class="hero-stat"><span class="hero-stat-val" id="activeSellersCount">0/100</span><div class="hero-stat-lbl">Elite Sellers</div></div>
                 <div class="hero-stat"><span class="hero-stat-val">1000+</span><div class="hero-stat-lbl">Products</div></div>
                 <div class="hero-stat mobile-hide"><span class="hero-stat-val">PKR 0</span><div class="hero-stat-lbl">Setup Cost</div></div>
             </div>
@@ -231,7 +228,6 @@
             <div style="font-size:11px; font-weight:700; color:var(--royal-gold); text-transform:uppercase; letter-spacing:2px; margin-bottom:4px;"><i class="fas fa-store"></i> All Products</div>
             <h2 style="font-family:'Epilogue',sans-serif; font-size:24px; font-weight:900; color:var(--text-light);">Royal Marketplace</h2>
         </div>
-        <a href="blog.html" class="btn-outline" style="padding:9px 20px; font-size:12px;"><i class="fas fa-newspaper"></i> Blog</a>
     </div>
     <div id="products-list">
         <div style="grid-column:1/-1; text-align:center; padding:80px 0;">
@@ -245,12 +241,11 @@
     <div class="footer-container">
         <div class="footer-grid">
             <div>
-                <div class="footer-brand">👑 APNI SALTANAT</div>
+                <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inline-block; vertical-align:middle;"> APNI SALTANAT</div>
                 <p class="footer-desc">Pakistan's Royal Marketplace. High-quality products and trusted sellers.</p>
                 <div class="social-row" style="margin-top:20px;">
                     <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
                     <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/923011786494" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             <div>
@@ -258,15 +253,12 @@
                 <ul class="footer-links">
                     <li><a href="index.html">Explore Marketplace</a></li>
                     <li><a href="seller-dashboard.html" id="footerDashboard" style="display:none;">Seller Dashboard</a></li>
-                    <li><a href="signup.html">Become a Seller</a></li>
                 </ul>
             </div>
             <div>
                 <div class="footer-col-title">Imperial Hub</div>
                 <ul class="footer-links">
-                    <li><a href="about.html">Our Story</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="blog.html">Marketplace Blog</a></li>
                     <li><a href="instructions.html">Marketplace Guidelines</a></li>
                 </ul>
             </div>
@@ -291,17 +283,13 @@
         <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">ROYAL MENU</div>
         <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Explore Marketplace</a>
         <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
-        <a href="seller-dashboard.html" class="menu-item" id="menuDashboard" style="display:none;"><i class="fas fa-crown"></i> Admin Dashboard</a>
-        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Seller</a>
+        <a href="seller-dashboard.html" class="menu-item" id="menuDashboard" style="display:none;"><i class="fas fa-crown"></i> Seller Dashboard</a>
 
 
 
         <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
         <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Guidelines</a>
         <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
-        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Marketplace Blog</a>
-        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
-        <a href="partners.html" class="menu-item"><i class="fas fa-handshake"></i> Our Partners</a>
 
         <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
             <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
@@ -334,6 +322,23 @@
     </div>
 </div>
 
+<!-- BECOME SELLER MODAL -->
+<div id="becomeSellerModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:20000; align-items:center; justify-content:center; backdrop-filter:blur(10px);">
+    <div class="modal-card" style="background:var(--bg-surface); border:2px solid var(--royal-gold); border-radius:24px; padding:40px; width:90%; max-width:400px; text-align:center; box-shadow:0 0 50px rgba(46,204,113,0.2); position:relative;">
+        <button onclick="document.getElementById('becomeSellerModal').style.display='none'" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:20px; color:var(--text-muted); cursor:pointer;"><i class="fas fa-times"></i></button>
+        <div class="modal-icon" style="font-size:50px; margin-bottom:20px;">👑</div>
+        <div class="modal-title" style="font-family:'Epilogue',sans-serif; font-weight:900; color:var(--royal-gold); margin-bottom:10px; font-size:20px; text-transform:uppercase;">Become a Seller</div>
+        <div class="modal-text" style="color:var(--text-light); margin-bottom:20px; line-height:1.6; font-size:13px;">Enter your WhatsApp number to submit a seller request. The admin will review and activate your status.</div>
+        <form id="becomeSellerForm">
+            <div class="royal-field" style="text-align:left; margin-bottom:20px;">
+                <label style="display:block; font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:8px;">WhatsApp Number</label>
+                <input type="tel" id="whatsappNumber" class="royal-input" placeholder="+923001234567" required style="width:100%; box-sizing:border-box;">
+            </div>
+            <button type="submit" class="btn-gold" style="width:100%; padding:15px; border-radius:12px; font-weight:900;"><i class="fas fa-paper-plane"></i> Send Request</button>
+        </form>
+    </div>
+</div>
+
 <script>
     function acceptCookies() { localStorage.setItem('saltanat_cookies', 'true'); document.getElementById('cookie-consent').style.display='none'; }
     window.addEventListener('load', () => { setTimeout(() => { if(!localStorage.getItem('saltanat_cookies')) document.getElementById('cookie-consent').style.display='block'; }, 2000); });
@@ -342,12 +347,12 @@
 
 
 <script type="module">
-    import { auth, db } from "./auth-manager.js";
-    import { onValue, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { auth, db } from "./auth-manager.js?v=3.2";
+    import { onValue, ref, get, set, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
 
-    let allProducts = [], ameerSardaars = [], allReviews = {};
+    let allProducts = [], ameerSellers = [], allReviews = {};
     const cartCount = document.getElementById('cartCount');
     const updateCartCount = () => { const cart = JSON.parse(localStorage.getItem('saltanatCart') || '[]'); cartCount.innerText = cart.length; };
     updateCartCount();
@@ -355,16 +360,28 @@
     onValue(ref(db, 'products'), async (s) => {
         if(!s.exists()) { document.getElementById('products-list').innerHTML = `<p style="color:var(--text-muted); text-align:center; padding:60px 0;">Marketplace is empty.</p>`; return; }
         
-        const [sSnap, rSnap] = await Promise.all([get(ref(db, 'users/sardaars')), get(ref(db, 'reviews'))]);
+        const [sSnap, rSnap] = await Promise.all([get(ref(db, 'users/sellers')), get(ref(db, 'reviews'))]);
         const sData = sSnap.exists() ? sSnap.val() : {};
+        
+        let activeCount = 0;
+        for (let uid in sData) {
+            if (sData[uid].status === 'active' || sData[uid].status === 'unpaid') {
+                activeCount++;
+            }
+        }
+        const sellersCountEl = document.getElementById('activeSellersCount');
+        if (sellersCountEl) {
+            sellersCountEl.innerText = `${activeCount}/100`;
+        }
+
         allReviews = rSnap.exists() ? rSnap.val() : {};
         const pData = s.val();
         allProducts = [];
 
-        ameerSardaars = Object.keys(sData).filter(uid => sData[uid].isAmeer);
+        ameerSellers = Object.keys(sData).filter(uid => sData[uid].isAmeer);
 
         for(let sid in pData) {
-            if (sData[sid] && (sData[sid].status === 'blocked' || sData[sid].status === 'unpaid')) continue;
+            if (!sData[sid] || sData[sid].status !== 'active') continue;
             for(let pid in pData[sid]) {
                 const p = pData[sid][pid];
                 let pRating = 0, pReviewCount = 0;
@@ -439,7 +456,7 @@
         const list = document.getElementById('products-list');
         if(items.length === 0) { list.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:var(--text-muted);">No products found.</div>`; return; }
         list.innerHTML = items.map(p => {
-            const isAmeer = ameerSardaars.includes(p.sellerId || p.seller);
+            const isAmeer = ameerSellers.includes(p.sellerId || p.seller);
             const ameerTag = isAmeer ? `<div class="ameer-badge"><i class="fas fa-crown"></i> Ameer</div>` : '';
             const stars = p.pRating > 0 ? `<i class="fas fa-star" style="color:#FFCC00; font-size:10px;"></i> ${p.pRating} <span style="font-size:10px; color:var(--text-muted);">(${p.pReviewCount})</span>` : `<i class="far fa-star" style="color:var(--text-dim); font-size:10px;"></i> <span style="font-size:10px; color:var(--text-dim);">No reviews</span>`;
             return `
@@ -467,10 +484,83 @@
     // PWA Install
     let shahiPrompt;
     const shahiBtn = document.getElementById('shahi-install-btn');
-    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); shahiPrompt = e; shahiBtn.style.display = 'block'; });
-    shahiBtn.addEventListener('click', () => {
-        if (shahiPrompt) { shahiPrompt.prompt(); shahiPrompt.userChoice.then(c => { if(c.outcome==='accepted') shahiBtn.style.display='none'; shahiPrompt = null; }); }
-    });
+    if (shahiBtn) {
+        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); shahiPrompt = e; shahiBtn.style.display = 'block'; });
+        shahiBtn.addEventListener('click', () => {
+            if (shahiPrompt) { shahiPrompt.prompt(); shahiPrompt.userChoice.then(c => { if(c.outcome==='accepted') shahiBtn.style.display='none'; shahiPrompt = null; }); }
+        });
+    }
+
+    // Become a Seller Modal Handler
+    const becomeSellerForm = document.getElementById('becomeSellerForm');
+    if (becomeSellerForm) {
+        becomeSellerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if (!user) {
+                alert("Please log in first.");
+                window.location.href = "login.html?redirect=" + encodeURIComponent("index.html?action=become-seller");
+                return;
+            }
+            const whatsapp = document.getElementById('whatsappNumber').value.trim();
+            if (!whatsapp) {
+                alert("Please enter a valid WhatsApp number.");
+                return;
+            }
+            
+            const submitBtn = becomeSellerForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            
+            try {
+                // Fetch buyer details
+                const buyerSnap = await get(ref(db, `users/buyers/${user.uid}`));
+                const buyerData = buyerSnap.exists() ? buyerSnap.val() : {};
+                
+                const requestData = {
+                    uid: user.uid,
+                    userName: buyerData.name || user.displayName || 'Anonymous Buyer',
+                    email: user.email || '',
+                    phone: whatsapp,
+                    storeName: (buyerData.name || user.displayName || 'Buyer') + "'s Store",
+                    role: 'seller',
+                    status: 'pending',
+                    timestamp: Date.now()
+                };
+                
+                // Write under users/sellers/${uid} as pending
+                await set(ref(db, `users/sellers/${user.uid}`), requestData);
+                // Remove buyer record
+                await remove(ref(db, `users/buyers/${user.uid}`));
+                
+                document.getElementById('becomeSellerModal').style.display = 'none';
+                alert("Your request to become a seller has been sent successfully. The admin will review it shortly.");
+                window.location.reload();
+            } catch (err) {
+                console.error("Become seller request error:", err);
+                alert("Failed to submit request: " + err.message);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+    }
+
+    // Auto-open modal if requested in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('action') === 'become-seller') {
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                const sSnap = await get(ref(db, `users/sellers/${user.uid}`));
+                const isSeller = sSnap.exists();
+                const isAdmin = user.email === 'saltanatapni@gmail.com' || user.uid === 'qnWFjg3XNlO7jHDhz84bPJMikP72';
+                if (!isSeller && !isAdmin) {
+                    const modal = document.getElementById('becomeSellerModal');
+                    if (modal) modal.style.display = 'flex';
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>

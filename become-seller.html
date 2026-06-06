@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Seller — Apni Saltanat | Pakistan's Premier Marketplace</title>
+    <meta name="description" content="Become a part of Apni Saltanat — Open your store in Pakistan's royal marketplace, sell products and earn halal income. Register today!">
+    <link rel="canonical" href="https://apnisaltanat.com/become-seller.html">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="royal.css">
+    <script src="theme-manager.js"></script>
+    <style>
+        /* ===== SIGNUP PAGE LAYOUT ===== */
+        body { min-height:100vh; display:flex; flex-direction:column; background:var(--bg-dark); }
+
+        /* Background radial glow */
+        body::after {
+            content:'';
+            position:fixed;
+            top:0; left:50%;
+            transform:translateX(-50%);
+            width:900px; height:500px;
+            background:radial-gradient(ellipse, rgba(255,204,0,0.07) 0%, transparent 65%);
+            pointer-events:none; z-index:0;
+        }
+
+        /* ===== TOP NAV (minimal) ===== */
+        .signup-nav {
+            display:flex; align-items:center; justify-content:space-between;
+            padding:20px 40px;
+            position:relative; z-index:10;
+            border-bottom:1px solid var(--border);
+        }
+        .signup-nav .nav-logo {
+            font-family:'Epilogue',sans-serif;
+            font-size:20px; font-weight:900;
+            color:var(--royal-gold); text-decoration:none;
+            letter-spacing:2px; text-transform:uppercase;
+        }
+        .signup-nav .nav-right { display:flex; align-items:center; gap:14px; }
+
+        /* ===== PAGE WRAPPER ===== */
+        .signup-page {
+            flex:1;
+            display:grid;
+            grid-template-columns:1fr 480px;
+            max-width:1200px;
+            margin:0 auto;
+            width:100%;
+            padding:40px 20px;
+            gap:60px;
+            align-items:start;
+            position:relative; z-index:2;
+        }
+
+        /* ===== LEFT PANEL (benefits) ===== */
+        .signup-left { padding:20px 0; }
+        .signup-left .eyebrow {
+            display:inline-flex; align-items:center; gap:8px;
+            background:rgba(255,204,0,0.1); border:1px solid rgba(255,204,0,0.3);
+            color:var(--royal-gold); padding:7px 18px; border-radius:50px;
+            font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px;
+            margin-bottom:24px;
+        }
+        .signup-left h1 {
+            font-family:'Epilogue',sans-serif;
+            font-size:clamp(32px,4vw,54px); font-weight:900;
+            color:var(--text-light); line-height:1.1; margin-bottom:16px;
+        }
+        .signup-left h1 span { color:var(--royal-gold); }
+        .signup-left .sub {
+            font-size:16px; color:var(--text-muted); line-height:1.8;
+            max-width:460px; margin-bottom:36px;
+        }
+
+        /* Benefit list */
+        .benefit-list { display:flex; flex-direction:column; gap:14px; margin-bottom:40px; }
+        .benefit-item {
+            display:flex; align-items:flex-start; gap:16px;
+            background:var(--bg-surface); border:1px solid var(--border);
+            border-radius:var(--radius-md); padding:18px 20px;
+            transition:var(--transition);
+        }
+        .benefit-item:hover { border-color:var(--border-gold); }
+        .benefit-icon {
+            width:44px; height:44px; flex-shrink:0;
+            background:rgba(255,204,0,0.1); border:1px solid rgba(255,204,0,0.25);
+            border-radius:12px; display:flex; align-items:center; justify-content:center;
+            color:var(--royal-gold); font-size:18px;
+        }
+        .benefit-item h4 { font-family:'Epilogue',sans-serif; font-size:15px; font-weight:800; color:var(--text-light); margin-bottom:4px; }
+        .benefit-item p { font-size:13px; color:var(--text-muted); line-height:1.5; }
+
+        /* Stats row */
+        .stats-row { display:flex; gap:28px; flex-wrap:wrap; }
+        .stat-block { text-align:left; }
+        .stat-val { font-family:'Epilogue',sans-serif; font-size:28px; font-weight:900; color:var(--royal-gold); display:block; line-height:1; }
+        .stat-lbl { font-size:11px; color:var(--text-muted); margin-top:4px; text-transform:uppercase; letter-spacing:1px; font-weight:700; }
+
+        /* ===== RIGHT PANEL (form) ===== */
+        .signup-card {
+            background:var(--bg-surface);
+            border:1px solid var(--border);
+            border-radius:var(--radius-lg);
+            padding:40px 38px;
+            box-shadow:0 40px 80px rgba(0,0,0,0.5);
+            position:relative;
+            overflow:hidden;
+        }
+        .signup-card::before {
+            content:'';
+            position:absolute; top:0; left:0; right:0;
+            height:3px;
+            background:linear-gradient(90deg, #FFEDC3, #FFCC00, #FF9900, #FFCC00, #FFEDC3);
+        }
+        .card-title {
+            font-family:'Epilogue',sans-serif;
+            font-size:24px; font-weight:900;
+            color:var(--royal-gold); margin-bottom:6px;
+        }
+        .card-sub { font-size:13px; color:var(--text-muted); margin-bottom:28px; }
+
+        /* Form fields */
+        .field-group { margin-bottom:20px; }
+        .field-group label {
+            display:block; font-size:10px; color:var(--text-muted);
+            text-transform:uppercase; margin-bottom:8px;
+            letter-spacing:1.5px; font-weight:700;
+        }
+        .field-wrap { position:relative; }
+        .field-icon {
+            position:absolute; left:16px; top:50%;
+            transform:translateY(-50%); color:var(--text-dim); font-size:14px;
+            pointer-events:none;
+        }
+        .royal-field-input {
+            width:100%; padding:14px 18px 14px 46px;
+            background:var(--bg-deep);
+            border:1.5px solid var(--border);
+            border-radius:var(--radius-md); color:var(--text-main);
+            outline:none; transition:var(--transition);
+            font-family:'Manrope',sans-serif; font-size:14px;
+        }
+        .royal-field-input:focus {
+            border-color:var(--royal-gold);
+            box-shadow:0 0 0 3px rgba(255,204,0,0.1);
+        }
+        .royal-field-input::placeholder { color:var(--text-dim); }
+        .royal-field-input.no-icon { padding-left:18px; }
+        .royal-field-input:read-only {
+            opacity: 0.65;
+            cursor: not-allowed;
+            border-color: var(--border);
+        }
+
+        /* File upload */
+        .doc-upload-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px; }
+        .doc-upload-label {
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            gap:8px; padding:16px 10px;
+            background:var(--bg-deep); border:1.5px dashed var(--border);
+            border-radius:var(--radius-md); cursor:pointer;
+            transition:var(--transition); text-align:center; position:relative;
+        }
+        .doc-upload-label:hover { border-color:var(--border-gold); }
+        .doc-upload-label i { font-size:22px; color:var(--text-muted); }
+        .doc-upload-label span { font-size:11px; color:var(--text-muted); font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+        .doc-upload-label input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; }
+
+        /* Progress bar */
+        .upload-progress { display:none; margin-top:12px; }
+        .progress-bar-wrap { height:4px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden; }
+        .progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg, #FFCC00, #FF9900); border-radius:2px; transition:width 0.3s; }
+        .progress-text { font-size:11px; color:var(--text-muted); margin-top:6px; text-align:center; }
+
+        /* Submit button */
+        .submit-btn {
+            width:100%; padding:17px;
+            background:linear-gradient(135deg, #FFEDC3, #FFCC00);
+            color:#131313; border:none; border-radius:var(--radius-md);
+            font-family:'Epilogue',sans-serif; font-weight:900; cursor:pointer;
+            transition:var(--transition); text-transform:uppercase;
+            letter-spacing:2px; font-size:14px; margin-top:8px;
+            display:flex; align-items:center; justify-content:center; gap:10px;
+        }
+        .submit-btn:hover { transform:translateY(-2px); box-shadow:0 12px 35px rgba(255,204,0,0.3); }
+        .submit-btn:disabled { background:#2a2a2a; color:#555; cursor:not-allowed; transform:none; box-shadow:none; }
+
+        .link-text { margin-top:20px; text-align:center; font-size:13px; color:var(--text-muted); }
+        .link-text a { color:var(--royal-gold); text-decoration:none; font-weight:700; }
+        .link-text a:hover { text-decoration:underline; }
+
+        /* Terms note */
+        .terms-note { font-size:11px; color:var(--text-dim); text-align:center; margin-top:14px; line-height:1.6; }
+        .terms-note a { color:var(--text-muted); }
+        .terms-note a:hover { color:var(--royal-gold); }
+
+        /* Phone field */
+        .iti { width:100% !important; }
+        .iti__flag-container { z-index:100; }
+        .iti__selected-flag { background:transparent !important; border-right:1px solid var(--border); padding:0 10px 0 14px; }
+        .iti__country-list { background:var(--bg-surface); border:1px solid var(--border); color:var(--text-light); border-radius:var(--radius-md); }
+        .iti__country.iti__highlight { background:rgba(255,204,0,0.08); }
+        .iti__dial-code { color:var(--text-muted); }
+
+        /* Doc preview */
+        .doc-preview { width:100%; height:56px; object-fit:cover; border-radius:6px; margin-top:8px; display:none; border:1px solid var(--border-gold); }
+
+        /* Responsive */
+        @media(max-width:900px) {
+            .signup-page { grid-template-columns:1fr; gap:40px; }
+            .signup-left { display:none; }
+        }
+        @media(max-width:600px) {
+            .signup-nav { padding:16px 20px; }
+            .signup-card { padding:28px 20px; }
+            .doc-upload-grid { grid-template-columns:1fr; }
+            .signup-page { padding:24px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SHAHI MODAL CONTAINER -->
+<div id="shahiModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:20000; align-items:center; justify-content:center; backdrop-filter:blur(10px);">
+    <div class="modal-card" style="background:var(--bg-surface); border:2px solid var(--royal-gold); border-radius:24px; padding:40px; width:90%; max-width:400px; text-align:center; box-shadow:0 0 50px rgba(197,160,89,0.2);">
+        <div class="modal-icon" id="modalIcon" style="font-size:50px; margin-bottom:20px;">👑</div>
+        <div class="modal-title" id="modalTitle" style="font-family:'Epilogue',sans-serif; font-weight:900; color:var(--royal-gold); margin-bottom:10px; font-size:20px; text-transform:uppercase;">WELCOME SELLER</div>
+        <div class="modal-text" id="modalText" style="color:var(--text-light); margin-bottom:30px; line-height:1.6;">Message here...</div>
+        <div class="modal-btns" id="modalBtns" style="display:flex; gap:12px;">
+            <button class="modal-btn btn-confirm" id="modalConfirmBtn" style="flex:1; padding:15px; border-radius:12px; border:none; font-weight:900; cursor:pointer; background:var(--royal-gold); color:#1a1a1a;">OK</button>
+        </div>
+    </div>
+</div>
+
+<!-- MINIMAL TOP NAV -->
+<nav class="signup-nav">
+    <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"> APNI SALTANAT</a>
+    <div class="nav-right">
+        <div onclick="toggleMenu()" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; cursor:pointer; color:var(--text-muted); font-size:18px; transition:var(--transition); margin-left:4px;" onmouseover="this.style.borderColor='var(--border-gold)';" onmouseout="this.style.borderColor='';">
+            <i class="fas fa-ellipsis-v"></i>
+        </div>
+    </div>
+</nav>
+
+<!-- MAIN PAGE -->
+<div class="signup-page">
+
+    <!-- LEFT — Benefits Panel -->
+    <div class="signup-left">
+        <div class="eyebrow"><i class="fas fa-crown"></i> Become a Seller</div>
+        <h1>Join the <span>Imperial Guild</span></h1>
+        <p class="sub">Open your store, list products, and start earning halal income in Pakistan's premium online marketplace — verified and protected.</p>
+
+        <div class="benefit-list">
+            <div class="benefit-item">
+                <div class="benefit-icon"><i class="fas fa-store"></i></div>
+                <div>
+                    <h4>Unlimited Listings</h4>
+                    <p>List all your products for a flat Rs. 1,000 monthly maintenance fee — zero hidden cost.</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon"><i class="fas fa-crown"></i></div>
+                <div>
+                    <h4>Elite Status Badge</h4>
+                    <p>Only 100 verified sellers are allowed in this elite marketplace.</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon"><i class="fas fa-users"></i></div>
+                <div>
+                    <h4>Trusted Customers</h4>
+                    <p>Direct communication with eager buyers and local door-to-door deliveries.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT — Signup Form -->
+    <div class="signup-card">
+        <h2 class="card-title">Seller Application 👑</h2>
+        <p class="card-sub">Enter your WhatsApp number to submit your request.</p>
+
+        <form id="signupForm">
+            <!-- Phone / WhatsApp -->
+            <div class="field-group">
+                <label>WhatsApp Number</label>
+                <div class="field-wrap">
+                    <i class="fab fa-whatsapp field-icon" style="color:#25d366; position:absolute; left:16px; top:50%; transform:translateY(-50%);"></i>
+                    <input type="tel" id="phone" class="royal-field-input" placeholder="+923001234567" required style="padding-left:46px;">
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fas fa-paper-plane"></i> Send Request
+            </button>
+        </form>
+
+        <div class="terms-note">
+            By submitting, you agree to our
+            <a href="terms.html">Terms of Service</a>,
+            <a href="privacy-policy.html">Privacy Policy</a> and
+            <a href="instructions.html">Royal Manifesto</a>.
+        </div>
+    </div>
+</div>
+
+<div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
+    <div class="menu-inner" onclick="event.stopPropagation()">
+        <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Royal Marketplace</a>
+        <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Categories</a>
+
+        <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Information Center</div>
+        <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Guidelines</a>
+        <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
+
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
+            <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
+            <a href="#" class="menu-item" id="menuLogout" style="display:none; color:var(--danger);"><i class="fas fa-sign-out-alt"></i> Exit Marketplace</a>
+        </div>
+        <div style="padding-top:10px;">
+            <div id="theme-picker-container"></div>
+        </div>
+        <div style="padding-top:10px;">
+            <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
+            <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Support</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
+    function previewDoc(input, previewId) {
+        const preview = document.getElementById(previewId);
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (e) => { preview.src = e.target.result; preview.style.display = 'block'; };
+            reader.readAsDataURL(input.files[0]);
+            const label = input.closest('.doc-upload-label');
+            label.style.borderColor = 'var(--border-gold)';
+            label.querySelector('i').style.color = 'var(--royal-gold)';
+        }
+    }
+    // Initialize theme picker in the menu
+    window.addEventListener('load', () => {
+        if (window.ThemeManager) {
+            ThemeManager.injectThemePicker('theme-picker-container', true);
+        }
+    });
+</script>
+
+<script type="module">
+    import { app, auth, db } from "./auth-manager.js?v=3.2";
+    import { ref, set, get, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    let currentUser = null;
+
+    onAuthStateChanged(auth, u => {
+        if(u) {
+            currentUser = u;
+        } else {
+            window.location.href = "login.html?redirect=become-seller.html";
+        }
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if(!currentUser) {
+            shahiAlert("You must be logged in to apply.", "❌");
+            return;
+        }
+
+        const btn = document.getElementById('submitBtn');
+        const phone = document.getElementById('phone').value.trim();
+
+        if(!phone) {
+            shahiAlert("Please enter a valid WhatsApp number.", "❌");
+            return;
+        }
+
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Submitting...';
+        btn.disabled = true;
+
+        try {
+            // Fetch buyer details
+            const buyerSnap = await get(ref(db, `users/buyers/${currentUser.uid}`));
+            const buyerData = buyerSnap.exists() ? buyerSnap.val() : {};
+
+            const userData = {
+                uid: currentUser.uid,
+                email: currentUser.email || '',
+                phone: phone,
+                userName: buyerData.name || currentUser.displayName || 'Anonymous Buyer',
+                storeName: (buyerData.name || currentUser.displayName || 'Buyer') + "'s Store",
+                role: 'seller',
+                status: 'pending',
+                timestamp: Date.now()
+            };
+
+            // Save to sellers node
+            await set(ref(db, `users/sellers/${currentUser.uid}`), userData);
+            
+            // Delete buyer record to prevent role duplicates
+            await remove(ref(db, `users/buyers/${currentUser.uid}`));
+
+            shahiAlert("Your request has been submitted. The admin will review it shortly.", "✅");
+            document.getElementById('modalConfirmBtn').onclick = () => { window.location.href = 'index.html'; };
+
+        } catch (error) {
+            console.error(error);
+            shahiAlert("Submission Failed: " + error.message, "❌");
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Request';
+        }
+    });
+
+    window.shahiAlert = (text, type = 'info') => {
+        const modal = document.getElementById('shahiModal');
+        const icon = document.getElementById('modalIcon');
+        const title = document.getElementById('modalTitle');
+        const content = document.getElementById('modalText');
+        const confirmBtn = document.getElementById('modalConfirmBtn');
+
+        modal.style.display = 'flex';
+        content.innerText = text;
+        
+        if(type === '✅') { icon.innerText = '✅'; title.innerText = 'SUCCESS'; }
+        else if(type === '❌') { icon.innerText = '❌'; title.innerText = 'FAILED'; }
+        else { icon.innerText = '👑'; title.innerText = 'SYSTEM MESSAGE'; }
+
+        confirmBtn.onclick = () => modal.style.display = 'none';
+    };
+</script>
+</body>
+</html>

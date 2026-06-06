@@ -1,5 +1,5 @@
 // Apni Saltanat Consolidated Service Worker (sw-master.js)
-// Handles PWA installation, Fetch, and Firebase Background Messaging
+// Handles caching, PWA installation, Fetch, and Firebase Background Messaging
 
 importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js');
@@ -17,19 +17,68 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
-// 1. PWA Installation
+const CACHE_NAME = 'saltanat-cache-v2';
+const ASSETS = [
+  '/',
+  '/index.html',
+  '/royal.css',
+  '/theme-manager.js',
+  '/favicon.png',
+  '/logo.png',
+  '/style.css'
+];
+
+// 1. PWA Installation & Cache Setup
 self.addEventListener('install', (e) => {
   console.log('Saltanat App Service Worker Installed!');
-  self.skipWaiting();
+  e.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS);
+    }).then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate', (e) => {
   console.log('Saltanat App Service Worker Active!');
+  e.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
 });
 
-// 2. Fetch Handling (Basic for now)
+// 2. Fetch Handling (Stale-While-Revalidate caching strategy)
 self.addEventListener('fetch', (e) => {
-  e.respondWith(fetch(e.request));
+  if (e.request.method !== 'GET' || !e.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+
+  // Skip caching third party firebase libraries or external calls
+  if (e.request.url.includes('googleapis.com') || e.request.url.includes('firebasejs') || e.request.url.includes('googlesyndication.com')) {
+    return;
+  }
+
+  e.respondWith(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.match(e.request).then((cachedResponse) => {
+        const fetchedResponse = fetch(e.request).then((networkResponse) => {
+          if (networkResponse.status === 200) {
+            cache.put(e.request, networkResponse.clone());
+          }
+          return networkResponse;
+        }).catch(() => {
+          return cachedResponse;
+        });
+        return cachedResponse || fetchedResponse;
+      });
+    })
+  );
 });
 
 // 3. Background Notification Handling
@@ -53,11 +102,10 @@ messaging.onBackgroundMessage((payload) => {
         { action: 'view', title: 'VIEW DASHBOARD 👑', icon: '/favicon.png' },
         { action: 'dismiss', title: 'DISMISS' }
     ],
-    requireInteraction: true, // Keep notification visible until user interacts
-    tag: 'royal-order-' + (nData.orderId || Date.now()) // Avoid duplicate notifications
+    requireInteraction: true,
+    tag: 'royal-order-' + (nData.orderId || Date.now())
   };
 
-  // Update App Badge (The red dot/number on the home screen icon)
   if ('setAppBadge' in navigator) {
     navigator.setAppBadge(1).catch((error) => {
       console.error('Badging API error:', error);
@@ -76,20 +124,17 @@ self.addEventListener('notificationclick', (event) => {
   notification.close();
 
   if (action === 'dismiss') {
-      console.log('Notification dismissed by Sardaar.');
+      console.log('Notification dismissed by Seller.');
       return;
   }
 
-  // Handle 'view' action or general click
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
-      // Try to find an existing tab with the target URL
       for (const client of clientList) {
         if (client.url.includes('seller-dashboard.html') && 'focus' in client) {
             return client.focus();
         }
       }
-      // If no tab found, open a new one
       if (clients.openWindow) {
           return clients.openWindow(targetUrl);
       }

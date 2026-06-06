@@ -13,22 +13,22 @@
     
     <style>
         :root {
-            --shahi-gold: #FFD700;
-            --shahi-gold-dim: rgba(255, 215, 0, 0.2);
-            --shahi-black: #050505;
-            --shahi-card: rgba(15, 15, 18, 0.95);
-            --shahi-border: rgba(255, 215, 0, 0.15);
+            --shahi-gold: #2ecc71;
+            --shahi-gold-dim: rgba(46, 204, 113, 0.15);
+            --shahi-black: #ffffff;
+            --shahi-card: #ffffff;
+            --shahi-border: #d4edda;
             --danger: #ff4444;
-            --success: #00ff88;
-            --accent-blue: #2196f3;
-            --text-main: #f0f0f0;
-            --text-muted: #888;
+            --success: #2ecc71;
+            --accent-blue: #27ae60;
+            --text-main: #1e3f20;
+            --text-muted: #3b7a40;
             --sidebar-width: 280px;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--shahi-black) url('https://www.transparenttextures.com/patterns/stardust.png');
+            background: #f1fbf6 url('https://www.transparenttextures.com/patterns/stardust.png');
             color: var(--text-main);
             margin: 0;
             display: flex;
@@ -38,12 +38,12 @@
         /* ----- SIDEBAR ----- */
         .shahi-sidebar {
             width: var(--sidebar-width);
-            background: rgba(5, 5, 8, 0.98);
+            background: #ffffff;
             border-right: 1px solid var(--shahi-border);
             padding: 30px 20px;
             display: flex;
             flex-direction: column;
-            box-shadow: 5px 0 20px rgba(0,0,0,0.5);
+            box-shadow: 5px 0 20px rgba(46, 204, 113, 0.05);
             position: fixed;
             height: 100vh;
             overflow-y: auto;
@@ -55,8 +55,8 @@
             text-align: center;
             margin-bottom: 40px;
         }
-        .brand i { font-size: 40px; color: var(--shahi-gold); margin-bottom: 10px; filter: drop-shadow(0 0 10px var(--shahi-gold)); }
-        .brand h2 { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 900; margin: 0; letter-spacing: 2px; }
+        .brand i { font-size: 40px; color: var(--shahi-gold); margin-bottom: 10px; filter: drop-shadow(0 0 10px rgba(46, 204, 113, 0.3)); }
+        .brand h2 { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 900; margin: 0; letter-spacing: 2px; color: var(--text-main); }
         .brand span { color: var(--shahi-gold); }
 
         .nav-link {
@@ -75,10 +75,10 @@
         }
 
         .nav-link i { width: 25px; font-size: 18px; }
-        .nav-link:hover { background: rgba(255, 215, 0, 0.05); color: white; }
+        .nav-link:hover { background: rgba(46, 204, 113, 0.08); color: var(--text-main); }
         .nav-link.active {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.02));
-            color: var(--shahi-gold);
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.15), rgba(46, 204, 113, 0.02));
+            color: #27ae60;
             border: 1px solid var(--shahi-border);
         }
         
@@ -100,8 +100,8 @@
         }
 
         .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-        .page-title { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 900; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
-        .user-profile { display: flex; align-items: center; gap: 15px; background: var(--shahi-card); padding: 10px 20px; border-radius: 30px; border: 1px solid var(--shahi-border); }
+        .page-title { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 900; margin: 0; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); }
+        .user-profile { display: flex; align-items: center; gap: 15px; background: var(--shahi-card); padding: 10px 20px; border-radius: 30px; border: 1px solid var(--shahi-border); color: var(--text-main); }
         
         .tab-content { display: none; animation: fadeIn 0.4s ease forwards; }
         .tab-content.active { display: block; }
@@ -112,51 +112,51 @@
         .shahi-search {
             width: 350px; padding: 12px 20px 12px 45px; border-radius: 30px;
             border: 1px solid var(--shahi-border); background: var(--shahi-card);
-            color: white; font-size: 14px; outline: none; transition: 0.3s;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFD700" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>');
+            color: var(--text-main); font-size: 14px; outline: none; transition: 0.3s;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%232ecc71" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>');
             background-repeat: no-repeat; background-position: 15px center;
         }
-        .shahi-search:focus { border-color: var(--shahi-gold); box-shadow: 0 0 15px rgba(255,215,0,0.1); }
+        .shahi-search:focus { border-color: var(--shahi-gold); box-shadow: 0 0 15px rgba(46,204,113,0.1); }
         
         .shahi-btn {
-            background: var(--shahi-gold); color: black; padding: 10px 20px; border: none;
+            background: var(--shahi-gold); color: var(--text-main); padding: 10px 20px; border: none;
             border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s; font-family: 'Inter'; display: flex; align-items: center; gap: 8px;
         }
-        .shahi-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,215,0,0.3); }
+        .shahi-btn:hover { background: #27ae60; color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(46,204,113,0.25); }
 
         /* Tables */
         .table-wrap { overflow-x: auto; background: var(--shahi-card); border: 1px solid var(--shahi-border); border-radius: 16px; margin-bottom: 30px; }
         table { width: 100%; border-collapse: collapse; white-space: nowrap; }
-        th { background: rgba(0,0,0,0.5); color: var(--shahi-gold); font-size: 11px; text-transform: uppercase; padding: 20px; text-align: left; letter-spacing: 1px; border-bottom: 1px solid var(--shahi-border); }
-        td { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
-        tr:hover { background: rgba(255,255,255,0.02); }
+        th { background: #f1fbf6; color: var(--text-main); font-size: 11px; text-transform: uppercase; padding: 20px; text-align: left; letter-spacing: 1px; border-bottom: 1px solid var(--shahi-border); }
+        td { padding: 20px; border-bottom: 1px solid rgba(46,204,113,0.08); font-size: 14px; color: var(--text-main); }
+        tr:hover { background: rgba(46,204,113,0.03); }
 
         .btn-action { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 11px; transition: 0.3s; text-transform: uppercase; }
-        .btn-success { background: rgba(0,255,136,0.1); color: var(--success); border: 1px solid var(--success); }
-        .btn-success:hover { background: var(--success); color: black; }
+        .btn-success { background: rgba(46,204,113,0.1); color: var(--success); border: 1px solid var(--success); }
+        .btn-success:hover { background: var(--success); color: white; }
         .btn-danger { background: rgba(255,68,68,0.1); color: var(--danger); border: 1px solid var(--danger); }
         .btn-danger:hover { background: var(--danger); color: white; }
-        .doc-link { color: var(--shahi-gold); text-decoration: none; font-size: 11px; border: 1px dashed var(--shahi-gold); padding: 4px 8px; border-radius: 4px; display: inline-block; margin-right: 5px; }
+        .doc-link { color: var(--text-muted); text-decoration: none; font-size: 11px; border: 1px dashed var(--shahi-gold); padding: 4px 8px; border-radius: 4px; display: inline-block; margin-right: 5px; }
 
         /* Status Selects */
         .status-select {
-            padding: 8px 12px; border-radius: 8px; font-weight: 800; background: #1a1a1e; 
+            padding: 8px 12px; border-radius: 8px; font-weight: 800; background: #f1fbf6; color: var(--text-main); border: 1px solid var(--shahi-border);
             outline: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size:11px; transition:0.3s;
         }
 
         /* Grid Cards (for Directory / Payments) */
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-        .admin-card { background: var(--shahi-card); border: 1px solid var(--shahi-border); border-radius: 16px; padding: 25px; transition: 0.3s; position: relative; }
-        .admin-card:hover { transform: translateY(-5px); border-color: var(--shahi-gold); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .card-label { color: var(--shahi-gold); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-top: 15px; }
-        .card-val { font-size: 15px; font-weight: 600; margin-top: 3px; word-break: break-all; }
-        .card-img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin: 15px 0; border: 1px solid #333; cursor: pointer; }
+        .admin-card { background: var(--shahi-card); border: 1px solid var(--shahi-border); border-radius: 16px; padding: 25px; transition: 0.3s; position: relative; color: var(--text-main); }
+        .admin-card:hover { transform: translateY(-5px); border-color: var(--shahi-gold); box-shadow: 0 10px 20px rgba(46,204,113,0.08); }
+        .card-label { color: var(--text-muted); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-top: 15px; }
+        .card-val { font-size: 15px; font-weight: 600; margin-top: 3px; word-break: break-all; color: var(--text-main); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin: 15px 0; border: 1px solid var(--shahi-border); cursor: pointer; }
 
         /* Stats Grid */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: var(--shahi-card); padding: 25px; border-radius: 16px; border: 1px solid var(--shahi-border); display: flex; align-items: center; gap: 20px; }
-        .stat-icon { width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
-        .stat-val { font-size: 28px; font-weight: 900; font-family: 'Outfit'; margin-bottom: 5px; }
+        .stat-card { background: var(--shahi-card); padding: 25px; border-radius: 16px; border: 1px solid var(--shahi-border); display: flex; align-items: center; gap: 20px; color: var(--text-main); }
+        .stat-icon { width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; background: rgba(46,204,113,0.1); color: #2ecc71; }
+        .stat-val { font-size: 28px; font-weight: 900; font-family: 'Outfit'; margin-bottom: 5px; color: var(--text-main); }
         .stat-title { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
 
         /* Responsive Mobile */
@@ -169,9 +169,141 @@
             .top-bar { align-items: flex-start; flex-direction: column; gap: 15px; }
             .user-profile { align-self: flex-end; }
         }
+
+        /* ----- ADMIN LOGIN OVERLAY ----- */
+        #adminLoginOverlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, #ffffff 0%, #f1fbf6 100%);
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .admin-login-card {
+            background: #ffffff;
+            border: 1.5px solid #d4edda;
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.15);
+            text-align: center;
+            position: relative;
+        }
+        .admin-login-card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            color: #1e3f20;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+        .admin-login-card p {
+            font-size: 13px;
+            color: #3b7a40;
+            margin-bottom: 24px;
+        }
+        .admin-login-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .admin-login-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #1e3f20;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .admin-login-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #f1fbf6;
+            border: 1.5px solid #d4edda;
+            border-radius: 8px;
+            color: #1e3f20;
+            outline: none;
+            font-size: 14px;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+        .admin-login-input:focus {
+            border-color: #2ecc71;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
+        }
+        .admin-login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #2ecc71;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .admin-login-btn:hover {
+            background: #27ae60;
+        }
+        .admin-login-back {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #27ae60;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .admin-login-back:hover {
+            text-decoration: underline;
+        }
+        .admin-login-error {
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
+
+    <!-- ADMIN LOGIN OVERLAY -->
+    <div id="adminLoginOverlay">
+        <div class="admin-login-card">
+            <i class="fas fa-user-shield" style="font-size: 50px; color: #2ecc71; margin-bottom: 15px;"></i>
+            <h2>APNI SALTANAT</h2>
+            <p>Imperial Admin Console Access</p>
+            
+            <div id="adminLoginError" class="admin-login-error"></div>
+            
+            <form id="adminLoginForm">
+                <div class="admin-login-group">
+                    <label>Admin Email</label>
+                    <input type="email" id="adminEmail" class="admin-login-input" placeholder="saltanatapni@gmail.com" required value="saltanatapni@gmail.com">
+                </div>
+                <div class="admin-login-group">
+                    <label>Security Password</label>
+                    <input type="password" id="adminPassword" class="admin-login-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" id="adminLoginBtn" class="admin-login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login to Console
+                </button>
+            </form>
+            <a href="index.html" class="admin-login-back"><i class="fas fa-arrow-left"></i> Back to Marketplace</a>
+        </div>
+    </div>
 
     <!-- SIDEBAR -->
     <div class="shahi-sidebar" id="sidebar">
@@ -181,12 +313,8 @@
             <div style="font-size: 12px; color: var(--shahi-gold); letter-spacing: 2px; margin-top: 5px;">ADMIN DASHBOARD</div>
         </div>
 
-        <a class="nav-link active" onclick="switchTab('dashboard', this)"><i class="fas fa-chart-pie"></i> Overview</a>
-        <a class="nav-link" onclick="switchTab('requests', this)"><i class="fas fa-user-plus"></i> Seller Requests <span class="badge" id="navBadgeRequests">0</span></a>
+        <a class="nav-link active" onclick="switchTab('requests', this)"><i class="fas fa-user-plus"></i> Seller Requests <span class="badge" id="navBadgeRequests">0</span></a>
         <a class="nav-link" onclick="switchTab('users', this)"><i class="fas fa-users-cog"></i> User Control</a>
-        <a class="nav-link" onclick="switchTab('directory', this)"><i class="fas fa-address-book"></i> Seller Directory</a>
-        <a class="nav-link" onclick="switchTab('ledger', this)"><i class="fas fa-file-invoice-dollar"></i> Shahi Ledger</a>
-        <a class="nav-link" onclick="switchTab('payments', this)"><i class="fas fa-receipt"></i> Payment Vault</a>
         <a class="nav-link" href="index.html" style="margin-top: auto;"><i class="fas fa-home"></i> Back to Marketplace</a>
         <a class="nav-link" onclick="logout()" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
@@ -195,7 +323,7 @@
     <div class="shahi-main">
         <div class="top-bar">
             <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fas fa-bars"></i></button>
-            <h1 class="page-title" id="pageTitle">ADMIN OVERVIEW</h1>
+            <h1 class="page-title" id="pageTitle">SELLER SUBMISSIONS</h1>
             <div class="user-profile">
                 <i class="fas fa-user-shield" style="color: var(--shahi-gold); font-size: 20px;"></i>
                 <div style="text-align: right;">
@@ -205,42 +333,15 @@
             </div>
         </div>
 
-        <!-- 1. DASHBOARD OVERVIEW -->
-        <div id="tab-dashboard" class="tab-content active">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: rgba(255,215,0,0.1); color: var(--shahi-gold);"><i class="fas fa-crown"></i></div>
-                    <div><div class="stat-val" id="statSardaars">0</div><div class="stat-title">Total Sellers</div></div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: rgba(33,150,243,0.1); color: var(--accent-blue);"><i class="fas fa-users"></i></div>
-                    <div><div class="stat-val" id="statBuyers">0</div><div class="stat-title">Total Buyers</div></div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: rgba(0,255,136,0.1); color: var(--success);"><i class="fas fa-box-open"></i></div>
-                    <div><div class="stat-val" id="statProducts">0</div><div class="stat-title">Products Listed</div></div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: rgba(255,68,68,0.1); color: var(--danger);"><i class="fas fa-clock"></i></div>
-                    <div><div class="stat-val" id="statPending">0</div><div class="stat-title">Pending Requests</div></div>
-                </div>
-            </div>
-            <div class="admin-card" style="text-align: center; padding: 60px 20px;">
-                <i class="fas fa-chess-king" style="font-size: 80px; color: var(--shahi-gold); margin-bottom: 20px; opacity: 0.8; filter: drop-shadow(0 0 20px var(--shahi-gold));"></i>
-                <h2 style="font-family: 'Outfit'; font-size: 32px; margin:0;">WELCOME ADMIN</h2>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 15px auto;">Use the navigation menu to manage Sellers, approve seller requests, verify treasury payments, and control user access across the system.</p>
-            </div>
-        </div>
-
-        <!-- 2. SARDAAR REQUESTS (admin.html) -->
-        <div id="tab-requests" class="tab-content">
+        <!-- 2. SELLER REQUESTS (admin.html) -->
+        <div id="tab-requests" class="tab-content active">
             <div class="action-header">
                 <input type="text" id="searchRequests" class="shahi-search" placeholder="Search pending applications...">
-                <button class="shahi-btn" onclick="exportExcel('tableRequests', 'Pending_Sardaars')"><i class="fas fa-file-excel"></i> EXCEL REPORT</button>
+                <button class="shahi-btn" onclick="exportExcel('tableRequests', 'Pending_Sellers')"><i class="fas fa-file-excel"></i> EXCEL REPORT</button>
             </div>
             <div class="table-wrap">
                 <table id="tableRequests">
-                    <thead><tr><th>Node ID</th><th>Personal Info</th><th>Store Details</th><th>Documents</th><th>Action</th></tr></thead>
+                    <thead><tr><th>User ID</th><th>User Info</th><th>WhatsApp Number</th><th>Store Name</th><th>Action</th></tr></thead>
                     <tbody id="listRequests"><tr><td colspan="5" style="text-align:center;">Loading Imperial Requests...</td></tr></tbody>
                 </table>
             </div>
@@ -260,65 +361,16 @@
             </div>
         </div>
 
-        <!-- 4. SARDAAR DIRECTORY (admin4.html) -->
-        <div id="tab-directory" class="tab-content">
-            <div class="action-header">
-                <input type="text" id="searchDirectory" class="shahi-search" placeholder="Search seller directory...">
-            </div>
-            <div class="cards-grid" id="listDirectory">
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">Loading Seller Directory...</div>
-            </div>
-        </div>
-
-        <!-- 5. SHAHI LEDGER (admin3.html / ledger.html) -->
-        <div id="tab-ledger" class="tab-content">
-            <div class="stats-grid">
-                <div class="stat-card" style="padding: 20px;"><div><div class="stat-val" id="ledgerIncome" style="color:var(--success);">Rs. 0</div><div class="stat-title">Monthly Income</div></div></div>
-                <div class="stat-card" style="padding: 20px;"><div><div class="stat-val" id="ledgerPaidCount">0</div><div class="stat-title">Paid Sardaars</div></div></div>
-            </div>
-            
-            <div class="action-header">
-                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
-                    <select id="ledgerMonth" class="shahi-search" style="padding: 10px 20px; width: auto; background-image: none; cursor: pointer; font-weight: bold;"></select>
-                    <button id="freezeBtn" class="shahi-btn" style="background: var(--danger); color: white;"><i class="fas fa-lock"></i> FREEZE RECORD</button>
-                </div>
-                <input type="text" id="searchLedger" class="shahi-search" placeholder="Search ledger...">
-            </div>
-            
-            <div class="table-wrap">
-                <table id="tableLedger">
-                    <thead>
-                        <tr>
-                            <th width="40"><input type="checkbox" id="selectAllLedger" style="accent-color: var(--shahi-gold); cursor:pointer;"></th>
-                            <th>Sardaar Info</th><th>Contact</th><th>Address</th><th>Fee (Rs. 1000)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="listLedger"><tr><td colspan="5" style="text-align:center;">Loading Ledger...</td></tr></tbody>
-                </table>
-            </div>
-            <button id="bulkMarkBtn" class="shahi-btn" style="display: none; width: 100%; justify-content: center; margin-top: -15px; margin-bottom: 30px;"><i class="fas fa-check-double"></i> MARK SELECTED AS PAID</button>
-        </div>
-
-        <!-- 6. PAYMENT VAULT (admin6.html) -->
-        <div id="tab-payments" class="tab-content">
-            <div class="action-header">
-                <p style="color: var(--text-muted); margin: 0;">Verify Commission & Rent Receipts submitted by Sardaars.</p>
-            </div>
-            <div class="cards-grid" id="listPayments">
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">Checking Vault...</div>
-            </div>
-        </div>
-
     </div>
 
 <script type="module">
-    import { auth, db, SULTAN_UID } from "./auth-manager.js";
+    import { auth, db, ADMIN_UID } from "./auth-manager.js?v=3.2";
     import { ref, onValue, set, update, remove, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { onAuthStateChanged, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     // Global State
     let allUsers = [];
-    let sardaars = [];
+    let sellers = [];
     let buyers = [];
     let pendingRequests = [];
     let productCounts = {};
@@ -327,19 +379,46 @@
     let ledgerIsFrozen = false;
     let ledgerPayments = {};
 
+    const loginOverlay = document.getElementById('adminLoginOverlay');
+
     // Auth Guard
     onAuthStateChanged(auth, (user) => {
-        if (user && user.uid === SULTAN_UID) {
+        const isAdmin = user && (user.uid === ADMIN_UID || (user.email && user.email.toLowerCase() === 'saltanatapni@gmail.com'));
+        if (isAdmin) {
+            loginOverlay.style.display = 'none';
             initDashboard();
         } else {
-            alert("Access Denied! Only the Sultan may enter the Imperial Dashboard.");
-            window.location.href = "login.html";
+            loginOverlay.style.display = 'flex';
+        }
+    });
+
+    // Admin Login Form Submission
+    document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('adminEmail').value.trim();
+        const password = document.getElementById('adminPassword').value;
+        const btn = document.getElementById('adminLoginBtn');
+        const errDiv = document.getElementById('adminLoginError');
+
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Logging in...';
+        btn.disabled = true;
+        errDiv.style.display = 'none';
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+            errDiv.innerText = "Error: " + error.message;
+            errDiv.style.display = 'block';
+            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Console';
+            btn.disabled = false;
         }
     });
 
     // Logout
     window.logout = () => {
-        signOut(auth).then(() => window.location.href = "login.html");
+        signOut(auth).then(() => {
+            window.location.reload();
+        });
     };
 
     // Tab Switching
@@ -350,7 +429,7 @@
         if(element) element.classList.add('active');
         
         const titles = {
-            'dashboard': 'IMPERIAL OVERVIEW', 'requests': 'SARDAAR SUBMISSIONS',
+            'dashboard': 'IMPERIAL OVERVIEW', 'requests': 'SELLER SUBMISSIONS',
             'users': 'USER CONTROL CENTER', 'directory': 'SELLER DIRECTORY',
             'ledger': 'SHAHI TREASURY LEDGER', 'payments': 'PAYMENT VERIFICATION VAULT'
         };
@@ -361,20 +440,20 @@
     };
 
     function initDashboard() {
-        // Fetch Sardaars
-        onValue(ref(db, 'users/sardaars'), (snap) => {
-            sardaars = []; pendingRequests = [];
+        // Fetch Sellers
+        onValue(ref(db, 'users/sellers'), (snap) => {
+            sellers = []; pendingRequests = [];
             if(snap.exists()) {
                 snap.forEach(child => {
-                    const data = { id: child.key, ...child.val(), role: 'SARDAAR', path: `users/sardaars/${child.key}` };
-                    sardaars.push(data);
+                    const data = { id: child.key, ...child.val(), role: 'SELLER', path: `users/sellers/${child.key}` };
+                    sellers.push(data);
                     if(data.status === 'pending') pendingRequests.push(data);
                 });
             }
             updateAllUsers();
             renderRequests();
             renderDirectory();
-            renderLedger(); // Needs sardaars
+            renderLedger(); // Needs sellers
         });
 
         // Fetch Buyers
@@ -399,7 +478,8 @@
                     totalProds += count;
                 });
             }
-            document.getElementById('statProducts').innerText = totalProds;
+            const elProducts = document.getElementById('statProducts');
+            if(elProducts) elProducts.innerText = totalProds;
             renderUsers();
             renderDirectory();
         });
@@ -414,10 +494,13 @@
     }
 
     function updateAllUsers() {
-        allUsers = [...sardaars.filter(s => s.status !== 'pending'), ...buyers];
-        document.getElementById('statSardaars').innerText = sardaars.filter(s => s.status !== 'pending').length;
-        document.getElementById('statBuyers').innerText = buyers.length;
-        document.getElementById('statPending').innerText = pendingRequests.length;
+        allUsers = [...sellers.filter(s => s.status !== 'pending'), ...buyers];
+        const elSellers = document.getElementById('statSellers');
+        if(elSellers) elSellers.innerText = sellers.filter(s => s.status !== 'pending').length;
+        const elBuyers = document.getElementById('statBuyers');
+        if(elBuyers) elBuyers.innerText = buyers.length;
+        const elPending = document.getElementById('statPending');
+        if(elPending) elPending.innerText = pendingRequests.length;
         
         const badge = document.getElementById('navBadgeRequests');
         if(pendingRequests.length > 0) {
@@ -445,18 +528,14 @@
             <tr>
                 <td><small style="color:var(--shahi-gold)">${item.id}</small></td>
                 <td>
-                    <b style="color:white">${item.name || item.userName || 'N/A'}</b><br>
-                    <small style="color:var(--text-muted)">${item.email || 'No Email'}</small><br>
-                    <small style="color:var(--text-muted)">${item.phone || 'No Phone'}</small><br>
-                    <small style="color:var(--shahi-gold)">Bank: ${item.bankAccount || 'N/A'}</small>
+                    <b style="color:var(--text-main)">${item.name || item.userName || 'N/A'}</b><br>
+                    <small style="color:var(--text-muted)">${item.email || 'No Email'}</small>
                 </td>
                 <td>
-                    <b style="color:var(--success)">${item.storeName || 'N/A'}</b><br>
-                    <small style="color:var(--text-muted)">${item.category || 'Imperial Goods'}</small>
+                    <b style="color:var(--success)">${item.phone || 'No WhatsApp'}</b>
                 </td>
                 <td>
-                    <a href="${item.idFrontURL || '#'}" target="_blank" class="doc-link">Front ID</a>
-                    <a href="${item.idBackURL || '#'}" target="_blank" class="doc-link">Back ID</a>
+                    <span style="color:var(--text-main)">${item.storeName || 'N/A'}</span>
                 </td>
                 <td>
                     <div style="display:flex; gap:8px;">
@@ -469,17 +548,24 @@
     }
 
     window.handleRequest = (id, newStatus) => {
+        if (newStatus === 'active') {
+            const activeCount = sellers.filter(s => s.status === 'active').length;
+            if (activeCount >= 100) {
+                alert("Alert! The quota of 100 active sellers has been reached. You cannot approve more sellers until an existing seller is blocked or deactivated.");
+                return;
+            }
+        }
         if(confirm(newStatus === 'active' ? "Approve this seller?" : "Reject this application?")) {
-            update(ref(db, `users/sardaars/${id}`), { status: newStatus })
+            update(ref(db, `users/sellers/${id}`), { status: newStatus })
                 .then(() => {
                     alert(newStatus === 'active' ? "Seller Approved!" : "Application Rejected!");
                     
                     // Fetch seller details to send email
-                    get(ref(db, `users/sardaars/${id}`)).then(snap => {
+                    get(ref(db, `users/sellers/${id}`)).then(snap => {
                         if (snap.exists()) {
                             const data = snap.val();
                             if (data.email) {
-                                notifySardaarStatusUpdate(data.email, newStatus, data.name || data.userName);
+                                notifySellerStatusUpdate(data.email, newStatus, data.name || data.userName);
                             }
                         }
                     });
@@ -487,7 +573,7 @@
         }
     };
 
-    async function notifySardaarStatusUpdate(email, status, name) {
+    async function notifySellerStatusUpdate(email, status, name) {
         const scriptUrl = "https://script.google.com/macros/s/AKfycbwo6smhEV8TWPrWdBJ3SCFFj96AL6ucGHR4dRMAfCX5EpFSJuQnIwgMHmoWbzLaawzb/exec";
         const isApproved = status === 'active';
         const subject = isApproved ? "Verification Approved! - Apni Saltanat" : "Verification Update - Apni Saltanat";
@@ -521,42 +607,61 @@
 
         list.innerHTML = filtered.map(user => {
             const pCount = productCounts[user.id] || 0;
-            let statusColor = '#00ff88';
-            if (user.status === 'blocked') statusColor = '#ff4444';
-            if (user.status === 'unpaid') statusColor = '#ffcc00';
+            const isInactive = user.status === 'deactivated' || user.status === 'blocked';
+            const statusColor = isInactive ? '#ff4444' : '#00ff88';
 
             return `
                 <tr>
-                    <td><b style="color:white">${user.name || user.userName || 'N/A'}</b><br><small style="color:var(--text-muted)">${user.email || 'No Email'}</small></td>
-                    <td><span style="background:${user.role==='SARDAAR'?'rgba(255,215,0,0.1)':'rgba(33,150,243,0.1)'}; color:${user.role==='SARDAAR'?'var(--shahi-gold)':'var(--accent-blue)'}; padding:4px 8px; border-radius:4px; font-size:10px; font-weight:800;">${user.role}</span></td>
+                    <td><b style="color:var(--text-main)">${user.name || user.userName || 'N/A'}</b><br><small style="color:var(--text-muted)">${user.email || 'No Email'}</small></td>
+                    <td><span style="background:${user.role==='SELLER'?'rgba(255,215,0,0.1)':'rgba(33,150,243,0.1)'}; color:${user.role==='SELLER'?'var(--shahi-gold)':'var(--accent-blue)'}; padding:4px 8px; border-radius:4px; font-size:10px; font-weight:800;">${user.role}</span></td>
                     <td><b style="color:${pCount>0?'var(--success)':'var(--text-muted)'}">${pCount}</b> <small>Items</small></td>
-                    <td><b style="color:${statusColor}">${user.status === 'blocked' ? '🛑 BLOCKED' : (user.status === 'unpaid' ? '⚠️ UNPAID' : '✅ ACTIVE')}</b></td>
+                    <td><b style="color:${statusColor}">${isInactive ? '🛑 INACTIVE' : '✅ ACTIVE'}</b></td>
                     <td>
-                        <select class="status-select" style="border: 1px solid ${statusColor}; color: ${statusColor};" onchange="changeUserStatus('${user.path}', this.value, '${user.status||'active'}', this)">
-                            <option value="active" ${(!user.status || user.status === 'active') ? 'selected' : ''}>✅ ACTIVE</option>
-                            <option value="blocked" ${user.status === 'blocked' ? 'selected' : ''}>🛑 BLOCKED</option>
-                            ${user.role === 'SARDAAR' ? `<option value="unpaid" ${user.status === 'unpaid' ? 'selected' : ''}>⚠️ UNPAID</option>` : ''}
-                        </select>
+                        <button class="btn-action ${isInactive ? 'btn-success' : 'btn-danger'}" onclick="toggleUserActiveState('${user.path}', '${user.status || 'active'}')" style="padding: 6px 12px; border-radius: 6px; font-weight: 700; font-size: 11px; width: 120px;">
+                            ${isInactive ? '<i class="fas fa-toggle-off"></i> Activate' : '<i class="fas fa-toggle-on"></i> Deactivate'}
+                        </button>
                     </td>
                 </tr>
             `;
         }).join('');
     }
     
-    window.changeUserStatus = async (path, newStatus, oldStatus, select) => {
-        if(newStatus === oldStatus) return;
-        if(!confirm(`Change status to ${newStatus.toUpperCase()}?`)) { select.value = oldStatus; return; }
-        await update(ref(db, path), { status: newStatus }).catch(e => { alert(e); select.value = oldStatus; });
+    window.toggleUserActiveState = async (path, currentStatus) => {
+        const isCurrentlyActive = (currentStatus !== 'deactivated' && currentStatus !== 'blocked');
+        const newStatus = isCurrentlyActive ? 'deactivated' : 'active';
+        
+        if (path.includes('users/sellers') && newStatus === 'active') {
+            const activeCount = sellers.filter(s => s.status === 'active').length;
+            if (activeCount >= 100) {
+                alert("Alert! The quota of 100 active sellers has been reached. You cannot activate more sellers until an existing seller is blocked or deactivated.");
+                return;
+            }
+        }
+        if(!confirm(`Are you sure you want to change this user status to ${newStatus.toUpperCase()}?`)) return;
+        await update(ref(db, path), { status: newStatus }).catch(e => { alert(e); });
+
+        // If deactivating a seller, remove all their products immediately
+        if (path.includes('users/sellers') && newStatus === 'deactivated') {
+            const parts = path.split('/');
+            const uid = parts[parts.length - 1];
+            await remove(ref(db, `products/${uid}`)).then(() => {
+                alert("Seller deactivated and all their products have been removed from the marketplace.");
+            }).catch(e => {
+                console.error("Error removing products:", e);
+            });
+        }
     };
     document.getElementById('searchUsers').addEventListener('input', renderUsers);
 
     // --- TAB: DIRECTORY ---
     function renderDirectory() {
         const grid = document.getElementById('listDirectory');
-        const activeSardaars = sardaars.filter(s => s.status !== 'pending' && s.status !== 'rejected');
+        if(!grid) return;
+        const activeSellers = sellers.filter(s => s.status !== 'pending' && s.status !== 'rejected');
         
-        const term = document.getElementById('searchDirectory').value.toLowerCase();
-        const filtered = activeSardaars.filter(s => Object.values(s).some(val => String(val).toLowerCase().includes(term)));
+        const termInput = document.getElementById('searchDirectory');
+        const term = termInput ? termInput.value.toLowerCase() : '';
+        const filtered = activeSellers.filter(s => Object.values(s).some(val => String(val).toLowerCase().includes(term)));
 
         if(!filtered.length) { grid.innerHTML = '<div style="grid-column:1/-1; text-align:center;">No seller records found.</div>'; return; }
 
@@ -564,10 +669,10 @@
             <div class="admin-card">
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--shahi-border); padding-bottom:15px; margin-bottom:15px;">
                     <div>
-                        <h3 style="margin:0; font-family:'Outfit'; color:white;">${s.storeName || 'Store N/A'}</h3>
+                        <h3 style="margin:0; font-family:'Outfit'; color:var(--text-main);">${s.storeName || 'Store N/A'}</h3>
                         <small style="color:var(--success); font-weight:bold;">${s.userName || s.name}</small>
                     </div>
-                    <span style="background:rgba(255,255,255,0.1); padding:4px 8px; border-radius:4px; font-size:10px;">${productCounts[s.id]||0} ITEMS</span>
+                    <span style="background:rgba(46,204,113,0.1); color:var(--text-main); padding:4px 8px; border-radius:4px; font-size:10px; font-weight:800;">${productCounts[s.id]||0} ITEMS</span>
                 </div>
                 <div class="card-label">Contact</div><div class="card-val">${s.phone || 'N/A'}</div>
                 <div class="card-label">Email</div><div class="card-val">${s.email || 'N/A'}</div>
@@ -577,11 +682,13 @@
             </div>
         `).join('');
     }
-    document.getElementById('searchDirectory').addEventListener('input', renderDirectory);
+    const searchDirEl = document.getElementById('searchDirectory');
+    if(searchDirEl) searchDirEl.addEventListener('input', renderDirectory);
 
     // --- TAB: LEDGER ---
     function setupLedgerMonthSelector() {
         const sel = document.getElementById('ledgerMonth');
+        if(!sel) return;
         const now = new Date();
         for(let i=0; i<24; i++) {
             const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
@@ -594,25 +701,29 @@
     }
 
     function loadLedgerData() {
-        const period = document.getElementById('ledgerMonth').value;
+        const sel = document.getElementById('ledgerMonth');
+        if(!sel) return;
+        const period = sel.value;
         if(!period) return;
 
         // Status
-        onValue(ref(db, `shahi_ledger/${period}/status`), (snap) => {
+        onValue(ref(db, `sellers_ledger/${period}/status`), (snap) => {
             ledgerIsFrozen = snap.val() === 'frozen';
             const fBtn = document.getElementById('freezeBtn');
-            if(ledgerIsFrozen) {
-                fBtn.innerHTML = '<i class="fas fa-snowflake"></i> FROZEN';
-                fBtn.style.background = '#333'; fBtn.disabled = true;
-            } else {
-                fBtn.innerHTML = '<i class="fas fa-lock"></i> FREEZE RECORD';
-                fBtn.style.background = 'var(--danger)'; fBtn.disabled = false;
+            if(fBtn) {
+                if(ledgerIsFrozen) {
+                    fBtn.innerHTML = '<i class="fas fa-snowflake"></i> FROZEN';
+                    fBtn.style.background = '#333'; fBtn.disabled = true;
+                } else {
+                    fBtn.innerHTML = '<i class="fas fa-lock"></i> FREEZE RECORD';
+                    fBtn.style.background = 'var(--danger)'; fBtn.disabled = false;
+                }
             }
             renderLedger();
         });
 
         // Payments
-        onValue(ref(db, `shahi_ledger/${period}/payments`), (snap) => {
+        onValue(ref(db, `sellers_ledger/${period}/payments`), (snap) => {
             ledgerPayments = snap.val() || {};
             renderLedger();
         });
@@ -620,19 +731,21 @@
 
     function renderLedger() {
         const list = document.getElementById('listLedger');
-        const activeSardaars = sardaars.filter(s => s.status !== 'pending' && s.status !== 'rejected');
-        const term = document.getElementById('searchLedger').value.toLowerCase();
+        if(!list) return;
+        const activeSellers = sellers.filter(s => s.status !== 'pending' && s.status !== 'rejected');
+        const termInput = document.getElementById('searchLedger');
+        const term = termInput ? termInput.value.toLowerCase() : '';
         
         let income = 0; let paid = 0; let html = '';
         
-        activeSardaars.forEach(s => {
+        activeSellers.forEach(s => {
             if(term && !(s.userName||s.name||"").toLowerCase().includes(term) && !(s.email||"").toLowerCase().includes(term)) return;
             const hasPaid = ledgerPayments[s.id] === true;
             if(hasPaid) { income += 1000; paid++; }
 
             html += `<tr style="${ledgerIsFrozen ? 'opacity:0.6;' : ''}">
                 <td><input type="checkbox" class="ledger-cb" data-uid="${s.id}" ${hasPaid||ledgerIsFrozen?'disabled':''} style="accent-color:var(--shahi-gold); cursor:pointer;" onchange="updateBulkBtn()"></td>
-                <td><b style="color:white">${s.userName||s.name||'Sardaar'}</b> ${ledgerIsFrozen?'<i class="fas fa-lock" style="color:var(--shahi-gold); font-size:10px;"></i>':''}<br><small style="color:var(--text-muted)">${s.email}</small></td>
+                <td><b style="color:var(--text-main)">${s.userName||s.name||'Seller'}</b> ${ledgerIsFrozen?'<i class="fas fa-lock" style="color:var(--shahi-gold); font-size:10px;"></i>':''}<br><small style="color:var(--text-muted)">${s.email}</small></td>
                 <td>${s.phone || 'N/A'}</td>
                 <td><span style="font-size:12px; white-space:normal; display:block; max-width:200px;">${s.address || 'N/A'}</span></td>
                 <td>
@@ -644,54 +757,76 @@
         });
 
         list.innerHTML = html || '<tr><td colspan="5" style="text-align:center;">No records found.</td></tr>';
-        document.getElementById('ledgerIncome').innerText = `Rs. ${income}`;
-        document.getElementById('ledgerPaidCount').innerText = paid;
+        const incEl = document.getElementById('ledgerIncome');
+        if(incEl) incEl.innerText = `Rs. ${income}`;
+        const pcEl = document.getElementById('ledgerPaidCount');
+        if(pcEl) pcEl.innerText = paid;
         updateBulkBtn();
     }
 
     window.markLedgerPaid = async (uid, current) => {
         if(ledgerIsFrozen) return;
-        const period = document.getElementById('ledgerMonth').value;
+        const sel = document.getElementById('ledgerMonth');
+        if(!sel) return;
+        const period = sel.value;
         if(confirm(current ? "Revert to UNPAID?" : "Mark as PAID?")) {
-            await set(ref(db, `shahi_ledger/${period}/payments/${uid}`), !current);
+            await set(ref(db, `sellers_ledger/${period}/payments/${uid}`), !current);
         }
     };
 
     window.updateBulkBtn = () => {
         const checked = document.querySelectorAll('.ledger-cb:checked').length;
         const btn = document.getElementById('bulkMarkBtn');
-        if(checked > 0) { btn.style.display = 'flex'; btn.innerHTML = `<i class="fas fa-check-double"></i> MARK ${checked} SELECTED AS PAID`; } 
-        else { btn.style.display = 'none'; }
-    };
-
-    document.getElementById('selectAllLedger').onchange = (e) => {
-        document.querySelectorAll('.ledger-cb:not([disabled])').forEach(cb => cb.checked = e.target.checked);
-        updateBulkBtn();
-    };
-
-    document.getElementById('bulkMarkBtn').onclick = async () => {
-        const period = document.getElementById('ledgerMonth').value;
-        const selected = document.querySelectorAll('.ledger-cb:checked');
-        if(confirm(`Mark all ${selected.length} as PAID?`)) {
-            const updates = {};
-            selected.forEach(cb => updates[`shahi_ledger/${period}/payments/${cb.dataset.uid}`] = true);
-            await update(ref(db), updates);
-            document.getElementById('selectAllLedger').checked = false;
+        if(btn) {
+            if(checked > 0) { btn.style.display = 'flex'; btn.innerHTML = `<i class="fas fa-check-double"></i> MARK ${checked} SELECTED AS PAID`; } 
+            else { btn.style.display = 'none'; }
         }
     };
 
-    document.getElementById('freezeBtn').onclick = () => {
-        const period = document.getElementById('ledgerMonth').value;
-        if(confirm("FREEZE this month's records? This action cannot be undone.")) {
-            update(ref(db, `shahi_ledger/${period}`), { status: 'frozen' });
-        }
-    };
+    const selectAllLedgerEl = document.getElementById('selectAllLedger');
+    if(selectAllLedgerEl) {
+        selectAllLedgerEl.onchange = (e) => {
+            document.querySelectorAll('.ledger-cb:not([disabled])').forEach(cb => cb.checked = e.target.checked);
+            updateBulkBtn();
+        };
+    }
 
-    document.getElementById('searchLedger').addEventListener('input', renderLedger);
+    const bulkMarkBtnEl = document.getElementById('bulkMarkBtn');
+    if(bulkMarkBtnEl) {
+        bulkMarkBtnEl.onclick = async () => {
+            const sel = document.getElementById('ledgerMonth');
+            if(!sel) return;
+            const period = sel.value;
+            const selected = document.querySelectorAll('.ledger-cb:checked');
+            if(confirm(`Mark all ${selected.length} as PAID?`)) {
+                const updates = {};
+                selected.forEach(cb => updates[`sellers_ledger/${period}/payments/${cb.dataset.uid}`] = true);
+                await update(ref(db), updates);
+                const selectAll = document.getElementById('selectAllLedger');
+                if(selectAll) selectAll.checked = false;
+            }
+        };
+    }
+
+    const freezeBtnEl = document.getElementById('freezeBtn');
+    if(freezeBtnEl) {
+        freezeBtnEl.onclick = () => {
+            const sel = document.getElementById('ledgerMonth');
+            if(!sel) return;
+            const period = sel.value;
+            if(confirm("FREEZE this month's records? This action cannot be undone.")) {
+                update(ref(db, `sellers_ledger/${period}`), { status: 'frozen' });
+            }
+        };
+    }
+
+    const searchLedgerEl = document.getElementById('searchLedger');
+    if(searchLedgerEl) searchLedgerEl.addEventListener('input', renderLedger);
 
     // --- TAB: PAYMENTS (Settlements) ---
     function renderPayments() {
         const list = document.getElementById('listPayments');
+        if(!list) return;
         const dataArr = Object.entries(settlements).sort((a,b) => (b[1].timestamp||0) - (a[1].timestamp||0));
         
         if(!dataArr.length) {
@@ -712,7 +847,7 @@
     }
 
     window.confirmPayment = async (id) => {
-        if(confirm("Sultan, confirm receipt of this payment? It will be archived.")) {
+        if(confirm("Admin, confirm receipt of this payment? It will be archived.")) {
             await remove(ref(db, `settlements/${id}`));
         }
     };

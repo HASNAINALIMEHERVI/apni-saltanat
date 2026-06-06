@@ -3,475 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9236482420910781" crossorigin="anonymous"></script>
-    <title>Become a Seller — Apni Saltanat | Pakistan's Premier Marketplace</title>
-    <meta name="description" content="Become a part of Apni Saltanat — Open your store in Pakistan's royal marketplace, sell products and earn halal income. Register today!">
+    <title>Register | Apni Saltanat</title>
+    <meta name="description" content="Create your account on Apni Saltanat — shop premium products from Pakistan's royal marketplace. Free registration, instant access.">
     <link rel="canonical" href="https://apnisaltanat.com/signup.html">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
-    <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }</script>
-    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <link rel="stylesheet" href="royal.css">
     <script src="theme-manager.js"></script>
     <style>
-        /* ===== SIGNUP PAGE LAYOUT ===== */
         body { min-height:100vh; display:flex; flex-direction:column; background:var(--bg-dark); }
+        body::after { content:''; position:fixed; top:0; left:50%; transform:translateX(-50%); width:700px; height:400px; background:radial-gradient(ellipse, rgba(255,204,0,0.07) 0%, transparent 65%); pointer-events:none; z-index:0; }
 
-        /* Background radial glow */
-        body::after {
-            content:'';
-            position:fixed;
-            top:0; left:50%;
-            transform:translateX(-50%);
-            width:900px; height:500px;
-            background:radial-gradient(ellipse, rgba(255,204,0,0.07) 0%, transparent 65%);
-            pointer-events:none; z-index:0;
-        }
+        .signup-nav { display:flex; align-items:center; justify-content:space-between; padding:20px 40px; position:relative; z-index:10; border-bottom:1px solid var(--border); }
+        .signup-nav .nav-logo { font-family:'Epilogue',sans-serif; font-size:20px; font-weight:900; color:var(--royal-gold); text-decoration:none; letter-spacing:2px; text-transform:uppercase; }
 
-        /* ===== TOP NAV (minimal) ===== */
-        .signup-nav {
-            display:flex; align-items:center; justify-content:space-between;
-            padding:20px 40px;
-            position:relative; z-index:10;
-            border-bottom:1px solid var(--border);
-        }
-        .signup-nav .nav-logo {
-            font-family:'Epilogue',sans-serif;
-            font-size:20px; font-weight:900;
-            color:var(--royal-gold); text-decoration:none;
-            letter-spacing:2px; text-transform:uppercase;
-        }
-        .signup-nav .nav-right { display:flex; align-items:center; gap:14px; }
+        .page-wrap { flex:1; display:grid; grid-template-columns:1fr 460px; max-width:1100px; margin:0 auto; width:100%; padding:50px 20px; gap:60px; align-items:start; position:relative; z-index:2; }
 
-        /* ===== PAGE WRAPPER ===== */
-        .signup-page {
-            flex:1;
-            display:grid;
-            grid-template-columns:1fr 480px;
-            max-width:1200px;
-            margin:0 auto;
-            width:100%;
-            padding:40px 20px;
-            gap:60px;
-            align-items:start;
-            position:relative; z-index:2;
-        }
+        /* LEFT */
+        .left-panel { padding:10px 0; }
+        .eyebrow { display:inline-flex; align-items:center; gap:8px; background:rgba(255,204,0,0.1); border:1px solid rgba(255,204,0,0.3); color:var(--royal-gold); padding:7px 18px; border-radius:50px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:24px; }
+        .left-panel h1 { font-family:'Epilogue',sans-serif; font-size:clamp(30px,4vw,52px); font-weight:900; color:var(--text-light); line-height:1.1; margin-bottom:16px; }
+        .left-panel h1 span { color:var(--royal-gold); }
+        .left-panel .sub { font-size:15px; color:var(--text-muted); line-height:1.8; max-width:420px; margin-bottom:36px; }
 
-        /* ===== LEFT PANEL (benefits) ===== */
-        .signup-left { padding:20px 0; }
-        .signup-left .eyebrow {
-            display:inline-flex; align-items:center; gap:8px;
-            background:rgba(255,204,0,0.1); border:1px solid rgba(255,204,0,0.3);
-            color:var(--royal-gold); padding:7px 18px; border-radius:50px;
-            font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px;
-            margin-bottom:24px;
-        }
-        .signup-left h1 {
-            font-family:'Epilogue',sans-serif;
-            font-size:clamp(32px,4vw,54px); font-weight:900;
-            color:var(--text-light); line-height:1.1; margin-bottom:16px;
-        }
-        .signup-left h1 span { color:var(--royal-gold); }
-        .signup-left .sub {
-            font-size:16px; color:var(--text-muted); line-height:1.8;
-            max-width:460px; margin-bottom:36px;
-        }
+        .perk-list { display:flex; flex-direction:column; gap:12px; }
+        .perk-item { display:flex; align-items:center; gap:14px; padding:16px 18px; background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-md); transition:var(--transition); }
+        .perk-item:hover { border-color:var(--border-gold); }
+        .perk-icon { width:40px; height:40px; flex-shrink:0; background:rgba(255,204,0,0.1); border:1px solid rgba(255,204,0,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--royal-gold); font-size:16px; }
+        .perk-text { font-size:14px; font-weight:700; color:var(--text-light); }
 
-        /* Benefit list */
-        .benefit-list { display:flex; flex-direction:column; gap:14px; margin-bottom:40px; }
-        .benefit-item {
-            display:flex; align-items:flex-start; gap:16px;
-            background:var(--bg-surface); border:1px solid var(--border);
-            border-radius:var(--radius-md); padding:18px 20px;
-            transition:var(--transition);
-        }
-        .benefit-item:hover { border-color:var(--border-gold); }
-        .benefit-icon {
-            width:44px; height:44px; flex-shrink:0;
-            background:rgba(255,204,0,0.1); border:1px solid rgba(255,204,0,0.25);
-            border-radius:12px; display:flex; align-items:center; justify-content:center;
-            color:var(--royal-gold); font-size:18px;
-        }
-        .benefit-item h4 { font-family:'Epilogue',sans-serif; font-size:15px; font-weight:800; color:var(--text-light); margin-bottom:4px; }
-        .benefit-item p { font-size:13px; color:var(--text-muted); line-height:1.5; }
-
-        /* Stats row */
-        .stats-row { display:flex; gap:28px; flex-wrap:wrap; }
-        .stat-block { text-align:left; }
-        .stat-val { font-family:'Epilogue',sans-serif; font-size:28px; font-weight:900; color:var(--royal-gold); display:block; line-height:1; }
-        .stat-lbl { font-size:11px; color:var(--text-muted); margin-top:4px; text-transform:uppercase; letter-spacing:1px; font-weight:700; }
-
-        /* ===== RIGHT PANEL (form) ===== */
-        .signup-card {
-            background:var(--bg-surface);
-            border:1px solid var(--border);
-            border-radius:var(--radius-lg);
-            padding:40px 38px;
-            box-shadow:0 40px 80px rgba(0,0,0,0.5);
-            position:relative;
-            overflow:hidden;
-        }
-        .signup-card::before {
-            content:'';
-            position:absolute; top:0; left:0; right:0;
-            height:3px;
-            background:linear-gradient(90deg, #FFEDC3, #FFCC00, #FF9900, #FFCC00, #FFEDC3);
-        }
-        .card-title {
-            font-family:'Epilogue',sans-serif;
-            font-size:24px; font-weight:900;
-            color:var(--royal-gold); margin-bottom:6px;
-        }
+        /* FORM CARD */
+        .form-card { background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:40px 36px; box-shadow:0 40px 80px rgba(0,0,0,0.5); position:relative; overflow:hidden; }
+        .form-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, #FFEDC3, #FFCC00, #FF9900, #FFCC00, #FFEDC3); }
+        .card-title { font-family:'Epilogue',sans-serif; font-size:24px; font-weight:900; color:var(--royal-gold); margin-bottom:6px; }
         .card-sub { font-size:13px; color:var(--text-muted); margin-bottom:28px; }
 
-        /* Form fields */
-        .field-group { margin-bottom:20px; }
-        .field-group label {
-            display:block; font-size:10px; color:var(--text-muted);
-            text-transform:uppercase; margin-bottom:8px;
-            letter-spacing:1.5px; font-weight:700;
-        }
+        .field-group { margin-bottom:18px; }
+        .field-group label { display:block; font-size:10px; color:var(--text-muted); text-transform:uppercase; margin-bottom:7px; letter-spacing:1.5px; font-weight:700; }
         .field-wrap { position:relative; }
-        .field-icon {
-            position:absolute; left:16px; top:50%;
-            transform:translateY(-50%); color:var(--text-dim); font-size:14px;
-            pointer-events:none;
-        }
-        .royal-field-input {
-            width:100%; padding:14px 18px 14px 46px;
-            background:var(--bg-deep);
-            border:1.5px solid var(--border);
-            border-radius:var(--radius-md); color:var(--text-main);
-            outline:none; transition:var(--transition);
-            font-family:'Manrope',sans-serif; font-size:14px;
-        }
-        .royal-field-input:focus {
-            border-color:var(--royal-gold);
-            box-shadow:0 0 0 3px rgba(255,204,0,0.1);
-        }
-        .royal-field-input::placeholder { color:var(--text-dim); }
-        .royal-field-input.no-icon { padding-left:18px; }
-        .pw-toggle {
-            position:absolute; right:16px; top:50%;
-            transform:translateY(-50%); color:var(--text-dim);
-            cursor:pointer; transition:0.3s; font-size:14px;
-        }
+        .field-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--text-dim); font-size:14px; pointer-events:none; }
+        .r-input { width:100%; padding:13px 18px 13px 46px; background:#ffffff; border:1.5px solid var(--border); border-radius:8px; color:var(--text-main); outline:none; transition:var(--transition); font-family:'Manrope',sans-serif; font-size:14px; }
+        .r-input:focus { border-color:var(--royal-gold); box-shadow:0 0 0 3px rgba(255,153,0,0.2); }
+        .r-input::placeholder { color:var(--text-dim); }
+        .pw-toggle { position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--text-dim); cursor:pointer; transition:0.3s; }
         .pw-toggle:hover { color:var(--royal-gold); }
 
-        /* File upload */
-        .doc-upload-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px; }
-        .doc-upload-label {
-            display:flex; flex-direction:column; align-items:center; justify-content:center;
-            gap:8px; padding:16px 10px;
-            background:var(--bg-deep); border:1.5px dashed var(--border);
-            border-radius:var(--radius-md); cursor:pointer;
-            transition:var(--transition); text-align:center; position:relative;
-        }
-        .doc-upload-label:hover { border-color:var(--border-gold); }
-        .doc-upload-label i { font-size:22px; color:var(--text-muted); }
-        .doc-upload-label span { font-size:11px; color:var(--text-muted); font-weight:700; text-transform:uppercase; letter-spacing:1px; }
-        .doc-upload-label input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; }
-
-        /* Progress bar */
-        .upload-progress { display:none; margin-top:12px; }
-        .progress-bar-wrap { height:4px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden; }
-        .progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg, #FFCC00, #FF9900); border-radius:2px; transition:width 0.3s; }
-        .progress-text { font-size:11px; color:var(--text-muted); margin-top:6px; text-align:center; }
-
-        /* Submit button */
-        .submit-btn {
-            width:100%; padding:17px;
-            background:linear-gradient(135deg, #FFEDC3, #FFCC00);
-            color:#131313; border:none; border-radius:var(--radius-md);
-            font-family:'Epilogue',sans-serif; font-weight:900; cursor:pointer;
-            transition:var(--transition); text-transform:uppercase;
-            letter-spacing:2px; font-size:14px; margin-top:8px;
-            display:flex; align-items:center; justify-content:center; gap:10px;
-        }
-        .submit-btn:hover { transform:translateY(-2px); box-shadow:0 12px 35px rgba(255,204,0,0.3); }
-        .submit-btn:disabled { background:#2a2a2a; color:#555; cursor:not-allowed; transform:none; box-shadow:none; }
+        .submit-btn { width:100%; padding:16px; background:var(--royal-gold); color:#131313; border:none; border-radius:8px; font-family:'Epilogue',sans-serif; font-weight:900; cursor:pointer; transition:var(--transition); text-transform:uppercase; letter-spacing:2px; font-size:14px; margin-top:8px; display:flex; align-items:center; justify-content:center; gap:10px; box-shadow:0 2px 5px rgba(213,217,217,0.5); }
+        .submit-btn:hover { transform:translateY(-2px); box-shadow:0 4px 10px rgba(213,217,217,0.8); }
+        .submit-btn:disabled { background:#e7e9ec; color:#888; cursor:not-allowed; transform:none; box-shadow:none; border: 1px solid #d5d9d9; }
 
         .link-text { margin-top:20px; text-align:center; font-size:13px; color:var(--text-muted); }
         .link-text a { color:var(--royal-gold); text-decoration:none; font-weight:700; }
-        .link-text a:hover { text-decoration:underline; }
 
-        /* Terms note */
-        .terms-note { font-size:11px; color:var(--text-dim); text-align:center; margin-top:14px; line-height:1.6; }
-        .terms-note a { color:var(--text-muted); }
-        .terms-note a:hover { color:var(--royal-gold); }
+        @media(max-width:860px) { .page-wrap { grid-template-columns:1fr; } .left-panel { display:none; } }
+        @media(max-width:600px) { .signup-nav { padding:16px 20px; } .form-card { padding:28px 20px; } .page-wrap { padding:24px 16px; } }
 
-        /* Phone field */
-        .iti { width:100% !important; }
-        .iti__flag-container { z-index:100; }
-        .iti__selected-flag { background:transparent !important; border-right:1px solid var(--border); padding:0 10px 0 14px; }
-        .iti__country-list { background:var(--bg-surface); border:1px solid var(--border); color:var(--text-light); border-radius:var(--radius-md); }
-        .iti__country.iti__highlight { background:rgba(255,204,0,0.08); }
-        .iti__dial-code { color:var(--text-muted); }
-
-        /* Doc preview */
-        .doc-preview { width:100%; height:56px; object-fit:cover; border-radius:6px; margin-top:8px; display:none; border:1px solid var(--border-gold); }
-
-        /* Responsive */
-        @media(max-width:900px) {
-            .signup-page { grid-template-columns:1fr; gap:40px; }
-            .signup-left { display:none; }
+        /* Google button & Divider */
+        .google-btn {
+            width: 100%;
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            transition: 0.3s;
+            margin-top: 12px;
+            box-shadow:0 2px 5px rgba(213,217,217,0.5);
         }
-        @media(max-width:600px) {
-            .signup-nav { padding:16px 20px; }
-            .signup-card { padding:28px 20px; }
-            .doc-upload-grid { grid-template-columns:1fr; }
-            .signup-page { padding:24px 16px; }
+        .google-btn:hover {
+            background: #F7FAFA;
+            border-color: var(--border);
+        }
+        .divider {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border);
+        }
+        .divider:not(:empty)::before {
+            margin-right: .5em;
+        }
+        .divider:not(:empty)::after {
+            margin-left: .5em;
         }
     </style>
 </head>
 <body>
 
-<!-- SHAHI MODAL CONTAINER -->
-<div id="shahiModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:20000; align-items:center; justify-content:center; backdrop-filter:blur(10px);">
-    <div class="modal-card" style="background:var(--bg-surface); border:2px solid var(--royal-gold); border-radius:24px; padding:40px; width:90%; max-width:400px; text-align:center; box-shadow:0 0 50px rgba(197,160,89,0.2);">
-        <div class="modal-icon" id="modalIcon" style="font-size:50px; margin-bottom:20px;">👑</div>
-        <div class="modal-title" id="modalTitle" style="font-family:'Epilogue',sans-serif; font-weight:900; color:var(--royal-gold); margin-bottom:10px; font-size:20px; text-transform:uppercase;">WELCOME SELLER</div>
-        <div class="modal-text" id="modalText" style="color:var(--text-light); margin-bottom:30px; line-height:1.6;">Message here...</div>
-        <div class="modal-btns" id="modalBtns" style="display:flex; gap:12px;">
-            <button class="modal-btn btn-confirm" id="modalConfirmBtn" style="flex:1; padding:15px; border-radius:12px; border:none; font-weight:900; cursor:pointer; background:var(--royal-gold); color:#1a1a1a;">OK</button>
-        </div>
-    </div>
-</div>
-
-<!-- MINIMAL TOP NAV -->
 <nav class="signup-nav">
-    <a href="index.html" class="nav-logo">👑 APNI SALTANAT</a>
-    <div class="nav-right">
-        <a href="login.html" class="btn-outline mobile-hide" style="padding:9px 20px; font-size:12px;">Login</a>
-        <div onclick="toggleMenu()" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; cursor:pointer; color:var(--text-muted); font-size:18px; transition:var(--transition); margin-left:4px;" onmouseover="this.style.borderColor='var(--border-gold)';" onmouseout="this.style.borderColor='';">
-            <i class="fas fa-ellipsis-v"></i>
-        </div>
+    <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"> APNI SALTANAT</a>
+    <div style="display:flex; gap:12px; align-items:center;">
+        <a href="login.html" class="btn-outline" style="padding:9px 20px; font-size:12px;"><i class="fas fa-sign-in-alt"></i> Login</a>
     </div>
 </nav>
 
-<!-- MAIN PAGE -->
-<div class="signup-page">
-
-    <!-- LEFT — Benefits Panel -->
-    <div class="signup-left">
-        <div class="eyebrow"><i class="fas fa-crown"></i> New Sellers Welcome</div>
-        <h1>Join <span>Apni Saltanat</span></h1>
-        <p class="sub">Pakistan's most trusted royal marketplace. Open your store, sell products, and start your journey of halal earnings — completely free.</p>
-
-        <div class="benefit-list">
-            <div class="benefit-item">
-                <div class="benefit-icon"><i class="fas fa-store"></i></div>
-                <div>
-                    <h4>Unlimited Product Listings</h4>
-                    <p>Upload all your products for free — unlimited storage and no hidden charges.</p>
-                </div>
-            </div>
-            <div class="benefit-item">
-                <div class="benefit-icon"><i class="fas fa-crown"></i></div>
-                <div>
-                    <h4>Elite Badge</h4>
-                    <p>The top 300 sellers receive the "Elite" badge and priority listing placement.</p>
-                </div>
-            </div>
-            <div class="benefit-item">
-                <div class="benefit-icon"><i class="fas fa-users"></i></div>
-                <div>
-                    <h4>1000+ Active Buyers</h4>
-                    <p>Thousands of buyers are active in the marketplace — reach them easily with your products.</p>
-                </div>
-            </div>
-            <div class="benefit-item">
-                <div class="benefit-icon"><i class="fas fa-mosque"></i></div>
-                <div>
-                    <h4>100% Halal Commerce</h4>
-                    <p>Only halal, legal, and ethical products. Earn with integrity and blessings.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="stats-row">
-            <div class="stat-block">
-                <span class="stat-val">∞</span>
-                <div class="stat-lbl">Unlimited</div>
-            </div>
-            <div class="stat-block">
-                <span class="stat-val">Free</span>
-                <div class="stat-lbl">Listings</div>
-            </div>
-            <div class="stat-block">
-                <span class="stat-val">PKR 0</span>
-                <div class="stat-lbl">Setup Cost</div>
-            </div>
+<div class="page-wrap">
+    <!-- LEFT -->
+    <div class="left-panel">
+        <div class="eyebrow"><i class="fas fa-shopping-bag"></i> Free Account</div>
+        <h1>Welcome to the <span>Royal Bazaar</span></h1>
+        <p class="sub">Register now and explore thousands of premium products in Pakistan's premier online marketplace — absolutely free.</p>
+        <div class="perk-list">
+            <div class="perk-item"><div class="perk-icon"><i class="fas fa-store"></i></div><div class="perk-text">1000+ Products from Verified Sellers</div></div>
+            <div class="perk-item"><div class="perk-icon"><i class="fas fa-star"></i></div><div class="perk-text">Write reviews on purchased products</div></div>
+            <div class="perk-item"><div class="perk-icon"><i class="fas fa-shield-alt"></i></div><div class="perk-text">Secure Orders &amp; Buyer Protection</div></div>
+            <div class="perk-item"><div class="perk-icon"><i class="fas fa-truck"></i></div><div class="perk-text">Pan-Pakistan Doorstep Delivery</div></div>
+            <div class="perk-item"><div class="perk-icon"><i class="fas fa-mosque"></i></div><div class="perk-text">100% Halal &amp; Trusted Products Only</div></div>
         </div>
     </div>
 
-    <!-- RIGHT — Signup Form -->
-    <div class="signup-card">
-        <h2 class="card-title">Become a Seller 👑</h2>
-        <p class="card-sub">Apply to join our royal circle of trusted sellers and grow your business.</p>
+    <!-- FORM -->
+    <div class="form-card">
+        <h2 class="card-title">🛍️ Create Account</h2>
+        <p class="card-sub">Create your free account now</p>
 
-        <form id="signupForm">
-
-            <!-- Full Name -->
+        <form id="buyerSignupForm">
             <div class="field-group">
-                <label>Full Name (As per CNIC)</label>
+                <label>Full Name</label>
                 <div class="field-wrap">
                     <i class="fas fa-user field-icon"></i>
-                    <input type="text" id="userName" class="royal-field-input" placeholder="Enter your legal name" required>
+                    <input type="text" id="bName" class="r-input" placeholder="Your full name" required>
                 </div>
             </div>
-
-            <!-- Store Name -->
-            <div class="field-group">
-                <label>Store Name</label>
-                <div class="field-wrap">
-                    <i class="fas fa-store field-icon"></i>
-                    <input type="text" id="storeName" class="royal-field-input" placeholder="Your Imperial Store Name" required>
-                </div>
-            </div>
-
-            <!-- Category -->
-            <div class="field-group">
-                <label>Business Category</label>
-                <div class="field-wrap">
-                    <i class="fas fa-tags field-icon"></i>
-                    <select id="storeCategory" class="royal-field-input" style="appearance: none; padding-left: 45px;" required>
-                        <option value="" disabled selected>Select Category</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Fashion">Fashion</option>
-                        <option value="Groceries">Groceries</option>
-                        <option value="Home & Decor">Home & Decor</option>
-                        <option value="Health & Beauty">Health & Beauty</option>
-                        <option value="Handicrafts">Handicrafts</option>
-                        <option value="Others">Others</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Email -->
             <div class="field-group">
                 <label>Email Address</label>
                 <div class="field-wrap">
                     <i class="fas fa-envelope field-icon"></i>
-                    <input type="email" id="email" class="royal-field-input" placeholder="email@example.com" required>
+                    <input type="email" id="bEmail" class="r-input" placeholder="email@example.com" required>
                 </div>
             </div>
-
-            <!-- Phone (intl) -->
             <div class="field-group">
-                <label>Contact Number (With Country Code)</label>
+                <label>Contact Number</label>
                 <div class="field-wrap">
-                    <input type="tel" id="phone" class="royal-field-input no-icon" style="padding-left:54px !important;" required>
+                    <i class="fas fa-phone field-icon"></i>
+                    <input type="tel" id="bPhone" class="r-input" placeholder="+92 3XX XXXXXXX" required>
                 </div>
             </div>
-
-            <!-- Password -->
             <div class="field-group">
                 <label>Security Password</label>
                 <div class="field-wrap">
                     <i class="fas fa-lock field-icon"></i>
-                    <input type="password" id="password" class="royal-field-input" placeholder="Minimum 6 characters" required>
-                    <i class="fas fa-eye pw-toggle" id="togglePassword"></i>
+                    <input type="password" id="bPassword" class="r-input" placeholder="Minimum 6 characters" required>
+                    <i class="fas fa-eye pw-toggle" id="bTogglePw"></i>
                 </div>
             </div>
-
-            <!-- Address -->
-            <div class="field-group">
-                <label>Residential Address</label>
-                <div class="field-wrap">
-                    <i class="fas fa-map-marker-alt field-icon"></i>
-                    <input type="text" id="address" class="royal-field-input" placeholder="Full Street Address, City" required>
-                </div>
-            </div>
-
-            <!-- Bank -->
-            <div class="field-group">
-                <label>Bank Account / JazzCash / EasyPaisa</label>
-                <div class="field-wrap">
-                    <i class="fas fa-university field-icon"></i>
-                    <input type="text" id="bankAccountNumber" class="royal-field-input" placeholder="Account Number or IBAN" required>
-                </div>
-            </div>
-
-            <!-- CNIC -->
-            <div class="field-group">
-                <label>ID Card Number (CNIC)</label>
-                <div class="field-wrap">
-                    <i class="fas fa-id-card field-icon"></i>
-                    <input type="text" id="idCard" class="royal-field-input" placeholder="XXXXX-XXXXXXX-X" required>
-                </div>
-            </div>
-
-            <!-- ID Card Upload -->
-            <div class="field-group">
-                <label><i class="fas fa-upload" style="margin-right:6px;"></i> Verification Documents</label>
-                <div style="background:rgba(255,204,0,0.05); border:1px solid rgba(255,204,0,0.15); border-radius:var(--radius-sm); padding:10px 14px; margin-bottom:10px; font-size:12px; color:var(--text-muted);">
-                    <i class="fas fa-info-circle" style="color:var(--royal-gold); margin-right:6px;"></i>
-                    Upload both sides of your ID Card (CNIC front and back)
-                </div>
-                <div class="doc-upload-grid">
-                    <label class="doc-upload-label" for="idFront">
-                        <i class="fas fa-id-card"></i>
-                        <span>CNIC Front</span>
-                        <input type="file" id="idFront" accept="image/*" required onchange="previewDoc(this, 'prevFront')">
-                    </label>
-                    <label class="doc-upload-label" for="idBack">
-                        <i class="fas fa-id-card-alt"></i>
-                        <span>CNIC Back</span>
-                        <input type="file" id="idBack" accept="image/*" required onchange="previewDoc(this, 'prevBack')">
-                    </label>
-                </div>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
-                    <img id="prevFront" class="doc-preview" alt="CNIC Front Preview">
-                    <img id="prevBack" class="doc-preview" alt="CNIC Back Preview">
-                </div>
-            </div>
-
-            <!-- Upload Progress -->
-            <div class="upload-progress" id="uploadProgress">
-                <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div>
-                <div class="progress-text" id="progressText">Uploading documents...</div>
-            </div>
-
-            <!-- Submit -->
-            <button type="submit" class="submit-btn" id="submitBtn">
-                <i class="fas fa-crown"></i> Join the Marketplace
-            </button>
+            <button type="submit" class="submit-btn" id="bSubmitBtn">
+                <i class="fas fa-user-plus"></i> Create Account
         </form>
 
-        <div class="link-text">
-            Already a Seller? <a href="login.html">Login Now</a>
-        </div>
-        <div class="terms-note">
-            By signing up, you agree to our
-            <a href="terms.html">Terms of Service</a>,
-            <a href="privacy-policy.html">Privacy Policy</a> and
-            <a href="instructions.html">Royal Manifesto</a>.
-        </div>
+        <div class="link-text">Already have an account? <a href="login.html">Log In Here</a></div>
     </div>
 </div>
+
+<!-- FOOTER -->
+<footer class="royal-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inline-block; vertical-align:middle;"> APNI SALTANAT</div>
+                <p class="footer-desc">Pakistan's Royal Marketplace. High-quality products and trusted sellers. Every Deal is a Commitment.</p>
+                <div class="social-row" style="margin-top:20px;">
+                    <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/apnisaltanat.official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/923011786494" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Marketplace</div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Royal Bazaar</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Imperial Hub</div>
+                <ul class="footer-links">
+                    <li><a href="faq.html">Help Center</a></li>
+                    <li><a href="instructions.html">Guidelines</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Legal</div>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="refund-policy.html">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <span>© 2026 Apni Saltanat | By Bablu Architect | Taxila, Punjab, Pakistan</span>
+            <span>Every Deal is a Commitment 👑</span>
+        </div>
+    </div>
+</footer>
 
 <div id="menu-overlay" class="menu-overlay" onclick="toggleMenu()">
     <div class="menu-inner" onclick="event.stopPropagation()">
         <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Marketplace</div>
-        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Royal Marketplace</a>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Royal Bazaar</a>
         <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
-        <a href="seller-dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Seller Dashboard</a>
-        <a href="signup.html" class="menu-item" style="color:var(--royal-gold); background:rgba(255,204,0,0.05); border-radius:12px; padding:12px 16px; margin:0 -8px;"><i class="fas fa-user-plus"></i> Become a Seller</a>
         <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Categories</a>
 
-        <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Information Center</div>
+        <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
         <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Guidelines</a>
         <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
-        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Marketplace Blog</a>
-        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
 
         <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
             <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
-            <a href="#" class="menu-item" id="menuLogout" style="display:none; color:var(--danger);"><i class="fas fa-sign-out-alt"></i> Exit Marketplace</a>
         </div>
         <div style="padding-top:10px;">
             <div id="theme-picker-container"></div>
@@ -480,175 +239,69 @@
             <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Support Channel</div>
             <a href="https://wa.me/923011786494" class="menu-item" style="color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Support</a>
         </div>
-        <script>
-            // Initialize theme picker in the menu
-            window.addEventListener('load', () => {
-                if (window.ThemeManager) {
-                    ThemeManager.injectThemePicker('theme-picker-container', true);
-                }
-            });
-        </script>
     </div>
 </div>
 
 <script>
     window.toggleMenu = () => { document.getElementById('menu-overlay').classList.toggle('active'); };
-    function previewDoc(input, previewId) {
-        const preview = document.getElementById(previewId);
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = (e) => { preview.src = e.target.result; preview.style.display = 'block'; };
-            reader.readAsDataURL(input.files[0]);
-            const label = input.closest('.doc-upload-label');
-            label.style.borderColor = 'var(--border-gold)';
-            label.querySelector('i').style.color = 'var(--royal-gold)';
+    // Initialize theme picker in the menu
+    window.addEventListener('load', () => {
+        if (window.ThemeManager) {
+            ThemeManager.injectThemePicker('theme-picker-container', true);
         }
-    }
+    });
 </script>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-    import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     const firebaseConfig = { apiKey:"AIzaSyCsIZ_H0sJddEkiPHfuMPlLNvjxn-1Jzbc", authDomain:"apnisaltanat.com", databaseURL:"https://apni-saltanat-default-rtdb.firebaseio.com", projectId:"apni-saltanat", storageBucket:"apni-saltanat.firebasestorage.app", messagingSenderId:"691941073239", appId:"1:691941073239:web:9e0b568eccc347a0c0de12" };
     const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
     const auth = getAuth(app);
-    const storage = getStorage(app);
+    const db = getDatabase(app);
 
-    let isRegistering = false;
-    const params = new URLSearchParams(window.location.search);
-    const isGoogleFlow = params.has('email');
-
-    onAuthStateChanged(auth, u => {
-        if(u && !isRegistering) {
-            // Check if user has a role already
-            get(ref(db, `users/sardaars/${u.uid}`)).then(snap => {
-                if(snap.exists()) {
-                    localStorage.setItem('userRole', 'sardaar');
-                    window.location.href = 'seller-dashboard.html';
-                } else {
-                    get(ref(db, `users/buyers/${u.uid}`)).then(bSnap => {
-                        if(bSnap.exists()) {
-                            localStorage.setItem('userRole', 'buyer');
-                            window.location.href = 'index.html';
-                        } else if (!isGoogleFlow) {
-                            // Only redirect if NOT in google signup flow
-                            window.location.href = 'index.html';
-                        }
-                    });
-                }
-            });
-        }
+    // Forward redirect parameter to login links
+    const loginLinks = document.querySelectorAll('a[href="login.html"]');
+    loginLinks.forEach(link => {
+        link.onclick = (e) => {
+            e.preventDefault();
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirect = urlParams.get('redirect');
+            window.location.href = redirect ? `login.html?redirect=${encodeURIComponent(redirect)}` : 'login.html';
+        };
     });
 
-    // Pre-fill Google Data
-    if (isGoogleFlow) {
-        window.addEventListener('load', () => {
-            document.getElementById('email').value = params.get('email');
-            document.getElementById('email').readOnly = true;
-            document.getElementById('userName').value = params.get('name');
-            const pwGroup = document.getElementById('password').closest('.field-group');
-            if(pwGroup) pwGroup.style.display = 'none';
-            document.getElementById('password').removeAttribute('required');
-        });
-    }
-
-    const phoneInputField = document.querySelector("#phone");
-    const phoneInput = window.intlTelInput(phoneInputField, {
-        initialCountry: "pk",
-        preferredCountries: ["pk", "ae", "sa", "gb", "us"],
-        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    document.getElementById('bTogglePw').addEventListener('click', function() {
+        const f = document.getElementById('bPassword');
+        const t = f.getAttribute('type') === 'password' ? 'text' : 'password';
+        f.setAttribute('type', t); this.classList.toggle('fa-eye-slash');
+        this.style.color = t === 'text' ? 'var(--royal-gold)' : '';
     });
 
-    document.getElementById('togglePassword').addEventListener('click', function() {
-        const pwField = document.getElementById('password');
-        const type = pwField.getAttribute('type') === 'password' ? 'text' : 'password';
-        pwField.setAttribute('type', type);
-        this.classList.toggle('fa-eye-slash');
-        this.style.color = type === 'text' ? 'var(--royal-gold)' : '';
-    });
-
-    const uploadToFirebaseStorage = async (file, path, progressCallback) => {
-        if (!file) return null;
-        const storageRef = sRef(storage, path);
-        await uploadBytes(storageRef, file);
-        if (progressCallback) progressCallback(100);
-        return await getDownloadURL(storageRef);
-    };
-
-    document.getElementById('signupForm').addEventListener('submit', async function(e) {
+    document.getElementById('buyerSignupForm').addEventListener('submit', async function(e) {
         e.preventDefault();
-        isRegistering = true;
-        const btn = document.getElementById('submitBtn');
-        const progressWrap = document.getElementById('uploadProgress');
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-
-        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Processing...';
-        btn.disabled = true;
-
-        const email = document.getElementById('email').value.trim();
-        const pwd = document.getElementById('password').value;
-        const userName = document.getElementById('userName').value.trim();
-        const storeName = document.getElementById('storeName').value.trim();
-        const category = document.getElementById('storeCategory').value;
-        const phone = phoneInput.getNumber();
-        const address = document.getElementById('address').value.trim();
-        const bankAccount = document.getElementById('bankAccountNumber').value.trim();
-        const cnic = document.getElementById('idCard').value.trim();
-        const fFront = document.getElementById('idFront').files[0];
-        const fBack = document.getElementById('idBack').files[0];
-
+        const btn = document.getElementById('bSubmitBtn');
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Creating Account...'; btn.disabled = true;
+        const name = document.getElementById('bName').value.trim();
+        const email = document.getElementById('bEmail').value.trim();
+        const phone = document.getElementById('bPhone').value.trim();
+        const pwd = document.getElementById('bPassword').value;
         try {
-            let user = auth.currentUser;
+            const cred = await createUserWithEmailAndPassword(auth, email, pwd);
+            const user = cred.user;
+            await set(ref(db, `users/buyers/${user.uid}`), { uid:user.uid, name, email, phone, role:'buyer', timestamp:Date.now() });
+            alert("🎉 Welcome to Apni Saltanat! Your account has been created successfully.");
             
-            if (!user) {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, pwd);
-                user = userCredential.user;
-            }
-
-            progressWrap.style.display = 'block';
-            progressText.textContent = 'Uploading documents...';
-            const frontUrl = await uploadToFirebaseStorage(fFront, `cnic/${user.uid}/front_${Date.now()}`, (p) => { progressFill.style.width = p * 0.45 + '%'; });
-            const backUrl = await uploadToFirebaseStorage(fBack, `cnic/${user.uid}/back_${Date.now()}`, (p) => { progressFill.style.width = 45 + p * 0.45 + '%'; });
-
-            const userData = {
-                uid: user.uid, email, phone, address, userName, storeName, category, bankAccount, cnic,
-                role: 'sardaar', status: 'pending', idFrontURL: frontUrl, idBackURL: backUrl, timestamp: Date.now()
-            };
-
-            await set(ref(db, `users/sardaars/${user.uid}`), userData);
-            shahiAlert("Your application is submitted and you will get the reply from admin in 3 to 4 working days.", "✅");
-            document.getElementById('modalConfirmBtn').onclick = () => { window.location.href = 'seller-dashboard.html'; };
-
-        } catch (error) {
-            console.error(error);
-            shahiAlert("Signup Failed: " + error.message, "❌");
-            btn.disabled = false;
-            isRegistering = false;
-            btn.innerHTML = 'JOIN THE MARKETPLACE <i class="fas fa-arrow-right"></i>';
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirect = urlParams.get('redirect');
+            window.location.href = redirect ? decodeURIComponent(redirect) : 'index.html';
+        } catch(err) {
+            alert("Error: " + err.message);
+            btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account'; btn.disabled = false;
         }
     });
-
-    window.shahiAlert = (text, type = 'info') => {
-        const modal = document.getElementById('shahiModal');
-        const icon = document.getElementById('modalIcon');
-        const title = document.getElementById('modalTitle');
-        const content = document.getElementById('modalText');
-        const confirmBtn = document.getElementById('modalConfirmBtn');
-
-        modal.style.display = 'flex';
-        content.innerText = text;
-        
-        if(type === '✅') { icon.innerText = '✅'; title.innerText = 'SUCCESS'; }
-        else if(type === '❌') { icon.innerText = '❌'; title.innerText = 'FAILED'; }
-        else { icon.innerText = '👑'; title.innerText = 'SYSTEM MESSAGE'; }
-
-        confirmBtn.onclick = () => modal.style.display = 'none';
-    };
 </script>
 </body>
 </html>

@@ -50,9 +50,9 @@
 <body>
 <nav class="royal-nav">
     <div class="nav-container">
-        <a href="index.html" class="nav-logo">👑 APNI SALTANAT</a>
+        <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"> APNI SALTANAT</a>
         <div style="display:flex; align-items:center; gap:10px;">
-            <a href="signup.html" class="btn-outline mobile-hide" style="padding:9px 20px; font-size:12px;">Sell Now</a>
+            <a href="become-seller.html" class="btn-outline mobile-hide" style="padding:9px 20px; font-size:12px;">Become a Seller</a>
             <div onclick="toggleMenu()" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:12px; cursor:pointer; color:var(--text-muted); font-size:18px; transition:var(--transition); margin-left:4px;" onmouseover="this.style.borderColor='var(--border-gold)';" onmouseout="this.style.borderColor='';">
                 <i class="fas fa-ellipsis-v"></i>
             </div>
@@ -139,7 +139,7 @@
     <div class="footer-container">
         <div class="footer-grid">
             <div>
-                <div class="footer-brand">👑 APNI SALTANAT</div>
+                <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inline-block; vertical-align:middle;"> APNI SALTANAT</div>
                 <p class="footer-desc">Pakistan's Royal Marketplace. High-quality products and trusted sellers. Har Soda Aik Ahad.</p>
                 <div class="social-row" style="margin-top:20px;">
                     <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -153,15 +153,13 @@
                     <li><a href="index.html">Marketplace</a></li>
                     <li><a href="categories.html">Categories</a></li>
                     <li><a href="seller-dashboard.html" id="footerDashboard" style="display:none;">Seller Dashboard</a></li>
-                    <li><a href="signup.html">Become a Seller</a></li>
+                    <li><a href="become-seller.html">Become a Seller</a></li>
                 </ul>
             </div>
             <div>
                 <div class="footer-col-title">Imperial Hub</div>
                 <ul class="footer-links">
-                    <li><a href="about.html">Our Story</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="blog.html">Marketplace Blog</a></li>
                     <li><a href="instructions.html">Seller Guidelines</a></li>
                 </ul>
             </div>
@@ -188,14 +186,12 @@
         <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Marketplace</a>
         <a href="cart.html" class="menu-item"><i class="fas fa-shopping-basket"></i> View My Cart</a>
         <a href="seller-dashboard.html" class="menu-item" id="menuDashboard" style="display:none;"><i class="fas fa-th-large"></i> Seller Dashboard</a>
-        <a href="signup.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Seller</a>
+        <a href="become-seller.html" class="menu-item"><i class="fas fa-user-plus"></i> Become a Seller</a>
         <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> Marketplace Categories</a>
 
         <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Imperial Hub</div>
         <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Seller Guidelines</a>
         <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
-        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Marketplace Blog</a>
-        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
 
         <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
             <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
@@ -239,7 +235,7 @@
         const footerDashboard = document.getElementById('footerDashboard');
 
         if(u) {
-            get(ref(db, `users/sardaars/${u.uid}`)).then(snapshot => {
+            get(ref(db, `users/sellers/${u.uid}`)).then(snapshot => {
                 if (snapshot.exists()) {
                     loginLink.innerHTML = `<i class="fas fa-user-circle"></i> Admin Panel`;
                     loginLink.href = 'seller-dashboard.html';

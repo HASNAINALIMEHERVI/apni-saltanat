@@ -686,7 +686,7 @@
                 <div class="input-row">
                     <div class="royal-field">
                         <label>Product Name *</label>
-                        <input type="text" id="pName" class="royal-input" placeholder="e.g. Shahi Jhumka">
+                        <input type="text" id="pName" class="royal-input" placeholder="e.g. Royal Earring">
                     </div>
                     <div class="royal-field">
                         <label>Main Category *</label>
@@ -829,7 +829,7 @@
 </div>
 
 <script type="module">
-    import { app, auth, db } from "./auth-manager.js";
+    import { app, auth, db } from "./auth-manager.js?v=3.2";
     import { onValue, ref, push, update, remove, get, set, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
     import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
@@ -837,7 +837,7 @@
 
     const storage = getStorage(app);
     const messaging = getMessaging(app);
-    const audioOrder = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); // Shahi Chime
+    const audioOrder = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); // Chime
 
     let uid, products = {}, files = [], existingUrls = [];
 
@@ -866,8 +866,8 @@
         if (user) {
             uid = user.uid;
             document.getElementById('loader').style.display = 'none';
-            // loadSardaarData is called, but auth-manager.js will redirect if not a sardaar
-            loadSardaarData(user);
+            // loadSellerData is called, but auth-manager.js will redirect if not a seller
+            loadSellerData(user);
             checkNotificationStatus(true); 
         }
     });
@@ -882,13 +882,13 @@
     };
 
     // ===== DATA LOADING =====
-    async function loadSardaarData(user) {
+    async function loadSellerData(user) {
         // User Profile
-        onValue(ref(db, `users/sardaars/${user.uid}`), (snap) => {
+        onValue(ref(db, `users/sellers/${user.uid}`), (snap) => {
             if (snap.exists()) {
                 const data = snap.val();
-                document.getElementById('displayUserName').innerText = data.name || "Sardaar";
-                document.getElementById('welcomeName').innerText = data.name || "Sardaar";
+                document.getElementById('displayUserName').innerText = data.name || "Seller";
+                document.getElementById('welcomeName').innerText = data.name || "Seller";
                 document.getElementById('userStatusLabel').innerText = data.status === 'active' ? "Active Member" : "Royal Member";
                 document.getElementById('viewStoreLink').href = `store.html?seller=${user.uid}`;
                 document.getElementById('statVisits').innerText = data.visits || 0;
@@ -917,10 +917,27 @@
                         document.getElementById('statusBanner').style.borderColor = '#f44336';
                         document.getElementById('statusBanner').style.background = 'rgba(244,67,54,0.05)';
                         document.getElementById('statusTitle').style.color = '#f44336';
+                    } else if (data.status === 'deactivated') {
+                        document.getElementById('statusIcon').innerText = '⚠️';
+                        document.getElementById('statusTitle').innerText = 'ACCOUNT DEACTIVATED';
+                        document.getElementById('statusMsg').innerText = 'Your seller account has been deactivated (e.g. pending monthly subscription fee of Rs. 1,000). Please pay the fee to restore store and product visibility.';
+                        document.getElementById('statusBanner').style.borderColor = '#ff9800';
+                        document.getElementById('statusBanner').style.background = 'rgba(255,152,0,0.05)';
+                        document.getElementById('statusTitle').style.color = '#ff9800';
+                    } else if (data.status === 'blocked') {
+                        document.getElementById('statusIcon').innerText = '🛑';
+                        document.getElementById('statusTitle').innerText = 'ACCOUNT BLOCKED';
+                        document.getElementById('statusMsg').innerText = 'Your seller account has been permanently blocked due to violations of our guidelines. If you believe this is a mistake, please contact support.';
+                        document.getElementById('statusBanner').style.borderColor = '#f44336';
+                        document.getElementById('statusBanner').style.background = 'rgba(244,67,54,0.05)';
+                        document.getElementById('statusTitle').style.color = '#f44336';
                     } else {
                         document.getElementById('statusIcon').innerText = '⏳';
                         document.getElementById('statusTitle').innerText = 'VERIFICATION PENDING';
                         document.getElementById('statusMsg').innerText = 'Our royal team is reviewing your details. You will be able to upload products once approved.';
+                        document.getElementById('statusBanner').style.borderColor = 'var(--border-gold)';
+                        document.getElementById('statusBanner').style.background = 'rgba(255,204,0,0.05)';
+                        document.getElementById('statusTitle').style.color = 'var(--royal-gold)';
                     }
                 }
             }
@@ -1054,13 +1071,13 @@
         onChildAdded(ordersRef, (snapshot) => {
             if (!isInitialLoad) {
                 const order = snapshot.val();
-                notifySardaar(order);
+                notifySeller(order);
             }
         });
         get(ordersRef).then(() => { isInitialLoad = false; });
     }
 
-    function notifySardaar(order) {
+    function notifySeller(order) {
         audioOrder.play().catch(e => console.log("Audio play blocked until interaction"));
         if (Notification.permission === "granted") {
             new Notification("👑 New Order Received!", {
@@ -1169,7 +1186,7 @@
                     await navigator.serviceWorker.register('sw-master.js');
                 }
             } else {
-                shahiAlert("Sultan, notifications are blocked. Please click Allow for order notifications in your browser settings.", "⚠️");
+                shahiAlert("Alert! Notifications are blocked. Please click Allow for order notifications in your browser settings.", "⚠️");
             }
         } catch (err) {
             console.error("Notif Error:", err);
@@ -1269,7 +1286,7 @@
     document.getElementById('uploadBtn').onclick = async () => {
         const name = document.getElementById('pName').value.trim();
         const price = document.getElementById('pNewPrice').value.trim();
-        if (!name || !price) return shahiAlert("Sultan, Product Name and Price are required!", "⚠️");
+        if (!name || !price) return shahiAlert("Alert! Product Name and Price are required!", "⚠️");
         if (files.length === 0 && existingUrls.length === 0) return shahiAlert("Please upload at least one product image!", "🖼️");
 
         const btn = document.getElementById('uploadBtn');

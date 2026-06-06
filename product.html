@@ -159,7 +159,7 @@
 <nav class="royal-nav">
     <div class="nav-container">
         <div style="display:flex; align-items:center; gap:16px;">
-            <a href="index.html" class="nav-logo">👑 APNI SALTANAT</a>
+            <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"> APNI SALTANAT</a>
             <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--text-muted); font-size:12px; font-weight:700; background:rgba(255,255,255,0.05); border:1px solid var(--border); padding:6px 14px; border-radius:var(--radius-sm); transition:var(--transition);" onmouseover="this.style.borderColor='var(--border-gold)'; this.style.color='var(--royal-gold)';" onmouseout="this.style.borderColor=''; this.style.color='';">
                 <i class="fas fa-arrow-left"></i> <span class="back-text mobile-hide">Back to Shop</span>
             </a>
@@ -272,8 +272,6 @@
         <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Information Center</div>
         <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Guidelines</a>
         <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
-        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Marketplace Blog</a>
-        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
 
         <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
             <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
@@ -294,7 +292,7 @@
     <div class="footer-container">
         <div class="footer-grid">
             <div>
-                <div class="footer-brand">👑 APNI SALTANAT</div>
+                <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inline-block; vertical-align:middle;"> APNI SALTANAT</div>
                 <p class="footer-desc">Pakistan's Royal Marketplace. High-quality products and trusted sellers.</p>
                 <div class="social-row" style="margin-top:20px;">
                     <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -314,9 +312,7 @@
             <div>
                 <div class="footer-col-title">Information Center</div>
                 <ul class="footer-links">
-                    <li><a href="about.html">Our Story</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="blog.html">Marketplace Blog</a></li>
                     <li><a href="instructions.html">Guidelines</a></li>
                 </ul>
             </div>
@@ -337,7 +333,7 @@
 </footer>
 
 <script type="module">
-    import { auth, db } from "./auth-manager.js";
+    import { auth, db } from "./auth-manager.js?v=3.2";
     import { ref, get, runTransaction, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
@@ -373,7 +369,7 @@
         if (!pID || !sID) return;
         
         // Track Visit
-        runTransaction(ref(db, `users/sardaars/${sID}/visits`), (current) => {
+        runTransaction(ref(db, `users/sellers/${sID}/visits`), (current) => {
             return (current || 0) + 1;
         });
 
@@ -382,12 +378,14 @@
             if (!pSnap.exists()) { document.getElementById('product-root').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:var(--text-muted);">Product not found.</div>`; return; }
             const p = pSnap.val();
             window.currentProduct = p;
-            const sSnap = await get(ref(db, `users/sardaars/${sID}`));
-            if (sSnap.exists()) {
-                const sData = sSnap.val();
-                window.sellerPhone = sData.phone ? sData.phone.replace(/[^0-9]/g, '') : "923230275594";
-                window.sellerEmail = sData.email || "";
+            const sSnap = await get(ref(db, `users/sellers/${sID}`));
+            if (!sSnap.exists() || sSnap.val().status !== 'active') {
+                document.getElementById('product-root').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:var(--text-muted);">Product not available (Seller account inactive).</div>`;
+                return;
             }
+            const sData = sSnap.val();
+            window.sellerPhone = sData.phone ? sData.phone.replace(/[^0-9]/g, '') : "923230275594";
+            window.sellerEmail = sData.email || "";
 
             document.getElementById('pLongDesc').innerText = p.description || "Premium quality product.";
 
@@ -401,10 +399,10 @@
 
             // Check Ameer status
             let isAmeer = false;
-            const selSnap = await get(ref(db, 'users/sardaars'));
+            const selSnap = await get(ref(db, 'users/sellers'));
             if (selSnap.exists()) {
                 const sellers = Object.entries(selSnap.val()).sort((a,b) => (a[1].timestamp||0)-(b[1].timestamp||0));
-                isAmeer = sellers.slice(0, 300).some(([uid]) => uid === sID);
+                isAmeer = sellers.slice(0, 100).some(([uid]) => uid === sID);
             }
             const ameerBadge = isAmeer ? `<div class="ameer-badge" style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg,#FFEDC3,#FFCC00); color:#131313; padding:5px 14px; border-radius:8px; font-size:11px; font-weight:900; font-family:'Epilogue',sans-serif; width:fit-content; margin-bottom:8px;"><i class="fas fa-crown"></i> Elite Seller</div>` : '';
 
@@ -563,11 +561,16 @@
     async function loadRelatedProducts(category) {
         if (!category) return;
         try {
-            const allProductsSnap = await get(ref(db, 'products'));
-            if (!allProductsSnap.exists()) return;
+            const [allProductsSnap, sellersSnap] = await Promise.all([
+                get(ref(db, 'products')),
+                get(ref(db, 'users/sellers'))
+            ]);
+            if (!allProductsSnap.exists() || !sellersSnap.exists()) return;
             let relatedHTML = "";
             const data = allProductsSnap.val();
+            const sellersData = sellersSnap.val();
             for (let sellerId in data) {
+                if (!sellersData[sellerId] || sellersData[sellerId].status !== 'active') continue;
                 for (let productId in data[sellerId]) {
                     const item = data[sellerId][productId];
                     if (item.category === category && productId !== pID) {
@@ -601,9 +604,9 @@
         try {
             let userName = "Marketplace User";
             const buyerSnap = await get(ref(db, `users/buyers/${window.currentUser.uid}`));
-            const sardaarSnap = await get(ref(db, `users/sardaars/${window.currentUser.uid}`));
+            const sellerSnap = await get(ref(db, `users/sellers/${window.currentUser.uid}`));
             if (buyerSnap.exists()) userName = buyerSnap.val().name;
-            else if (sardaarSnap.exists()) userName = sardaarSnap.val().name;
+            else if (sellerSnap.exists()) userName = sellerSnap.val().name;
             await set(push(ref(db, `reviews/${pID}`)), { uid: window.currentUser.uid, userName, rating: window.selectedRating, text, timestamp: Date.now() });
             alert("Review submitted successfully!");
             document.getElementById('reviewText').value = '';

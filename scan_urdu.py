@@ -16,8 +16,8 @@ for fname in sorted(os.listdir('.')):
         if hits:
             results[fname] = hits
 
-for fname, hits in results.items():
-    print(f"\n=== {fname} ===", flush=True)
-    for lno, text in hits:
-        safe = text.encode('ascii', errors='replace').decode('ascii')
-        print(f"  {lno}: {safe}", flush=True)
+with open('urdu_matches_utf8.txt', 'w', encoding='utf-8') as f:
+    for fname, hits in results.items():
+        f.write(f"\n=== {fname} ===\n")
+        for lno, text in hits:
+            f.write(f"  {lno}: {text}\n")

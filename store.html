@@ -667,7 +667,7 @@
 
     <!-- FIREBASE & LOGIC -->
     <script type="module">
-        import { auth, db, logout } from "./auth-manager.js";
+        import { auth, db, logout } from "./auth-manager.js?v=3.2";
         import { ref, onValue, get, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         const params = new URLSearchParams(window.location.search);
@@ -675,7 +675,7 @@
         if (!sID) location.href = "index.html";
 
         // Track Visit
-        const visitRef = ref(db, `users/sardaars/${sID}/visits`);
+        const visitRef = ref(db, `users/sellers/${sID}/visits`);
         runTransaction(visitRef, (currentValue) => (currentValue || 0) + 1);
 
         function updateCartCount() {
@@ -733,11 +733,11 @@
         }
 
         // Load Store Data
-        get(ref(db, `users/sardaars/${sID}`)).then(async (s) => {
+        get(ref(db, `users/sellers/${sID}`)).then(async (s) => {
             if (s.exists()) {
                 const d = s.val();
 
-                if (d.status === 'blocked' || d.status === 'unpaid') {
+                if (d.status !== 'active') {
                     document.getElementById('products-list').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:80px 0; color:#f44336;"><i class="fas fa-ban text-6xl mb-4"></i><h3 class="text-2xl font-heading">This store is currently unavailable.</h3></div>`;
                     return;
                 }

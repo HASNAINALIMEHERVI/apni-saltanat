@@ -93,7 +93,7 @@
 
 <nav class="royal-nav">
     <div class="nav-container">
-        <a href="index.html" class="nav-logo">👑 APNI SALTANAT</a>
+        <a href="index.html" class="nav-logo"><img src="favicon.png" alt="AS Logo" style="height:32px; width:32px; border-radius:8px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3);"> APNI SALTANAT</a>
         <div style="display:flex; align-items:center; gap:10px;">
             <a href="index.html" class="btn-outline" style="padding:9px 20px; font-size:12px; text-decoration:none; display:flex; align-items:center; gap:8px;"><i class="fas fa-arrow-left"></i> <span class="back-text mobile-hide">Keep Shopping</span></a>
             <a href="seller-dashboard.html" class="cart-icon-wrap" id="profileTrigger" style="display:none;"><i class="fas fa-user"></i></a>
@@ -166,8 +166,6 @@
         <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px; font-weight:800;">Information Center</div>
         <a href="instructions.html" class="menu-item"><i class="fas fa-scroll"></i> Guidelines</a>
         <a href="faq.html" class="menu-item"><i class="fas fa-question-circle"></i> Help Center</a>
-        <a href="blog.html" class="menu-item"><i class="fas fa-feather-alt"></i> Marketplace Blog</a>
-        <a href="about.html" class="menu-item"><i class="fas fa-crown"></i> Our Story</a>
 
         <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--border);" id="authWrapper">
             <a href="login.html" class="menu-item" id="menuLogin" style="margin-bottom:12px;"><i class="fas fa-sign-in-alt"></i> Join/Login</a>
@@ -187,7 +185,7 @@
     <div class="footer-container">
         <div class="footer-grid">
             <div>
-                <div class="footer-brand">👑 APNI SALTANAT</div>
+                <div class="footer-brand"><img src="favicon.png" alt="AS Logo" style="height:24px; width:24px; border-radius:6px; object-fit:cover; margin-right:8px; border:1px solid rgba(255,204,0,0.3); display:inline-block; vertical-align:middle;"> APNI SALTANAT</div>
                 <p class="footer-desc">Pakistan's Royal Marketplace. High-quality products and trusted sellers. Every Promise is a Pledge.</p>
                 <div class="social-row" style="margin-top:20px;">
                     <a href="https://www.facebook.com/apnisaltanat.official" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -209,8 +207,6 @@
                 <ul class="footer-links">
                     <li><a href="faq.html">Help Center</a></li>
                     <li><a href="instructions.html">Guidelines</a></li>
-                    <li><a href="about.html">Our Story</a></li>
-                    <li><a href="blog.html">Marketplace Blog</a></li>
                 </ul>
             </div>
             <div>
@@ -230,7 +226,7 @@
 </footer>
 
 <script type="module">
-    import { auth, db } from "./auth-manager.js";
+    import { auth, db } from "./auth-manager.js?v=3.2";
     import { ref, get, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
@@ -344,7 +340,7 @@
 
     async function notifySellerEmail(sellerId, order) {
         try {
-            const snap = await get(ref(db, `users/sardaars/${sellerId}`));
+            const snap = await get(ref(db, `users/sellers/${sellerId}`));
             if (snap.exists()) {
                 const sData = snap.val();
                 if (sData.email) {
@@ -406,7 +402,25 @@
         cancelBtn.onclick = () => modal.style.display = 'none';
     };
 
-    window.renderCart();
+    async function validateSellersInCart() {
+        if (cart.length === 0) { window.renderCart(); return; }
+        try {
+            const sellersSnap = await get(ref(db, 'users/sellers'));
+            if (sellersSnap.exists()) {
+                const sellersData = sellersSnap.val();
+                const originalLength = cart.length;
+                cart = cart.filter(item => sellersData[item.seller] && sellersData[item.seller].status === 'active');
+                if (cart.length < originalLength) {
+                    localStorage.setItem('saltanatCart', JSON.stringify(cart));
+                    shahiAlert("Some products were removed from your cart because those sellers are currently inactive.", "⚠️");
+                }
+            }
+        } catch (e) {
+            console.error("Cart validation error:", e);
+        }
+        window.renderCart();
+    }
+    validateSellersInCart();
 
     // Initialize theme picker
     if (window.ThemeManager) {
