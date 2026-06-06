@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
@@ -21,11 +21,7 @@ const db = getDatabase(app);
 // ADMIN (Admin) UID
 const ADMIN_UID = "qnWFjg3XNlO7jHDhz84bPJMikP72";
 
-// Initialize Google Auth Provider
-const googleProvider = new GoogleAuthProvider();
-googleProvider.setCustomParameters({
-    prompt: 'select_account'
-});
+
 
 
 const logout = () => {
@@ -70,6 +66,26 @@ onAuthStateChanged(auth, (user) => {
                 }
                 const isSeller = sSnap.exists() && sSnap.val() && sSnap.val().status === 'active';
                 const isAdmin = user.uid === ADMIN_UID || (user.email && user.email.toLowerCase() === 'saltanatapni@gmail.com');
+
+                // Automatically create buyer profile for new Google/authenticated users if not already registered
+                let isBuyer = false;
+                try {
+                    const bSnap = await get(ref(db, `users/buyers/${user.uid}`));
+                    isBuyer = bSnap.exists();
+                    if (!isBuyer && !sSnap.exists() && !isAdmin) {
+                        await set(ref(db, `users/buyers/${user.uid}`), {
+                            uid: user.uid,
+                            name: user.displayName || "Royal Guest",
+                            email: user.email || "",
+                            phone: user.phoneNumber || "",
+                            role: 'buyer',
+                            timestamp: Date.now()
+                        });
+                        console.log("Created buyer profile for new user:", user.uid);
+                    }
+                } catch (dbErr) {
+                    console.error("Failed to check/create buyer profile:", dbErr);
+                }
 
                 // One-time Admin migration of legacy data
                 if (isAdmin) {
@@ -128,9 +144,9 @@ onAuthStateChanged(auth, (user) => {
             }
         } else {
             window.currentUser = null;
-            const restricted = ['seller-dashboard.html', 'profile.html', 'become-seller.html'];
-            if (restricted.includes(currentPage)) {
-                window.location.href = 'login.html?redirect=' + encodeURIComponent(currentPage);
+            const publicPages = ['login.html', 'signup.html'];
+            if (!publicPages.includes(currentPage)) {
+                window.location.replace('login.html');
                 return;
             }
             updateGlobalUI(false, false, false);
@@ -239,7 +255,7 @@ function updateGlobalUI(isLoggedIn, isSeller, isAdmin) {
 }
 
 // Unified Export
-export { app, auth, db, ADMIN_UID, logout, googleProvider, signInWithPopup };
+export { app, auth, db, ADMIN_UID, logout };
 
 // Global Flag for verification
 window.shahiAuthLoaded = true;

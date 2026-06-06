@@ -295,13 +295,55 @@
         .divider {
             display: flex;
             align-items: center;
-            gap: 20px;
-            margin: 40px 0;
+            text-align: center;
             color: var(--text-muted);
             font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
+            margin: 24px 0;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1.5px solid var(--border);
+        }
+        .divider:not(:empty)::before {
+            margin-right: 1.5em;
+        }
+        .divider:not(:empty)::after {
+            margin-left: 1.5em;
+        }
+
+
+
+        .btn-outline {
+            width: 100%;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-family: 'Epilogue', sans-serif;
+            font-weight: 900;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-main);
+            transition: 0.3s;
+            box-shadow: 0 2px 5px rgba(213,217,217,0.5);
+        }
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(213,217,217,0.8);
+        }
+        .btn-outline:active {
+            transform: scale(0.98);
         }
 
 
@@ -401,13 +443,12 @@
                         </button>
                     </form>
 
-
-
                     <p id="msg" style="margin-top: 20px; font-size: 14px; text-align: center; min-height: 20px;"></p>
 
-                    <div class="footer-links-row">
-                        New to the Saltanat? <a href="#" id="signupTrigger">Apply for Access</a>
-                    </div>
+                    <div class="divider">New to the Saltanat?</div>
+                    <button type="button" class="btn-outline" id="goToSignupBtn">
+                        CREATE AN ACCOUNT
+                    </button>
                 </div>
             </div>
         </div>
@@ -558,16 +599,14 @@
             } catch(e) { showMsg("Failed to send reset link", "#ff4d4d"); }
         });
 
-        // --- Modal Logic & Signup Redirect ---
-        const signupTrigger = document.getElementById('signupTrigger');
-        if (signupTrigger) {
-            signupTrigger.href = 'signup.html';
-            signupTrigger.onclick = (e) => {
-                e.preventDefault();
+        // --- Navigation to Signup ---
+        const goToSignupBtn = document.getElementById('goToSignupBtn');
+        if (goToSignupBtn) {
+            goToSignupBtn.addEventListener('click', () => {
                 const urlParams = new URLSearchParams(window.location.search);
                 const redirect = urlParams.get('redirect');
                 window.location.href = redirect ? `signup.html?redirect=${encodeURIComponent(redirect)}` : 'signup.html';
-            };
+            });
         }
 
         // Initialize theme picker

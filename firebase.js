@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
@@ -24,11 +24,4 @@ const auth = getAuth(app);
 const dbFirestore = getFirestore(app);
 const dbRealtime = getDatabase(app);
 
-// Initialize Google Auth Provider
-const googleProvider = new GoogleAuthProvider();
-// Set custom parameters if needed, e.g. prompt for account selection
-googleProvider.setCustomParameters({
-    prompt: 'select_account'
-});
-
-export { app, analytics, auth, dbFirestore, dbRealtime, googleProvider };
+export { app, analytics, auth, dbFirestore, dbRealtime };

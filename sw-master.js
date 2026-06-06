@@ -17,7 +17,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
-const CACHE_NAME = 'saltanat-cache-v2';
+const CACHE_NAME = 'saltanat-cache-v5';
 const ASSETS = [
   '/',
   '/index.html',

@@ -497,7 +497,15 @@
                 await set(newOrderRef, orderData);
                 if (window.sellerEmail) {
                     const scriptUrl = "https://script.google.com/macros/s/AKfycbwo6smhEV8TWPrWdBJ3SCFFj96AL6ucGHR4dRMAfCX5EpFSJuQnIwgMHmoWbzLaawzb/exec";
-                    fetch(scriptUrl, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sellerEmail: window.sellerEmail, productName: orderData.productName, productPrice: orderData.productPrice, customerName: orderData.customerName, customerPhone: orderData.customerPhone, customerAddress: orderData.customerAddress }) }).catch(e => console.error("Email error:", e));
+                    const payload = {
+                        targetEmail: window.sellerEmail,
+                        subject: "New Order! - Apni Saltanat",
+                        message: `Hello Seller! You have received a new order.\n\nCustomer: ${orderData.customerName}\nProduct: ${orderData.productName}\nPrice: Rs. ${orderData.productPrice}\n\nCheck your dashboard: https://apnisaltanat.com/seller-dashboard.html`,
+                        productName: orderData.productName,
+                        customerName: orderData.customerName,
+                        status: "New Order"
+                    };
+                    fetch(scriptUrl, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).catch(e => console.error("Email error:", e));
                 }
                 
                 shahiAlert("Order placed successfully! You will receive an email once the seller confirms.", "✅");
